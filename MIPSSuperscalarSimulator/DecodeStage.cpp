@@ -9,5 +9,5 @@
 #include "DecodeStage.hpp"
 
 DecodeStage::DecodeStage() {
-
+	cout << "dooey";
 }
