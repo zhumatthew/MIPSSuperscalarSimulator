@@ -10,11 +10,11 @@
 #define FetchStage_hpp
 
 #include <stdio.h>
-#include "AllStage.hpp"
+#include "Stage.hpp"
 
 using namespace std;
 
-class FetchStage : public AllStage {
+class FetchStage : public Stage {
 public:
 	FetchStage();
 

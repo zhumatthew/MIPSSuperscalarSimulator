@@ -11,12 +11,19 @@
 
 #include <stdio.h>
 #include <vector>
+#include "SimulationInstruction.hpp"
 
 using namespace std;
 
 class Stage {
 public:
-    Stage();
+	Stage();
+	vector<SimulationInstruction> currentInstrList;
+private:
+
+
+protected:
+	static int PC;
 };
 
 #endif /* Stage_hpp */
