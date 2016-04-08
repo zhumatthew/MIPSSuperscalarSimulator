@@ -8,12 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		B355600C1CB4D02F0043584B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B355600B1CB4D02F0043584B /* main.cpp */; };
-		B35560141CB4D6E30043584B /* Stage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B35560121CB4D6E30043584B /* Stage.cpp */; };
-		B35560171CB4D7160043584B /* Fetch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B35560151CB4D7160043584B /* Fetch.cpp */; };
-		B355601A1CB4D7260043584B /* Decode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B35560181CB4D7260043584B /* Decode.cpp */; };
-		B355601D1CB4D7330043584B /* Execute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B355601B1CB4D7330043584B /* Execute.cpp */; };
-		B35560201CB4D7460043584B /* Memory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B355601E1CB4D7460043584B /* Memory.cpp */; };
-		B35560231CB4D75F0043584B /* WriteBack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B35560211CB4D75F0043584B /* WriteBack.cpp */; };
+		B35560261CB5903D0043584B /* FetchStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B35560241CB5903D0043584B /* FetchStage.cpp */; };
+		B35560291CB5904C0043584B /* DecodeStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B35560271CB5904C0043584B /* DecodeStage.cpp */; };
+		B355602F1CB590680043584B /* ExecuteStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B355602D1CB590680043584B /* ExecuteStage.cpp */; };
+		B35560321CB590780043584B /* WriteBackStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B35560301CB590780043584B /* WriteBackStage.cpp */; };
+		B35560351CB590870043584B /* MemoryStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B35560331CB590870043584B /* MemoryStage.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,18 +30,16 @@
 /* Begin PBXFileReference section */
 		B35560081CB4D02F0043584B /* MIPSSuperscalarSimulator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MIPSSuperscalarSimulator; sourceTree = BUILT_PRODUCTS_DIR; };
 		B355600B1CB4D02F0043584B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		B35560121CB4D6E30043584B /* Stage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Stage.cpp; sourceTree = "<group>"; };
-		B35560131CB4D6E30043584B /* Stage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Stage.hpp; sourceTree = "<group>"; };
-		B35560151CB4D7160043584B /* Fetch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fetch.cpp; sourceTree = "<group>"; };
-		B35560161CB4D7160043584B /* Fetch.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Fetch.hpp; sourceTree = "<group>"; };
-		B35560181CB4D7260043584B /* Decode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Decode.cpp; sourceTree = "<group>"; };
-		B35560191CB4D7260043584B /* Decode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Decode.hpp; sourceTree = "<group>"; };
-		B355601B1CB4D7330043584B /* Execute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Execute.cpp; sourceTree = "<group>"; };
-		B355601C1CB4D7330043584B /* Execute.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Execute.hpp; sourceTree = "<group>"; };
-		B355601E1CB4D7460043584B /* Memory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Memory.cpp; sourceTree = "<group>"; };
-		B355601F1CB4D7460043584B /* Memory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Memory.hpp; sourceTree = "<group>"; };
-		B35560211CB4D75F0043584B /* WriteBack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WriteBack.cpp; sourceTree = "<group>"; };
-		B35560221CB4D75F0043584B /* WriteBack.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = WriteBack.hpp; sourceTree = "<group>"; };
+		B35560241CB5903D0043584B /* FetchStage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FetchStage.cpp; sourceTree = "<group>"; };
+		B35560251CB5903D0043584B /* FetchStage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FetchStage.hpp; sourceTree = "<group>"; };
+		B35560271CB5904C0043584B /* DecodeStage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DecodeStage.cpp; sourceTree = "<group>"; };
+		B35560281CB5904C0043584B /* DecodeStage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DecodeStage.hpp; sourceTree = "<group>"; };
+		B355602D1CB590680043584B /* ExecuteStage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExecuteStage.cpp; sourceTree = "<group>"; };
+		B355602E1CB590680043584B /* ExecuteStage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ExecuteStage.hpp; sourceTree = "<group>"; };
+		B35560301CB590780043584B /* WriteBackStage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WriteBackStage.cpp; sourceTree = "<group>"; };
+		B35560311CB590780043584B /* WriteBackStage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = WriteBackStage.hpp; sourceTree = "<group>"; };
+		B35560331CB590870043584B /* MemoryStage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MemoryStage.cpp; sourceTree = "<group>"; };
+		B35560341CB590870043584B /* MemoryStage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MemoryStage.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,18 +73,16 @@
 			isa = PBXGroup;
 			children = (
 				B355600B1CB4D02F0043584B /* main.cpp */,
-				B35560121CB4D6E30043584B /* Stage.cpp */,
-				B35560131CB4D6E30043584B /* Stage.hpp */,
-				B35560151CB4D7160043584B /* Fetch.cpp */,
-				B35560161CB4D7160043584B /* Fetch.hpp */,
-				B35560181CB4D7260043584B /* Decode.cpp */,
-				B35560191CB4D7260043584B /* Decode.hpp */,
-				B355601B1CB4D7330043584B /* Execute.cpp */,
-				B355601C1CB4D7330043584B /* Execute.hpp */,
-				B355601E1CB4D7460043584B /* Memory.cpp */,
-				B355601F1CB4D7460043584B /* Memory.hpp */,
-				B35560211CB4D75F0043584B /* WriteBack.cpp */,
-				B35560221CB4D75F0043584B /* WriteBack.hpp */,
+				B35560241CB5903D0043584B /* FetchStage.cpp */,
+				B35560251CB5903D0043584B /* FetchStage.hpp */,
+				B35560271CB5904C0043584B /* DecodeStage.cpp */,
+				B35560281CB5904C0043584B /* DecodeStage.hpp */,
+				B355602D1CB590680043584B /* ExecuteStage.cpp */,
+				B355602E1CB590680043584B /* ExecuteStage.hpp */,
+				B35560301CB590780043584B /* WriteBackStage.cpp */,
+				B35560311CB590780043584B /* WriteBackStage.hpp */,
+				B35560331CB590870043584B /* MemoryStage.cpp */,
+				B35560341CB590870043584B /* MemoryStage.hpp */,
 			);
 			path = MIPSSuperscalarSimulator;
 			sourceTree = "<group>";
@@ -148,13 +143,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B35560201CB4D7460043584B /* Memory.cpp in Sources */,
-				B355601D1CB4D7330043584B /* Execute.cpp in Sources */,
-				B35560141CB4D6E30043584B /* Stage.cpp in Sources */,
-				B35560171CB4D7160043584B /* Fetch.cpp in Sources */,
 				B355600C1CB4D02F0043584B /* main.cpp in Sources */,
-				B355601A1CB4D7260043584B /* Decode.cpp in Sources */,
-				B35560231CB4D75F0043584B /* WriteBack.cpp in Sources */,
+				B35560261CB5903D0043584B /* FetchStage.cpp in Sources */,
+				B35560321CB590780043584B /* WriteBackStage.cpp in Sources */,
+				B355602F1CB590680043584B /* ExecuteStage.cpp in Sources */,
+				B35560351CB590870043584B /* MemoryStage.cpp in Sources */,
+				B35560291CB5904C0043584B /* DecodeStage.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
