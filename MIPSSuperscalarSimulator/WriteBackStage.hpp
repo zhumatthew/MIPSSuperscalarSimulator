@@ -10,10 +10,11 @@
 #define WriteBackStage_hpp
 
 #include <stdio.h>
+#include "AllStage.hpp"
 
 using namespace std;
 
-class WriteBackStage {
+class WriteBackStage : public AllStage {
 public:
 	WriteBackStage();
 
