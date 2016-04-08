@@ -11,4 +11,14 @@
 
 #include <stdio.h>
 
+using namespace std;
+
+class MemoryStage {
+public:
+	MemoryStage();
+
+private:
+
+};
+
 #endif /* MemoryStage_hpp */

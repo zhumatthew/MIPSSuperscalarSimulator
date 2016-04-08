@@ -7,3 +7,7 @@
 //
 
 #include "ExecuteStage.hpp"
+
+ExecuteStage::ExecuteStage() {
+
+}

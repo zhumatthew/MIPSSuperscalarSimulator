@@ -11,4 +11,14 @@
 
 #include <stdio.h>
 
+using namespace std;
+
+class DecodeStage {
+public:
+	DecodeStage();
+
+private:
+
+};
+
 #endif /* DecodeStage_hpp */

@@ -7,3 +7,7 @@
 //
 
 #include "MemoryStage.hpp"
+
+MemoryStage::MemoryStage() {
+
+}

@@ -11,4 +11,14 @@
 
 #include <stdio.h>
 
+using namespace std;
+
+class WriteBackStage {
+public:
+	WriteBackStage();
+
+private:
+
+};
+
 #endif /* WriteBackStage_hpp */
