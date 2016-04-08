@@ -10,10 +10,11 @@
 #define DecodeStage_hpp
 
 #include <stdio.h>
+#include "AllStage.hpp"
 
 using namespace std;
 
-class DecodeStage {
+class DecodeStage : public AllStage {
 public:
 	DecodeStage();
 

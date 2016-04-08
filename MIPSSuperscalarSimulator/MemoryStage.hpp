@@ -10,12 +10,14 @@
 #define MemoryStage_hpp
 
 #include <stdio.h>
+#include "AllStage.hpp"
 
 using namespace std;
 
-class MemoryStage {
+class MemoryStage : public AllStage {
 public:
 	MemoryStage();
+	void implement(MainMemory mmemo, RegisterFile regfile);
 
 private:
 

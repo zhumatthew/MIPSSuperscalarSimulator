@@ -10,10 +10,11 @@
 #define ExecuteStage_hpp
 
 #include <stdio.h>
+#include "AllStage.hpp"
 
 using namespace std;
 
-class ExecuteStage {
+class ExecuteStage : public AllStage {
 public:
 	ExecuteStage();
 
