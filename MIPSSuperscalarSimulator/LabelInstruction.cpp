@@ -7,3 +7,19 @@
 //
 
 #include "LabelInstruction.hpp"
+
+LabelInstruction::LabelInstruction(string label, int lineNumber) {
+    if (label.back() == ':') {
+        label.pop_back();
+    }
+    this->label = label;
+    this->labelAddress = lineNumber;
+}
+
+int LabelInstruction::getLabelAddress() {
+    return labelAddress;
+}
+
+string LabelInstruction::getLabelString() {
+    return label;
+}

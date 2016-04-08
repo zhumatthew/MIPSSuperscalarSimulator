@@ -18,6 +18,8 @@ class LabelInstruction {
     
 public:
     LabelInstruction(string label, int lineNumber);
+    int getLabelAddress();
+    string getLabelString();
     
 private:
     string label;
