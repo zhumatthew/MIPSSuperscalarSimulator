@@ -13,6 +13,8 @@
 		B355602F1CB590680043584B /* ExecuteStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B355602D1CB590680043584B /* ExecuteStage.cpp */; };
 		B35560321CB590780043584B /* WriteBackStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B35560301CB590780043584B /* WriteBackStage.cpp */; };
 		B35560351CB590870043584B /* MemoryStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B35560331CB590870043584B /* MemoryStage.cpp */; };
+		B355603B1CB737AE0043584B /* RegisterFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B35560391CB737AE0043584B /* RegisterFile.cpp */; };
+		B355603E1CB737C00043584B /* MainMemory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B355603C1CB737C00043584B /* MainMemory.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,6 +42,10 @@
 		B35560311CB590780043584B /* WriteBackStage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = WriteBackStage.hpp; sourceTree = "<group>"; };
 		B35560331CB590870043584B /* MemoryStage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MemoryStage.cpp; sourceTree = "<group>"; };
 		B35560341CB590870043584B /* MemoryStage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MemoryStage.hpp; sourceTree = "<group>"; };
+		B35560391CB737AE0043584B /* RegisterFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RegisterFile.cpp; sourceTree = "<group>"; };
+		B355603A1CB737AE0043584B /* RegisterFile.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RegisterFile.hpp; sourceTree = "<group>"; };
+		B355603C1CB737C00043584B /* MainMemory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainMemory.cpp; sourceTree = "<group>"; };
+		B355603D1CB737C00043584B /* MainMemory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MainMemory.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +79,10 @@
 			isa = PBXGroup;
 			children = (
 				B355600B1CB4D02F0043584B /* main.cpp */,
+				B355603A1CB737AE0043584B /* RegisterFile.hpp */,
+				B35560391CB737AE0043584B /* RegisterFile.cpp */,
+				B355603C1CB737C00043584B /* MainMemory.cpp */,
+				B355603D1CB737C00043584B /* MainMemory.hpp */,
 				B35560241CB5903D0043584B /* FetchStage.cpp */,
 				B35560251CB5903D0043584B /* FetchStage.hpp */,
 				B35560271CB5904C0043584B /* DecodeStage.cpp */,
@@ -148,7 +158,9 @@
 				B35560321CB590780043584B /* WriteBackStage.cpp in Sources */,
 				B355602F1CB590680043584B /* ExecuteStage.cpp in Sources */,
 				B35560351CB590870043584B /* MemoryStage.cpp in Sources */,
+				B355603E1CB737C00043584B /* MainMemory.cpp in Sources */,
 				B35560291CB5904C0043584B /* DecodeStage.cpp in Sources */,
+				B355603B1CB737AE0043584B /* RegisterFile.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
