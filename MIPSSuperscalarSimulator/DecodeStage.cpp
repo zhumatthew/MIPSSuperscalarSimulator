@@ -7,3 +7,7 @@
 //
 
 #include "DecodeStage.hpp"
+
+DecodeStage::DecodeStage() {
+
+}

@@ -7,3 +7,7 @@
 //
 
 #include "FetchStage.hpp"
+
+FetchStage::FetchStage() {
+
+}

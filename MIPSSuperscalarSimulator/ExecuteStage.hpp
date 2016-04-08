@@ -11,4 +11,14 @@
 
 #include <stdio.h>
 
+using namespace std;
+
+class ExecuteStage {
+public:
+	ExecuteStage();
+
+private:
+
+};
+
 #endif /* ExecuteStage_hpp */

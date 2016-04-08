@@ -11,4 +11,14 @@
 
 #include <stdio.h>
 
+using namespace std;
+
+class FetchStage {
+public:
+	FetchStage();
+
+private:
+
+};
+
 #endif /* FetchStage_hpp */
