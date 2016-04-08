@@ -10,7 +10,6 @@
 
 #define REGISTER_SIZE 32
 
-
 RegisterFile::RegisterFile() {
     for (int i = 0; i < REGISTER_SIZE; i++) {
         registerData.push_back(0);
@@ -18,7 +17,7 @@ RegisterFile::RegisterFile() {
 }
 
 bool RegisterFile::putValue(int value, int address) {
-    if (address >= 0 && address < 32) {
+    if (address >= 0 && address < REGISTER_SIZE) {
         registerData[address] = 0;
         return true;
     }
