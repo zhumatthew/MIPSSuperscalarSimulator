@@ -119,10 +119,10 @@
 				B35560271CB5904C0043584B /* DecodeStage.cpp */,
 				B355602E1CB590680043584B /* ExecuteStage.hpp */,
 				B355602D1CB590680043584B /* ExecuteStage.cpp */,
-				B35560311CB590780043584B /* WriteBackStage.hpp */,
-				B35560301CB590780043584B /* WriteBackStage.cpp */,
 				B35560341CB590870043584B /* MemoryStage.hpp */,
 				B35560331CB590870043584B /* MemoryStage.cpp */,
+				B35560311CB590780043584B /* WriteBackStage.hpp */,
+				B35560301CB590780043584B /* WriteBackStage.cpp */,
 			);
 			path = MIPSSuperscalarSimulator;
 			sourceTree = "<group>";
