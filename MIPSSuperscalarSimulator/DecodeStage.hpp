@@ -15,8 +15,15 @@
 using namespace std;
 
 class DecodeStage : Stage {
+
 public:
 	DecodeStage();
+    int pcSaved;
+    SimulationInstruction instrucionSaved;
+    bool readAfterWriteHazard;
+
+    void implement(MainMemory mmem, RegisterFile regm, Simulator currentSimulator);
+    void check(vector<SimulationInstruction> hazardList, Simulator currentSimulator);
 
 private:
 
