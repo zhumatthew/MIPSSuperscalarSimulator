@@ -10,7 +10,7 @@
 
 Forwarding::Forwarding() {
 
-    rsForward =  false;
+    rsForward = false;
     rtForward = false;
     rsDelayedForward = false;
     rtDelayedForward = false;

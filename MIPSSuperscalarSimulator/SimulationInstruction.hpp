@@ -11,16 +11,20 @@
 
 #include <stdio.h>
 #include <string>
+#include "Forwarding.hpp"
+#include "Instruction.hpp"
 
 using namespace std;
 
 class SimulationInstruction {
 public:
 	SimulationInstruction(string str);
+    SimulationInstruction(Instruction instr);
     int opcode, rd, rt, rs, rdValue, rtValue, rsValue, immediate;
     string originalString, opcodeString;
     int instructionLocation, loopCount, effectiveAddress;
-    bool branchCondition, reodered;
+    bool branchCondition, reordered;
+    Forwarding *currentForward;
 
 private:
 

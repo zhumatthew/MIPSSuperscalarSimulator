@@ -11,7 +11,7 @@
 
 SimulationInstruction::SimulationInstruction(string str) {
 
-    originStr = str;
+    originalString = str;
     opcode = 0;
     rd = 0;
     rs = 0;
@@ -20,14 +20,14 @@ SimulationInstruction::SimulationInstruction(string str) {
     rtValue = 0;
     rsValue = 0;
     immediate = 0;
-    originStr = str;
-    opcStr = str;
+    originalString = str;
+    opcodeString = str;
     currentForward = new Forwarding();
-    effectiveAddr = 0;
-    branchCond = false;
+    effectiveAddress = 0;
+    branchCondition = false;
     reordered = false;
-    instrLocation = 0;
-    loopCnt = 0;
+    instructionLocation = 0;
+    loopCount = 0;
 }
 
 SimulationInstruction::SimulationInstruction(Instruction instr) {
@@ -40,10 +40,10 @@ SimulationInstruction::SimulationInstruction(Instruction instr) {
     rtValue = instr.rtvalue;
     rsValue = instr.rsvalue;
     immediate = instr.immediate;
-    originStr = instr.originalString;
-    opcStr = instr.opcodeString;
+    originalString = instr.originalString;
+    opcodeString = instr.opcodeString;
     currentForward = new Forwarding();
-    effectiveAddr = 0;
-    branchCond = false;
+    effectiveAddress = 0;
+    branchCondition = false;
     reordered = false;
 }
