@@ -8,6 +8,8 @@
 
 #include "WriteBackStage.hpp"
 
+using namespace std;
+
 WriteBackStage::WriteBackStage() {
 	Stage::Stage();
 }

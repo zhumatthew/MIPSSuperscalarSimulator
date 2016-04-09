@@ -8,6 +8,8 @@
 
 #include "MemoryStage.hpp"
 
+using namespace std;
+
 void MemoryStage::implement(MainMemory mmemo, RegisterFile regfile){
 
 	if(this->currentInstructionList[0].effectiveAddress != 0){

@@ -15,8 +15,6 @@
 #include "MainMemory.hpp"
 #include "RegisterFile.hpp"
 
-using namespace std;
-
 class MemoryStage : Stage {
 public:
 	MemoryStage();

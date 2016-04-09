@@ -15,8 +15,6 @@
 #include "DecodeStage.hpp"
 #include "Simulator.hpp"
 
-using namespace std;
-
 class WriteBackStage : Stage {
 public:
 	WriteBackStage();
