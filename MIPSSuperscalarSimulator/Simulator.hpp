@@ -46,6 +46,8 @@ public:
     int instrCount;
 
     void implement();
+    void stepImplement();
+    void main();
 private:
     vector<int> registerData;
 
