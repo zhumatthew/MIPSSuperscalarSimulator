@@ -45,6 +45,7 @@ public:
     vector<SimulationInstruction> tempHazardList;
     int instrCount;
 
+    void implement();
 private:
     vector<int> registerData;
 
