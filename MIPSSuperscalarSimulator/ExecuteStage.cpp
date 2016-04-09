@@ -8,10 +8,6 @@
 
 #include "ExecuteStage.hpp"
 
-ExecuteStage::ExecuteStage() {
-	Stage::Stage();
-}
-
 void ExecuteStage::implement(vector<SimulationInstruction> simulationInstructionList, DecodeStage currentDecode, MemoryStage currentMemory, Simulator currentSimulator) {
 	if(currentDecode.readAfterWriteHazard || (this->currentInstructionList[0].opcodeString=="NOP"))
 		return;
