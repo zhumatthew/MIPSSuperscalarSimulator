@@ -8,20 +8,15 @@
 
 #include "MemoryStage.hpp"
 
-using namespace std;
-
-MemoryStage::MemoryStage() {
-    
-}
-
 void MemoryStage::implement(MainMemory mmemo, RegisterFile regfile){
 
 	if(this->currentInstructionList[0].effectiveAddress != 0){
-	cout << "MemoryAddress [ " + this->currentInstructionList[0].effectiveAddress + "] = ";
+        cout << "MemoryAddress [ " << this->currentInstructionList[0].effectiveAddress << "] = ";
 	}
+    // this->currentInstructionList.front();
 
 	if(this->currentInstructionList[1].effectiveAddress != 0){
-	cout << "MemoryAddress [ " + this->currentInstructionList[1].effectiveAddress + "] = ";
+        cout << "MemoryAddress [ " << this->currentInstructionList[1].effectiveAddress << "] = ";
 	}
 
 	if(this->currentInstructionList[0].opcodeString == "NOP" || this->currentInstructionList[0].opcodeString == "Empty" || this->currentInstructionList[0].opcodeString == "nop" || this->currentInstructionList[0].opcodeString == "nop")
