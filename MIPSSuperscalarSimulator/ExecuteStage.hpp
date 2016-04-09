@@ -15,11 +15,14 @@
 using namespace std;
 
 class ExecuteStage : Stage {
+
 public:
 	ExecuteStage();
+	void implement(vector<SimulationInstruction> simulationInstructionList, DecodeStage currentDecode, MemoryStage currentMemory, Simulator currentSimulator);
+	int getSavedPC();
 
 private:
-
+	int tempPC;
 };
 
 #endif /* ExecuteStage_hpp */
