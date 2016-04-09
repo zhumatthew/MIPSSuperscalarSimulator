@@ -10,12 +10,33 @@
 #define SimulationInstruction_hpp
 
 #include <stdio.h>
+#include <string.h>
+
+#include "Instruction.hpp"
 
 using namespace std;
 
 class SimulationInstruction {
 public:
-	SimulationInstruction();
+	SimulationInstruction(Instruction instr);
+	SimulationInstruction(string str);
+
+    int opcode;
+    int rd;
+    int rt;
+    int rs;
+    int rdValue;
+    int rtValue;
+    int rsValue;
+    int immediate;
+    string originStr;
+    string opcStr;
+    int instrLocation;
+    int loopCnt;
+    Forwarding currentForward;
+    int effectiveAddr;
+    bool branchCond;
+    bool reordered;
 
 private:
 
