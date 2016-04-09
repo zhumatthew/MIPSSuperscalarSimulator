@@ -18,7 +18,7 @@ using namespace std;
 class Stage {
 public:
 	Stage();
-	vector<SimulationInstruction> currentInstrList;
+	vector<SimulationInstruction> currentInstructionList;
 private:
 
 

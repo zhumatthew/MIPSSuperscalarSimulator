@@ -8,6 +8,6 @@
 
 #include "SimulationInstruction.hpp"
 
-SimulationInstruction::SimulationInstruction() {
+SimulationInstruction::SimulationInstruction(string str) {
 
 }

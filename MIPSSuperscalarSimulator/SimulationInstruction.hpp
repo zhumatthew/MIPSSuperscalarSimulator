@@ -10,12 +10,17 @@
 #define SimulationInstruction_hpp
 
 #include <stdio.h>
+#include <string>
 
 using namespace std;
 
 class SimulationInstruction {
 public:
-	SimulationInstruction();
+	SimulationInstruction(string str);
+    int opcode, rd, rt, rs, rdValue, rtValue, rsValue, immediate;
+    string originalString, opcodeString;
+    int instructionLocation, loopCount, effectiveAddress;
+    bool branchCondition, reodered;
 
 private:
 
