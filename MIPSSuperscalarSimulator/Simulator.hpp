@@ -21,8 +21,6 @@
 #include "WriteBackStage.hpp"
 #include "SimulationInstruction.hpp"
 
-using namespace std;
-
 class Simulator {
 
 public:

@@ -10,10 +10,6 @@
 
 using namespace std;
 
-WriteBackStage::WriteBackStage() {
-	Stage::Stage();
-}
-
 void WriteBackStage::implement(RegisterFile regFile, DecodeStage currentDecode, Simulator sim){
 
 	if(this->currentInstructionList[0].opcodeString == "NOP" || this->currentInstructionList[0].opcodeString == "nop" || this->currentInstructionList[0].opcodeString == "Empty") {

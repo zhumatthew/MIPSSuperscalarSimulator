@@ -11,6 +11,8 @@
 
 #include <stdio.h>
 #include "Stage.hpp"
+#include "MemoryStage.hpp"
+#include "Simulator.hpp"
 
 using namespace std;
 
