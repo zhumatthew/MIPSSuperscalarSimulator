@@ -14,7 +14,7 @@
 
 using namespace std;
 
-class ExecuteStage:Stage {
+class ExecuteStage : Stage {
 public:
 	ExecuteStage();
 

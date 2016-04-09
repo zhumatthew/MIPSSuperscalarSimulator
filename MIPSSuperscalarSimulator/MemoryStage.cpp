@@ -11,7 +11,7 @@
 using namespace std;
 
 MemoryStage::MemoryStage() {
-
+    
 }
 
 void MemoryStage::implement(MainMemory mmemo, RegisterFile regfile){

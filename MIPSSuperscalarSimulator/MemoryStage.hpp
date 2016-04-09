@@ -16,7 +16,7 @@
 
 using namespace std;
 
-class MemoryStage:Stage {
+class MemoryStage : Stage {
 public:
 	MemoryStage();
 	void implement(MainMemory mmemo, RegisterFile regfile);
