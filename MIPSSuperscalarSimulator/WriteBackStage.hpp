@@ -17,7 +17,7 @@ using namespace std;
 class WriteBackStage:Stage {
 public:
 	WriteBackStage();
-
+	void implement(RegisterFile regFile, DecodeStage currentDecode, Simulator sim);
 private:
 
 };
