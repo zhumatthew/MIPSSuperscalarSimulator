@@ -14,7 +14,7 @@
 
 using namespace std;
 
-class WriteBackStage : public Stage {
+class WriteBackStage:Stage {
 public:
 	WriteBackStage();
 

@@ -11,10 +11,12 @@
 
 #include <stdio.h>
 #include "Stage.hpp"
+#include "MainMemory.hpp"
+#include "RegisterFile.hpp"
 
 using namespace std;
 
-class MemoryStage : public Stage {
+class MemoryStage:Stage {
 public:
 	MemoryStage();
 	void implement(MainMemory mmemo, RegisterFile regfile);

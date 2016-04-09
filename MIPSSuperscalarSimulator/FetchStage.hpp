@@ -14,7 +14,7 @@
 
 using namespace std;
 
-class FetchStage : public Stage {
+class FetchStage:Stage {
 public:
 	FetchStage();
 

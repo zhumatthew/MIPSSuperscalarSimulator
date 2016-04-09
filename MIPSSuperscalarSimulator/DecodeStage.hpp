@@ -14,7 +14,7 @@
 
 using namespace std;
 
-class DecodeStage : public Stage {
+class DecodeStage:Stage {
 public:
 	DecodeStage();
 
