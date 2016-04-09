@@ -24,6 +24,6 @@ void WriteBackStage::implement(RegisterFile regFile, DecodeStage currentDecode, 
 	}
 	regFile.putValue(this->currentInstructionList[0].rdValue, this->currentInstructionList[0].rd);
 	regFile.putValue(this->currentInstructionList[1].rdValue, this->currentInstructionList[1].rd);
-	cout << "r" + this->currentInstructionList[0].rd + "=" + regFile.getValue(this->currentInstructionList[0].rd);
-	cout << "r" + this->currentInstructionList[1].rd + "=" + regFile.getValue(this->currentInstructionList[1].rd);
+	cout << "r" << this->currentInstructionList[0].rd << "=" << regFile.getValue(this->currentInstructionList[0].rd);
+	cout << "r" << this->currentInstructionList[1].rd << "=" << regFile.getValue(this->currentInstructionList[1].rd);
 }
