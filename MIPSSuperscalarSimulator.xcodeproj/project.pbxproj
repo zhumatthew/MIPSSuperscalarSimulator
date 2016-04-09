@@ -94,10 +94,10 @@
 			isa = PBXGroup;
 			children = (
 				B355600B1CB4D02F0043584B /* main.cpp */,
-				B32A0D051CB7581900216F67 /* SimulationInstruction.cpp */,
 				B32A0D061CB7581900216F67 /* SimulationInstruction.hpp */,
-				B32A0D071CB7581A00216F67 /* Simulator.cpp */,
+				B32A0D051CB7581900216F67 /* SimulationInstruction.cpp */,
 				B32A0D081CB7581A00216F67 /* Simulator.hpp */,
+				B32A0D071CB7581A00216F67 /* Simulator.cpp */,
 				B35560461CB746A30043584B /* LabelInstruction.hpp */,
 				B35560451CB746A30043584B /* LabelInstruction.cpp */,
 				B35560431CB7421D0043584B /* Instruction.hpp */,
@@ -116,8 +116,8 @@
 				B355602D1CB590680043584B /* ExecuteStage.cpp */,
 				B35560311CB590780043584B /* WriteBackStage.hpp */,
 				B35560301CB590780043584B /* WriteBackStage.cpp */,
-				B35560331CB590870043584B /* MemoryStage.cpp */,
 				B35560341CB590870043584B /* MemoryStage.hpp */,
+				B35560331CB590870043584B /* MemoryStage.cpp */,
 			);
 			path = MIPSSuperscalarSimulator;
 			sourceTree = "<group>";
