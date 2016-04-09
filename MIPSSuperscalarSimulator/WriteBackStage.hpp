@@ -11,6 +11,9 @@
 
 #include <stdio.h>
 #include "Stage.hpp"
+#include "RegisterFile.hpp"
+#include "DecodeStage.hpp"
+#include "Simulator.hpp"
 
 using namespace std;
 

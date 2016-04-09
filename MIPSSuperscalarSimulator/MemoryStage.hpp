@@ -10,6 +10,7 @@
 #define MemoryStage_hpp
 
 #include <stdio.h>
+#include <iostream>
 #include "Stage.hpp"
 #include "MainMemory.hpp"
 #include "RegisterFile.hpp"
