@@ -47,7 +47,7 @@ bool FetchStage::regNameMatch(vector<SimulationInstruction> win, int chk)
 	bool tempFlag = false;
 	int tempCnti = 0;
 
-	if((win[0].opcodeString = "end") || (win[0].opcodeString == "nop") || (win[0].opcodeString == "NOP"))
+	if((win[0].opcodeString == "end") || (win[0].opcodeString == "nop") || (win[0].opcodeString == "NOP"))
 		return true;
 
 	while(tempCnti < chk)
@@ -104,7 +104,7 @@ void FetchStage::implement(vector<SimulationInstruction> simulationInstructionLi
 {
 	pairwise = false;
 	this->lastPC = PC;
-	windowMove(simuInstrList);
+	windowMove(simulationInstructionList);
 	reorder(window, simulationInstructionList);
 
 	if(currentSimu.lastStall == 1) {
