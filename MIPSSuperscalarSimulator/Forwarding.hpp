@@ -14,18 +14,19 @@
 using namespace std;
 
 class Forwarding {
+    
 public:
 	Forwarding();
 
-	 bool rsForward;
-	 bool rtForward;
-	 bool rsDelayedForward;
-	 bool rtDelayedForward;
+    bool rsForward;
+    bool rtForward;
+    bool rsDelayedForward;
+    bool rtDelayedForward;
 
-	 int rsForwardDepth;
-	 int rtForwardDepth;
-	 int rsDelayForwardDepth;
-	 int rtDelayForwardDepth;
+    int rsForwardDepth;
+    int rtForwardDepth;
+    int rsDelayForwardDepth;
+    int rtDelayForwardDepth;
 private:
 
 };
