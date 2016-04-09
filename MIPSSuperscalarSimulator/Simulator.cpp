@@ -11,7 +11,7 @@
 
 using namespace std;
 
-Simulator::Simulator(vector<SimulationInstruction*> &simulationInstrList) {
+//Simulator::Simulator(vector<SimulationInstruction*> &simulationInstrList) {
 //	this->simulationInstrList = simulationInstrList;
 //	simuFetch = new FetchStage(this->simulationInstrList.size());
 //	simuDecode = new DecodeStage();
@@ -39,4 +39,4 @@ Simulator::Simulator(vector<SimulationInstruction*> &simulationInstrList) {
 //	{
 //		tempInstrList.push_back(tempInstr);
 //	}
-}
+// }
