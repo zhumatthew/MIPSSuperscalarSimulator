@@ -45,7 +45,7 @@ Simulator::Simulator(vector<SimulationInstruction*> &simulationInstrList) {
 
 void Simulator::implement() {
 	this->cycleCount = 0;
-	while (!simuMemory.currentInstructionList[0].originalString == "end")
+	while (!simuMemory->currentInstructionList[0].originalString == "end")
 	{
 		cout << "clockCycle:" << (cycleCount << 1) << endl;
 		if (this->lastStall != 2)

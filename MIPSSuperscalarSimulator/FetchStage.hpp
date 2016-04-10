@@ -15,7 +15,7 @@
 
 using namespace std;
 
-class FetchStage : Stage {
+class FetchStage : public Stage {
 
 public:
 	FetchStage(int instructionLength);

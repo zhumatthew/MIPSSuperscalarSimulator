@@ -15,7 +15,7 @@
 #include "DecodeStage.hpp"
 #include "Simulator.hpp"
 
-class WriteBackStage : Stage {
+class WriteBackStage : public Stage {
 public:
 	WriteBackStage();
 	void implement(RegisterFile regFile, DecodeStage currentDecode, Simulator sim);

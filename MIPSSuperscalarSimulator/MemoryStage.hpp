@@ -15,7 +15,7 @@
 #include "MainMemory.hpp"
 #include "RegisterFile.hpp"
 
-class MemoryStage : Stage {
+class MemoryStage : public Stage {
 public:
 	MemoryStage();
 	void implement(MainMemory mmemo, RegisterFile regfile);
