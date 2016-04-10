@@ -26,23 +26,23 @@ class Simulator {
 public:
 	Simulator(vector<SimulationInstruction*> &simulationInstrList);
 
-	FetchStage simuFetch;
-	DecodeStage simuDecode;
-	ExecuteStage simuExecute;
-    MemoryStage simuMemory;
-    WriteBackStage simuWriteBack;
+	FetchStage *simuFetch;
+	DecodeStage *simuDecode;
+	ExecuteStage *simuExecute;
+    MemoryStage *simuMemory;
+    WriteBackStage *simuWriteBack;
 
-    MainMemory simuMainMemory;
-    RegisterFile simuRegFile;
-    vector<SimulationInstruction> simulationInstrList;
+    MainMemory *simuMainMemory;
+    RegisterFile *simuRegFile;
+    vector<SimulationInstruction*> simulationInstrList;
 
     int cycleCount;
     int lastStall;
-    SimulationInstruction tempInstr;
-    vector<SimulationInstruction> tempInstrList;
+    SimulationInstruction *tempInstr;
+    vector<SimulationInstruction*> tempInstrList;
     bool falsePrediction;
-    vector<SimulationInstruction> hazardList;
-    vector<SimulationInstruction> tempHazardList;
+    vector<SimulationInstruction*> hazardList;
+    vector<SimulationInstruction*> tempHazardList;
     int instrCount;
 
     void implement();

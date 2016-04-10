@@ -20,8 +20,8 @@ Simulator::Simulator(vector<SimulationInstruction*> &simulationInstrList) {
 	simuExecute = new ExecuteStage();
 	simuMemory = new MemoryStage();
 	simuWriteBack = new WriteBackStage();
-	this->instrCount = 0;
-	this->lastStall = 0;
+	instrCount = 0;
+	lastStall = 0;
 	simuRegFile = new RegisterFile();
 	simuMainMemory = new MainMemory();
 	tempInstr = new SimulationInstruction("nop");
