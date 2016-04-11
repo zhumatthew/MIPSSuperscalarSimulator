@@ -1,12 +1,12 @@
 //
-//  Instruction.cpp
+//  InstructionType.cpp
 //  MIPSSuperscalarSimulator
 //
 //  Created by Matt Zhu on 4/7/16.
 //  Copyright © 2016 ZhuKim. All rights reserved.
 //
 
-#include "Instruction.hpp"
+#include "InstructionType.hpp"
 
 InstructionType::InstructionType() {
     
