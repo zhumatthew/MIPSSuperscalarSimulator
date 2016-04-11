@@ -22,6 +22,7 @@ public:
     
 private:
     int upBranch;
+    int PC;
     int lastPC;
     int tempCnt;
     bool pairwise;
