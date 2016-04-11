@@ -13,9 +13,9 @@
 
 using namespace std;
 
-Simulator::Simulator(vector<SimulationInstruction> simulationInstrList) {
+Simulator::Simulator(vector<SimulationInstruction> simulationInstrList) : simuFetch(FetchStage((int) simulationInstrList.size())), tempInstr(SimulationInstruction("nop")) {
 	this->simulationInstrList = simulationInstrList;
-	simuFetch = FetchStage((int) this->simulationInstrList.size());
+	// simuFetch = FetchStage((int) this->simulationInstrList.size());
 	simuDecode = DecodeStage();
 	simuExecute = ExecuteStage();
 	simuMemory = MemoryStage();
@@ -24,7 +24,7 @@ Simulator::Simulator(vector<SimulationInstruction> simulationInstrList) {
 	lastStall = 0;
 	simuRegFile = RegisterFile();
 	simuMainMemory = MainMemory();
-	tempInstr = SimulationInstruction("nop");
+	// tempInstr = SimulationInstruction("nop");
 	hazardList = vector<SimulationInstruction>();
 	tempHazardList = vector<SimulationInstruction>();
 
@@ -42,6 +42,36 @@ Simulator::Simulator(vector<SimulationInstruction> simulationInstrList) {
 		tempInstrList.push_back(tempInstr);
 	}
 }
+
+//Simulator::Simulator(vector<SimulationInstruction> simulationInstrList) {
+//    this->simulationInstrList = simulationInstrList;
+//    simuFetch = FetchStage((int) this->simulationInstrList.size());
+//    simuDecode = DecodeStage();
+//    simuExecute = ExecuteStage();
+//    simuMemory = MemoryStage();
+//    simuWriteBack = WriteBackStage();
+//    instrCount = 0;
+//    lastStall = 0;
+//    simuRegFile = RegisterFile();
+//    simuMainMemory = MainMemory();
+//    tempInstr = SimulationInstruction("nop");
+//    hazardList = vector<SimulationInstruction>();
+//    tempHazardList = vector<SimulationInstruction>();
+//    
+//    for (int i = 0; i < 6; i++)
+//    {
+//        hazardList.push_back(tempInstr);
+//    }
+//    for (int i = 0; i < 4; i++)
+//    {
+//        tempHazardList.push_back(tempInstr);
+//    }
+//    tempInstrList = vector<SimulationInstruction>();
+//    for (int i = 0; i < 2; i++)
+//    {
+//        tempInstrList.push_back(tempInstr);
+//    }
+//}
 
 void Simulator::implement() {
 	this->cycleCount = 0;

@@ -13,11 +13,11 @@ void ExecuteStage::implement(vector<SimulationInstruction> simulationInstruction
 		return;
 	for(int i = 0; i < 2; i++) {
 		if(this->currentInstructionList[i].currentForward->rsDelayedForward) {
-			this->currentInstructionList[i].rsValue = currentSimulator.simuRegFile->getValue(currentInstructionList[i].rs);
+			this->currentInstructionList[i].rsValue = currentSimulator.simuRegFile.getValue(currentInstructionList[i].rs);
 		}
 
 		if(this->currentInstructionList[i].currentForward->rtDelayedForward) {
-			this->currentInstructionList[i].rtValue = currentSimulator.simuRegFile->getValue(currentInstructionList[i].rt);
+			this->currentInstructionList[i].rtValue = currentSimulator.simuRegFile.getValue(currentInstructionList[i].rt);
 		}
 
 		if(this->currentInstructionList[i].currentForward->rsForward) {
@@ -32,10 +32,10 @@ void ExecuteStage::implement(vector<SimulationInstruction> simulationInstruction
 
 		if( currentSimulator.lastStall == 2) {
 			if(this->currentInstructionList[i].currentForward->rsForward)
-				this->currentInstructionList[i].rsValue = currentSimulator.simuRegFile->getValue(currentInstructionList[i].rs);
+				this->currentInstructionList[i].rsValue = currentSimulator.simuRegFile.getValue(currentInstructionList[i].rs);
 
 			if(this->currentInstructionList[i].currentForward->rtForward)
-				this->currentInstructionList[i].rtValue = currentSimulator.simuRegFile->getValue(currentInstructionList[i].rt);
+				this->currentInstructionList[i].rtValue = currentSimulator.simuRegFile.getValue(currentInstructionList[i].rt);
 		}
 
 		this->currentInstructionList[i].currentForward->rsDelayedForward = false;
