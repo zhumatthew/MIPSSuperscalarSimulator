@@ -13,12 +13,11 @@
 #include "Stage.hpp"
 #include "RegisterFile.hpp"
 #include "DecodeStage.hpp"
-#include "Simulator.hpp"
 
 class WriteBackStage : public Stage {
 public:
 	WriteBackStage();
-	void implement(RegisterFile regFile, DecodeStage currentDecode, Simulator sim);
+	int implement(RegisterFile regFile, DecodeStage currentDecode);
 private:
 
 };

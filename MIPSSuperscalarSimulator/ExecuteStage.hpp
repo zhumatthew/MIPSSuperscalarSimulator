@@ -11,8 +11,8 @@
 
 #include <stdio.h>
 #include "Stage.hpp"
+#include "DecodeStage.hpp"
 #include "MemoryStage.hpp"
-#include "Simulator.hpp"
 
 using namespace std;
 
@@ -20,7 +20,7 @@ class ExecuteStage : public Stage {
 
 public:
 	ExecuteStage();
-	void implement(vector<SimulationInstruction> simulationInstructionList, DecodeStage currentDecode, MemoryStage currentMemory, RegisterFile simuRegFile, int lastStall);
+	void implement(DecodeStage currentDecode, MemoryStage currentMemory, RegisterFile simuRegFile, int lastStall, bool falsePrediction);
 	int getSavedPC();
 
 private:

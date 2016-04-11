@@ -11,7 +11,8 @@
 
 #include <stdio.h>
 #include "Stage.hpp"
-#include "Simulator.hpp"
+#include "MainMemory.hpp"
+#include "RegisterFile.hpp"
 
 using namespace std;
 

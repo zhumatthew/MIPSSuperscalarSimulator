@@ -8,7 +8,7 @@
 
 #include "ExecuteStage.hpp"
 
-void ExecuteStage::implement(vector<SimulationInstruction> simulationInstructionList, DecodeStage currentDecode, MemoryStage currentMemory, RegisterFile simuRegFile, int lastStall) {
+void ExecuteStage::implement(DecodeStage currentDecode, MemoryStage currentMemory, RegisterFile simuRegFile, int lastStall, bool falsePrediction) {
 	if (currentDecode.readAfterWriteHazard || (this->currentInstructionList[0].opcodeString=="NOP"))
 		return;
 	for (int i = 0; i < 2; i++) {
@@ -68,7 +68,7 @@ void ExecuteStage::implement(vector<SimulationInstruction> simulationInstruction
 				this->currentInstructionList[i].branchCondition = true;
 			if(this->currentInstructionList[i].branchCondition == true) {
 				tempPC = this->currentInstructionList[i].immediate;
-				currentSimulator.falsePrediction = true;
+				falsePrediction = true;
 				this->currentInstructionList[i].branchCondition = false;
 			}
 		}

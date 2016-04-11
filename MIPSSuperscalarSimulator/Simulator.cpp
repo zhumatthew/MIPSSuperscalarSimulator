@@ -18,10 +18,10 @@ using namespace std;
 Simulator::Simulator(vector<SimulationInstruction> simulationInstrList) : simuFetch(FetchStage((int) simulationInstrList.size())), tempInstr(SimulationInstruction("nop")) {
 	this->simulationInstrList = simulationInstrList;
 	// simuFetch = FetchStage((int) this->simulationInstrList.size());
-	simuDecode = DecodeStage();
-	simuExecute = ExecuteStage();
-	simuMemory = MemoryStage();
-	simuWriteBack = WriteBackStage();
+//	simuDecode = DecodeStage();
+//	simuExecute = ExecuteStage();
+//	simuMemory = MemoryStage();
+//	simuWriteBack = WriteBackStage();
 	instrCount = 0;
 	lastStall = 0;
 	simuRegFile = RegisterFile();
@@ -124,11 +124,12 @@ void Simulator::implement() {
 		cout << "WriteBack:" << simuWriteBack.currentInstructionList[0].originalString << endl;
 		cout << "WriteBack:" << simuWriteBack.currentInstructionList[1].originalString << endl;
 
-		simuWriteBack.implement(simuRegFile, simuDecode, *this);
+		int increment = simuWriteBack.implement(simuRegFile, simuDecode);
 		simuMemory.implement(simuMainMemory, simuRegFile);
-		simuExecute.implement(NULL, simuDecode, simuMemory, simuRegFile, lastStall);
+		simuExecute.implement(simuDecode, simuMemory, simuRegFile, lastStall, falsePrediction);
 		simuDecode.implement(simuMainMemory, simuRegFile, hazardList, lastStall);
 		simuFetch.implement(simulationInstrList, lastStall, falsePrediction, simuExecute.getSavedPC());
+        instrCount += increment;
 
 		cout << "Fetch:" << simuFetch.currentInstructionList[0].originalString;
 		cout << "Fetch:" << simuFetch.currentInstructionList[1].originalString;
@@ -243,11 +244,11 @@ void Simulator::stepImplement(){
 	cout << "WriteBack:" << simuWriteBack.currentInstructionList[0].originalString;
 	cout << "WriteBack:" << simuWriteBack.currentInstructionList[1].originalString;
 
-	simuWriteBack.implement(simuRegFile, simuDecode, *this);
+	simuWriteBack.implement(simuRegFile, simuDecode);
 	simuMemory.implement(simuMainMemory, simuRegFile);
-	simuExecute.implement(NULL, simuDecode, simuMemory, *this);
-	simuDecode.implement(simuMainMemory, simuRegFile, *this);
-	simuFetch.implement(simulationInstrList, *this);
+    simuExecute.implement(simuDecode, simuMemory, simuRegFile, lastStall, falsePrediction);
+    simuDecode.implement(simuMainMemory, simuRegFile, hazardList, lastStall);
+    simuFetch.implement(simulationInstrList, lastStall, falsePrediction, simuExecute.getSavedPC());
 
 	cout << "Fetch:" + simuFetch.currentInstructionList[0].originalString;
 	cout << "Fetch:" + simuFetch.currentInstructionList[1].originalString;
