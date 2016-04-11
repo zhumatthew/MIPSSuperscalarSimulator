@@ -244,11 +244,12 @@ void Simulator::stepImplement(){
 	cout << "WriteBack:" << simuWriteBack.currentInstructionList[0].originalString;
 	cout << "WriteBack:" << simuWriteBack.currentInstructionList[1].originalString;
 
-	simuWriteBack.implement(simuRegFile, simuDecode);
+    int increment = simuWriteBack.implement(simuRegFile, simuDecode);
 	simuMemory.implement(simuMainMemory, simuRegFile);
     simuExecute.implement(simuDecode, simuMemory, simuRegFile, lastStall, falsePrediction);
     simuDecode.implement(simuMainMemory, simuRegFile, hazardList, lastStall);
     simuFetch.implement(simulationInstrList, lastStall, falsePrediction, simuExecute.getSavedPC());
+    instrCount += increment;
 
 	cout << "Fetch:" + simuFetch.currentInstructionList[0].originalString;
 	cout << "Fetch:" + simuFetch.currentInstructionList[1].originalString;
