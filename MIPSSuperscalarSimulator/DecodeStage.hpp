@@ -23,8 +23,8 @@ public:
     SimulationInstruction instructionSaved;
     bool readAfterWriteHazard;
 
-    void implement(MainMemory mmem, RegisterFile regm, Simulator currentSimulator);
-    void check(vector<SimulationInstruction> hazardList, Simulator currentSimulator);
+    void implement(MainMemory mmem, RegisterFile regm, vector<SimulationInstruction> hazardList, int lastStall);
+    void check(vector<SimulationInstruction> hazardList, int lastStall);
 
 private:
 

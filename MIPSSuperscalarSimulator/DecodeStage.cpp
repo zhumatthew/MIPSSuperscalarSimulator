@@ -13,20 +13,20 @@ DecodeStage::DecodeStage() {
 	this->readAfterWriteHazard = false;
 }
 
-void DecodeStage::implement(MainMemory mmem, RegisterFile regm, Simulator currentSimulator) {
+void DecodeStage::implement(MainMemory mmem, RegisterFile regm, vector<SimulationInstruction> hazardList, int lastStall) {
 	if (readAfterWriteHazard || (this->currentInstructionList[0].opcodeString == "NOP")) {
 		return;
 	}
 
-	this->check(currentSimulator.hazardList, currentSimulator);
+	this->check(hazardList, lastStall);
 	this->currentInstructionList[0].rsValue = regm.getValue(this->currentInstructionList[0].rs);
 	this->currentInstructionList[0].rtValue = regm.getValue(this->currentInstructionList[0].rt);
 	this->currentInstructionList[1].rsValue = regm.getValue(this->currentInstructionList[1].rs);
 	this->currentInstructionList[1].rtValue = regm.getValue(this->currentInstructionList[1].rt);
 }
 
-void DecodeStage::check(vector<SimulationInstruction> hazardList, Simulator currentSimulator) {
-	if (currentSimulator.lastStall == 2) {
+void DecodeStage::check(vector<SimulationInstruction> hazardList, int lastStall) {
+	if (lastStall == 2) {
 		if (this->currentInstructionList[0].rs == hazardList[0].rd) {
 			if(currentInstructionList[0].loopCount > hazardList[0].loopCount) {
 				this->currentInstructionList[0].currentForward->rsForward = true;
@@ -169,7 +169,7 @@ void DecodeStage::check(vector<SimulationInstruction> hazardList, Simulator curr
 		}
 	}
 
-	if (currentSimulator.lastStall == 2) {
+	if (lastStall == 2) {
 
 		if (this->currentInstructionList[1].rs == hazardList[0].rd) {
 			if(currentInstructionList[1].loopCount > hazardList[0].loopCount) {
