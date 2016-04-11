@@ -128,7 +128,7 @@ void Simulator::implement() {
 		simuMemory.implement(simuMainMemory, simuRegFile);
 		simuExecute.implement(NULL, simuDecode, simuMemory, *this);
 		simuDecode.implement(simuMainMemory, simuRegFile, *this);
-		simuFetch.implement(simulationInstrList, *this);
+		simuFetch.implement(simulationInstrList, lastStall, falsePrediction, simuExecute.getSavedPC());
 
 		cout << "Fetch:" << simuFetch.currentInstructionList[0].originalString;
 		cout << "Fetch:" << simuFetch.currentInstructionList[1].originalString;

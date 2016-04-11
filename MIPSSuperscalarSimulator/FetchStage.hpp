@@ -19,10 +19,9 @@ class FetchStage : public Stage {
 
 public:
 	FetchStage(int instructionLength);
-	void implement(vector<SimulationInstruction> simuInstrList, Simulator currentSimu);
-
+    void implement(vector<SimulationInstruction> simulationInstructionList, int lastStall, bool falsePrediction, int savedPC);
+    
 private:
-
     int upBranch;
     int lastPC;
     int tempCnt;

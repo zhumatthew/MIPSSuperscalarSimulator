@@ -70,7 +70,7 @@ void FetchStage::reorder(vector<SimulationInstruction> win, vector<SimulationIns
 {
 	if(win[0].opcodeString == "BGEZ" || win[0].opcodeString == "BLEZ" || win[0].opcodeString == "BEQ" || win[0].opcodeString == "J" || win[0].opcodeString == "end" || win[0].opcodeString == "nop" || win[0].opcodeString == "NOP")
 		return;
-	if ((win[1].rs != win[0].rd) &&(win[1].rt != win[0].rd) &&(!win[1].opcodeString == "end") &&(!win[1].opcodeString == "nop") &&(!win[1].opcodeString == "NOP")) {
+	if ((win[1].rs != win[0].rd) &&(win[1].rt != win[0].rd) &&(win[1].opcodeString != "end") &&(win[1].opcodeString != "nop") && (win[1].opcodeString != "NOP")) {
 		pairwise = true;
 		return;
 	}
@@ -100,14 +100,14 @@ void FetchStage::clear_reordered(vector<SimulationInstruction> simulationInstruc
 	}
 }
 
-void FetchStage::implement(vector<SimulationInstruction> simulationInstructionList, Simulator currentSimu)
+void FetchStage::implement(vector<SimulationInstruction> simulationInstructionList, int lastStall, bool falsePrediction, int savedPC)
 {
 	pairwise = false;
 	this->lastPC = PC;
 	windowMove(simulationInstructionList);
 	reorder(window, simulationInstructionList);
 
-	if(currentSimu.lastStall == 1) {
+	if(lastStall == 1) {
 		return;
 	} else {
 		if(pairwise)
@@ -122,13 +122,13 @@ void FetchStage::implement(vector<SimulationInstruction> simulationInstructionLi
 		} else {
 			window[0].loopCount = window[0].instructionLocation + this->upBranch;
 			this->currentInstructionList[0] = window[0];
-			this->currentInstructionList[1] = new SimulationInstruction("NOP");
+			this->currentInstructionList[1] = SimulationInstruction("NOP");
 			PC ++;
 		}
 		clear_reordered(simulationInstructionList,PC,lastPC);
 
-		if(currentSimu.falsePrediction) {
-			int updatedPC = currentSimu.simuExecute.getSavedPC();
+		if (falsePrediction) {
+			int updatedPC = savedPC;
 			upBranch = upBranch + (PC - updatedPC);
 			simulationInstructionList[PC].reordered = false;
 			PC = updatedPC;

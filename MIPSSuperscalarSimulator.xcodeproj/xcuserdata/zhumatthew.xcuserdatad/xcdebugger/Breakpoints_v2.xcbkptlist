@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "107"
             endingLineNumber = "107"
-            landmarkName = "FetchStage::implement(vector&lt;SimulationInstruction&gt; simulationInstructionList, Simulator currentSimu)"
+            landmarkName = "FetchStage::implement(vector&lt;SimulationInstruction&gt; simulationInstructionList, int lastStall, bool falsePrediction, int savedPC)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
