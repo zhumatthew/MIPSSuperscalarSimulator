@@ -126,7 +126,7 @@ void Simulator::implement() {
 
 		simuWriteBack.implement(simuRegFile, simuDecode, *this);
 		simuMemory.implement(simuMainMemory, simuRegFile);
-		simuExecute.implement(NULL, simuDecode, simuMemory, *this);
+		simuExecute.implement(NULL, simuDecode, simuMemory, simuRegFile, lastStall);
 		simuDecode.implement(simuMainMemory, simuRegFile, hazardList, lastStall);
 		simuFetch.implement(simulationInstrList, lastStall, falsePrediction, simuExecute.getSavedPC());
 

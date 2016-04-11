@@ -20,7 +20,7 @@ class DecodeStage : public Stage {
 public:
 	DecodeStage();
     int pcSaved;
-    SimulationInstruction instructionSaved;
+    // SimulationInstruction instructionSaved;
     bool readAfterWriteHazard;
 
     void implement(MainMemory mmem, RegisterFile regm, vector<SimulationInstruction> hazardList, int lastStall);

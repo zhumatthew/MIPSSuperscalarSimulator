@@ -20,7 +20,7 @@ class ExecuteStage : public Stage {
 
 public:
 	ExecuteStage();
-	void implement(vector<SimulationInstruction> simulationInstructionList, DecodeStage currentDecode, MemoryStage currentMemory, Simulator currentSimulator);
+	void implement(vector<SimulationInstruction> simulationInstructionList, DecodeStage currentDecode, MemoryStage currentMemory, RegisterFile simuRegFile, int lastStall);
 	int getSavedPC();
 
 private:

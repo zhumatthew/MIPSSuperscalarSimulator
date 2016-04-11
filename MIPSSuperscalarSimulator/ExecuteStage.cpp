@@ -8,34 +8,34 @@
 
 #include "ExecuteStage.hpp"
 
-void ExecuteStage::implement(vector<SimulationInstruction> simulationInstructionList, DecodeStage currentDecode, MemoryStage currentMemory, Simulator currentSimulator) {
-	if(currentDecode.readAfterWriteHazard || (this->currentInstructionList[0].opcodeString=="NOP"))
+void ExecuteStage::implement(vector<SimulationInstruction> simulationInstructionList, DecodeStage currentDecode, MemoryStage currentMemory, RegisterFile simuRegFile, int lastStall) {
+	if (currentDecode.readAfterWriteHazard || (this->currentInstructionList[0].opcodeString=="NOP"))
 		return;
-	for(int i = 0; i < 2; i++) {
-		if(this->currentInstructionList[i].currentForward->rsDelayedForward) {
-			this->currentInstructionList[i].rsValue = currentSimulator.simuRegFile.getValue(currentInstructionList[i].rs);
+	for (int i = 0; i < 2; i++) {
+		if (this->currentInstructionList[i].currentForward->rsDelayedForward) {
+			this->currentInstructionList[i].rsValue = simuRegFile.getValue(currentInstructionList[i].rs);
 		}
 
-		if(this->currentInstructionList[i].currentForward->rtDelayedForward) {
-			this->currentInstructionList[i].rtValue = currentSimulator.simuRegFile.getValue(currentInstructionList[i].rt);
+		if (this->currentInstructionList[i].currentForward->rtDelayedForward) {
+			this->currentInstructionList[i].rtValue = simuRegFile.getValue(currentInstructionList[i].rt);
 		}
 
-		if(this->currentInstructionList[i].currentForward->rsForward) {
+		if (this->currentInstructionList[i].currentForward->rsForward) {
 			int depthIndex = this->currentInstructionList[i].currentForward->rsForwardDepth;
 			this->currentInstructionList[i].rsValue = currentMemory.currentInstructionList[depthIndex].rdValue;
 		}
 
-		if(this->currentInstructionList[i].currentForward->rtForward) {
+		if (this->currentInstructionList[i].currentForward->rtForward) {
 			int depthIndex = this->currentInstructionList[i].currentForward->rtForwardDepth;
 			this->currentInstructionList[i].rtValue = currentMemory.currentInstructionList[depthIndex].rdValue;
 		}
 
-		if( currentSimulator.lastStall == 2) {
+		if (lastStall == 2) {
 			if(this->currentInstructionList[i].currentForward->rsForward)
-				this->currentInstructionList[i].rsValue = currentSimulator.simuRegFile.getValue(currentInstructionList[i].rs);
+				this->currentInstructionList[i].rsValue = simuRegFile.getValue(currentInstructionList[i].rs);
 
 			if(this->currentInstructionList[i].currentForward->rtForward)
-				this->currentInstructionList[i].rtValue = currentSimulator.simuRegFile.getValue(currentInstructionList[i].rt);
+				this->currentInstructionList[i].rtValue = simuRegFile.getValue(currentInstructionList[i].rt);
 		}
 
 		this->currentInstructionList[i].currentForward->rsDelayedForward = false;
