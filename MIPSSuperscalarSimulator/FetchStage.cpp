@@ -18,10 +18,10 @@ FetchStage::FetchStage(int instructionLength) {
 	this->tempCnt = 0;
 	pairwise = false;
 	this->upBranch = 0;
-	window = new vector<SimulationInstruction>();
+	window = vector<SimulationInstruction>();
 
 	for(; tempCnt < windowSize; tempCnt++)
-		window[tempCnt] = new SimulationInstruction("nop");
+		window[tempCnt] = SimulationInstruction("nop");
 }
 
 void FetchStage::windowMove(vector<SimulationInstruction> simulationInstructionList)

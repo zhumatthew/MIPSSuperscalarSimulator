@@ -45,7 +45,7 @@ Simulator::Simulator(vector<SimulationInstruction*> &simulationInstrList) {
 
 void Simulator::implement() {
 	this->cycleCount = 0;
-	while (!simuMemory->currentInstructionList[0].originalString == "end")
+	while (simuMemory->currentInstructionList[0].originalString != "end")
 	{
 		cout << "clockCycle:" << (cycleCount << 1) << endl;
 		if (this->lastStall != 2)
@@ -286,7 +286,7 @@ void Simulator::stepImplement(){
 }
 
 void Simulator::main(){
-	SourceReader reader = new SourceReader("D:/Code/AssemblerApp0.99/AssemblerApp/InstructionList.dat");
+	// SourceReader reader = new SourceReader("D:/Code/AssemblerApp0.99/AssemblerApp/InstructionList.dat");
 	ArrayList<SimuInstr> simuInstrList = new ArrayList<SimuInstr>();
 	ArrayList<Instruction> originInstrList = reader.readInstrList();
 	System.out.println(originInstrList.size());
