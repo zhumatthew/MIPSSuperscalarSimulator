@@ -13,6 +13,8 @@
 
 using namespace std;
 
+// if the type of 'simuDecode' is 'DecodeStage' and it has a default ctor, then you don't need to initialize it manually.
+
 Simulator::Simulator(vector<SimulationInstruction> simulationInstrList) : simuFetch(FetchStage((int) simulationInstrList.size())), tempInstr(SimulationInstruction("nop")) {
 	this->simulationInstrList = simulationInstrList;
 	// simuFetch = FetchStage((int) this->simulationInstrList.size());
