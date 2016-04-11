@@ -14,8 +14,6 @@
 #include "Forwarding.hpp"
 #include "Instruction.hpp"
 
-using namespace std;
-
 class SimulationInstruction {
 public:
 	SimulationInstruction(string str);

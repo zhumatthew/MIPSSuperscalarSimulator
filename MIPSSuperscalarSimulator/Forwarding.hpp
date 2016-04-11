@@ -11,8 +11,6 @@
 
 #include <stdio.h>
 
-using namespace std;
-
 class Forwarding {
     
 public:
@@ -27,7 +25,6 @@ public:
     int rtForwardDepth;
     int rsDelayForwardDepth;
     int rtDelayForwardDepth;
-private:
 
 };
 

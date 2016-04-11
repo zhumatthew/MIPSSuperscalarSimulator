@@ -9,6 +9,8 @@
 #include "SimulationInstruction.hpp"
 #include "Instruction.hpp"
 
+using namespace std;
+
 SimulationInstruction::SimulationInstruction(string str) {
 
     originalString = str;

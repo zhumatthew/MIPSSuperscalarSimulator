@@ -8,6 +8,8 @@
 
 #include "Forwarding.hpp"
 
+using namespace std;
+
 Forwarding::Forwarding() {
 
     rsForward = false;
