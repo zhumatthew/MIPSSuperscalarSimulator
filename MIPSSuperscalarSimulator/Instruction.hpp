@@ -23,6 +23,8 @@ public:
     string originalString;
     int lowSixDigital, middleFiveDigital, instructionType, rtvalue, rsvalue, rdvalue, immediate, rd, rt, rs, opcode;
     string opcodeString;
+    void handleInstruction(string results[]);
+    string* resultDec(string results[]);
     
 private:
     vector<LabelInstruction> labelInstructionList;
