@@ -19,11 +19,12 @@ class Stage {
 public:
 	Stage();
 	vector<SimulationInstruction> currentInstructionList;
+//    static int PC;
+    int PC;
+
+
 private:
 
-
-protected:
-	static int PC;
 };
 
 #endif /* Stage_hpp */
