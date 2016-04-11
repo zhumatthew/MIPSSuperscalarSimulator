@@ -126,10 +126,11 @@ int InstructionParser::parserRs(int instrType) {
 	return rs;
 }
 
+// remove extraneous breaks?
 int InstructionParser::parserRt(int instrType) {
 	int rt = 0;
 
-	switch(instrType){
+	switch (instrType) {
 		case 0:
 			if(starts_with(this->results[3], "r")) {
 				string strValue = this->results[3].substr(1, this->results[3].length());
@@ -143,13 +144,13 @@ int InstructionParser::parserRt(int instrType) {
 			}
 			break;
 		case 2:
-			if(results[0] == "LW"){
+			if (results.front() == "LW") {
 				if(starts_with(results[1], "r"))
 					rt = atoi(results[1].substr(1, results[1].length()).c_str());
-			}else if(results[0] == "SW"){
+			} else if (results.front() == "SW") {
 				if(starts_with(results[1], "r"))
 					rt = atoi(results[1].substr(1,results[1].length()).c_str());
-			}else{
+			} else {
 				if(starts_with(results[2], "r"))
 					rt = atoi(results[2].substr(1,results[2].length()).c_str());
 			}
@@ -164,6 +165,7 @@ int InstructionParser::parserRt(int instrType) {
 	return rt;
 }
 
+// remove extraneous breaks?
 int InstructionParser::parserRd(int instrType) {
 	int rd = 0;
 	switch(instrType){
@@ -239,6 +241,7 @@ int InstructionParser::parserMiddleFiveDigit(int instrType) {
 	return middleFiveDigit;
 }
 
+// parseImmediateValue?
 int InstructionParser::parserImmediateNumber(int instrType) {
 	int immediate = 0;
 
@@ -249,7 +252,6 @@ int InstructionParser::parserImmediateNumber(int instrType) {
 			immediate = atoi(this->results[3].c_str());
 			break;
 		case 2:
-            // results.front()?
 			if (results.front() == "LW") {
 				int index;
 				index = static_cast<int>(results[2].find("("));
@@ -283,7 +285,7 @@ int InstructionParser::parserImmediateNumber(int instrType) {
 			}
 			break;
 		default:
-			immediate = 0;
+            break;
 	}
 	return immediate;
 }

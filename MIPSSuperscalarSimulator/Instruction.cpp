@@ -13,6 +13,8 @@
 
 using namespace std;
 
+// enumeration for instruction types??
+
 // array?
 Instruction::Instruction(vector<string> results, int instructionType, vector<LabelInstruction> labelInstructionList) {
 	this->instructionType = instructionType;
@@ -20,7 +22,7 @@ Instruction::Instruction(vector<string> results, int instructionType, vector<Lab
 
 	InstructionType instrType= InstructionType();
 
-	if(instructionType == 5){
+	if (instructionType == 5) {
 		this->instructionType = instrType.instrTypeDefine(results[1]);
 		results = this->resultDec(results);
 	}
@@ -70,11 +72,8 @@ void Instruction::handleInstruction(vector<string> results) {
 	}
 }
 
+// removeLabel??
 vector<string> Instruction::resultDec(vector<string> results) {
-	// vector<string> newResults = string[sizeof(results)/sizeof(results[0])];
-    vector<string> newResults;
-	for( int i = 1;i < sizeof(results)/sizeof(results[0]); i++ ){
-		newResults[i-1] = results[i];
-	}
-	return newResults;
+    results.erase(results.begin());
+    return results;
 }
