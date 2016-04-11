@@ -6,13 +6,16 @@
 //  Copyright © 2016 ZhuKim. All rights reserved.
 //
 
+#include <iostream>
 #include "InstructionType.hpp"
+
+using namespace std;
 
 InstructionType::InstructionType() {
     
 }
 
-static int InstructionType::instrTypeDefine(string strOpcode) {
+int InstructionType::instrTypeDefine(string strOpcode) {
 	if(strOpcode == "ADD" || strOpcode == "SUB" || strOpcode == "MUL"|| strOpcode == "DIV" || strOpcode == "AND")
 		return instrType = 0;
 	else if(strOpcode == "ADDI" || strOpcode == "ANDI" || strOpcode == "ORI" || strOpcode == "XORI" || strOpcode == "SUBI" || strOpcode == "SLLI"|| strOpcode == "SRLI")
@@ -28,7 +31,7 @@ static int InstructionType::instrTypeDefine(string strOpcode) {
 	return instrType = 5;
 }
 
-static bool InstructionType::isLabel(string strOpcode) {
+bool InstructionType::isLabel(string strOpcode) {
 	instrTypeDefine(strOpcode);
 	if (this->instrType == 5)
 		return true;
@@ -109,7 +112,7 @@ static int InstructionType::lowSixDigitDefine(string str,int instrType) {
 	return low;
 }
 
-static int InstructionType::middleFiveDigitDefine(string str,int instrType) {
+int InstructionType::middleFiveDigitDefine(string str,int instrType) {
 	int middle = 0;
 
 	switch(instrType) {

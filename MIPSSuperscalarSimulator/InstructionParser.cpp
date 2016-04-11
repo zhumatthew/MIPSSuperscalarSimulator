@@ -7,9 +7,12 @@
 //
 #include <stdio.h>
 #include <stdlib.h>
+#include <iostream>
 
 #include "InstructionParser.hpp"
 #include "InstructionType.hpp"
+
+using namespace std;
 
 InstructionParser::InstructionParser(string aLine) {
 	this->line = aLine;
@@ -65,7 +68,7 @@ int InstructionParser::parserOptcode(int instrType) {
 	string operation = "";
 	operation = this->results[0];
 
-	InstructionType instructionType = new InstructionType();
+	InstructionType instructionType = InstructionType();
 	return instructionType.operatonCodeDefine(operation, instrType);
 }
 
@@ -88,8 +91,8 @@ int InstructionParser::parserRs(int instrType) {
 		case 2:
 			if(results[0] == "LW") {
 				int leftIndex,rightIndex;
-				leftIndex = results[2].find("(", 0);
-				rightIndex = results[2].find(")", 0);
+				leftIndex = static_cast<int>(results[2].find("("));
+				rightIndex = static_cast<int>(results[2].find(")"));
 				string str = results[2].substr(leftIndex + 1, rightIndex);
 				if (starts_with(str, "r")) {
 					string strValue = str.substr(1, str.length());
@@ -97,8 +100,8 @@ int InstructionParser::parserRs(int instrType) {
 				}
 			} else if(results[0] == "SW") {
 				int leftIndex,rightIndex;
-				leftIndex = results[2].find("(", 0);
-				rightIndex = results[2].find(")", 0);
+				leftIndex = static_cast<int>(results[2].find("("));
+				rightIndex = static_cast<int>(results[2].find(")"));
 				string str = results[2].substr(leftIndex + 1, rightIndex);
 				if (starts_with(str, "r")){
 					string strValue = str.substr(1,str.length());
@@ -198,7 +201,7 @@ int InstructionParser::parserRd(int instrType) {
 
 int InstructionParser::parserLowSixDigit(int instrType) {
 	int lowSixDigit = 0;
-	InstructionType instructionType = new InstructionType();
+	InstructionType instructionType = InstructionType();
 
 	switch(instrType) {
 		case 0:
@@ -215,7 +218,7 @@ int InstructionParser::parserLowSixDigit(int instrType) {
 
 int InstructionParser::parserMiddleFiveDigit(int instrType) {
 	int middleFiveDigit = 0;
-	InstructionType instructionType = new InstructionType();
+	InstructionType instructionType = InstructionType();
 
 	switch(instrType){
 		case 0:
@@ -239,41 +242,42 @@ int InstructionParser::parserMiddleFiveDigit(int instrType) {
 int InstructionParser::parserImmediateNumber(int instrType) {
 	int immediate = 0;
 
-	switch(instrType) {
+	switch (instrType) {
 		case 0:
 			break;
 		case 1:
 			immediate = atoi(this->results[3].c_str());
 			break;
 		case 2:
-			if(results[0] == "LW") {
+            // results.front()?
+			if (results.front() == "LW") {
 				int index;
-				index = results[2].find("(", 0);
+				index = static_cast<int>(results[2].find("("));
 				string str = results[2].substr(0, index);
 				immediate = atoi(str.c_str());
-			}else if(results[0] == "SW") {
+			} else if (results.front() == "SW") {
 				int index;
-				index = results[2].find("(", 0);
+				index = static_cast<int>(results[2].find("("));
 				string str = results[2].substr(0, index);
 				immediate = atoi(str.c_str());
-			}else{
-				for(int index = 0; index < labelInstructionList.size(); index++) {
-					if(labelInstructionList[index].getLabelString() == results[3]) {
+			} else {
+				for (int index = 0; index < labelInstructionList.size(); index++) {
+					if (labelInstructionList[index].getLabelString() == results[3]) {
 						immediate = labelInstructionList[index].getLabelAddress();
 					}
 				}
 			}
 			break;
 		case 3:
-			for(int index = 0; index < labelInstructionList.size(); index++) {
-				if(labelInstructionList[index].getLabelString() == results[1]) {
+			for (int index = 0; index < labelInstructionList.size(); index++) {
+				if (labelInstructionList[index].getLabelString() == results[1]) {
 					immediate = labelInstructionList[index].getLabelAddress();
 				}
 			}
 			break;
 		case 4:
-			for(int index = 0; index < labelInstructionList.size(); index++) {
-				if(labelInstructionList[index].getLabelString() == results[2]) {
+			for (int index = 0; index < labelInstructionList.size(); index++) {
+				if (labelInstructionList[index].getLabelString() == results[2]) {
 					immediate = labelInstructionList[index].getLabelAddress();
 				}
 			}

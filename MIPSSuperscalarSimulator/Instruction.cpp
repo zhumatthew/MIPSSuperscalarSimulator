@@ -7,12 +7,18 @@
 //
 
 #include "Instruction.hpp"
+#include "InstructionType.hpp"
+#include "InstructionParser.hpp"
+#include <iostream>
 
-Instruction::Instruction(string results[], int instructionType, vector<LabelInstruction> labelInstructionList) {
+using namespace std;
+
+// array?
+Instruction::Instruction(vector<string> results, int instructionType, vector<LabelInstruction> labelInstructionList) {
 	this->instructionType = instructionType;
 	this->labelInstructionList = labelInstructionList;
 
-	InstructionType instrType= new InstructionType();
+	InstructionType instrType= InstructionType();
 
 	if(instructionType == 5){
 		this->instructionType = instrType.instrTypeDefine(results[1]);
@@ -22,8 +28,9 @@ Instruction::Instruction(string results[], int instructionType, vector<LabelInst
 	this->handleInstruction(results);
 }
 
-void Instruction::handleInstruction(string results[]) {
-	InstructionParser parser = new InstructionParser(results, this->labelInstructionList);
+void Instruction::handleInstruction(vector<string> results) {
+    // this needs to be a vector for input, not an array of strings or something
+	InstructionParser parser = InstructionParser(results, this->labelInstructionList);
 
 	switch(this->instructionType){
 		case 0:
@@ -63,8 +70,9 @@ void Instruction::handleInstruction(string results[]) {
 	}
 }
 
-string* Instruction::resultDec(string results[]) {
-	string* newResults = new string[sizeof(results)/sizeof(results[0])];
+vector<string> Instruction::resultDec(vector<string> results) {
+	// vector<string> newResults = string[sizeof(results)/sizeof(results[0])];
+    vector<string> newResults;
 	for( int i = 1;i < sizeof(results)/sizeof(results[0]); i++ ){
 		newResults[i-1] = results[i];
 	}

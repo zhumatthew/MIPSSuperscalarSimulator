@@ -21,6 +21,8 @@
 		B35560441CB7421D0043584B /* Instruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B35560421CB7421D0043584B /* Instruction.cpp */; };
 		B35560471CB746A30043584B /* LabelInstruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B35560451CB746A30043584B /* LabelInstruction.cpp */; };
 		B36AB3F41CB88345009C3275 /* Forwarding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B36AB3F21CB88345009C3275 /* Forwarding.cpp */; };
+		B3E8DC521CBC5BAF00E99EDD /* InstructionParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3E8DC4E1CBC5BAE00E99EDD /* InstructionParser.cpp */; };
+		B3E8DC531CBC5BAF00E99EDD /* InstructionType.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3E8DC501CBC5BAF00E99EDD /* InstructionType.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -64,6 +66,10 @@
 		B35560461CB746A30043584B /* LabelInstruction.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LabelInstruction.hpp; sourceTree = "<group>"; };
 		B36AB3F21CB88345009C3275 /* Forwarding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Forwarding.cpp; sourceTree = "<group>"; };
 		B36AB3F31CB88345009C3275 /* Forwarding.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Forwarding.hpp; sourceTree = "<group>"; };
+		B3E8DC4E1CBC5BAE00E99EDD /* InstructionParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InstructionParser.cpp; sourceTree = "<group>"; };
+		B3E8DC4F1CBC5BAF00E99EDD /* InstructionParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InstructionParser.hpp; sourceTree = "<group>"; };
+		B3E8DC501CBC5BAF00E99EDD /* InstructionType.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InstructionType.cpp; sourceTree = "<group>"; };
+		B3E8DC511CBC5BAF00E99EDD /* InstructionType.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InstructionType.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +103,10 @@
 			isa = PBXGroup;
 			children = (
 				B355600B1CB4D02F0043584B /* main.cpp */,
+				B3E8DC4F1CBC5BAF00E99EDD /* InstructionParser.hpp */,
+				B3E8DC4E1CBC5BAE00E99EDD /* InstructionParser.cpp */,
+				B3E8DC511CBC5BAF00E99EDD /* InstructionType.hpp */,
+				B3E8DC501CBC5BAF00E99EDD /* InstructionType.cpp */,
 				B36AB3F31CB88345009C3275 /* Forwarding.hpp */,
 				B36AB3F21CB88345009C3275 /* Forwarding.cpp */,
 				B32A0D061CB7581900216F67 /* SimulationInstruction.hpp */,
@@ -191,8 +201,10 @@
 				B35560441CB7421D0043584B /* Instruction.cpp in Sources */,
 				B32A0D091CB7581A00216F67 /* SimulationInstruction.cpp in Sources */,
 				B35560351CB590870043584B /* MemoryStage.cpp in Sources */,
+				B3E8DC531CBC5BAF00E99EDD /* InstructionType.cpp in Sources */,
 				B355603E1CB737C00043584B /* MainMemory.cpp in Sources */,
 				B35560291CB5904C0043584B /* DecodeStage.cpp in Sources */,
+				B3E8DC521CBC5BAF00E99EDD /* InstructionParser.cpp in Sources */,
 				B355603B1CB737AE0043584B /* RegisterFile.cpp in Sources */,
 				B35560471CB746A30043584B /* LabelInstruction.cpp in Sources */,
 				B35560411CB7416A0043584B /* Stage.cpp in Sources */,
