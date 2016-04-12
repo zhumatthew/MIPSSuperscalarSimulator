@@ -47,7 +47,7 @@ void FetchStage::windowMove(vector<SimulationInstruction> simulationInstructionL
 	}
 }
 
-
+// determines if window[check] can be reordered into window[1] to make a pair with window [0] for simultaneous pipeline entering
 bool FetchStage::regNameMatch(int check)
 {
 	bool tempFlag = false;
@@ -70,12 +70,14 @@ bool FetchStage::regNameMatch(int check)
 	return tempFlag;
 }
 
+// For a pipeline stop, an "end" is inserted at the end of the benchmark (when an "end" is detected in the MEM stage) To stay within array borders, three "nops" are inserted after "end".  "end"/"nop" is not included in reordering, but enters the window/pipeline to stop the pipeline.
+
 void FetchStage::reorder(vector<SimulationInstruction> simulationInstructionList)
 {
-	if(window[0].opcodeString == "BGEZ" || window[0].opcodeString == "BLEZ" || window[0].opcodeString == "BEQ" || window[0].opcodeString == "J" || window[0].opcodeString == "end" || window[0].opcodeString == "nop" || window[0].opcodeString == "NOP")
-		return;
+	if (window[0].opcodeString == "BGEZ" || window[0].opcodeString == "BLEZ" || window[0].opcodeString == "BEQ" || window[0].opcodeString == "J" || window[0].opcodeString == "end" || window[0].opcodeString == "nop" || window[0].opcodeString == "NOP")
+		return; // two branch instructions can only enter pipeline with a depth of two (not a single clock cycle) Only a single branch may enter a pipeline for a single cycle. Another condition is false prediction. (pipeline flash cannot be implemented correctly?)
 	if ((window[1].rs != window[0].rd) &&(window[1].rt != window[0].rd) &&(window[1].opcodeString != "end") &&(window[1].opcodeString != "nop") && (window[1].opcodeString != "NOP")) {
-		pairwise = true;
+		pairwise = true; // no data dependence between [0] and [1]; (end cannot enter second depth?)
 		return;
 	}
 
