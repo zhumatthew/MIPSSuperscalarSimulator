@@ -30,6 +30,7 @@ private:
     int windowSize;
     vector<SimulationInstruction> window;
 
+    // window/check/count?
 	void windowMove(vector<SimulationInstruction> simulationInstructionList);
 	bool regNameMatch(vector<SimulationInstruction> win, int chk);
 	void reorder(vector<SimulationInstruction> win, vector<SimulationInstruction> simuInstrList);

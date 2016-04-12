@@ -20,6 +20,8 @@ public:
 	Stage();
 	vector<SimulationInstruction> currentInstructionList;
 //    static int PC;
+    
+    // should be static?
     int PC;
 
 

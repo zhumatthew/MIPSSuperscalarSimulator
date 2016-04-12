@@ -8,19 +8,20 @@
 
 #include "FetchStage.hpp"
 
-FetchStage::FetchStage(int instructionLength) {
+// No "this" required unless parameter/local variable name overloading
+
+FetchStage::FetchStage(int instructionLength) : lastPC(0), instrSize(instructionLength), windowSize(8), pairwise(false), windowTail(0), upBranch(0) {
 //    super();
-	this->PC = 0;
-	this->lastPC = 0;
-	this->instrSize = instructionLength;
-	this->windowSize = 8;
-	this->windowTail = 0;
-	this->tempCnt = 0;
-	pairwise = false;
-	this->upBranch = 0;
+	PC = 0;
+//	lastPC = 0;
+//	instrSize = instructionLength;
+//	windowSize = 8;
+//	windowTail = 0;
+//	pairwise = false;
+//	upBranch = 0;
 	window = vector<SimulationInstruction>();
 
-	for(; tempCnt < windowSize; tempCnt++)
+	for(tempCnt = 0; tempCnt < windowSize; tempCnt++)
 		window[tempCnt] = SimulationInstruction("nop");
 }
 
@@ -107,11 +108,10 @@ void FetchStage::implement(vector<SimulationInstruction> simulationInstructionLi
 	windowMove(simulationInstructionList);
 	reorder(window, simulationInstructionList);
 
-	if(lastStall == 1) {
+	if (lastStall == 1) {
 		return;
 	} else {
-		if(pairwise)
-		{
+		if (pairwise) {
 			window[0].loopCount = window[0].instructionLocation + this->upBranch;
 			window[1].loopCount = window[1].instructionLocation + this->upBranch;
 			this->currentInstructionList[0] = window[0];

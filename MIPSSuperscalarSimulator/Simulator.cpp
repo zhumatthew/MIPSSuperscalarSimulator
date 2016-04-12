@@ -153,26 +153,26 @@ void Simulator::implement() {
 			tempHazardList[3] = simuFetch.currentInstructionList[1];
 		}
 
-		switch(lastStall) {
+		switch (lastStall) {
 			case 0:
-				for(int i = 0; i < 4; i++){
+				for (int i = 0; i < 4; i++){
 					hazardList[i] = hazardList[i+2];
 				}
 				hazardList[4] = simuFetch.currentInstructionList[0];
 				hazardList[5] = simuFetch.currentInstructionList[1];
 
-				for(int i = 0; i < 6; i++) {
+				for (int i = 0; i < 6; i++) {
 					cout << "hazardList[" << i << "]: " << hazardList[i].originalString;
 				}
 				break;
 			case 1:
-				for(int i = 0; i < 4; i++) {
+				for (int i = 0; i < 4; i++) {
 					hazardList[i] = hazardList[i+2];
 				}
 				hazardList[4] = SimulationInstruction("nop");
 				hazardList[5] = SimulationInstruction("nop");
 
-				for(int i = 0; i < 6; i++) {
+				for (int i = 0; i < 6; i++) {
 					cout << "hazardList[" << i << "]: " << hazardList[i].originalString;
 				}
 				break;
@@ -180,20 +180,20 @@ void Simulator::implement() {
 				hazardList[4] = simuFetch.currentInstructionList[0];
 				hazardList[5] = simuFetch.currentInstructionList[1]
 				                                                 ;
-				for(int i = 0; i < 6; i++) {
+				for (int i = 0; i < 6; i++) {
 					cout << "hazardList[" << i << "]: " << hazardList[i].originalString;
 				}
 				break;
 		}
 
-		if(this->lastStall == 2)
+		if (this->lastStall == 2)
 			this->lastStall = 0;
 
-		if(this->lastStall == 1) {
+		if (this->lastStall == 1) {
 			this->lastStall = 2;
 			this->simuDecode.readAfterWriteHazard = false;
 		}
-		if(this->simuDecode.readAfterWriteHazard){
+		if (this->simuDecode.readAfterWriteHazard) {
 			this->lastStall = 1;
 		}
 		this->cycleCount++;
@@ -214,7 +214,7 @@ void Simulator::stepImplement(){
 		simuDecode.currentInstructionList[1] = simuFetch.currentInstructionList[1];
 	}
 
-	if(this->lastStall == 2) {
+	if (this->lastStall == 2) {
 		simuWriteBack.currentInstructionList[0] = simuMemory.currentInstructionList[0];
 		simuWriteBack.currentInstructionList[1] = simuMemory.currentInstructionList[1];
 		this->tempInstrList[0] = this->simuMemory.currentInstructionList[0];
@@ -223,7 +223,7 @@ void Simulator::stepImplement(){
 		this->simuMemory.currentInstructionList[1] = SimulationInstruction("Empty");
 	}
 
-	if(this->falsePrediction){
+	if (this->falsePrediction) {
 		this->falsePrediction = false;
 		this->simuExecute.currentInstructionList[0] =  SimulationInstruction("NOP");
 		this->simuExecute.currentInstructionList[1] = SimulationInstruction("NOP");
@@ -273,7 +273,7 @@ void Simulator::stepImplement(){
 		tempHazardList[3] = simuFetch.currentInstructionList[1];
 	}
 
-	switch(lastStall){
+	switch (lastStall) {
 		case 0:
 			for(int i = 0; i < 4; i++){
 				hazardList[i] = hazardList[i+2];
