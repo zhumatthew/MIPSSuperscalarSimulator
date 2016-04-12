@@ -12,11 +12,11 @@ void ExecuteStage::implement(DecodeStage currentDecode, MemoryStage currentMemor
 	if (currentDecode.readAfterWriteHazard || (this->currentInstructionList[0].opcodeString=="NOP"))
 		return;
 	for (int i = 0; i < 2; i++) {
-		if (this->currentInstructionList[i].currentForward->rsDelayedForward) {
+		if (this->currentInstructionList[i].currentForward.rsDelayedForward) {
 			this->currentInstructionList[i].rsValue = simuRegFile.getValue(currentInstructionList[i].rs);
 		}
 
-		if (this->currentInstructionList[i].currentForward->rtDelayedForward) {
+		if (this->currentInstructionList[i].currentForward.rtDelayedForward) {
 			this->currentInstructionList[i].rtValue = simuRegFile.getValue(currentInstructionList[i].rt);
 		}
 
