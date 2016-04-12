@@ -14,7 +14,7 @@ LabelInstruction::LabelInstruction(string label, int lineNumber) {
         label.substr(0, label.size()-1);
     }
     this->label = label;
-    this->labelAddress = lineNumber;
+    labelAddress = lineNumber;
 }
 
 int LabelInstruction::getLabelAddress() {

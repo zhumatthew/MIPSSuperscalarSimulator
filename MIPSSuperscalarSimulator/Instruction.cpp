@@ -17,55 +17,55 @@ using namespace std;
 
 // array?
 Instruction::Instruction(vector<string> results, int instructionType, vector<LabelInstruction> labelInstructionList) {
-	this->instructionType = instructionType;
-	this->labelInstructionList = labelInstructionList;
+	instructionType = instructionType;
+	labelInstructionList = labelInstructionList;
 
 	InstructionType instrType= InstructionType();
 
 	if (instructionType == 5) {
-		this->instructionType = instrType.instrTypeDefine(results[1]);
-		results = this->resultDec(results);
+		instructionType = instrType.instrTypeDefine(results[1]);
+		results = resultDec(results);
 	}
-	this->opcodeString = results[0];
-	this->handleInstruction(results);
+	opcodeString = results[0];
+	handleInstruction(results);
 }
 
 void Instruction::handleInstruction(vector<string> results) {
     // this needs to be a vector for input, not an array of strings or something
-	InstructionParser parser = InstructionParser(results, this->labelInstructionList);
+	InstructionParser parser = InstructionParser(results, labelInstructionList);
 
-	switch(this->instructionType){
+	switch(instructionType){
 		case 0:
-			this->opcodeString = parser.parserOptcode(this->instructionType);
-			this->rs = parser.parserRs(this->instructionType);
-			this->rt = parser.parserRt(this->instructionType);
-			this->rd = parser.parserRd(this->instructionType);
-			this->middleFiveDigital = parser.parserMiddleFiveDigit(this->instructionType);
-			this->lowSixDigital = parser.parserLowSixDigit(this->instructionType);
+			opcodeString = parser.parserOptcode(instructionType);
+			rs = parser.parserRs(instructionType);
+			rt = parser.parserRt(instructionType);
+			rd = parser.parserRd(instructionType);
+			middleFiveDigital = parser.parserMiddleFiveDigit(instructionType);
+			lowSixDigital = parser.parserLowSixDigit(instructionType);
 			break;
 		case 1:
-			this->opcode = parser.parserOptcode(this->instructionType);
-			this->rs = parser.parserRs(this->instructionType);
-			this->rd = parser.parserRd(instructionType);
-			this->rt = rd;
-			this->immediate = parser.parserImmediateNumber(this->instructionType);
+			opcode = parser.parserOptcode(instructionType);
+			rs = parser.parserRs(instructionType);
+			rd = parser.parserRd(instructionType);
+			rt = rd;
+			immediate = parser.parserImmediateNumber(instructionType);
 			break;
 		case 2:
-			this->opcode = parser.parserOptcode(this->instructionType);
-			this->rt = parser.parserRt(this->instructionType);
-			this->rd = parser.parserRd(this->instructionType);
-			this->rs = parser.parserRs(this->instructionType);
-			this->immediate = parser.parserImmediateNumber(this->instructionType);
+			opcode = parser.parserOptcode(instructionType);
+			rt = parser.parserRt(instructionType);
+			rd = parser.parserRd(instructionType);
+			rs = parser.parserRs(instructionType);
+			immediate = parser.parserImmediateNumber(instructionType);
 			break;
 		case 3:
-			this->opcode = parser.parserOptcode(this->instructionType);
-			this->immediate = parser.parserImmediateNumber(this->instructionType);
+			opcode = parser.parserOptcode(instructionType);
+			immediate = parser.parserImmediateNumber(instructionType);
 			break;
 		case 4:
-			this->opcode = parser.parserOptcode(this->instructionType);
-			this->rs = parser.parserRs(this->instructionType);
-			this->middleFiveDigital = parser.parserMiddleFiveDigit(instructionType);
-			this->immediate = parser.parserImmediateNumber(instructionType);
+			opcode = parser.parserOptcode(instructionType);
+			rs = parser.parserRs(instructionType);
+			middleFiveDigital = parser.parserMiddleFiveDigit(instructionType);
+			immediate = parser.parserImmediateNumber(instructionType);
 			break;
 		default:
 			cout << "instrType Error";

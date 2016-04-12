@@ -92,7 +92,7 @@ int InstructionParser::parserOptcode(int instrType) {
 	operation = this->results[0];
 
 	InstructionType instructionType = InstructionType();
-	return instructionType.operatonCodeDefine(operation, instrType);
+	return instructionType.operationCodeDefine(operation, instrType);
 }
 
 int InstructionParser::parserRs(int instrType) {
