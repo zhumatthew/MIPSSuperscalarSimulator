@@ -16,8 +16,8 @@ using namespace std;
 // if the type of 'simuDecode' is 'DecodeStage' and it has a default ctor, then you don't need to initialize it manually.
 
 Simulator::Simulator(vector<SimulationInstruction> simulationInstrList) : simuFetch(FetchStage((int) simulationInstrList.size())), tempInstr(SimulationInstruction("nop")) {
-	this->simulationInstrList = simulationInstrList;
-	// simuFetch = FetchStage((int) this->simulationInstrList.size());
+	simulationInstrList = simulationInstrList;
+	// simuFetch = FetchStage((int) simulationInstrList.size());
 //	simuDecode = DecodeStage();
 //	simuExecute = ExecuteStage();
 //	simuMemory = MemoryStage();
@@ -46,8 +46,8 @@ Simulator::Simulator(vector<SimulationInstruction> simulationInstrList) : simuFe
 }
 
 //Simulator::Simulator(vector<SimulationInstruction> simulationInstrList) {
-//    this->simulationInstrList = simulationInstrList;
-//    simuFetch = FetchStage((int) this->simulationInstrList.size());
+//    simulationInstrList = simulationInstrList;
+//    simuFetch = FetchStage((int) simulationInstrList.size());
 //    simuDecode = DecodeStage();
 //    simuExecute = ExecuteStage();
 //    simuMemory = MemoryStage();
@@ -76,11 +76,11 @@ Simulator::Simulator(vector<SimulationInstruction> simulationInstrList) : simuFe
 //}
 
 void Simulator::implement() {
-	this->cycleCount = 0;
+	cycleCount = 0;
 	while (simuMemory.currentInstructionList[0].originalString != "end")
 	{
 		cout << "clockCycle:" << (cycleCount << 1) << endl;
-		if (this->lastStall != 2)
+		if (lastStall != 2)
 		{
 			simuWriteBack.currentInstructionList[0] = simuMemory.currentInstructionList[0];
 			simuWriteBack.currentInstructionList[1] = simuMemory.currentInstructionList[1];
@@ -92,27 +92,27 @@ void Simulator::implement() {
 			simuDecode.currentInstructionList[1] = simuFetch.currentInstructionList[1];
 		}
 
-		if (this->lastStall == 2)
+		if (lastStall == 2)
 		{
 			simuWriteBack.currentInstructionList[0] = simuMemory.currentInstructionList[0];
 			simuWriteBack.currentInstructionList[1] = simuMemory.currentInstructionList[1];
-			this->tempInstrList[0] = this->simuMemory.currentInstructionList[0];
-			this->tempInstrList[1] = this->simuMemory.currentInstructionList[1];
-			this->simuMemory.currentInstructionList[0] = SimulationInstruction("Empty");
-			this->simuMemory.currentInstructionList[1] = SimulationInstruction("Empty");
+			tempInstrList[0] = simuMemory.currentInstructionList[0];
+			tempInstrList[1] = simuMemory.currentInstructionList[1];
+			simuMemory.currentInstructionList[0] = SimulationInstruction("Empty");
+			simuMemory.currentInstructionList[1] = SimulationInstruction("Empty");
 		}
 
-		if (this->falsePrediction)
+		if (falsePrediction)
 		{
-			this->falsePrediction = false;
-			this->simuExecute.currentInstructionList[0] = SimulationInstruction("NOP");
-			this->simuExecute.currentInstructionList[1] = SimulationInstruction("NOP");
-			this->simuDecode.currentInstructionList[0] = SimulationInstruction("NOP");
-			this->simuDecode.currentInstructionList[1] = SimulationInstruction("NOP");
-			this->hazardList[2] = tempHazardList[0];
-			this->hazardList[3] = tempHazardList[1];
-			this->hazardList[4] = tempHazardList[2];
-			this->hazardList[5] = tempHazardList[3];
+			falsePrediction = false;
+			simuExecute.currentInstructionList[0] = SimulationInstruction("NOP");
+			simuExecute.currentInstructionList[1] = SimulationInstruction("NOP");
+			simuDecode.currentInstructionList[0] = SimulationInstruction("NOP");
+			simuDecode.currentInstructionList[1] = SimulationInstruction("NOP");
+			hazardList[2] = tempHazardList[0];
+			hazardList[3] = tempHazardList[1];
+			hazardList[4] = tempHazardList[2];
+			hazardList[5] = tempHazardList[3];
 		}
 
 		cout << "Decode:" << simuDecode.currentInstructionList[0].originalString << endl;
@@ -186,24 +186,24 @@ void Simulator::implement() {
 				break;
 		}
 
-		if (this->lastStall == 2)
-			this->lastStall = 0;
+		if (lastStall == 2)
+			lastStall = 0;
 
-		if (this->lastStall == 1) {
-			this->lastStall = 2;
-			this->simuDecode.readAfterWriteHazard = false;
+		if (lastStall == 1) {
+			lastStall = 2;
+			simuDecode.readAfterWriteHazard = false;
 		}
-		if (this->simuDecode.readAfterWriteHazard) {
-			this->lastStall = 1;
+		if (simuDecode.readAfterWriteHazard) {
+			lastStall = 1;
 		}
-		this->cycleCount++;
+		cycleCount++;
 		cout << "-------------------------------------------------";
 	}
 	cout << cycleCount;
 }
 
 void Simulator::stepImplement(){
-	if(this->lastStall != 2) {
+	if(lastStall != 2) {
 		simuWriteBack.currentInstructionList[0] = simuMemory.currentInstructionList[0];
 		simuWriteBack.currentInstructionList[1] = simuMemory.currentInstructionList[1];
 		simuMemory.currentInstructionList[0] = simuExecute.currentInstructionList[0];
@@ -214,25 +214,25 @@ void Simulator::stepImplement(){
 		simuDecode.currentInstructionList[1] = simuFetch.currentInstructionList[1];
 	}
 
-	if (this->lastStall == 2) {
+	if (lastStall == 2) {
 		simuWriteBack.currentInstructionList[0] = simuMemory.currentInstructionList[0];
 		simuWriteBack.currentInstructionList[1] = simuMemory.currentInstructionList[1];
-		this->tempInstrList[0] = this->simuMemory.currentInstructionList[0];
-		this->tempInstrList[1] = this->simuMemory.currentInstructionList[1];
-		this->simuMemory.currentInstructionList[0] = SimulationInstruction("Empty");
-		this->simuMemory.currentInstructionList[1] = SimulationInstruction("Empty");
+		tempInstrList[0] = simuMemory.currentInstructionList[0];
+		tempInstrList[1] = simuMemory.currentInstructionList[1];
+		simuMemory.currentInstructionList[0] = SimulationInstruction("Empty");
+		simuMemory.currentInstructionList[1] = SimulationInstruction("Empty");
 	}
 
-	if (this->falsePrediction) {
-		this->falsePrediction = false;
-		this->simuExecute.currentInstructionList[0] =  SimulationInstruction("NOP");
-		this->simuExecute.currentInstructionList[1] = SimulationInstruction("NOP");
-		this->simuDecode.currentInstructionList[0] =  SimulationInstruction("NOP");
-		this->simuDecode.currentInstructionList[1] = SimulationInstruction("NOP");
-		this->hazardList[2] = tempHazardList[0];
-		this->hazardList[3] = tempHazardList[1];
-		this->hazardList[4] = tempHazardList[2];
-		this->hazardList[5] = tempHazardList[3];
+	if (falsePrediction) {
+		falsePrediction = false;
+		simuExecute.currentInstructionList[0] =  SimulationInstruction("NOP");
+		simuExecute.currentInstructionList[1] = SimulationInstruction("NOP");
+		simuDecode.currentInstructionList[0] =  SimulationInstruction("NOP");
+		simuDecode.currentInstructionList[1] = SimulationInstruction("NOP");
+		hazardList[2] = tempHazardList[0];
+		hazardList[3] = tempHazardList[1];
+		hazardList[4] = tempHazardList[2];
+		hazardList[5] = tempHazardList[3];
 	}
 
 	cout << "Decode:" << simuDecode.currentInstructionList[0].originalString;
@@ -305,16 +305,16 @@ void Simulator::stepImplement(){
 			break;
 		}
 
-		if(this->lastStall == 2)
-			this->lastStall = 0;
+		if(lastStall == 2)
+			lastStall = 0;
 
-		if(this->lastStall == 1) {
-			this->lastStall = 2;
-			this->simuDecode.readAfterWriteHazard = false;
+		if(lastStall == 1) {
+			lastStall = 2;
+			simuDecode.readAfterWriteHazard = false;
 		}
 
-		if(this->simuDecode.readAfterWriteHazard) {
-			this->lastStall = 1;
+		if(simuDecode.readAfterWriteHazard) {
+			lastStall = 1;
 		}
 		cout << "-------------------------------------------------";
 }

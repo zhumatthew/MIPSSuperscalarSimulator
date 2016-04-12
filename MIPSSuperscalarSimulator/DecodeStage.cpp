@@ -23,10 +23,16 @@ void DecodeStage::implement(MainMemory mmem, RegisterFile regm, vector<Simulatio
 	currentInstructionList[1].rtValue = regm.getValue(currentInstructionList[1].rt);
 }
 
+// Instructions such as SW and LW only have rt or rs and will assign 0 values to rt or rs that is not needed
+
+// Forwarding occurs between the rdValue of an instruction in the MEM stage and an instruction with rsForward(rtForwarding) set at the beginning of the EX stage
+
 void DecodeStage::check(vector<SimulationInstruction> hazardList, int lastStall) {
 	if (lastStall == 2) {
+        
+        // Judge 1 is based on hazardList index of 0
 		if (currentInstructionList[0].rs == hazardList[0].rd) {
-			if(currentInstructionList[0].loopCount > hazardList[0].loopCount) {
+			if (currentInstructionList[0].loopCount > hazardList[0].loopCount) {
 				currentInstructionList[0].currentForward.rsForward = true;
 				currentInstructionList[0].currentForward.rsForwardDepth = 0;
 			} else {
@@ -42,7 +48,8 @@ void DecodeStage::check(vector<SimulationInstruction> hazardList, int lastStall)
 				currentInstructionList[0].currentForward.rtForward = false;
 			}
 		}
-
+        
+        // Judge 2 is based on hazard list index of 2
 		if (currentInstructionList[0].rs == hazardList[1].rd) {
 			if(currentInstructionList[0].loopCount > hazardList[1].loopCount) {
 				currentInstructionList[0].currentForward.rsForward = true;

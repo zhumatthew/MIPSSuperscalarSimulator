@@ -31,10 +31,10 @@ void ExecuteStage::implement(DecodeStage currentDecode, MemoryStage currentMemor
 		}
 
 		if (lastStall == 2) {
-			if(currentInstructionList[i].currentForward.rsForward)
+			if (currentInstructionList[i].currentForward.rsForward)
 				currentInstructionList[i].rsValue = simuRegFile.getValue(currentInstructionList[i].rs);
 
-			if(currentInstructionList[i].currentForward.rtForward)
+			if (currentInstructionList[i].currentForward.rtForward)
 				currentInstructionList[i].rtValue = simuRegFile.getValue(currentInstructionList[i].rt);
 		}
 
@@ -43,22 +43,22 @@ void ExecuteStage::implement(DecodeStage currentDecode, MemoryStage currentMemor
 		currentInstructionList[i].currentForward.rtDelayedForward = false;
 		currentInstructionList[i].currentForward.rtForward = false;
 
-		if(currentInstructionList[i].opcodeString == "ADD") {
+		if (currentInstructionList[i].opcodeString == "ADD") {
 			currentInstructionList[i].rdValue = currentInstructionList[i].rsValue + currentInstructionList[i].rtValue;
-		} else if(currentInstructionList[i].opcodeString=="DIV") {
-			if(currentInstructionList[i].rtValue == 0)
+		} else if (currentInstructionList[i].opcodeString=="DIV") {
+			if (currentInstructionList[i].rtValue == 0)
 				return;
 			else
 				currentInstructionList[i].rdValue = currentInstructionList[i].rsValue / currentInstructionList[i].rtValue;
-		} else if(currentInstructionList[i].opcodeString == "SUB") {
+		} else if (currentInstructionList[i].opcodeString == "SUB") {
 			currentInstructionList[i].rdValue = currentInstructionList[i].rsValue - currentInstructionList[i].rtValue;
-		} else if(currentInstructionList[i].opcodeString == "MUL") {
+		} else if (currentInstructionList[i].opcodeString == "MUL") {
 			currentInstructionList[i].rdValue = (currentInstructionList[i].rsValue) * (currentInstructionList[i].rtValue);
-		} else if(currentInstructionList[i].opcodeString == "LW" || currentInstructionList[i].opcodeString=="SW") {
+		} else if (currentInstructionList[i].opcodeString == "LW" || currentInstructionList[i].opcodeString=="SW") {
 			currentInstructionList[i].effectiveAddress = currentInstructionList[i].rsValue + currentInstructionList[i].immediate;
-		} else if(currentInstructionList[i].opcodeString=="ADDI") {
+		} else if (currentInstructionList[i].opcodeString=="ADDI") {
 			currentInstructionList[i].rdValue = currentInstructionList[i].rsValue + currentInstructionList[i].immediate;
-		} else if(currentInstructionList[i].opcodeString=="BGEZ" || currentInstructionList[i].opcodeString=="BLEZ" || currentInstructionList[i].opcodeString=="BEQ" || currentInstructionList[i].opcodeString=="J") {
+		} else if (currentInstructionList[i].opcodeString=="BGEZ" || currentInstructionList[i].opcodeString=="BLEZ" || currentInstructionList[i].opcodeString=="BEQ" || currentInstructionList[i].opcodeString=="J") {
 			if((currentInstructionList[i].opcodeString=="BGEZ" && currentInstructionList[i].rsValue >= 0)
 					|| (currentInstructionList[i].opcodeString=="BLEZ" && currentInstructionList[i].rsValue <= 0)
 					|| (currentInstructionList[i].opcodeString=="BEQ" && (currentInstructionList[i].rsValue == currentInstructionList[i].rtValue))) {
