@@ -23,6 +23,7 @@
 		B36AB3F41CB88345009C3275 /* Forwarding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B36AB3F21CB88345009C3275 /* Forwarding.cpp */; };
 		B3E8DC521CBC5BAF00E99EDD /* InstructionParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3E8DC4E1CBC5BAE00E99EDD /* InstructionParser.cpp */; };
 		B3E8DC531CBC5BAF00E99EDD /* InstructionType.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3E8DC501CBC5BAF00E99EDD /* InstructionType.cpp */; };
+		B3E8DC561CBC965D00E99EDD /* SourceReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3E8DC541CBC965C00E99EDD /* SourceReader.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -70,6 +71,8 @@
 		B3E8DC4F1CBC5BAF00E99EDD /* InstructionParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InstructionParser.hpp; sourceTree = "<group>"; };
 		B3E8DC501CBC5BAF00E99EDD /* InstructionType.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InstructionType.cpp; sourceTree = "<group>"; };
 		B3E8DC511CBC5BAF00E99EDD /* InstructionType.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InstructionType.hpp; sourceTree = "<group>"; };
+		B3E8DC541CBC965C00E99EDD /* SourceReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SourceReader.cpp; sourceTree = "<group>"; };
+		B3E8DC551CBC965C00E99EDD /* SourceReader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SourceReader.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +106,8 @@
 			isa = PBXGroup;
 			children = (
 				B355600B1CB4D02F0043584B /* main.cpp */,
+				B3E8DC551CBC965C00E99EDD /* SourceReader.hpp */,
+				B3E8DC541CBC965C00E99EDD /* SourceReader.cpp */,
 				B3E8DC4F1CBC5BAF00E99EDD /* InstructionParser.hpp */,
 				B3E8DC4E1CBC5BAE00E99EDD /* InstructionParser.cpp */,
 				B3E8DC511CBC5BAF00E99EDD /* InstructionType.hpp */,
@@ -196,6 +201,7 @@
 				B36AB3F41CB88345009C3275 /* Forwarding.cpp in Sources */,
 				B355600C1CB4D02F0043584B /* main.cpp in Sources */,
 				B35560261CB5903D0043584B /* FetchStage.cpp in Sources */,
+				B3E8DC561CBC965D00E99EDD /* SourceReader.cpp in Sources */,
 				B35560321CB590780043584B /* WriteBackStage.cpp in Sources */,
 				B355602F1CB590680043584B /* ExecuteStage.cpp in Sources */,
 				B35560441CB7421D0043584B /* Instruction.cpp in Sources */,
