@@ -72,7 +72,7 @@ void Instruction::handleInstruction(vector<string> results) {
 	}
 }
 
-// removeLabel??
+// call this function removeLabel??
 vector<string> Instruction::resultDec(vector<string> results) {
     results.erase(results.begin());
     return results;

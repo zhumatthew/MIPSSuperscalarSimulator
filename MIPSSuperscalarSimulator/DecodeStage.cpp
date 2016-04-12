@@ -27,6 +27,8 @@ void DecodeStage::implement(MainMemory mmem, RegisterFile regm, vector<Simulatio
 
 // Forwarding occurs between the rdValue of an instruction in the MEM stage and an instruction with rsForward(rtForwarding) set at the beginning of the EX stage
 
+
+// read after write hazards and forwarding possibilities
 void DecodeStage::check(vector<SimulationInstruction> hazardList, int lastStall) {
 	if (lastStall == 2) {
         

@@ -12,6 +12,9 @@
 #include <stdio.h>
 #include <string>
 
+//Class InstrType to determine the three type of instruction: Register to
+//Register; Register to Immediate; Jump
+
 using namespace std;
 
 class InstructionType {
