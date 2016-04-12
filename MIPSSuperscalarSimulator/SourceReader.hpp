@@ -11,6 +11,8 @@
 
 #include <stdio.h>
 #include <vector>
+#include "LabelInstruction.hpp"
+#include "Instruction.hpp"
 
 using namespace std;
 
@@ -21,15 +23,14 @@ public:
 	void setFilePath(string aFilePath);
 	void findLabel();
 	void constructInstrList();
-	vector<Instruction> getInstrucionList();
+	vector<Instruction>* getInstrucionList();
 	vector<Instruction> readInstrList();
-	void main();
 	string trim(string str);
 
 private:
     string filePath;
-    vector<LabelInstruction> labelInstrList;
-    vector<Instruction> instrList;
+    vector<LabelInstruction>* labelInstrList;
+    vector<Instruction>* instrList;
 };
 
 #endif /* SourceReader_hpp */

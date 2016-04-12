@@ -7,9 +7,12 @@
 //
 
 #include <iostream>
+#include "SourceReader.hpp"
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    std::cout << "Hello, World!\n";
+    SourceReader sourceReader("load_delay_1.asm");
+    sourceReader.findLabel();
+    sourceReader.constructInstrList();
     return 0;
 }

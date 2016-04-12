@@ -18,11 +18,11 @@ class InstructionType {
     
 public:
 	InstructionType();
-	static int instrTypeDefine(string strOpcode);
-	static bool isLabel(string strOpcode);
-	static int operatonCodeDefine(string str, int instrType);
-	static int lowSixDigitDefine(string str,int instrType);
-	static int middleFiveDigitDefine(string str,int instrType);
+	int instrTypeDefine(string strOpcode);
+	bool isLabel(string strOpcode);
+	int operatonCodeDefine(string str, int instrType);
+	int lowSixDigitDefine(string str,int instrType);
+	int middleFiveDigitDefine(string str,int instrType);
 
 private:
 	static int instrType;

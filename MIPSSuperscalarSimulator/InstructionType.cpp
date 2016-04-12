@@ -37,7 +37,7 @@ int InstructionType::instrTypeDefine(string strOpcode) {
     return instrType = 5;
 }
 
-static bool InstructionType::isLabel(string strOpcode) {
+bool InstructionType::isLabel(string strOpcode) {
 	instrTypeDefine(strOpcode);
 	if (instrType == 5)
 		return true;
@@ -49,7 +49,7 @@ static bool InstructionType::isLabel(string strOpcode) {
 // all but case 0 involve immediates
 // case 5 involves labels
 
-static int InstructionType::operatonCodeDefine(string str, int instrType) {
+int InstructionType::operatonCodeDefine(string str, int instrType) {
     int optcode = 0;
     switch(instrType){
         case 0:
@@ -97,7 +97,7 @@ static int InstructionType::operatonCodeDefine(string str, int instrType) {
     return optcode;
 }
 
-static int InstructionType::lowSixDigitDefine(string str,int instrType) {
+int InstructionType::lowSixDigitDefine(string str,int instrType) {
 	int low = 0;
 
 	switch (instrType) {
