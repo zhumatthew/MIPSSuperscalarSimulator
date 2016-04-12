@@ -24,8 +24,8 @@
 class Simulator {
 
 public:
+    
 	Simulator(vector<SimulationInstruction> simulationInstrList);
-
 	FetchStage simuFetch;
 	DecodeStage simuDecode;
 	ExecuteStage simuExecute;
@@ -48,6 +48,7 @@ public:
     void implement();
     void stepImplement();
     void main();
+    
 private:
     vector<int> registerData;
 

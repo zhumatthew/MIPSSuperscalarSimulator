@@ -22,7 +22,7 @@ public:
     string originalString, opcodeString;
     int instructionLocation, loopCount, effectiveAddress;
     bool branchCondition, reordered;
-    Forwarding *currentForward;
+    Forwarding currentForward;
 
 private:
 

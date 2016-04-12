@@ -24,7 +24,7 @@ SimulationInstruction::SimulationInstruction(string str) {
     immediate = 0;
     originalString = str;
     opcodeString = str;
-    currentForward = new Forwarding();
+    currentForward = Forwarding();
     effectiveAddress = 0;
     branchCondition = false;
     reordered = false;
@@ -44,7 +44,7 @@ SimulationInstruction::SimulationInstruction(Instruction instr) {
     immediate = instr.immediate;
     originalString = instr.originalString;
     opcodeString = instr.opcodeString;
-    currentForward = new Forwarding();
+    currentForward = Forwarding();
     effectiveAddress = 0;
     branchCondition = false;
     reordered = false;

@@ -32,8 +32,8 @@ private:
 
     // window/check/count?
 	void windowMove(vector<SimulationInstruction> simulationInstructionList);
-	bool regNameMatch(vector<SimulationInstruction> win, int chk);
-	void reorder(vector<SimulationInstruction> win, vector<SimulationInstruction> simuInstrList);
+	bool regNameMatch(int check);
+	void reorder(vector<SimulationInstruction> simuInstrList);
 	void clear_reordered(vector<SimulationInstruction> simulationInstructionList, int cnt1, int cnt2);
 };
 
