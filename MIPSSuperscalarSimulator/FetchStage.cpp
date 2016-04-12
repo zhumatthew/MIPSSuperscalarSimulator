@@ -25,16 +25,20 @@ FetchStage::FetchStage(int instructionLength) : lastPC(0), instrSize(instruction
 		window[tempCnt] = SimulationInstruction("nop");
 }
 
+// Program counter may add one or two
 void FetchStage::windowMove(vector<SimulationInstruction> simulationInstructionList)
 {
 	windowTail = 0;
 	tempCnt = PC;
-
+    
+    // First condition is to ensure window shrinks when approaching the edge of the instruction queue as there are fewer instructions to fetch
+    // Second condition is to ensure that the length of the window will not be greater than the window size
+    // Instruction size takes into account one "end" and three "nop" at the end of the simulated instruction list
 	while (((tempCnt - PC) < (instrSize - PC)) && (windowTail < windowSize)) {
 		window[windowTail] = simulationInstructionList[tempCnt];
-		if (!window[windowTail].reordered) {
+		if (!window[windowTail].reordered) { // reordered instructions have entered the pipeline; if they enter the window again, they are executed twice
 			windowTail++;
-		} else {
+		} else { // Avoids a second execution of the instruction after the reordered one
 			if (windowTail < 2) {
 				PC++;
 			}
@@ -42,6 +46,7 @@ void FetchStage::windowMove(vector<SimulationInstruction> simulationInstructionL
 		tempCnt++;
 	}
 }
+
 
 bool FetchStage::regNameMatch(int check)
 {
@@ -51,15 +56,13 @@ bool FetchStage::regNameMatch(int check)
 	if((window[0].opcodeString == "end") || (window[0].opcodeString == "nop") || (window[0].opcodeString == "NOP"))
 		return true;
 
-	while(tempCnti < check)
-	{
+	while(tempCnti < check) {
 		tempCnti++;
 		if((window[check].rd == window[0].rd)
 			|| (window[check].rd == window[check-tempCnti].rd)
 			|| (window[check].rs == window[check-tempCnti].rd)
 			|| (window[check].rt == window[check-tempCnti].rd)
-			|| (((window[check].rd == window[check-tempCnti].rt) || (window[check].rd == window[check-tempCnti].rs)) && ((check-tempCnti)>2)))
-		{
+			|| (((window[check].rd == window[check-tempCnti].rt) || (window[check].rd == window[check-tempCnti].rs)) && ((check-tempCnti)>2))) {
 			tempFlag = true;
 			break;
 		}
@@ -76,7 +79,7 @@ void FetchStage::reorder(vector<SimulationInstruction> simulationInstructionList
 		return;
 	}
 
-	for (tempCnt=2; tempCnt<windowTail; tempCnt++ )
+	for (tempCnt = 2; tempCnt < windowTail; tempCnt++)
 	{
 		if(window[tempCnt].opcodeString == "BGEZ" || window[tempCnt].opcodeString == "BLEZ" || window[tempCnt].opcodeString == "BEQ" || window[tempCnt].opcodeString == "J" || window[tempCnt].opcodeString == "end" || window[tempCnt].opcodeString == "nop" || window[tempCnt].opcodeString == "NOP")
 			return;
@@ -93,9 +96,7 @@ void FetchStage::reorder(vector<SimulationInstruction> simulationInstructionList
 
 void FetchStage::clear_reordered(vector<SimulationInstruction> simulationInstructionList, int cnt1, int cnt2)
 {
-	int tempi = cnt1 - 1;
-
-	for(;tempi>=cnt2;tempi--)
+	for(int tempi = cnt1 - 1; tempi >= cnt2; tempi--)
 	{
 		simulationInstructionList[tempi].reordered = false;
 	}
@@ -106,7 +107,7 @@ void FetchStage::implement(vector<SimulationInstruction> simulationInstructionLi
 	pairwise = false;
 	this->lastPC = PC;
 	windowMove(simulationInstructionList);
-	reorder(window, simulationInstructionList);
+	reorder(simulationInstructionList);
 
 	if (lastStall == 1) {
 		return;
