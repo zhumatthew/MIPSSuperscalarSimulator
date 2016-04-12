@@ -34,7 +34,7 @@ public:
 
     MainMemory simuMainMemory;
     RegisterFile simuRegFile;
-    vector<SimulationInstruction> simulationInstrList;
+    vector<SimulationInstruction> simulationInstructionList;
 
     int cycleCount;
     int lastStall;

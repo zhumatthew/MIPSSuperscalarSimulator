@@ -16,7 +16,7 @@ using namespace std;
 // if the type of 'simuDecode' is 'DecodeStage' and it has a default constructor, then you don't need to initialize it manually.
 
 Simulator::Simulator(vector<SimulationInstruction> simulationInstrList) : simuFetch(FetchStage((int) simulationInstrList.size())), tempInstr(SimulationInstruction("nop")) {
-	simulationInstrList = simulationInstrList;
+	simulationInstructionList = simulationInstrList;
 	// simuFetch = FetchStage((int) simulationInstrList.size());
 //	simuDecode = DecodeStage();
 //	simuExecute = ExecuteStage();
@@ -128,7 +128,7 @@ void Simulator::implement() {
 		simuMemory.implement(simuMainMemory, simuRegFile);
 		simuExecute.implement(simuDecode, simuMemory, simuRegFile, lastStall, falsePrediction);
 		simuDecode.implement(simuMainMemory, simuRegFile, hazardList, lastStall);
-		simuFetch.implement(simulationInstrList, lastStall, falsePrediction, simuExecute.getSavedPC());
+		simuFetch.implement(simulationInstructionList, lastStall, falsePrediction, simuExecute.getSavedPC());
         instrCount += increment;
 
 		cout << "Fetch:" << simuFetch.currentInstructionList[0].originalString;
@@ -248,7 +248,7 @@ void Simulator::stepImplement() {
 	simuMemory.implement(simuMainMemory, simuRegFile);
     simuExecute.implement(simuDecode, simuMemory, simuRegFile, lastStall, falsePrediction);
     simuDecode.implement(simuMainMemory, simuRegFile, hazardList, lastStall);
-    simuFetch.implement(simulationInstrList, lastStall, falsePrediction, simuExecute.getSavedPC());
+    simuFetch.implement(simulationInstructionList, lastStall, falsePrediction, simuExecute.getSavedPC());
     instrCount += increment;
 
 	cout << "Fetch:" + simuFetch.currentInstructionList[0].originalString;

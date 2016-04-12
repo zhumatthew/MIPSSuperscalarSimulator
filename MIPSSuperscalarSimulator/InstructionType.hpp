@@ -30,7 +30,7 @@ public:
 	int middleFiveDigitDefine(string str,int instrType);
 
 private:
-	static int instrType;
+	int instrType;
 };
 
 #endif /* InstructionType_hpp */
