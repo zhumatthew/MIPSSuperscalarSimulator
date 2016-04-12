@@ -11,7 +11,8 @@
 DecodeStage::DecodeStage() : readAfterWriteHazard(false) {}
 
 void DecodeStage::implement(MainMemory mmem, RegisterFile regm, vector<SimulationInstruction> hazardList, int lastStall) {
-	if (readAfterWriteHazard || (currentInstructionList[0].opcodeString == "NOP")) {
+	
+    if (readAfterWriteHazard || (currentInstructionList[0].opcodeString == "NOP")) {
 		return;
 	}
 

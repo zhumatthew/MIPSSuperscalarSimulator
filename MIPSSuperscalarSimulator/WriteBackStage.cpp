@@ -14,19 +14,19 @@ using namespace std;
 int WriteBackStage::implement(RegisterFile regFile, DecodeStage currentDecode){
 
     int increment;
-	if(this->currentInstructionList[0].opcodeString == "NOP" || this->currentInstructionList[0].opcodeString == "nop" || this->currentInstructionList[0].opcodeString == "Empty") {
+	if(currentInstructionList[0].opcodeString == "NOP" || currentInstructionList[0].opcodeString == "nop" || currentInstructionList[0].opcodeString == "Empty") {
 		return increment;
 	} else {
-		if(this->currentInstructionList[1].opcodeString == "NOP")
+		if(currentInstructionList[1].opcodeString == "NOP")
 //			sim.instrCount++;
             increment = 1;
 		else
 //			sim.instrCount = sim.instrCount + 2;
             increment = 2;
 	}
-	regFile.putValue(this->currentInstructionList[0].rdValue, this->currentInstructionList[0].rd);
-	regFile.putValue(this->currentInstructionList[1].rdValue, this->currentInstructionList[1].rd);
-    cout << "r" << this->currentInstructionList[0].rd << "=" << regFile.getValue(this->currentInstructionList[0].rd);
-    cout << "r" << this->currentInstructionList[1].rd << "=" << regFile.getValue(this->currentInstructionList[1].rd);
+	regFile.putValue(currentInstructionList[0].rdValue, currentInstructionList[0].rd);
+	regFile.putValue(currentInstructionList[1].rdValue, currentInstructionList[1].rd);
+    cout << "r" << currentInstructionList[0].rd << "=" << regFile.getValue(currentInstructionList[0].rd);
+    cout << "r" << currentInstructionList[1].rd << "=" << regFile.getValue(currentInstructionList[1].rd);
     return increment;
 }
