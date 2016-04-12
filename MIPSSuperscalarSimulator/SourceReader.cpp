@@ -13,16 +13,16 @@
 
 using namespace std;
 
-SourceReader::SourceReader(string filePath) {
-	this->filePath = filePath;
+SourceReader::SourceReader(string path) {
+	filePath = path;
 }
 
 string SourceReader::getFilePath() {
-	return this->filePath;
+	return filePath;
 }
 
 void SourceReader::setFilePath(string aFilePath) {
-	this->filePath = aFilePath;
+	filePath = aFilePath;
 }
 
 string SourceReader::trim(string str) {
@@ -41,10 +41,10 @@ string SourceReader::trim(string str) {
 }
 
 void SourceReader::findLabel() {
-	ifstream reader(this->getFilePath());
+	ifstream reader(getFilePath());
 	string line;
 	int lineNumber = 0;
-	this->labelInstrList = new vector<LabelInstruction>();
+	labelInstrList = new vector<LabelInstruction>();
 
 	while (getline(reader, line)) {
 		if(line != "") {
@@ -58,10 +58,10 @@ void SourceReader::findLabel() {
 
 			if(type.isLabel(strOpcode)) {
 				LabelInstruction label = new LabelInstruction(strOpcode,lineNumber);
-				this->labelInstrList.push_back(label);
+				labelInstrList.push_back(label);
 				cout << label.getLabelString() <<  "---------" << label.getLabelAddress();
-				cout << this->labelInstrList[this->labelInstrList.size() - 1].getLabelString();
-				cout << this->labelInstrList.size();
+				cout << labelInstrList[labelInstrList.size() - 1].getLabelString();
+				cout << labelInstrList.size();
 			}
 			lineNumber ++ ;
 		}
@@ -69,10 +69,10 @@ void SourceReader::findLabel() {
 }
 
 void SourceReader::constructInstrList() {
-	ifstream reader(this->getFilePath());
+	ifstream reader(getFilePath());
 	string line;
 	int lineNumber = 0;
-	this->instrList = new vector<Instruction>();
+	instrList = new vector<Instruction>();
 
 	while (getline(reader, line)) {
 		if(line != "") {
@@ -85,7 +85,7 @@ void SourceReader::constructInstrList() {
 
 			InstructionType type = new InstructionType();
 			int instrType = type.instrTypeDefine(strOpcode);
-			Instruction instr = new Instruction(results,instrType,this->labelInstrList);
+			Instruction instr = new Instruction(results,instrType,labelInstrList);
 			instr.originalString = line;
 			cout << "Opcode" << "----->"+ instr.opcode;
 			cout << "rs" << "----->"+ instr.rs;
@@ -101,7 +101,7 @@ void SourceReader::constructInstrList() {
 }
 
 vector<Instruction> SourceReader::getInstrucionList() {
-	return this->instrList;
+	return instrList;
 }
 
 void SourceReader::main() {

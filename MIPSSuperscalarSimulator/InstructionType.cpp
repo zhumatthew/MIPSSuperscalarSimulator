@@ -37,9 +37,9 @@ int InstructionType::instrTypeDefine(string strOpcode) {
     return instrType = 5;
 }
 
-bool InstructionType::isLabel(string strOpcode) {
+static bool InstructionType::isLabel(string strOpcode) {
 	instrTypeDefine(strOpcode);
-	if (this->instrType == 5)
+	if (instrType == 5)
 		return true;
 	else
 		return false;
