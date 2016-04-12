@@ -97,7 +97,7 @@ int InstructionType::operatonCodeDefine(string str, int instrType) {
     return optcode;
 }
 
-static int InstructionType::lowSixDigitDefine(string str,int instrType) {
+int InstructionType::lowSixDigitDefine(string str,int instrType) {
 	int low = 0;
 
 	switch (instrType) {

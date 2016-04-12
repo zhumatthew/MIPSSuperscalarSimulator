@@ -6,10 +6,13 @@
 //  Copyright © 2016 ZhuKim. All rights reserved.
 //
 
-#include <stdio.h>
+#include <iostream>
 #include <fstream>
 #include <string>
+
 #include "SourceReader.hpp"
+#include "InstructionParser.hpp"
+#include "InstructionType.hpp"
 
 using namespace std;
 
@@ -41,7 +44,7 @@ string SourceReader::trim(string str) {
 }
 
 void SourceReader::findLabel() {
-	ifstream reader(getFilePath());
+	ifstream reader(getFilePath().c_str());
 	string line;
 	int lineNumber = 0;
 	labelInstrList = new vector<LabelInstruction>();
@@ -50,18 +53,18 @@ void SourceReader::findLabel() {
 		if(line != "") {
 			cout << lineNumber << "   " + trim(line);
 			cout << "------------------------------------------";
-			InstructionParser parser = new InstructionParser(line);
+			InstructionParser parser(line);
 			parser.doSplitLine();
 			string strOpcode = parser.getSplitLine()[0];
 
-			InstructionType type = new InstructionType();
+			InstructionType type;
 
 			if(type.isLabel(strOpcode)) {
-				LabelInstruction label = new LabelInstruction(strOpcode,lineNumber);
-				labelInstrList.push_back(label);
+				LabelInstruction label(strOpcode,lineNumber);
+				labelInstrList->push_back(label);
 				cout << label.getLabelString() <<  "---------" << label.getLabelAddress();
-				cout << labelInstrList[labelInstrList.size() - 1].getLabelString();
-				cout << labelInstrList.size();
+				cout << (*labelInstrList)[labelInstrList->size() - 1].getLabelString();
+				cout << labelInstrList->size();
 			}
 			lineNumber ++ ;
 		}
@@ -69,7 +72,7 @@ void SourceReader::findLabel() {
 }
 
 void SourceReader::constructInstrList() {
-	ifstream reader(getFilePath());
+	ifstream reader(getFilePath().c_str());
 	string line;
 	int lineNumber = 0;
 	instrList = new vector<Instruction>();
@@ -78,34 +81,28 @@ void SourceReader::constructInstrList() {
 		if(line != "") {
 			cout << lineNumber+"   " + trim(line);
 			cout << "------------------------------------------";
-			InstructionParser parser = new InstructionParser(line);
+			InstructionParser parser(line);
 			parser.doSplitLine();
 			string strOpcode = parser.getSplitLine()[0];
-			string results[] = parser.getSplitLine();
+			vector<string> results = parser.getSplitLine();
 
-			InstructionType type = new InstructionType();
+			InstructionType type;
 			int instrType = type.instrTypeDefine(strOpcode);
-			Instruction instr = new Instruction(results,instrType,labelInstrList);
+			Instruction instr(results,instrType,*labelInstrList);
 			instr.originalString = line;
 			cout << "Opcode" << "----->"+ instr.opcode;
 			cout << "rs" << "----->"+ instr.rs;
 			cout << "rt" << "----->"+ instr.rt;
 			cout << "rd" << "----->"+ instr.rd;
-			cout << "immediate" + "----->"+ instr.immediate;
-			cout << "lowSixDigital" + "----->"+ instr.lowSixDigital;
-			cout << "middleFiveDigital" + "----->"+ instr.middleFiveDigital;
-			instrList.push_back(instr);
+			cout << "immediate" << "----->" << instr.immediate;
+			cout << "lowSixDigital" << "----->" << instr.lowSixDigital;
+			cout << "middleFiveDigital" << "----->" << instr.middleFiveDigital;
+			instrList->push_back(instr);
 			lineNumber++ ;
 		}
 	}
 }
 
-vector<Instruction> SourceReader::getInstrucionList() {
+vector<Instruction>* SourceReader::getInstrucionList() {
 	return instrList;
-}
-
-void SourceReader::main() {
-    SourceReader sourceReader = new SourceReader("load_delay_1.asm");
-    sourceReader.findLabel();
-    sourceReader.constructInstrList();
 }
