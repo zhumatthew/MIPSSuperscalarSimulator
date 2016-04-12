@@ -11,16 +11,16 @@
 
 using namespace std;
 
-InstructionType::InstructionType() {
-    
-}
-
 // R-type instructions (register?)
 // I-type instructions (immediate?)
-// Load/store word instructions/branch comparison
-// Branch instructions with only immediate
-// branch instructions with rs/immediate
-// label instruction
+// Load/store word instructions/branch comparison     LW r21, 0(r30)       BEQ r1, r0, done
+// Branch instructions with only immediate     J begina
+// branch instructions with rs/immediate      BGEZ r30, endloopb      BGEZ r18, r0, Loop
+// label instruction        done ADDI r5, r0, 6
+
+// JAL is jump and link
+// SLLI is shift left logical immediate
+// SRLI is shift right logical immediate
 
 int InstructionType::instrTypeDefine(string strOpcode) {
     if(strOpcode == "ADD" || strOpcode == "SUB" || strOpcode == "MUL"|| strOpcode == "DIV" || strOpcode == "AND")

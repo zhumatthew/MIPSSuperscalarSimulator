@@ -12,6 +12,29 @@
 #include "InstructionParser.hpp"
 #include "InstructionType.hpp"
 
+// R-type instructions (register?)
+// I-type instructions (immediate?)
+// Load/store word instructions/branch comparison
+// Branch instructions with only immediate
+// branch instructions with rs/immediate
+// label instruction
+
+//int InstructionType::instrTypeDefine(string strOpcode) {
+//    if(strOpcode == "ADD" || strOpcode == "SUB" || strOpcode == "MUL"|| strOpcode == "DIV" || strOpcode == "AND")
+//        return instrType = 0;
+//    else if(strOpcode == "ADDI" || strOpcode == "ANDI" || strOpcode == "ORI" || strOpcode == "XORI" || strOpcode == "SUBI" || strOpcode == "SLLI"|| strOpcode == "SRLI")
+//        return instrType = 1;
+//    else if(strOpcode == "LW" || strOpcode == "SW"||strOpcode == "BEQ" || strOpcode == "BEQL")
+//        return instrType = 2;
+//    else if(strOpcode == "J" || strOpcode == "JAL"|| strOpcode == "B")
+//        return instrType = 3;
+//    else if(strOpcode == "BGEZ"|| strOpcode == "BLEZ")
+//        return instrType = 4;
+//    else
+//        cout << "It is a label for branch instruction";
+//    return instrType = 5;
+//}
+
 using namespace std;
 
 InstructionParser::InstructionParser(string aLine) {

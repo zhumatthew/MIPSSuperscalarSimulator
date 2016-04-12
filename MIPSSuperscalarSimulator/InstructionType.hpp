@@ -18,6 +18,8 @@
 using namespace std;
 
 class InstructionType {
+
+    enum InstructionType { register_, immediate,
     
 // static members??
     
