@@ -202,8 +202,8 @@ void Simulator::implement() {
 	cout << cycleCount;
 }
 
-void Simulator::stepImplement(){
-	if(lastStall != 2) {
+void Simulator::stepImplement() {
+	if (lastStall != 2) {
 		simuWriteBack.currentInstructionList[0] = simuMemory.currentInstructionList[0];
 		simuWriteBack.currentInstructionList[1] = simuMemory.currentInstructionList[1];
 		simuMemory.currentInstructionList[0] = simuExecute.currentInstructionList[0];

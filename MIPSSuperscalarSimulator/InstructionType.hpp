@@ -19,6 +19,8 @@ using namespace std;
 
 class InstructionType {
     
+// static members??
+    
 public:
 	InstructionType();
 	int instrTypeDefine(string strOpcode);

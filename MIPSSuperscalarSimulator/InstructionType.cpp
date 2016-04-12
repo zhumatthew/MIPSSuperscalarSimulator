@@ -20,6 +20,7 @@ InstructionType::InstructionType() {
 // Load/store word instructions/branch comparison
 // Branch instructions with only immediate
 // branch instructions with rs/immediate
+// label instruction
 
 int InstructionType::instrTypeDefine(string strOpcode) {
     if(strOpcode == "ADD" || strOpcode == "SUB" || strOpcode == "MUL"|| strOpcode == "DIV" || strOpcode == "AND")
