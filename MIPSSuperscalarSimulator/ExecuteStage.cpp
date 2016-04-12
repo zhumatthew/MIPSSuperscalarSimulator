@@ -12,36 +12,36 @@ void ExecuteStage::implement(DecodeStage currentDecode, MemoryStage currentMemor
 	if (currentDecode.readAfterWriteHazard || (this->currentInstructionList[0].opcodeString=="NOP"))
 		return;
 	for (int i = 0; i < 2; i++) {
-		if (this->currentInstructionList[i].currentForward->rsDelayedForward) {
+		if (this->currentInstructionList[i].currentForward.rsDelayedForward) {
 			this->currentInstructionList[i].rsValue = simuRegFile.getValue(currentInstructionList[i].rs);
 		}
 
-		if (this->currentInstructionList[i].currentForward->rtDelayedForward) {
+		if (this->currentInstructionList[i].currentForward.rtDelayedForward) {
 			this->currentInstructionList[i].rtValue = simuRegFile.getValue(currentInstructionList[i].rt);
 		}
 
-		if (this->currentInstructionList[i].currentForward->rsForward) {
-			int depthIndex = this->currentInstructionList[i].currentForward->rsForwardDepth;
+		if (this->currentInstructionList[i].currentForward.rsForward) {
+			int depthIndex = this->currentInstructionList[i].currentForward.rsForwardDepth;
 			this->currentInstructionList[i].rsValue = currentMemory.currentInstructionList[depthIndex].rdValue;
 		}
 
-		if (this->currentInstructionList[i].currentForward->rtForward) {
-			int depthIndex = this->currentInstructionList[i].currentForward->rtForwardDepth;
+		if (this->currentInstructionList[i].currentForward.rtForward) {
+			int depthIndex = this->currentInstructionList[i].currentForward.rtForwardDepth;
 			this->currentInstructionList[i].rtValue = currentMemory.currentInstructionList[depthIndex].rdValue;
 		}
 
 		if (lastStall == 2) {
-			if(this->currentInstructionList[i].currentForward->rsForward)
+			if(this->currentInstructionList[i].currentForward.rsForward)
 				this->currentInstructionList[i].rsValue = simuRegFile.getValue(currentInstructionList[i].rs);
 
-			if(this->currentInstructionList[i].currentForward->rtForward)
+			if(this->currentInstructionList[i].currentForward.rtForward)
 				this->currentInstructionList[i].rtValue = simuRegFile.getValue(currentInstructionList[i].rt);
 		}
 
-		this->currentInstructionList[i].currentForward->rsDelayedForward = false;
-		this->currentInstructionList[i].currentForward->rsForward = false;
-		this->currentInstructionList[i].currentForward->rtDelayedForward = false;
-		this->currentInstructionList[i].currentForward->rtForward = false;
+		this->currentInstructionList[i].currentForward.rsDelayedForward = false;
+		this->currentInstructionList[i].currentForward.rsForward = false;
+		this->currentInstructionList[i].currentForward.rtDelayedForward = false;
+		this->currentInstructionList[i].currentForward.rtForward = false;
 
 		if(currentInstructionList[i].opcodeString == "ADD") {
 			currentInstructionList[i].rdValue = currentInstructionList[i].rsValue + currentInstructionList[i].rtValue;
