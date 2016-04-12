@@ -19,7 +19,7 @@ using namespace std;
 
 class InstructionType {
 
-    enum InstructionType { register_, immediate,
+    // enum InstructionType { register_, immediate,
     
 // static members??
     
@@ -27,7 +27,7 @@ public:
 	InstructionType();
 	int instrTypeDefine(string strOpcode);
 	bool isLabel(string strOpcode);
-	int operatonCodeDefine(string str, int instrType);
+	int operationCodeDefine(string str, int instrType);
 	int lowSixDigitDefine(string str,int instrType);
 	int middleFiveDigitDefine(string str,int instrType);
 

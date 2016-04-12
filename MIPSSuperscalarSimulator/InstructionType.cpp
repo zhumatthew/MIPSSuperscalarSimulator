@@ -50,7 +50,7 @@ bool InstructionType::isLabel(string strOpcode) {
 // all but case 0 involve immediates
 // case 5 involves labels
 
-int InstructionType::operatonCodeDefine(string str, int instrType) {
+int InstructionType::operationCodeDefine(string str, int instrType) {
     int optcode = 0;
     switch(instrType){
         case 0:
@@ -143,9 +143,9 @@ int InstructionType::middleFiveDigitDefine(string str, int instrType) {
 		case 3:
 			break;
 		case 4:
-			if(str == "BGEZ"){
+			if (str == "BGEZ") {
 				middle = 1;
-			} else if(str == "BLEZ") {
+			} else if (str == "BLEZ") {
 				middle = 0;
 			}
 			break;
