@@ -25,9 +25,11 @@ private:
     int lastPC;
     int tempCnt;
     bool pairwise;
-    int windowTail;
-    int instrSize;
-    int windowSize;
+    int windowTail; // number of instructions in the window
+    int instrSize; // number of instructions in the benchmark
+    int windowSize; // number of instructions in the reorder window
+    
+    // Before IF is implemented, the window contains all instructions that can potentially be reordered. After the IF is implemented, the window contains all reordered instructions. Instructions enter ID stage according to the order of instructions in the window
     vector<SimulationInstruction> window;
 
     // window/check/count?
