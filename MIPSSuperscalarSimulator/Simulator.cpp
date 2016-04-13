@@ -196,7 +196,7 @@ void Simulator::implement() {
 		cycleCount++;
 		cout << "-------------------------------------------------" << endl;
 	}
-	cout << "total cycle count : " << cycleCount << endl;
+	cout << "Total number of cycle count after simulation: " << cycleCount << endl;
 }
 
 void Simulator::stepImplement() {
