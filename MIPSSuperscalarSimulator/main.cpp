@@ -19,8 +19,8 @@ int main(int argc, const char * argv[]) {
 	vector<SimulationInstruction> simulationInstructionList = vector<SimulationInstruction>();
 	vector<Instruction> originInstructionList = sourceReader.getInstructionList();
 
-	cout << "-------Start-------" << endl;
-	cout << originInstructionList.size() << endl;
+	cout << "-----------Start Simulation-----------" << endl;
+	cout << "Original number of Instruction : " << originInstructionList.size() << endl;
 
 	for (int i = 0; i < originInstructionList.size(); i++) {
 		SimulationInstruction simInstr = SimulationInstruction(originInstructionList[i]);

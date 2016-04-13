@@ -42,8 +42,9 @@ void SourceReader::findLabel() {
 	int lineNumber = 0;
 	labelInstrList = vector<LabelInstruction>();
 
+	cout << "------------Read the assembly File------------" << endl;
+
 	while (getline(reader, line)) {
-//        if(line != "") {
 		if (!line.empty()) {
 			cout << lineNumber << "   " + trim(line) << endl;
 			cout << "------------------------------------------" << endl;
@@ -71,11 +72,12 @@ void SourceReader::constructInstrList() {
 	int lineNumber = 0;
 	instrList = vector<Instruction>();
 
+	cout << "--------Printing out the each component-------" << endl;
+
 	while (getline(reader, line)) {
-//		if(line != "") {
         if (!line.empty()) {
-			cout << lineNumber << "   " << trim(line) << endl;
-			cout << "------------------------------------------" << endl;
+        	cout << "------------------------------------------" << endl;
+        	cout << lineNumber << "   " << trim(line) << endl;
 			InstructionParser parser(line);
 			parser.doSplitLine();
 			string strOpcode = parser.getSplitLine().front();
@@ -85,6 +87,7 @@ void SourceReader::constructInstrList() {
 			int instrType = type.instrTypeDefine(strOpcode);
 			Instruction instr(results,instrType,labelInstrList);
 			instr.originalString = line;
+
 			cout << "Opcode" << "----->" << instr.opcode << endl;
 			cout << "rs" << "----->" << instr.rs << endl;
 			cout << "rt" << "----->" << instr.rt << endl;
