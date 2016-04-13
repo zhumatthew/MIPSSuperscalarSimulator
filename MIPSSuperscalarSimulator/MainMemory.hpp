@@ -21,7 +21,7 @@ public:
     int getValue(int address);
     
 private:
-    vector<int> memoryData;
+    vector<int> memoryData; // holds values in main memory
 };
 
 #endif /* MainMemory_hpp */

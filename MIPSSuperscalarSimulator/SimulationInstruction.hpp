@@ -19,10 +19,13 @@ class SimulationInstruction {
 public:
 	SimulationInstruction(string str); // used for nop instruction
     SimulationInstruction(Instruction instr); // used for instructions that are not nop instructions
+    
     // destination register, target register, source register
     int rd, rt, rs;
+    
     // value in destination register, value in target register, value in source register
     int rdValue, rtValue, rsValue;
+    
     int opcode, immediate;
     string originalString, opcodeString;
     int instructionLocation;

@@ -22,6 +22,8 @@ public:
 //    static int PC;
     
     // should be static?
+    // index of instruction queue / instruction list
+    // index of instruction that is being fetched at this cycle
     int PC;
 
 

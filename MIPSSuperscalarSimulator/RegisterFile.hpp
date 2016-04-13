@@ -21,7 +21,7 @@ public:
     int getValue(int address);
     
 private:
-    vector<int> registerData;
+    vector<int> registerData; // holds values in the register file
 };
 
 #endif /* RegisterFile_hpp */

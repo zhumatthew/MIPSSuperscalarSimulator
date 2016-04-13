@@ -10,7 +10,7 @@
 
 Stage::Stage() {
 	currentInstructionList = vector<SimulationInstruction>();
+	currentInstructionList.push_back(SimulationInstruction("nop")); // default (initialized) instruction is a NOP
 	currentInstructionList.push_back(SimulationInstruction("nop"));
-	currentInstructionList.push_back(SimulationInstruction("nop"));
-	PC = 0;
+	PC = 0; // Initialize program counter
 }
