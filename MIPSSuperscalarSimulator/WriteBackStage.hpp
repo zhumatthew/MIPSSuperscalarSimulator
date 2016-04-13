@@ -17,7 +17,6 @@
 class WriteBackStage : public Stage {
     
 public:
-	WriteBackStage();
 	int implement(RegisterFile regFile, DecodeStage currentDecode);
 
 };

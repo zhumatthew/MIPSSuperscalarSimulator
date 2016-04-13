@@ -22,10 +22,6 @@ using namespace std;
 // SLLI is shift left logical immediate
 // SRLI is shift right logical immediate
 
-InstructionType::InstructionType() {
-
-}
-
 int InstructionType::instrTypeDefine(string strOpcode) {
     if(strOpcode == "ADD" || strOpcode == "SUB" || strOpcode == "MUL"|| strOpcode == "DIV" || strOpcode == "AND")
         return instrType = 0;

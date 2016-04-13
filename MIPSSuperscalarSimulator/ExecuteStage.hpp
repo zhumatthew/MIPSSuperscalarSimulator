@@ -19,7 +19,6 @@ using namespace std;
 class ExecuteStage : public Stage {
 
 public:
-	ExecuteStage();
 	void implement(DecodeStage currentDecode, MemoryStage currentMemory, RegisterFile simuRegFile, int lastStall, bool falsePrediction);
 	int getSavedPC();
 
