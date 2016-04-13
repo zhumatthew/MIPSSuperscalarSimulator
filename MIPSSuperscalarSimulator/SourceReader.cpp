@@ -16,29 +16,22 @@
 
 using namespace std;
 
-SourceReader::SourceReader(string path) {
-	filePath = path;
-}
+SourceReader::SourceReader(string path) : filePath(path){}
 
 string SourceReader::getFilePath() {
 	return filePath;
 }
 
-void SourceReader::setFilePath(string aFilePath) {
-	filePath = aFilePath;
+void SourceReader::setFilePath(string filePath) {
+	this->filePath = filePath;
 }
 
 string SourceReader::trim(string str) {
     if(str.length() == 0) return str;
 
     int beg = 0, end = static_cast<int>(str.length()) - 1;
-    while (str[beg] == ' ') {
-        beg++;
-    }
-
-    while (str[end] == ' ') {
-        end--;
-    }
+    while (str[beg] == ' ') beg++;
+    while (str[end] == ' ') end--;
 
     return str.substr(beg, end - beg + 1);
 }
@@ -56,7 +49,7 @@ void SourceReader::findLabel() {
 			cout << "------------------------------------------";
 			InstructionParser parser(line);
 			parser.doSplitLine();
-			string strOpcode = parser.getSplitLine()[0];
+			string strOpcode = parser.getSplitLine().front();
 
 			InstructionType type;
 
@@ -85,7 +78,7 @@ void SourceReader::constructInstrList() {
 			cout << "------------------------------------------";
 			InstructionParser parser(line);
 			parser.doSplitLine();
-			string strOpcode = parser.getSplitLine()[0];
+			string strOpcode = parser.getSplitLine().front();
 			vector<string> results = parser.getSplitLine();
 
 			InstructionType type;

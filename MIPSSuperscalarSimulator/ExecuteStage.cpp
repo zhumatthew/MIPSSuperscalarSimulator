@@ -8,10 +8,14 @@
 
 #include "ExecuteStage.hpp"
 
+// example instruction
+// $d = $s + $t
+
 void ExecuteStage::implement(DecodeStage currentDecode, MemoryStage currentMemory, RegisterFile simuRegFile, int lastStall, bool falsePrediction) {
-	if (currentDecode.readAfterWriteHazard || (currentInstructionList[0].opcodeString=="NOP"))
+    // In case a RAW hazard is detected in last cycle
+	if (currentDecode.readAfterWriteHazard || (currentInstructionList.front().opcodeString=="NOP"))
 		return;
-	for (int i = 0; i < 2; i++) {
+	for (int i = 0; i <= 1; i++) {
 		if (currentInstructionList[i].currentForward.rsDelayedForward) {
 			currentInstructionList[i].rsValue = simuRegFile.getValue(currentInstructionList[i].rs);
 		}
@@ -19,6 +23,8 @@ void ExecuteStage::implement(DecodeStage currentDecode, MemoryStage currentMemor
 		if (currentInstructionList[i].currentForward.rtDelayedForward) {
 			currentInstructionList[i].rtValue = simuRegFile.getValue(currentInstructionList[i].rt);
 		}
+        
+        // At the second cycle since the RAW hazard was detected (laststall==2), a NOP needs to be inserted into the MEM stage, but this can lead to the unsuccessful forwarding with an origin stage of MEM since the information in MEM is discarded before it is forwarded to the execution stage of the same cycle
 
 		if (currentInstructionList[i].currentForward.rsForward) {
 			int depthIndex = currentInstructionList[i].currentForward.rsForwardDepth;
@@ -45,7 +51,7 @@ void ExecuteStage::implement(DecodeStage currentDecode, MemoryStage currentMemor
 
 		if (currentInstructionList[i].opcodeString == "ADD") {
 			currentInstructionList[i].rdValue = currentInstructionList[i].rsValue + currentInstructionList[i].rtValue;
-		} else if (currentInstructionList[i].opcodeString=="DIV") {
+		} else if (currentInstructionList[i].opcodeString == "DIV") {
 			if (currentInstructionList[i].rtValue == 0)
 				return;
 			else
@@ -54,19 +60,19 @@ void ExecuteStage::implement(DecodeStage currentDecode, MemoryStage currentMemor
 			currentInstructionList[i].rdValue = currentInstructionList[i].rsValue - currentInstructionList[i].rtValue;
 		} else if (currentInstructionList[i].opcodeString == "MUL") {
 			currentInstructionList[i].rdValue = (currentInstructionList[i].rsValue) * (currentInstructionList[i].rtValue);
-		} else if (currentInstructionList[i].opcodeString == "LW" || currentInstructionList[i].opcodeString=="SW") {
+		} else if (currentInstructionList[i].opcodeString == "LW" || currentInstructionList[i].opcodeString == "SW") {
 			currentInstructionList[i].effectiveAddress = currentInstructionList[i].rsValue + currentInstructionList[i].immediate;
-		} else if (currentInstructionList[i].opcodeString=="ADDI") {
+		} else if (currentInstructionList[i].opcodeString == "ADDI") {
 			currentInstructionList[i].rdValue = currentInstructionList[i].rsValue + currentInstructionList[i].immediate;
-		} else if (currentInstructionList[i].opcodeString=="BGEZ" || currentInstructionList[i].opcodeString=="BLEZ" || currentInstructionList[i].opcodeString=="BEQ" || currentInstructionList[i].opcodeString=="J") {
-			if((currentInstructionList[i].opcodeString=="BGEZ" && currentInstructionList[i].rsValue >= 0)
-					|| (currentInstructionList[i].opcodeString=="BLEZ" && currentInstructionList[i].rsValue <= 0)
-					|| (currentInstructionList[i].opcodeString=="BEQ" && (currentInstructionList[i].rsValue == currentInstructionList[i].rtValue))) {
+		} else if (currentInstructionList[i].opcodeString == "BGEZ" || currentInstructionList[i].opcodeString == "BLEZ" || currentInstructionList[i].opcodeString == "BEQ" || currentInstructionList[i].opcodeString == "J") {
+			if((currentInstructionList[i].opcodeString == "BGEZ" && currentInstructionList[i].rsValue >= 0)
+					|| (currentInstructionList[i].opcodeString == "BLEZ" && currentInstructionList[i].rsValue <= 0)
+					|| (currentInstructionList[i].opcodeString == "BEQ" && (currentInstructionList[i].rsValue == currentInstructionList[i].rtValue))) {
 				currentInstructionList[i].branchCondition = true;
 			}
-			if(currentInstructionList[i].opcodeString=="J")
+			if (currentInstructionList[i].opcodeString == "J")
 				currentInstructionList[i].branchCondition = true;
-			if(currentInstructionList[i].branchCondition == true) {
+			if (currentInstructionList[i].branchCondition == true) {
 				tempPC = currentInstructionList[i].immediate;
 				falsePrediction = true;
 				currentInstructionList[i].branchCondition = false;

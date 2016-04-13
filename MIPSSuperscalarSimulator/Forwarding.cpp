@@ -8,6 +8,4 @@
 
 #include "Forwarding.hpp"
 
-using namespace std;
-
 Forwarding::Forwarding() : rsForward(false), rtForward(false), rsDelayedForward(false), rtDelayedForward(false), rsForwardDepth(0), rtForwardDepth(0), rsDelayForwardDepth(0), rtDelayForwardDepth (0) {}
