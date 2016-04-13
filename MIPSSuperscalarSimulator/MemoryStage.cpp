@@ -13,12 +13,12 @@ using namespace std;
 void MemoryStage::implement(MainMemory mmemo, RegisterFile regfile){
 
 	if(currentInstructionList[0].effectiveAddress != 0){
-        cout << "MemoryAddress [ " << currentInstructionList[0].effectiveAddress << "] = ";
+        cout << "MemoryAddress [ " << currentInstructionList[0].effectiveAddress << "] = " << endl;
 	}
     // currentInstructionList.front();
 
 	if(currentInstructionList[1].effectiveAddress != 0){
-        cout << "MemoryAddress [ " << currentInstructionList[1].effectiveAddress << "] = ";
+        cout << "MemoryAddress [ " << currentInstructionList[1].effectiveAddress << "] = " << endl;
 	}
 
 	if(currentInstructionList[0].opcodeString == "NOP" || currentInstructionList[0].opcodeString == "Empty" || currentInstructionList[0].opcodeString == "nop" || currentInstructionList[0].opcodeString == "nop")

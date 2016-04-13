@@ -68,7 +68,7 @@ void Instruction::handleInstruction(vector<string> results) {
 			immediate = parser.parserImmediateNumber(instructionType);
 			break;
 		default:
-			cout << "instrType Error";
+			cout << "instrType Error" << endl;
 	}
 }
 

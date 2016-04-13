@@ -75,11 +75,11 @@ void InstructionParser::doSplitLine() {
 	for(int i=0; i < results.size(); i++) {
 		if(ends_with(results[i], ",")) {
 			results[i] = results[i].substr(0, results[i].length()-1);
-			cout << results[i];
+			cout << results[i] << endl;
 		} else {
-			cout << results[i];
+			cout << results[i] << endl;
 		}
-		cout << "_________________________________";
+		cout << "_________________________________" << endl;
 	}
 }
 

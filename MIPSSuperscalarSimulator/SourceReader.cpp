@@ -52,8 +52,8 @@ void SourceReader::findLabel() {
 	while (getline(reader, line)) {
 //        if(line != "") {
 		if (!line.empty()) {
-			cout << lineNumber << "   " + trim(line);
-			cout << "------------------------------------------";
+			cout << lineNumber << "   " + trim(line) << endl;
+			cout << "------------------------------------------" << endl;
 			InstructionParser parser(line);
 			parser.doSplitLine();
 			string strOpcode = parser.getSplitLine()[0];
@@ -63,9 +63,9 @@ void SourceReader::findLabel() {
 			if(type.isLabel(strOpcode)) {
 				LabelInstruction label(strOpcode,lineNumber);
 				labelInstrList.push_back(label);
-				cout << label.getLabelString() <<  "---------" << label.getLabelAddress();
-				cout << labelInstrList.back().getLabelString();
-				cout << labelInstrList.size();
+				cout << label.getLabelString() <<  "---------" << label.getLabelAddress() << endl;
+				cout << labelInstrList.back().getLabelString() << endl;
+				cout << labelInstrList.size() << endl;
 			}
 			lineNumber++;
 		}
@@ -81,8 +81,8 @@ void SourceReader::constructInstrList() {
 	while (getline(reader, line)) {
 //		if(line != "") {
         if (!line.empty()) {
-			cout << lineNumber << "   " << trim(line);
-			cout << "------------------------------------------";
+			cout << lineNumber << "   " << trim(line) << endl;
+			cout << "------------------------------------------" << endl;
 			InstructionParser parser(line);
 			parser.doSplitLine();
 			string strOpcode = parser.getSplitLine()[0];
@@ -92,13 +92,13 @@ void SourceReader::constructInstrList() {
 			int instrType = type.instrTypeDefine(strOpcode);
 			Instruction instr(results,instrType,labelInstrList);
 			instr.originalString = line;
-			cout << "Opcode" << "----->" << instr.opcode;
-			cout << "rs" << "----->" << instr.rs;
-			cout << "rt" << "----->" << instr.rt;
-			cout << "rd" << "----->" << instr.rd;
-			cout << "immediate" << "----->" << instr.immediate;
-			cout << "lowSixDigital" << "----->" << instr.lowSixDigital;
-			cout << "middleFiveDigital" << "----->" << instr.middleFiveDigital;
+			cout << "Opcode" << "----->" << instr.opcode << endl;
+			cout << "rs" << "----->" << instr.rs << endl;
+			cout << "rt" << "----->" << instr.rt << endl;
+			cout << "rd" << "----->" << instr.rd << endl;
+			cout << "immediate" << "----->" << instr.immediate << endl;
+			cout << "lowSixDigital" << "----->" << instr.lowSixDigital << endl;
+			cout << "middleFiveDigital" << "----->" << instr.middleFiveDigital << endl;
 			instrList.push_back(instr);
 			lineNumber++;
 		}

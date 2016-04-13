@@ -34,7 +34,7 @@ int InstructionType::instrTypeDefine(string strOpcode) {
     else if(strOpcode == "BGEZ"|| strOpcode == "BLEZ")
         return instrType = 4;
     else
-        cout << "It is a label for branch instruction";
+        cout << "It is a label for branch instruction" << endl;
     return instrType = 5;
 }
 
