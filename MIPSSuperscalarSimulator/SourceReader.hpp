@@ -23,7 +23,7 @@ public:
 	void setFilePath(string aFilePath);
 	void findLabel();
 	void constructInstrList();
-	vector<Instruction> getInstrucionList();
+	vector<Instruction> getInstructionList();
 	vector<Instruction> readInstrList();
 	string trim(string str);
 

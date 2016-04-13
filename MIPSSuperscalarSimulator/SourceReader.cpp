@@ -50,7 +50,8 @@ void SourceReader::findLabel() {
 	labelInstrList = vector<LabelInstruction>();
 
 	while (getline(reader, line)) {
-		if(line != "") {
+//        if(line != "") {
+		if (!line.empty()) {
 			cout << lineNumber << "   " + trim(line);
 			cout << "------------------------------------------";
 			InstructionParser parser(line);
@@ -63,10 +64,10 @@ void SourceReader::findLabel() {
 				LabelInstruction label(strOpcode,lineNumber);
 				labelInstrList.push_back(label);
 				cout << label.getLabelString() <<  "---------" << label.getLabelAddress();
-				cout << (labelInstrList)[labelInstrList.size() - 1].getLabelString();
+				cout << labelInstrList.back().getLabelString();
 				cout << labelInstrList.size();
 			}
-			lineNumber ++ ;
+			lineNumber++;
 		}
 	}
 }
@@ -78,7 +79,8 @@ void SourceReader::constructInstrList() {
 	instrList = vector<Instruction>();
 
 	while (getline(reader, line)) {
-		if(line != "") {
+//		if(line != "") {
+        if (!line.empty()) {
 			cout << lineNumber << "   " << trim(line);
 			cout << "------------------------------------------";
 			InstructionParser parser(line);
@@ -98,11 +100,11 @@ void SourceReader::constructInstrList() {
 			cout << "lowSixDigital" << "----->" << instr.lowSixDigital;
 			cout << "middleFiveDigital" << "----->" << instr.middleFiveDigital;
 			instrList.push_back(instr);
-			lineNumber++ ;
+			lineNumber++;
 		}
 	}
 }
 
-vector<Instruction> SourceReader::getInstrucionList() {
+vector<Instruction> SourceReader::getInstructionList() {
 	return instrList;
 }
