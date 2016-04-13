@@ -24,7 +24,9 @@ void ExecuteStage::implement(DecodeStage currentDecode, MemoryStage currentMemor
 			currentInstructionList[i].rtValue = simuRegFile.getValue(currentInstructionList[i].rt);
 		}
         
-        // At the second cycle since the RAW hazard was detected (laststall==2), a NOP needs to be inserted into the MEM stage, but this can lead to the unsuccessful forwarding with an origin stage of MEM since the information in MEM is discarded before it is forwarded to the execution stage of the same cycle
+        // At the second cycle since the RAW hazard was detected (lastStall==2), a NOP needs to be inserted into the MEM stage, but this can lead to the unsuccessful forwarding with an origin stage of MEM since the information in MEM is discarded before it is forwarded to the execution stage of the same cycle
+        
+        // Implement forwarding with MEM as origin stage (origin = source?)
 
 		if (currentInstructionList[i].currentForward.rsForward) {
 			int depthIndex = currentInstructionList[i].currentForward.rsForwardDepth;
@@ -35,6 +37,9 @@ void ExecuteStage::implement(DecodeStage currentDecode, MemoryStage currentMemor
 			int depthIndex = currentInstructionList[i].currentForward.rtForwardDepth;
 			currentInstructionList[i].rtValue = currentMemory.currentInstructionList[depthIndex].rdValue;
 		}
+        
+        // Newly loaded, updated register value is required for the operation, so the register file needs to be accessed again
+        // Implement stage sequence is from WB to IF
 
 		if (lastStall == 2) {
 			if (currentInstructionList[i].currentForward.rsForward)

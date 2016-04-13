@@ -16,7 +16,7 @@ FetchStage::FetchStage(int instructionLength) : lastPC(0), instrSize(instruction
 	window = vector<SimulationInstruction>();
 
 	for(tempCnt = 0; tempCnt < windowSize; tempCnt++)
-		window[tempCnt] = SimulationInstruction("nop");
+        window.push_back(SimulationInstruction("nop"));
 }
 
 // Program counter may add one or two
