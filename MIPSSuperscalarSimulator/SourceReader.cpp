@@ -31,7 +31,7 @@ void SourceReader::setFilePath(string aFilePath) {
 string SourceReader::trim(string str) {
     if(str.length() == 0) return str;
 
-    int beg = 0, end = str.length() - 1;
+    int beg = 0, end = static_cast<int>(str.length()) - 1;
     while (str[beg] == ' ') {
         beg++;
     }
@@ -47,7 +47,7 @@ void SourceReader::findLabel() {
 	ifstream reader(getFilePath().c_str());
 	string line;
 	int lineNumber = 0;
-	labelInstrList = new vector<LabelInstruction>();
+	labelInstrList = vector<LabelInstruction>();
 
 	while (getline(reader, line)) {
 		if(line != "") {
@@ -61,10 +61,10 @@ void SourceReader::findLabel() {
 
 			if(type.isLabel(strOpcode)) {
 				LabelInstruction label(strOpcode,lineNumber);
-				labelInstrList->push_back(label);
+				labelInstrList.push_back(label);
 				cout << label.getLabelString() <<  "---------" << label.getLabelAddress();
-				cout << (*labelInstrList)[labelInstrList->size() - 1].getLabelString();
-				cout << labelInstrList->size();
+				cout << (labelInstrList)[labelInstrList.size() - 1].getLabelString();
+				cout << labelInstrList.size();
 			}
 			lineNumber ++ ;
 		}
@@ -75,11 +75,11 @@ void SourceReader::constructInstrList() {
 	ifstream reader(getFilePath().c_str());
 	string line;
 	int lineNumber = 0;
-	instrList = new vector<Instruction>();
+	instrList = vector<Instruction>();
 
 	while (getline(reader, line)) {
 		if(line != "") {
-			cout << lineNumber+"   " + trim(line);
+			cout << lineNumber << "   " << trim(line);
 			cout << "------------------------------------------";
 			InstructionParser parser(line);
 			parser.doSplitLine();
@@ -88,21 +88,21 @@ void SourceReader::constructInstrList() {
 
 			InstructionType type;
 			int instrType = type.instrTypeDefine(strOpcode);
-			Instruction instr(results,instrType,*labelInstrList);
+			Instruction instr(results,instrType,labelInstrList);
 			instr.originalString = line;
-			cout << "Opcode" << "----->"+ instr.opcode;
-			cout << "rs" << "----->"+ instr.rs;
-			cout << "rt" << "----->"+ instr.rt;
-			cout << "rd" << "----->"+ instr.rd;
+			cout << "Opcode" << "----->" << instr.opcode;
+			cout << "rs" << "----->" << instr.rs;
+			cout << "rt" << "----->" << instr.rt;
+			cout << "rd" << "----->" << instr.rd;
 			cout << "immediate" << "----->" << instr.immediate;
 			cout << "lowSixDigital" << "----->" << instr.lowSixDigital;
 			cout << "middleFiveDigital" << "----->" << instr.middleFiveDigital;
-			instrList->push_back(instr);
+			instrList.push_back(instr);
 			lineNumber++ ;
 		}
 	}
 }
 
-vector<Instruction>* SourceReader::getInstrucionList() {
+vector<Instruction> SourceReader::getInstrucionList() {
 	return instrList;
 }
