@@ -24,15 +24,15 @@ int main(int argc, const char * argv[]) {
 
 	for (int i = 0; i < originInstructionList.size(); i++) {
 		SimulationInstruction simInstr = SimulationInstruction(originInstructionList[i]);
-		simulationInstructionList[i] = simInstr;
+		simulationInstructionList.push_back(simInstr);
 	}
 
 	SimulationInstruction endInstr = SimulationInstruction("end");
-	simulationInstructionList[simulationInstructionList.size()] = endInstr;
+	simulationInstructionList.push_back(endInstr);
 	SimulationInstruction nopInstr = SimulationInstruction("nop");
-	simulationInstructionList[simulationInstructionList.size()] = nopInstr;
-	simulationInstructionList[simulationInstructionList.size()] = nopInstr;
-	simulationInstructionList[simulationInstructionList.size()] = nopInstr;
+	simulationInstructionList.push_back(nopInstr);
+	simulationInstructionList.push_back(nopInstr);
+	simulationInstructionList.push_back(nopInstr);
 
 	for (int i = 0; i < simulationInstructionList.size(); i++) {
 		simulationInstructionList[i].instructionLocation = i;
