@@ -15,6 +15,7 @@
 #include "Instruction.hpp"
 
 class SimulationInstruction {
+    
 public:
 	SimulationInstruction(string str);
     SimulationInstruction(Instruction instr);
@@ -23,8 +24,6 @@ public:
     int instructionLocation, loopCount, effectiveAddress;
     bool branchCondition, reordered;
     Forwarding currentForward;
-
-private:
 
 };
 
