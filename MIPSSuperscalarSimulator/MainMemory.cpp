@@ -17,8 +17,8 @@ MainMemory::MainMemory() {
 }
 
 bool MainMemory::putValue(int value, int address) {
-    if (address >= 0 && address < 32) {
-        memoryData[address] = 0;
+    if (address >= 0 && address < MEMORY_SIZE) {
+        memoryData[address] = value;
         return true;
     }
     return false;

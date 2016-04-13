@@ -18,7 +18,7 @@ RegisterFile::RegisterFile() {
 
 bool RegisterFile::putValue(int value, int address) {
     if (address >= 0 && address < REGISTER_SIZE) {
-        registerData[address] = 0;
+        registerData[address] = value;
         return true;
     }
     return false;
