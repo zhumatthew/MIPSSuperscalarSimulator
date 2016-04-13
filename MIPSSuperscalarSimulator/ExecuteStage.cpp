@@ -66,23 +66,32 @@ void ExecuteStage::implement(DecodeStage currentDecode, MemoryStage currentMemor
 		} else if (currentInstructionList[i].opcodeString == "MUL") {
 			currentInstructionList[i].rdValue = (currentInstructionList[i].rsValue) * (currentInstructionList[i].rtValue);
 		} else if (currentInstructionList[i].opcodeString == "LW" || currentInstructionList[i].opcodeString == "SW") {
+            // immediate corresponds to offset for LW/SW instructions
+            // Branch instructions involving effective address calculations should consider at which stage condition evaluation, effective address calculation, and program counter changing should be completed.
 			currentInstructionList[i].effectiveAddress = currentInstructionList[i].rsValue + currentInstructionList[i].immediate;
 		} else if (currentInstructionList[i].opcodeString == "ADDI") {
 			currentInstructionList[i].rdValue = currentInstructionList[i].rsValue + currentInstructionList[i].immediate;
 		} else if (currentInstructionList[i].opcodeString == "BGEZ" || currentInstructionList[i].opcodeString == "BLEZ" || currentInstructionList[i].opcodeString == "BEQ" || currentInstructionList[i].opcodeString == "J") {
+            // Add actions required by branch instructions in this stage
+            // The label produced by the assembler is the number for the target instruction in the instruction queue
+            // The instruction queue is indexed starting at 0
 			if((currentInstructionList[i].opcodeString == "BGEZ" && currentInstructionList[i].rsValue >= 0)
 					|| (currentInstructionList[i].opcodeString == "BLEZ" && currentInstructionList[i].rsValue <= 0)
 					|| (currentInstructionList[i].opcodeString == "BEQ" && (currentInstructionList[i].rsValue == currentInstructionList[i].rtValue))) {
-				currentInstructionList[i].branchCondition = true;
-			}
-			if (currentInstructionList[i].opcodeString == "J")
+				currentInstructionList[i].branchCondition = true; // branch condition variable will only be tested or changed in the implement function of execution stage
+			} // condition evaluation of conditional branch
+			if (currentInstructionList[i].opcodeString == "J") // unconditional branch
 				currentInstructionList[i].branchCondition = true;
 			if (currentInstructionList[i].branchCondition == true) {
+                // Save the PC. just for convenience, actually the target address will be updated to PC (all the five stages share this
+                // static field) in this cycle, but every instruction indicated by PC won't be fetched until next cycle's IF stage
 				tempPC = currentInstructionList[i].immediate;
-				falsePrediction = true;
-				currentInstructionList[i].branchCondition = false;
+				falsePrediction = true; // This flag is set so that a bubble is inserted into EX and ID stages in the next cycle
+				currentInstructionList[i].branchCondition = false; // Every time after this flag is used, it should be reset to false so that the next time it can be set or reset based on the outcome of the condition evaluation.
 			}
+            // For this instruction set, the target's absolute address (rather than the relative address to the PC) is assigned to the immediate of the branch instruction. The calculation of the effective address is not needed.
 		}
+        // In MIPS pipeline, the target address is not known earlier than the branch outcome, there is no advantage for the branch taken strategy. For the branch untaken strategy, branch condition evaluation and PC changing is done at the execution stage of the branch instruction. The target instruciton is fetched at the next cycle and the EX and ID stages' instruction are turned into NOP.
 	}
 }
 
