@@ -319,8 +319,8 @@ void Simulator::stepImplement() {
 		cout << "-------------------------------------------------";
 }
 
-void Simulator::main(){
-	// SourceReader reader = new SourceReader("D:/Code/AssemblerApp0.99/AssemblerApp/InstructionList.dat");
+void Simulator::main() {
+//	SourceReader reader = new SourceReader("D:/Code/AssemblerApp0.99/AssemblerApp/InstructionList.dat");
 //	vector<SimulationInstruction> simuInstrList = vector<SimulationInstruction>();
 //	// vector<Instruction> originInstrList = reader.readInstrList();
 //	// System.out.println(originInstrList.size());

@@ -16,9 +16,9 @@ using namespace std;
 // enumeration for instruction types??
 
 // array?
-Instruction::Instruction(vector<string> results, int instructionType, vector<LabelInstruction> labelInstructionList) {
-	instructionType = instructionType;
-	labelInstructionList = labelInstructionList;
+Instruction::Instruction(vector<string> results, int type, vector<LabelInstruction> labelInstrList) {
+	instructionType = type;
+	labelInstructionList = labelInstrList;
 
 	InstructionType instrType= InstructionType();
 
