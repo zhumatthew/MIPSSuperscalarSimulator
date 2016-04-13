@@ -24,7 +24,6 @@ class InstructionType {
 // static members??
     
 public:
-	InstructionType();
 	int instrTypeDefine(string strOpcode);
 	bool isLabel(string strOpcode);
 	int operationCodeDefine(string str, int instrType);
