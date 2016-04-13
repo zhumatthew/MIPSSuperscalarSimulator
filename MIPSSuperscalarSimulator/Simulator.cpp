@@ -131,17 +131,17 @@ void Simulator::implement() {
 		simuFetch.implement(simulationInstructionList, lastStall, falsePrediction, simuExecute.getSavedPC());
         instrCount += increment;
 
-		cout << "Fetch:" << simuFetch.currentInstructionList[0].originalString;
-		cout << "Fetch:" << simuFetch.currentInstructionList[1].originalString;
-		cout << "Decode:" << simuDecode.currentInstructionList[0].originalString;
-		cout << "Decode:" << simuDecode.currentInstructionList[1].originalString;
-		cout << "Execute:" << simuExecute.currentInstructionList[0].originalString;
-		cout << "Execute:" << simuExecute.currentInstructionList[1].originalString;
-		cout << "Memory:" << simuMemory.currentInstructionList[0].originalString;
-		cout << "Memory:" << simuMemory.currentInstructionList[1].originalString;
-		cout << "WriteBack:" << simuWriteBack.currentInstructionList[0].originalString;
-		cout << "WriteBack:" << simuWriteBack.currentInstructionList[1].originalString;
-		cout << "-------------------------------------------------";
+		cout << "Fetch:" << simuFetch.currentInstructionList[0].originalString << endl;
+		cout << "Fetch:" << simuFetch.currentInstructionList[1].originalString << endl;
+		cout << "Decode:" << simuDecode.currentInstructionList[0].originalString << endl;
+		cout << "Decode:" << simuDecode.currentInstructionList[1].originalString << endl;
+		cout << "Execute:" << simuExecute.currentInstructionList[0].originalString << endl;
+		cout << "Execute:" << simuExecute.currentInstructionList[1].originalString << endl;
+		cout << "Memory:" << simuMemory.currentInstructionList[0].originalString << endl;
+		cout << "Memory:" << simuMemory.currentInstructionList[1].originalString << endl;
+		cout << "WriteBack:" << simuWriteBack.currentInstructionList[0].originalString << endl;
+		cout << "WriteBack:" << simuWriteBack.currentInstructionList[1].originalString << endl;
+		cout << "-------------------------------------------------" << endl;
 
 		if(simuFetch.currentInstructionList[0].opcodeString == "BGEZ"
 				|| simuFetch.currentInstructionList[0].opcodeString == "BLEZ"
@@ -162,7 +162,7 @@ void Simulator::implement() {
 				hazardList[5] = simuFetch.currentInstructionList[1];
 
 				for (int i = 0; i < 6; i++) {
-					cout << "hazardList[" << i << "]: " << hazardList[i].originalString;
+					cout << "hazardList[" << i << "]: " << hazardList[i].originalString << endl;
 				}
 				break;
 			case 1:
@@ -173,7 +173,7 @@ void Simulator::implement() {
 				hazardList[5] = SimulationInstruction("nop");
 
 				for (int i = 0; i < 6; i++) {
-					cout << "hazardList[" << i << "]: " << hazardList[i].originalString;
+					cout << "hazardList[" << i << "]: " << hazardList[i].originalString << endl;
 				}
 				break;
 			case 2:
@@ -181,7 +181,7 @@ void Simulator::implement() {
 				hazardList[5] = simuFetch.currentInstructionList[1]
 				                                                 ;
 				for (int i = 0; i < 6; i++) {
-					cout << "hazardList[" << i << "]: " << hazardList[i].originalString;
+					cout << "hazardList[" << i << "]: " << hazardList[i].originalString << endl;
 				}
 				break;
 		}
@@ -197,7 +197,7 @@ void Simulator::implement() {
 			lastStall = 1;
 		}
 		cycleCount++;
-		cout << "-------------------------------------------------";
+		cout << "-------------------------------------------------" << endl;
 	}
 	cout << cycleCount;
 }
@@ -235,14 +235,14 @@ void Simulator::stepImplement() {
 		hazardList[5] = tempHazardList[3];
 	}
 
-	cout << "Decode:" << simuDecode.currentInstructionList[0].originalString;
-	cout << "Decode:" << simuDecode.currentInstructionList[1].originalString;
-	cout << "Execute:" << simuExecute.currentInstructionList[0].originalString;
-	cout << "Execute:" << simuExecute.currentInstructionList[1].originalString;
-	cout << "Memory:" << simuMemory.currentInstructionList[0].originalString;
-	cout << "Memory:" << simuMemory.currentInstructionList[1].originalString;
-	cout << "WriteBack:" << simuWriteBack.currentInstructionList[0].originalString;
-	cout << "WriteBack:" << simuWriteBack.currentInstructionList[1].originalString;
+	cout << "Decode:" << simuDecode.currentInstructionList[0].originalString << endl;
+	cout << "Decode:" << simuDecode.currentInstructionList[1].originalString << endl;
+	cout << "Execute:" << simuExecute.currentInstructionList[0].originalString << endl;
+	cout << "Execute:" << simuExecute.currentInstructionList[1].originalString << endl;
+	cout << "Memory:" << simuMemory.currentInstructionList[0].originalString << endl;
+	cout << "Memory:" << simuMemory.currentInstructionList[1].originalString << endl;
+	cout << "WriteBack:" << simuWriteBack.currentInstructionList[0].originalString << endl;
+	cout << "WriteBack:" << simuWriteBack.currentInstructionList[1].originalString << endl;
 
     int increment = simuWriteBack.implement(simuRegFile, simuDecode);
 	simuMemory.implement(simuMainMemory, simuRegFile);
@@ -251,17 +251,17 @@ void Simulator::stepImplement() {
     simuFetch.implement(simulationInstructionList, lastStall, falsePrediction, simuExecute.getSavedPC());
     instrCount += increment;
 
-	cout << "Fetch:" + simuFetch.currentInstructionList[0].originalString;
-	cout << "Fetch:" + simuFetch.currentInstructionList[1].originalString;
-	cout << "Decode:" + simuDecode.currentInstructionList[0].originalString;
-	cout << "Decode:" + simuDecode.currentInstructionList[1].originalString;
-	cout << "Execute:" + simuExecute.currentInstructionList[0].originalString;
-	cout << "Execute:" + simuExecute.currentInstructionList[1].originalString;
-	cout << "Memory:" + simuMemory.currentInstructionList[0].originalString;
-	cout << "Memory:" + simuMemory.currentInstructionList[1].originalString;
-	cout << "WriteBack:" + simuWriteBack.currentInstructionList[0].originalString;
-	cout << "WriteBack:" + simuWriteBack.currentInstructionList[1].originalString;
-	cout << "-------------------------------------------------";
+	cout << "Fetch:" + simuFetch.currentInstructionList[0].originalString << endl;
+	cout << "Fetch:" + simuFetch.currentInstructionList[1].originalString << endl;
+	cout << "Decode:" + simuDecode.currentInstructionList[0].originalString << endl;
+	cout << "Decode:" + simuDecode.currentInstructionList[1].originalString << endl;
+	cout << "Execute:" + simuExecute.currentInstructionList[0].originalString << endl;
+	cout << "Execute:" + simuExecute.currentInstructionList[1].originalString << endl;
+	cout << "Memory:" + simuMemory.currentInstructionList[0].originalString << endl;
+	cout << "Memory:" + simuMemory.currentInstructionList[1].originalString << endl;
+	cout << "WriteBack:" + simuWriteBack.currentInstructionList[0].originalString << endl;
+	cout << "WriteBack:" + simuWriteBack.currentInstructionList[1].originalString << endl;
+	cout << "-------------------------------------------------" << endl;
 
 	if(simuFetch.currentInstructionList[0].opcodeString == "BGEZ"
 			|| simuFetch.currentInstructionList[0].opcodeString == "BLEZ"
@@ -282,7 +282,7 @@ void Simulator::stepImplement() {
 			hazardList[5] = simuFetch.currentInstructionList[1];
 
 			for(int i = 0; i < 6; i++){
-			cout << "hazardList[" << i << "]: " << hazardList[i].originalString;
+			cout << "hazardList[" << i << "]: " << hazardList[i].originalString << endl;
 			}
 			break;
 		case 1:
@@ -293,14 +293,14 @@ void Simulator::stepImplement() {
 			hazardList[5] = SimulationInstruction("nop");
 
 			for(int i = 0; i < 6; i++){
-				cout << "hazardList[" << i << "]: " << hazardList[i].originalString;
+				cout << "hazardList[" << i << "]: " << hazardList[i].originalString << endl;
 			}
 			break;
 		case 2:
 			hazardList[4] = simuFetch.currentInstructionList[0];
 			hazardList[5] = simuFetch.currentInstructionList[1];
 			for(int i = 0; i < 6; i++){
-				cout << "hazardList[" << i << "]: " << hazardList[i].originalString;
+				cout << "hazardList[" << i << "]: " << hazardList[i].originalString << endl;
 			}
 			break;
 		}
@@ -316,7 +316,7 @@ void Simulator::stepImplement() {
 		if(simuDecode.readAfterWriteHazard) {
 			lastStall = 1;
 		}
-		cout << "-------------------------------------------------";
+		cout << "-------------------------------------------------" << endl;
 }
 
 void Simulator::main() {
