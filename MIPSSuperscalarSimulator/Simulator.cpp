@@ -79,7 +79,7 @@ void Simulator::implement() {
 	cycleCount = 0;
 	while (simuMemory.currentInstructionList[0].originalString != "end")
 	{
-		cout << "clockCycle:" << (cycleCount << 1) << endl;
+		cout << "clockCycle:" << cycleCount + 1 << endl;
 		if (lastStall != 2)
 		{
 			simuWriteBack.currentInstructionList[0] = simuMemory.currentInstructionList[0];
@@ -199,7 +199,7 @@ void Simulator::implement() {
 		cycleCount++;
 		cout << "-------------------------------------------------" << endl;
 	}
-	cout << cycleCount;
+	cout << "total cycle count : " << cycleCount << endl;
 }
 
 void Simulator::stepImplement() {
@@ -315,8 +315,9 @@ void Simulator::stepImplement() {
 
 		if(simuDecode.readAfterWriteHazard) {
 			lastStall = 1;
-		}
-		cout << "-------------------------------------------------" << endl;
+	}
+	cout << "-------------------------------------------------" << endl;
+	cout << "total cycle count : " << cycleCount << endl;
 }
 
 void Simulator::main() {
