@@ -17,7 +17,6 @@
 
 class MemoryStage : public Stage {
 public:
-	MemoryStage();
 	void implement(MainMemory mmemo, RegisterFile regfile);
 
 private:

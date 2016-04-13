@@ -23,14 +23,14 @@ public:
 	void setFilePath(string aFilePath);
 	void findLabel();
 	void constructInstrList();
-	vector<Instruction>* getInstrucionList();
+	vector<Instruction> getInstrucionList();
 	vector<Instruction> readInstrList();
 	string trim(string str);
 
 private:
     string filePath;
-    vector<LabelInstruction>* labelInstrList;
-    vector<Instruction>* instrList;
+    vector<LabelInstruction> labelInstrList;
+    vector<Instruction> instrList;
 };
 
 #endif /* SourceReader_hpp */
