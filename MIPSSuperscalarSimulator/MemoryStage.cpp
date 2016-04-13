@@ -12,27 +12,26 @@ using namespace std;
 
 void MemoryStage::implement(MainMemory mmemo, RegisterFile regfile){
 
-	if(currentInstructionList[0].effectiveAddress != 0){
-        cout << "MemoryAddress [ " << currentInstructionList[0].effectiveAddress << "] = " << endl;
+	if (currentInstructionList.front().effectiveAddress != 0) {
+        cout << "MemoryAddress [ " << currentInstructionList.front().effectiveAddress << "] = " << endl;
 	}
-    // currentInstructionList.front();
 
-	if(currentInstructionList[1].effectiveAddress != 0){
+	if (currentInstructionList[1].effectiveAddress != 0) {
         cout << "MemoryAddress [ " << currentInstructionList[1].effectiveAddress << "] = " << endl;
 	}
 
-	if(currentInstructionList[0].opcodeString == "NOP" || currentInstructionList[0].opcodeString == "Empty" || currentInstructionList[0].opcodeString == "nop" || currentInstructionList[0].opcodeString == "nop")
+	if (currentInstructionList.front().opcodeString == "NOP" || currentInstructionList.front().opcodeString == "Empty" || currentInstructionList[0].opcodeString == "nop" || currentInstructionList.front().opcodeString == "nop")
 	return;
 
-	if(currentInstructionList[0].opcodeString == "LW")
-		currentInstructionList[0].rdValue = mmemo.getValue(currentInstructionList[0].effectiveAddress);
+	if (currentInstructionList.front().opcodeString == "LW")
+		currentInstructionList.front().rdValue = mmemo.getValue(currentInstructionList.front().effectiveAddress);
 
-	if(currentInstructionList[1].opcodeString == "LW")
+	if (currentInstructionList[1].opcodeString == "LW")
 		currentInstructionList[1].rdValue = mmemo.getValue(currentInstructionList[1].effectiveAddress);
 
-	if(currentInstructionList[0].opcodeString == "SW")
-		mmemo.putValue(regfile.getValue(currentInstructionList[0].rt), currentInstructionList[0].effectiveAddress);
+	if (currentInstructionList.front().opcodeString == "SW")
+		mmemo.putValue(regfile.getValue(currentInstructionList.front().rt), currentInstructionList.front().effectiveAddress);
 
-	if(currentInstructionList[1].opcodeString == "SW")
+	if (currentInstructionList[1].opcodeString == "SW")
 		mmemo.putValue(regfile.getValue(currentInstructionList[1].rt), currentInstructionList[1].effectiveAddress);
 }
