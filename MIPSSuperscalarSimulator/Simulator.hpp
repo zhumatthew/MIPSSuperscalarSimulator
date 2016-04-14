@@ -41,8 +41,7 @@ public:
     SimulationInstruction tempInstr;
     vector<SimulationInstruction> tempInstrList;
     bool falsePrediction;
-    vector<SimulationInstruction> hazardList;
-    vector<SimulationInstruction> tempHazardList;
+    vector<SimulationInstruction> hazardList, tempHazardList;
     int instrCount;
 
     void implement();

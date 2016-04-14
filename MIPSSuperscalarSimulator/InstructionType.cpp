@@ -11,10 +11,10 @@
 
 using namespace std;
 
-// R-type instructions (register?)
-// I-type instructions (immediate?)
+// R-type instructions (register)
+// I-type instructions (immediate)
 // Load/store word instructions/branch comparison     LW r21, 0(r30)       BEQ r1, r0, done
-// Branch instructions with only immediate     J begina
+// J-type Instruction   Branch instructions with only immediate     J begina
 // branch instructions with rs/immediate      BGEZ r30, endloopb      BGEZ r18, r0, Loop
 // label instruction        done ADDI r5, r0, 6
 

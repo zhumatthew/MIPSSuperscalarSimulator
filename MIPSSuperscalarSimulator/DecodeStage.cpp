@@ -10,13 +10,15 @@
 
 DecodeStage::DecodeStage() : readAfterWriteHazard(false) {}
 
-void DecodeStage::implement(MainMemory mmem, RegisterFile regm, vector<SimulationInstruction> hazardList, int lastStall) {
+void DecodeStage::implement(const MainMemory& mmem, const RegisterFile& regm, const vector<SimulationInstruction>& hazardList, int lastStall) {
 	
-    if (readAfterWriteHazard || (currentInstructionList[0].opcodeString == "NOP")) {
+    if (readAfterWriteHazard || (currentInstructionList.front().opcodeString == "NOP")) {
 		return;
 	}
 
 	check(hazardList, lastStall);
+    
+    // Retrieve rs and rt values for the two instructions from the register file
 	currentInstructionList[0].rsValue = regm.getValue(currentInstructionList[0].rs);
 	currentInstructionList[0].rtValue = regm.getValue(currentInstructionList[0].rt);
 	currentInstructionList[1].rsValue = regm.getValue(currentInstructionList[1].rs);
@@ -29,7 +31,7 @@ void DecodeStage::implement(MainMemory mmem, RegisterFile regm, vector<Simulatio
 
 
 // read after write hazards and forwarding possibilities
-void DecodeStage::check(vector<SimulationInstruction> hazardList, int lastStall) {
+void DecodeStage::check(const vector<SimulationInstruction>& hazardList, int lastStall) {
 	if (lastStall == 2) {
         
         // Judge 1 is based on hazardList index of 0
@@ -80,7 +82,7 @@ void DecodeStage::check(vector<SimulationInstruction> hazardList, int lastStall)
 		}
 
 		if (currentInstructionList[0].rt == hazardList[2].rd) {
-			if(currentInstructionList[0].loopCount > hazardList[2].loopCount) {
+			if (currentInstructionList[0].loopCount > hazardList[2].loopCount) {
 				currentInstructionList[0].currentForward.rtForward = true;
 				currentInstructionList[0].currentForward.rtForwardDepth = 0;
 			} else {
@@ -89,7 +91,7 @@ void DecodeStage::check(vector<SimulationInstruction> hazardList, int lastStall)
 		}
 
 		if (currentInstructionList[0].rs == hazardList[3].rd) {
-			if(currentInstructionList[0].loopCount > hazardList[3].loopCount) {
+			if (currentInstructionList[0].loopCount > hazardList[3].loopCount) {
 				currentInstructionList[0].currentForward.rsForward = true;
 				currentInstructionList[0].currentForward.rsForwardDepth = 1;
 			} else {
@@ -108,7 +110,7 @@ void DecodeStage::check(vector<SimulationInstruction> hazardList, int lastStall)
 
 		if (currentInstructionList[0].currentForward.rsForward || currentInstructionList[0].currentForward.rtForward) {
 
-			if(currentInstructionList[0].currentForward.rsForward) {
+			if (currentInstructionList[0].currentForward.rsForward) {
 				int index = currentInstructionList[0].currentForward.rsForwardDepth + 2;
 				if (hazardList[index].opcodeString == "LW") {
 					if (currentInstructionList[0].opcodeString == "SW") {
@@ -123,7 +125,7 @@ void DecodeStage::check(vector<SimulationInstruction> hazardList, int lastStall)
 				}
 			}
 
-			if(currentInstructionList[0].currentForward.rtForward) {
+			if (currentInstructionList[0].currentForward.rtForward) {
 				int index = currentInstructionList[0].currentForward.rtForwardDepth + 2;
 				if (hazardList[index].opcodeString == "LW") {
 					if (currentInstructionList[0].opcodeString == "SW") {
@@ -139,8 +141,9 @@ void DecodeStage::check(vector<SimulationInstruction> hazardList, int lastStall)
 			}
 		}
 
+        // If last stall is not 2
 		if (currentInstructionList[0].rs == hazardList[0].rd) {
-			if(currentInstructionList[0].loopCount > hazardList[0].loopCount) {
+			if (currentInstructionList[0].loopCount > hazardList[0].loopCount) {
 				currentInstructionList[0].currentForward.rsDelayedForward = true;
 				currentInstructionList[0].currentForward.rsDelayForwardDepth = 0;
 			} else {
@@ -149,7 +152,7 @@ void DecodeStage::check(vector<SimulationInstruction> hazardList, int lastStall)
 		}
 
 		if (currentInstructionList[0].rt == hazardList[0].rd) {
-			if(currentInstructionList[0].loopCount > hazardList[0].loopCount) {
+			if (currentInstructionList[0].loopCount > hazardList[0].loopCount) {
 				currentInstructionList[0].currentForward.rtDelayedForward = true;
 				currentInstructionList[0].currentForward.rtDelayForwardDepth = 0;
 			} else {
@@ -167,7 +170,7 @@ void DecodeStage::check(vector<SimulationInstruction> hazardList, int lastStall)
 		}
 
 		if (currentInstructionList[0].rt == hazardList[1].rd) {
-			if(currentInstructionList[0].loopCount > hazardList[1].loopCount) {
+			if (currentInstructionList[0].loopCount > hazardList[1].loopCount) {
 				currentInstructionList[0].currentForward.rtDelayedForward = true;
 				currentInstructionList[0].currentForward.rtDelayForwardDepth = 1;
 			} else {
@@ -284,7 +287,7 @@ void DecodeStage::check(vector<SimulationInstruction> hazardList, int lastStall)
 		}
 
 		if (currentInstructionList[1].rs == hazardList[0].rd) {
-			if(currentInstructionList[1].loopCount > hazardList[0].loopCount) {
+			if (currentInstructionList[1].loopCount > hazardList[0].loopCount) {
 				currentInstructionList[1].currentForward.rsDelayedForward = true;
 				currentInstructionList[1].currentForward.rsDelayForwardDepth = 0;
 			} else {
@@ -293,7 +296,7 @@ void DecodeStage::check(vector<SimulationInstruction> hazardList, int lastStall)
 		}
 
 		if (currentInstructionList[1].rt == hazardList[0].rd) {
-			if(currentInstructionList[1].loopCount > hazardList[0].loopCount) {
+			if (currentInstructionList[1].loopCount > hazardList[0].loopCount) {
 				currentInstructionList[1].currentForward.rtDelayedForward = true;
 				currentInstructionList[1].currentForward.rtDelayForwardDepth = 0;
 			} else {
@@ -302,7 +305,7 @@ void DecodeStage::check(vector<SimulationInstruction> hazardList, int lastStall)
 		}
 
 		if (currentInstructionList[1].rs == hazardList[1].rd) {
-			if(currentInstructionList[1].loopCount > hazardList[1].loopCount) {
+			if (currentInstructionList[1].loopCount > hazardList[1].loopCount) {
 				currentInstructionList[1].currentForward.rsDelayedForward = true;
 				currentInstructionList[1].currentForward.rsDelayForwardDepth = 1;
 			} else {
@@ -311,7 +314,7 @@ void DecodeStage::check(vector<SimulationInstruction> hazardList, int lastStall)
 		}
 
 		if (currentInstructionList[1].rt == hazardList[1].rd) {
-			if(currentInstructionList[1].loopCount > hazardList[1].loopCount) {
+			if (currentInstructionList[1].loopCount > hazardList[1].loopCount) {
 				currentInstructionList[1].currentForward.rtDelayedForward = true;
 				currentInstructionList[1].currentForward.rtDelayForwardDepth = 1;
 			} else {

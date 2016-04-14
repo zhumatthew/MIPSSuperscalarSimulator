@@ -10,7 +10,8 @@
 
 using namespace std;
 
-void MemoryStage::implement(MainMemory mmemo, RegisterFile regfile){
+// In the memory stage, load word and store word operations are performed
+void MemoryStage::implement(MainMemory mmemo, RegisterFile regfile) {
 
 	if (currentInstructionList.front().effectiveAddress != 0) {
         cout << "MemoryAddress [ " << currentInstructionList.front().effectiveAddress << "] = " << endl;
@@ -20,7 +21,8 @@ void MemoryStage::implement(MainMemory mmemo, RegisterFile regfile){
         cout << "MemoryAddress [ " << currentInstructionList[1].effectiveAddress << "] = " << endl;
 	}
 
-	if (currentInstructionList.front().opcodeString == "NOP" || currentInstructionList.front().opcodeString == "Empty" || currentInstructionList[0].opcodeString == "nop" || currentInstructionList.front().opcodeString == "nop") // in case there is RAW hazard detected last cycle
+	if (currentInstructionList.front().opcodeString == "NOP" || currentInstructionList.front().opcodeString == "Empty" ||
+        currentInstructionList.front().opcodeString == "nop") // in case there is RAW hazard detected last cycle
 	return;
 
     // Mem[effectiveAddress] is placed in LMD (load memory data)

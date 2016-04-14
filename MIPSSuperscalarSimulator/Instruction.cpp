@@ -30,6 +30,8 @@ Instruction::Instruction(vector<string> results, int type, vector<LabelInstructi
 	handleInstruction(results);
 }
 
+
+// name this function parse instruction??
 void Instruction::handleInstruction(vector<string> results) {
     // this needs to be a vector for input, not an array of strings or something
 	InstructionParser parser = InstructionParser(results, labelInstructionList);

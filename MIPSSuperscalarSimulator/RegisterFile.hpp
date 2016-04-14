@@ -18,7 +18,7 @@ class RegisterFile {
 public:
     RegisterFile();
     bool putValue(int value, int address);
-    int getValue(int address);
+    int getValue(int address) const;
     
 private:
     vector<int> registerData; // holds values in the register file

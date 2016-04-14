@@ -88,6 +88,8 @@ void Simulator::implement() {
 			simuDecode.currentInstructionList[0] = simuFetch.currentInstructionList[0];
 			simuDecode.currentInstructionList[1] = simuFetch.currentInstructionList[1];
 		}
+        
+        // At the second cycle since the RAW hazard was detected (lastStall==2), a NOP needs to be inserted into the MEM stage, but this can lead to the unsuccessful forwarding with an origin stage of MEM since the information in MEM is discarded before it is forwarded to the execution stage of the same cycle
 
 		if (lastStall == 2)
 		{
@@ -272,31 +274,31 @@ void Simulator::stepImplement() {
 
 	switch (lastStall) {
 		case 0:
-			for(int i = 0; i < 4; i++){
+			for (int i = 0; i < 4; i++) {
 				hazardList[i] = hazardList[i+2];
 			}
 			hazardList[4] = simuFetch.currentInstructionList[0];
 			hazardList[5] = simuFetch.currentInstructionList[1];
 
-			for(int i = 0; i < 6; i++){
+			for (int i = 0; i < 6; i++) {
 			cout << "hazardList[" << i << "]: " << hazardList[i].originalString << endl;
 			}
 			break;
 		case 1:
-			for(int i = 0; i < 4; i++){
+			for (int i = 0; i < 4; i++) {
 				hazardList[i] = hazardList[i+2];
 			}
 			hazardList[4] = SimulationInstruction("nop");
 			hazardList[5] = SimulationInstruction("nop");
 
-			for(int i = 0; i < 6; i++){
+			for (int i = 0; i < 6; i++) {
 				cout << "hazardList[" << i << "]: " << hazardList[i].originalString << endl;
 			}
 			break;
 		case 2:
 			hazardList[4] = simuFetch.currentInstructionList[0];
 			hazardList[5] = simuFetch.currentInstructionList[1];
-			for(int i = 0; i < 6; i++){
+			for (int i = 0; i < 6; i++) {
 				cout << "hazardList[" << i << "]: " << hazardList[i].originalString << endl;
 			}
 			break;

@@ -24,10 +24,8 @@ public:
     // SimulationInstruction instructionSaved;
     bool readAfterWriteHazard;
 
-    void implement(MainMemory mmem, RegisterFile regm, vector<SimulationInstruction> hazardList, int lastStall);
-    void check(vector<SimulationInstruction> hazardList, int lastStall);
-
-private:
+    void implement(const MainMemory& mmem, const RegisterFile& regm, const vector<SimulationInstruction>& hazardList, int lastStall);
+    void check(const vector<SimulationInstruction>& hazardList, int lastStall);
 
 };
 
