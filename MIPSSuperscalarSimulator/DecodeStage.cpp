@@ -29,297 +29,157 @@ void DecodeStage::implement(const MainMemory& mmem, const RegisterFile& regm, co
 
 // Forwarding occurs between the rdValue of an instruction in the MEM stage and an instruction with rsForward(rtForwarding) set at the beginning of the EX stage
 
-
 // read after write hazards and forwarding possibilities
 void DecodeStage::check(const vector<SimulationInstruction>& hazardList, int lastStall) {
-	if (lastStall == 2) {
+    
+    for (int i = 0; i <= 1; i++) {
         
-        // Judge 1 is based on hazardList index of 0
-		if (currentInstructionList[0].rs == hazardList[0].rd) {
-			if (currentInstructionList[0].loopCount > hazardList[0].loopCount) {
-				currentInstructionList[0].currentForward.rsForward = true;
-				currentInstructionList[0].currentForward.rsForwardDepth = 0;
-			} else {
-				currentInstructionList[0].currentForward.rsForward = false;
-			}
-		}
-
-		if (currentInstructionList[0].rt == hazardList[0].rd) {
-			if(currentInstructionList[0].loopCount > hazardList[0].loopCount) {
-				currentInstructionList[0].currentForward.rtForward = true;
-				currentInstructionList[0].currentForward.rtForwardDepth = 0;
-			} else {
-				currentInstructionList[0].currentForward.rtForward = false;
-			}
-		}
-        
-        // Judge 2 is based on hazard list index of 2
-		if (currentInstructionList[0].rs == hazardList[1].rd) {
-			if(currentInstructionList[0].loopCount > hazardList[1].loopCount) {
-				currentInstructionList[0].currentForward.rsForward = true;
-				currentInstructionList[0].currentForward.rsForwardDepth = 1;
-			} else {
-				currentInstructionList[0].currentForward.rsForward = false;
-			}
-		}
-
-		if(currentInstructionList[0].rt == hazardList[1].rd) {
-			if(currentInstructionList[0].loopCount > hazardList[1].loopCount) {
-				currentInstructionList[0].currentForward.rtForward = true;
-				currentInstructionList[0].currentForward.rtForwardDepth = 1;
-			} else {
-				currentInstructionList[0].currentForward.rtForward = false;
-			}
-		}
-	} else {
-		if (currentInstructionList[0].rs == hazardList[2].rd) {
-			if(currentInstructionList[0].loopCount > hazardList[2].loopCount) {
-				currentInstructionList[0].currentForward.rsForward = true;
-				currentInstructionList[0].currentForward.rsForwardDepth = 0;
-			} else {
-				currentInstructionList[0].currentForward.rsForward = false;
-			}
-		}
-
-		if (currentInstructionList[0].rt == hazardList[2].rd) {
-			if (currentInstructionList[0].loopCount > hazardList[2].loopCount) {
-				currentInstructionList[0].currentForward.rtForward = true;
-				currentInstructionList[0].currentForward.rtForwardDepth = 0;
-			} else {
-				currentInstructionList[0].currentForward.rtForward = false;
-			}
-		}
-
-		if (currentInstructionList[0].rs == hazardList[3].rd) {
-			if (currentInstructionList[0].loopCount > hazardList[3].loopCount) {
-				currentInstructionList[0].currentForward.rsForward = true;
-				currentInstructionList[0].currentForward.rsForwardDepth = 1;
-			} else {
-				currentInstructionList[0].currentForward.rsForward = false;
-			}
-		}
-
-		if (currentInstructionList[0].rt == hazardList[3].rd) {
-			if(currentInstructionList[0].loopCount > hazardList[3].loopCount) {
-				currentInstructionList[0].currentForward.rtForward = true;
-				currentInstructionList[0].currentForward.rtForwardDepth = 1;
-			} else {
-				currentInstructionList[0].currentForward.rtForward = false;
-			}
-		}
-
-		if (currentInstructionList[0].currentForward.rsForward || currentInstructionList[0].currentForward.rtForward) {
-
-			if (currentInstructionList[0].currentForward.rsForward) {
-				int index = currentInstructionList[0].currentForward.rsForwardDepth + 2;
-				if (hazardList[index].opcodeString == "LW") {
-					if (currentInstructionList[0].opcodeString == "SW") {
-						if (currentInstructionList[0].currentForward.rsForward == true) {
-							readAfterWriteHazard = true;
-						} else {
-							readAfterWriteHazard = false;
-						}
-					} else {
-						readAfterWriteHazard = true;
-					}
-				}
-			}
-
-			if (currentInstructionList[0].currentForward.rtForward) {
-				int index = currentInstructionList[0].currentForward.rtForwardDepth + 2;
-				if (hazardList[index].opcodeString == "LW") {
-					if (currentInstructionList[0].opcodeString == "SW") {
-						if (currentInstructionList[0].currentForward.rsForward == true) {
-							readAfterWriteHazard = true;
-						} else {
-							readAfterWriteHazard = false;
-						}
-					} else {
-						readAfterWriteHazard = true;
-					}
-				}
-			}
-		}
-
-        // If last stall is not 2
-		if (currentInstructionList[0].rs == hazardList[0].rd) {
-			if (currentInstructionList[0].loopCount > hazardList[0].loopCount) {
-				currentInstructionList[0].currentForward.rsDelayedForward = true;
-				currentInstructionList[0].currentForward.rsDelayForwardDepth = 0;
-			} else {
-				currentInstructionList[0].currentForward.rsDelayedForward = false;
-			}
-		}
-
-		if (currentInstructionList[0].rt == hazardList[0].rd) {
-			if (currentInstructionList[0].loopCount > hazardList[0].loopCount) {
-				currentInstructionList[0].currentForward.rtDelayedForward = true;
-				currentInstructionList[0].currentForward.rtDelayForwardDepth = 0;
-			} else {
-				currentInstructionList[0].currentForward.rtDelayedForward = false;
-			}
-		}
-
-		if (currentInstructionList[0].rs == hazardList[1].rd) {
-			if(currentInstructionList[0].loopCount > hazardList[1].loopCount) {
-				currentInstructionList[0].currentForward.rsDelayedForward = true;
-				currentInstructionList[0].currentForward.rsDelayForwardDepth = 1;
-			} else {
-				currentInstructionList[0].currentForward.rsDelayedForward = false;
-			}
-		}
-
-		if (currentInstructionList[0].rt == hazardList[1].rd) {
-			if (currentInstructionList[0].loopCount > hazardList[1].loopCount) {
-				currentInstructionList[0].currentForward.rtDelayedForward = true;
-				currentInstructionList[0].currentForward.rtDelayForwardDepth = 1;
-			} else {
-				currentInstructionList[0].currentForward.rtDelayedForward = false;
-			}
-		}
-	}
-
-	if (lastStall == 2) {
-
-		if (currentInstructionList[1].rs == hazardList[0].rd) {
-			if(currentInstructionList[1].loopCount > hazardList[0].loopCount) {
-				currentInstructionList[1].currentForward.rsForward = true;
-				currentInstructionList[1].currentForward.rsForwardDepth = 0;
-			} else {
-				currentInstructionList[1].currentForward.rsForward = false;
-			}
-		}
-
-		if (currentInstructionList[1].rt == hazardList[0].rd) {
-			if(currentInstructionList[1].loopCount > hazardList[0].loopCount) {
-				currentInstructionList[1].currentForward.rtForward = true;
-				currentInstructionList[1].currentForward.rtForwardDepth = 0;
-			} else {
-				currentInstructionList[1].currentForward.rtForward = false;
-			}
-		}
-
-		if (currentInstructionList[1].rs == hazardList[1].rd) {
-			if(currentInstructionList[1].loopCount > hazardList[1].loopCount) {
-				currentInstructionList[1].currentForward.rsForward = true;
-				currentInstructionList[1].currentForward.rsForwardDepth = 1;
-			} else {
-				currentInstructionList[1].currentForward.rsForward = false;
-			}
-		}
-
-		if(currentInstructionList[1].rt == hazardList[1].rd) {
-			if(currentInstructionList[1].loopCount > hazardList[1].loopCount) {
-				currentInstructionList[1].currentForward.rtForward = true;
-				currentInstructionList[1].currentForward.rtForwardDepth = 1;
-			} else {
-				currentInstructionList[1].currentForward.rtForward = false;
-			}
-		}
-
-	} else {
-		if (currentInstructionList[1].rs == hazardList[2].rd) {
-			if(currentInstructionList[1].loopCount > hazardList[2].loopCount) {
-				currentInstructionList[1].currentForward.rsForward = true;
-				currentInstructionList[1].currentForward.rsForwardDepth = 0;
-			} else {
-				currentInstructionList[1].currentForward.rsForward = false;
-			}
-		}
-
-		if (currentInstructionList[1].rt == hazardList[2].rd) {
-			if(currentInstructionList[1].loopCount > hazardList[2].loopCount) {
-				currentInstructionList[1].currentForward.rtForward = true;
-				currentInstructionList[1].currentForward.rtForwardDepth = 0;
-			} else {
-				currentInstructionList[1].currentForward.rtForward = false;
-			}
-		}
-
-		if (currentInstructionList[1].rs == hazardList[3].rd) {
-			if(currentInstructionList[1].loopCount > hazardList[3].loopCount){
-				currentInstructionList[1].currentForward.rsForward = true;
-				currentInstructionList[1].currentForward.rsForwardDepth = 1;
-			} else {
-				currentInstructionList[1].currentForward.rsForward = false;
-			}
-		}
-
-		if (currentInstructionList[1].rt == hazardList[3].rd) {
-			if(currentInstructionList[1].loopCount > hazardList[3].loopCount) {
-				currentInstructionList[1].currentForward.rtForward = true;
-				currentInstructionList[1].currentForward.rtForwardDepth = 1;
-			} else {
-				currentInstructionList[1].currentForward.rtForward = false;
-			}
-		}
-
-		if (currentInstructionList[1].currentForward.rsForward || currentInstructionList[1].currentForward.rtForward) {
-			if(currentInstructionList[1].currentForward.rsForward) {
-				int index = currentInstructionList[1].currentForward.rsForwardDepth + 2;
-				if (hazardList[index].opcodeString == "LW") {
-					if (currentInstructionList[1].opcodeString == "SW") {
-						if (currentInstructionList[1].currentForward.rsForward == true) {
-							readAfterWriteHazard = true;
-						} else {
-							readAfterWriteHazard = false;
-						}
-					} else {
-						readAfterWriteHazard = true;
-					}
-				}
-			}
-
-			if(currentInstructionList[1].currentForward.rtForward) {
-				int index = currentInstructionList[1].currentForward.rtForwardDepth + 2;
-				if (hazardList[index].opcodeString == "LW") {
-					if (currentInstructionList[1].opcodeString == "SW") {
-						if (currentInstructionList[1].currentForward.rsForward == true) {
-							readAfterWriteHazard = true;
-						} else {
-							readAfterWriteHazard = false;
-						}
-					} else {
-						readAfterWriteHazard = true;
-					}
-				}
-			}
-		}
-
-		if (currentInstructionList[1].rs == hazardList[0].rd) {
-			if (currentInstructionList[1].loopCount > hazardList[0].loopCount) {
-				currentInstructionList[1].currentForward.rsDelayedForward = true;
-				currentInstructionList[1].currentForward.rsDelayForwardDepth = 0;
-			} else {
-				currentInstructionList[1].currentForward.rsDelayedForward = false;
-			}
-		}
-
-		if (currentInstructionList[1].rt == hazardList[0].rd) {
-			if (currentInstructionList[1].loopCount > hazardList[0].loopCount) {
-				currentInstructionList[1].currentForward.rtDelayedForward = true;
-				currentInstructionList[1].currentForward.rtDelayForwardDepth = 0;
-			} else {
-				currentInstructionList[1].currentForward.rtDelayedForward = false;
-			}
-		}
-
-		if (currentInstructionList[1].rs == hazardList[1].rd) {
-			if (currentInstructionList[1].loopCount > hazardList[1].loopCount) {
-				currentInstructionList[1].currentForward.rsDelayedForward = true;
-				currentInstructionList[1].currentForward.rsDelayForwardDepth = 1;
-			} else {
-				currentInstructionList[1].currentForward.rsDelayedForward = false;
-			}
-		}
-
-		if (currentInstructionList[1].rt == hazardList[1].rd) {
-			if (currentInstructionList[1].loopCount > hazardList[1].loopCount) {
-				currentInstructionList[1].currentForward.rtDelayedForward = true;
-				currentInstructionList[1].currentForward.rtDelayForwardDepth = 1;
-			} else {
-				currentInstructionList[1].currentForward.rtDelayedForward = false;
-			}
-		}
-	}
+        SimulationInstruction instruction = currentInstructionList[i];
+        if (lastStall == 2) {
+            
+            // Judge 1 is based on hazardList index of 0
+            if (instruction.rs == hazardList[0].rd) {
+                if (instruction.loopCount > hazardList[0].loopCount) {
+                    instruction.currentForward.rsForward = true;
+                    instruction.currentForward.rsForwardDepth = 0;
+                } else {
+                    instruction.currentForward.rsForward = false;
+                }
+            }
+            
+            if (instruction.rt == hazardList[0].rd) {
+                if(instruction.loopCount > hazardList[0].loopCount) {
+                    instruction.currentForward.rtForward = true;
+                    instruction.currentForward.rtForwardDepth = 0;
+                } else {
+                    instruction.currentForward.rtForward = false;
+                }
+            }
+            
+            // Judge 2 is based on hazard list index of 2
+            if (instruction.rs == hazardList[1].rd) {
+                if(instruction.loopCount > hazardList[1].loopCount) {
+                    instruction.currentForward.rsForward = true;
+                    instruction.currentForward.rsForwardDepth = 1;
+                } else {
+                    instruction.currentForward.rsForward = false;
+                }
+            }
+            
+            if(instruction.rt == hazardList[1].rd) {
+                if(instruction.loopCount > hazardList[1].loopCount) {
+                    instruction.currentForward.rtForward = true;
+                    instruction.currentForward.rtForwardDepth = 1;
+                } else {
+                    instruction.currentForward.rtForward = false;
+                }
+            }
+        } else {
+            if (instruction.rs == hazardList[2].rd) {
+                if(instruction.loopCount > hazardList[2].loopCount) {
+                    instruction.currentForward.rsForward = true;
+                    instruction.currentForward.rsForwardDepth = 0;
+                } else {
+                    instruction.currentForward.rsForward = false;
+                }
+            }
+            
+            if (instruction.rt == hazardList[2].rd) {
+                if (instruction.loopCount > hazardList[2].loopCount) {
+                    instruction.currentForward.rtForward = true;
+                    instruction.currentForward.rtForwardDepth = 0;
+                } else {
+                    instruction.currentForward.rtForward = false;
+                }
+            }
+            
+            if (instruction.rs == hazardList[3].rd) {
+                if (instruction.loopCount > hazardList[3].loopCount) {
+                    instruction.currentForward.rsForward = true;
+                    instruction.currentForward.rsForwardDepth = 1;
+                } else {
+                    instruction.currentForward.rsForward = false;
+                }
+            }
+            
+            if (instruction.rt == hazardList[3].rd) {
+                if(instruction.loopCount > hazardList[3].loopCount) {
+                    instruction.currentForward.rtForward = true;
+                    instruction.currentForward.rtForwardDepth = 1;
+                } else {
+                    instruction.currentForward.rtForward = false;
+                }
+            }
+            
+            if (instruction.currentForward.rsForward || instruction.currentForward.rtForward) {
+                
+                if (instruction.currentForward.rsForward) {
+                    int index = instruction.currentForward.rsForwardDepth + 2;
+                    if (hazardList[index].opcodeString == "LW") {
+                        if (instruction.opcodeString == "SW") {
+                            if (instruction.currentForward.rsForward == true) {
+                                readAfterWriteHazard = true;
+                            } else {
+                                readAfterWriteHazard = false;
+                            }
+                        } else {
+                            readAfterWriteHazard = true;
+                        }
+                    }
+                }
+                
+                if (instruction.currentForward.rtForward) {
+                    int index = instruction.currentForward.rtForwardDepth + 2;
+                    if (hazardList[index].opcodeString == "LW") {
+                        if (instruction.opcodeString == "SW") {
+                            if (instruction.currentForward.rsForward == true) {
+                                readAfterWriteHazard = true;
+                            } else {
+                                readAfterWriteHazard = false;
+                            }
+                        } else {
+                            readAfterWriteHazard = true;
+                        }
+                    }
+                }
+            }
+            
+            // Delayed forwards, last stall != 2
+            if (instruction.rs == hazardList[0].rd) {
+                if (instruction.loopCount > hazardList[0].loopCount) {
+                    instruction.currentForward.rsDelayedForward = true;
+                    instruction.currentForward.rsDelayForwardDepth = 0;
+                } else {
+                    instruction.currentForward.rsDelayedForward = false;
+                }
+            }
+            
+            if (instruction.rt == hazardList[0].rd) {
+                if (instruction.loopCount > hazardList[0].loopCount) {
+                    instruction.currentForward.rtDelayedForward = true;
+                    instruction.currentForward.rtDelayForwardDepth = 0;
+                } else {
+                    instruction.currentForward.rtDelayedForward = false;
+                }
+            }
+            
+            if (instruction.rs == hazardList[1].rd) {
+                if (instruction.loopCount > hazardList[1].loopCount) {
+                    instruction.currentForward.rsDelayedForward = true;
+                    instruction.currentForward.rsDelayForwardDepth = 1;
+                } else {
+                    instruction.currentForward.rsDelayedForward = false;
+                }
+            }
+            
+            if (instruction.rt == hazardList[1].rd) {
+                if (instruction.loopCount > hazardList[1].loopCount) {
+                    instruction.currentForward.rtDelayedForward = true;
+                    instruction.currentForward.rtDelayForwardDepth = 1;
+                } else {
+                    instruction.currentForward.rtDelayedForward = false;
+                }
+            }
+        }
+    }
 }
