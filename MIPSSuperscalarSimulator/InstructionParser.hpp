@@ -13,6 +13,7 @@
 #include <string>
 #include <vector>
 #include "LabelInstruction.hpp"
+#include "InstructionType.hpp"
 
 using namespace std;
 
@@ -23,13 +24,13 @@ public:
 	InstructionParser(vector<string> results, vector<LabelInstruction> aLabelInstructionList);
 	void doSplitLine();
 	vector<string> getSplitLine();
-	int parseOpcode(int instrType);
-	int parseRs(int instrType);
-	int parseRt(int instrType);
-	int parseRd(int instrType);
-	int parseLowSixDigit(int instrType);
-	int parseMiddleFiveDigit(int instrType);
-	int parseImmediateNumber(int instrType);
+	int parseOpcode(InstrType instrType);
+	int parseRs(InstrType instrType);
+	int parseRt(InstrType instrType);
+	int parseRd(InstrType instrType);
+	int parseLowSixDigit(InstrType instrType);
+	int parseMiddleFiveDigit(InstrType instrType);
+	int parseImmediateNumber(InstrType instrType);
 
 private:
     string line;

@@ -22,25 +22,25 @@ using namespace std;
 // SLLI is shift left logical immediate
 // SRLI is shift right logical immediate
 
-int InstructionType::instrTypeDefine(string strOpcode) {
+InstrType InstructionType::instrTypeDefine(string strOpcode) {
     if(strOpcode == "ADD" || strOpcode == "SUB" || strOpcode == "MUL"|| strOpcode == "DIV" || strOpcode == "AND")
-        return instrType = 0;
+        return instrType = RType;
     else if(strOpcode == "ADDI" || strOpcode == "ANDI" || strOpcode == "ORI" || strOpcode == "XORI" || strOpcode == "SUBI" || strOpcode == "SLLI"|| strOpcode == "SRLI")
-        return instrType = 1;
+        return instrType = IType;
     else if(strOpcode == "LW" || strOpcode == "SW"||strOpcode == "BEQ" || strOpcode == "BEQL")
-        return instrType = 2;
+        return instrType = MBType;
     else if(strOpcode == "J" || strOpcode == "JAL"|| strOpcode == "B")
-        return instrType = 3;
+        return instrType = JType;
     else if(strOpcode == "BGEZ"|| strOpcode == "BLEZ")
-        return instrType = 4;
+        return instrType = BRIType;
     else
         cout << "It is a label for branch instruction" << endl;
-    return instrType = 5;
+    return instrType = Label;
 }
 
 bool InstructionType::isLabel(string strOpcode) {
 	instrTypeDefine(strOpcode);
-	if (instrType == 5)
+	if (instrType == Label)
 		return true;
 	else
 		return false;
@@ -50,10 +50,10 @@ bool InstructionType::isLabel(string strOpcode) {
 // all but case 0 involve immediates
 // case 5 involves labels
 
-int InstructionType::operationCodeDefine(string str, int instrType) {
+int InstructionType::operationCodeDefine(string str, InstrType instrType) {
     int optcode = 0;
-    switch(instrType){
-        case 0:
+    switch (instrType) {
+        case RType:
             if (str == "ADD") {
                 optcode = 0;
             } else if (str == "MUL") {
@@ -64,12 +64,12 @@ int InstructionType::operationCodeDefine(string str, int instrType) {
                 optcode = 0;
             }
             break;
-        case 1:
-            if(str == "ADDI"){
+        case IType:
+            if (str == "ADDI") {
                 optcode = 8;
             }
             break;
-        case 2:
+        case MBType:
             if (str == "LW") {
                 optcode = 35;
             } else if (str == "SW") {
@@ -80,12 +80,12 @@ int InstructionType::operationCodeDefine(string str, int instrType) {
                 optcode = 20;
             }
             break;
-        case 3:
+        case JType:
             if (str == "J") {
                 optcode = 2;
             }
             break;
-        case 4:
+        case BRIType:
             if (str == "BGEZ") {
                 optcode = 1;
             } else if (str == "BLEZ") {
@@ -98,11 +98,11 @@ int InstructionType::operationCodeDefine(string str, int instrType) {
     return optcode;
 }
 
-int InstructionType::lowSixDigitDefine(string str,int instrType) {
+int InstructionType::lowSixDigitDefine(string str, InstrType instrType) {
 	int low = 0;
 
 	switch (instrType) {
-		case 0:
+		case RType:
 			if (str == "ADD") {
 				low = 32;
 			} else if (str == "MUL") {
@@ -113,9 +113,9 @@ int InstructionType::lowSixDigitDefine(string str,int instrType) {
 				low = 26;
 			}
 			break;
-		case 1:
-		case 2:
-		case 3:
+		case IType:
+		case MBType:
+		case JType:
 			break;
 		default:
 			low = 0;
@@ -123,11 +123,11 @@ int InstructionType::lowSixDigitDefine(string str,int instrType) {
 	return low;
 }
 
-int InstructionType::middleFiveDigitDefine(string str, int instrType) {
+int InstructionType::middleFiveDigitDefine(string str, InstrType instrType) {
 	int middle = 0;
 
 	switch (instrType) {
-		case 0:
+		case RType:
 			if (str == "ADD") {
 				middle = 0;
 			} else if(str == "MUL") {
@@ -138,11 +138,11 @@ int InstructionType::middleFiveDigitDefine(string str, int instrType) {
 				middle = 0;
 			}
 			break;
-		case 1:
-		case 2:
-		case 3:
+		case IType:
+		case MBType:
+		case JType:
 			break;
-		case 4:
+		case BRIType:
 			if (str == "BGEZ") {
 				middle = 1;
 			} else if (str == "BLEZ") {

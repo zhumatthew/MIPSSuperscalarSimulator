@@ -13,15 +13,17 @@
 #include <string>
 #include <vector>
 #include "LabelInstruction.hpp"
+#include "InstructionType.hpp"
 
 using namespace std;
 
 class Instruction {
     
 public:
-    Instruction(vector<string> results, int instructionType, vector<LabelInstruction> labelInstructionList);
+    Instruction(vector<string> results, InstrType instructionType, vector<LabelInstruction> labelInstructionList);
     string originalString;
-    int lowSixDigital, middleFiveDigital, instructionType, rtvalue, rsvalue, rdvalue, immediate, rd, rt, rs, opcode;
+    int lowSixDigital, middleFiveDigital, rtvalue, rsvalue, rdvalue, immediate, rd, rt, rs, opcode;
+    InstrType instrType;
     string opcodeString;
     void handleInstruction(vector<string> results);
     vector<string> resultDec(vector<string> results);

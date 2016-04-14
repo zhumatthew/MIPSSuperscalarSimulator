@@ -17,6 +17,9 @@
 
 using namespace std;
 
+// Register type, Immediate type, Memory/Branch comparison type, Jump type (only immediate), Branch with Register/Immediate type
+enum InstrType {RType, IType, MBType, JType, BRIType, Label};
+
 class InstructionType {
 
     // enum InstructionType { register_, immediate,
@@ -24,14 +27,14 @@ class InstructionType {
 // static members??
     
 public:
-	int instrTypeDefine(string strOpcode);
+	InstrType instrTypeDefine(string strOpcode);
 	bool isLabel(string strOpcode);
-	int operationCodeDefine(string str, int instrType);
-	int lowSixDigitDefine(string str,int instrType);
-	int middleFiveDigitDefine(string str,int instrType);
+	int operationCodeDefine(string str, InstrType instrType);
+	int lowSixDigitDefine(string str, InstrType instrType);
+	int middleFiveDigitDefine(string str, InstrType instrType);
 
 private:
-	int instrType;
+	InstrType instrType;
 };
 
 #endif /* InstructionType_hpp */

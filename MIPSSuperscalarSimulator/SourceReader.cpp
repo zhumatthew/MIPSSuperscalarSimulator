@@ -84,7 +84,7 @@ void SourceReader::constructInstrList() {
 			vector<string> results = parser.getSplitLine();
 
 			InstructionType type;
-			int instrType = type.instrTypeDefine(strOpcode);
+			InstrType instrType = type.instrTypeDefine(strOpcode);
 			Instruction instr(results,instrType,labelInstrList);
 			instr.originalString = line;
 

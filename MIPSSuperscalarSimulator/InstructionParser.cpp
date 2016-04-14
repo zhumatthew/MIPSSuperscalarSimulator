@@ -10,7 +10,6 @@
 #include <iostream>
 
 #include "InstructionParser.hpp"
-#include "InstructionType.hpp"
 
 // R-type instructions (register?)
 // I-type instructions (immediate?)
@@ -81,7 +80,7 @@ vector<string> InstructionParser::getSplitLine() {
 	return this->results;
 }
 
-int InstructionParser::parseOpcode(int instrType) {
+int InstructionParser::parseOpcode(InstrType instrType) {
 	string operation = "";
 	operation = this->results[0];
 
@@ -89,7 +88,7 @@ int InstructionParser::parseOpcode(int instrType) {
 	return instructionType.operationCodeDefine(operation, instrType);
 }
 
-int InstructionParser::parseRs(int instrType) {
+int InstructionParser::parseRs(InstrType instrType) {
 	int rs = 0;
 
 	switch (instrType) {
@@ -144,7 +143,7 @@ int InstructionParser::parseRs(int instrType) {
 }
 
 // remove extraneous breaks?
-int InstructionParser::parseRt(int instrType) {
+int InstructionParser::parseRt(InstrType instrType) {
 	int rt = 0;
 
 	switch (instrType) {
@@ -183,7 +182,7 @@ int InstructionParser::parseRt(int instrType) {
 }
 
 // remove extraneous breaks?
-int InstructionParser::parseRd(int instrType) {
+int InstructionParser::parseRd(InstrType instrType) {
 	int rd = 0;
 	switch(instrType){
 		case 0:
@@ -218,7 +217,7 @@ int InstructionParser::parseRd(int instrType) {
 	return rd;
 }
 
-int InstructionParser::parseLowSixDigit(int instrType) {
+int InstructionParser::parseLowSixDigit(InstrType instrType) {
 	int lowSixDigit = 0;
 	InstructionType instructionType = InstructionType();
 
@@ -235,7 +234,7 @@ int InstructionParser::parseLowSixDigit(int instrType) {
 	return lowSixDigit;
 }
 
-int InstructionParser::parseMiddleFiveDigit(int instrType) {
+int InstructionParser::parseMiddleFiveDigit(InstrType instrType) {
 	int middleFiveDigit = 0;
 	InstructionType instructionType = InstructionType();
 
@@ -259,7 +258,7 @@ int InstructionParser::parseMiddleFiveDigit(int instrType) {
 }
 
 // parseImmediateValue?
-int InstructionParser::parseImmediateNumber(int instrType) {
+int InstructionParser::parseImmediateNumber(InstrType instrType) {
 	int immediate = 0;
 
 	switch (instrType) {

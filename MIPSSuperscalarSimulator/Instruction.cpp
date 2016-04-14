@@ -16,14 +16,12 @@ using namespace std;
 // enumeration for instruction types??
 
 // array?
-Instruction::Instruction(vector<string> results, int type, vector<LabelInstruction> labelInstrList) {
-	instructionType = type;
-	labelInstructionList = labelInstrList;
+Instruction::Instruction(vector<string> results, InstrType type, vector<LabelInstruction> labelInstrList) : instrType(type), labelInstructionList(labelInstrList) {
 
-	InstructionType instrType= InstructionType();
+	InstructionType instructionType= InstructionType();
 
-	if (instructionType == 5) {
-		instructionType = instrType.instrTypeDefine(results[1]);
+	if (instrType == Label) {
+		instrType = instructionType.instrTypeDefine(results[1]);
 		results = resultDec(results);
 	}
 	opcodeString = results[0];
@@ -36,38 +34,38 @@ void Instruction::handleInstruction(vector<string> results) {
     // this needs to be a vector for input, not an array of strings or something
 	InstructionParser parser = InstructionParser(results, labelInstructionList);
 
-	switch(instructionType){
-		case 0:
-			opcodeString = parser.parseOpcode(instructionType);
-			rs = parser.parseRs(instructionType);
-			rt = parser.parseRt(instructionType);
-			rd = parser.parseRd(instructionType);
-			middleFiveDigital = parser.parseMiddleFiveDigit(instructionType);
-			lowSixDigital = parser.parseLowSixDigit(instructionType);
+	switch (instrType) {
+		case RType:
+			opcodeString = parser.parseOpcode(instrType);
+			rs = parser.parseRs(instrType);
+			rt = parser.parseRt(instrType);
+			rd = parser.parseRd(instrType);
+			middleFiveDigital = parser.parseMiddleFiveDigit(instrType);
+			lowSixDigital = parser.parseLowSixDigit(instrType);
 			break;
-		case 1:
-			opcode = parser.parseOpcode(instructionType);
-			rs = parser.parseRs(instructionType);
-			rd = parser.parseRd(instructionType);
+		case IType:
+			opcode = parser.parseOpcode(instrType);
+			rs = parser.parseRs(instrType);
+			rd = parser.parseRd(instrType);
 			rt = rd;
-			immediate = parser.parseImmediateNumber(instructionType);
+			immediate = parser.parseImmediateNumber(instrType);
 			break;
-		case 2:
-			opcode = parser.parseOpcode(instructionType);
-			rt = parser.parseRt(instructionType);
-			rd = parser.parseRd(instructionType);
-			rs = parser.parseRs(instructionType);
-			immediate = parser.parseImmediateNumber(instructionType);
+		case MBType:
+			opcode = parser.parseOpcode(instrType);
+			rt = parser.parseRt(instrType);
+			rd = parser.parseRd(instrType);
+			rs = parser.parseRs(instrType);
+			immediate = parser.parseImmediateNumber(instrType);
 			break;
-		case 3:
-			opcode = parser.parseOpcode(instructionType);
-			immediate = parser.parseImmediateNumber(instructionType);
+		case JType:
+			opcode = parser.parseOpcode(instrType);
+			immediate = parser.parseImmediateNumber(instrType);
 			break;
-		case 4:
-			opcode = parser.parseOpcode(instructionType);
-			rs = parser.parseRs(instructionType);
-			middleFiveDigital = parser.parseMiddleFiveDigit(instructionType);
-			immediate = parser.parseImmediateNumber(instructionType);
+		case BRIType:
+			opcode = parser.parseOpcode(instrType);
+			rs = parser.parseRs(instrType);
+			middleFiveDigital = parser.parseMiddleFiveDigit(instrType);
+			immediate = parser.parseImmediateNumber(instrType);
 			break;
 		default:
 			cout << "instrType Error" << endl;
