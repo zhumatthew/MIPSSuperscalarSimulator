@@ -17,6 +17,7 @@
 using namespace std;
 
 class SourceReader {
+    
 public:
 	SourceReader(string filePath);
 	string getFilePath();

@@ -64,9 +64,9 @@ vector<string> split(const string &text, char sep) {
 }
 
 void InstructionParser::doSplitLine() {
-	this->results = split(this->line, ' ');
+	results = split(line, ' ');
 
-	for(int i=0; i < results.size(); i++) {
+	for (int i=0; i < results.size(); i++) {
 		if(ends_with(results[i], ",")) {
 			results[i] = results[i].substr(0, results[i].length()-1);
 		}
@@ -74,35 +74,36 @@ void InstructionParser::doSplitLine() {
 }
 
 vector<string> InstructionParser::getSplitLine() {
-	return this->results;
+	return results;
 }
 
 int InstructionParser::parseOpcode(InstrType instrType) {
 	string operation = "";
-	operation = this->results[0];
+	operation = results[0];
 
 	InstructionType instructionType = InstructionType();
 	return instructionType.operationCodeDefine(operation, instrType);
 }
 
 int InstructionParser::parseRs(InstrType instrType) {
-	int rs = 0;
-
+	
+    int rs = 0;
+    
 	switch (instrType) {
-		case 0:
-			if(starts_with(this->results[2], "r")) {
-				string strValue = this->results[2].substr(1 ,this->results[2].length());
+		case RType:
+			if (starts_with(results[2], "r")) {
+				string strValue = results[2].substr(1, results[2].length());
 				rs = atoi(strValue.c_str());
 			}
 			break;
-		case 1:
-			if(starts_with(this->results[2], "r")) {
-				string strValue = this->results[2].substr(1,this->results[2].length());
+		case IType:
+			if (starts_with(results[2], "r")) {
+				string strValue = results[2].substr(1, results[2].length());
 				rs = atoi(strValue.c_str());
 			}
 		break;
-		case 2:
-			if(results[0] == "LW") {
+		case MBType:
+			if (results[0] == "LW") {
 				int leftIndex,rightIndex;
 				leftIndex = static_cast<int>(results[2].find("("));
 				rightIndex = static_cast<int>(results[2].find(")"));
@@ -121,56 +122,57 @@ int InstructionParser::parseRs(InstrType instrType) {
 					rs = atoi(strValue.c_str());
 				}
 			} else {
-				if(starts_with(results[1], "r"))
+				if (starts_with(results[1], "r"))
 					rs = atoi(results[1].substr(1, results[1].length()).c_str());
 				}
 				break;
-		case 3:
+		case JType:
 			break;
-		case 4:
-			if(starts_with(this->results[1], "r")){
-				string strValue = this->results[1].substr(1,this->results[1].length());
+		case BRIType:
+			if(starts_with(results[1], "r")){
+				string strValue = results[1].substr(1, results[1].length());
 				rs = atoi(strValue.c_str());
 			}
 			break;
 		default:
-			rs = 0;
+            break;
 	}
 	return rs;
 }
 
 // remove extraneous breaks?
 int InstructionParser::parseRt(InstrType instrType) {
-	int rt = 0;
-
+	
+    int rt = 0;
+    
 	switch (instrType) {
-		case 0:
-			if(starts_with(this->results[3], "r")) {
-				string strValue = this->results[3].substr(1, this->results[3].length());
+		case RType:
+			if (starts_with(results[3], "r")) {
+				string strValue = results[3].substr(1, results[3].length());
 				rt = atoi(strValue.c_str());
 			}
 			break;
-		case 1:
-			if(starts_with(this->results[1], "r")){
-				string strValue = this->results[1].substr(1, this->results[1].length());
+		case IType:
+			if (starts_with(results[1], "r")) {
+				string strValue = results[1].substr(1, results[1].length());
 				rt = atoi(strValue.c_str());
 			}
 			break;
-		case 2:
+		case MBType:
 			if (results.front() == "LW") {
-				if(starts_with(results[1], "r"))
+				if (starts_with(results[1], "r"))
 					rt = atoi(results[1].substr(1, results[1].length()).c_str());
 			} else if (results.front() == "SW") {
-				if(starts_with(results[1], "r"))
+				if (starts_with(results[1], "r"))
 					rt = atoi(results[1].substr(1,results[1].length()).c_str());
 			} else {
-				if(starts_with(results[2], "r"))
+				if (starts_with(results[2], "r"))
 					rt = atoi(results[2].substr(1,results[2].length()).c_str());
 			}
 			break;
-		case 3:
+		case JType:
 			break;
-		case 4:
+		case BRIType:
 			break;
 		default:
 			rt = 0;
@@ -181,20 +183,20 @@ int InstructionParser::parseRt(InstrType instrType) {
 // remove extraneous breaks?
 int InstructionParser::parseRd(InstrType instrType) {
 	int rd = 0;
-	switch(instrType){
-		case 0:
+	switch (instrType) {
+		case RType:
+			if (starts_with(this->results[1], "r")) {
+				string strValue = this->results[1].substr(1, this->results[1].length());
+				rd = atoi(strValue.c_str());
+			}
+			break;
+		case IType:
 			if(starts_with(this->results[1], "r")) {
 				string strValue = this->results[1].substr(1, this->results[1].length());
 				rd = atoi(strValue.c_str());
 			}
 			break;
-		case 1:
-			if(starts_with(this->results[1], "r")) {
-				string strValue = this->results[1].substr(1, this->results[1].length());
-				rd = atoi(strValue.c_str());
-			}
-			break;
-		case 2:
+		case MBType:
 			if(results[0] == "LW") {
 				if(starts_with(results[1], "r"))
 					rd = atoi(results[1].substr(1, results[1].length()).c_str());
@@ -204,9 +206,9 @@ int InstructionParser::parseRd(InstrType instrType) {
 
 			}
 			break;
-		case 3:
+		case JType:
 			break;
-		case 4:
+		case BRIType:
 			break;
 		default:
 			rd = 0;
@@ -218,13 +220,13 @@ int InstructionParser::parseLowSixDigit(InstrType instrType) {
 	int lowSixDigit = 0;
 	InstructionType instructionType = InstructionType();
 
-	switch(instrType) {
-		case 0:
+	switch (instrType) {
+		case RType:
 			lowSixDigit = instructionType.lowSixDigitDefine(this->results[0], instrType);
 			break;
-		case 1:
-		case 2:
-		case 3:
+		case IType:
+		case MBType:
+		case JType:
 		default:
 			lowSixDigit = 0;
 	}
@@ -236,16 +238,16 @@ int InstructionParser::parseMiddleFiveDigit(InstrType instrType) {
 	InstructionType instructionType = InstructionType();
 
 	switch(instrType){
-		case 0:
+		case RType:
 			middleFiveDigit =instructionType.middleFiveDigitDefine(this->results[0], instrType);
 			break;
-		case 1:
+		case IType:
 			break;
-		case 2:
+		case MBType:
 			break;
-		case 3:
+		case JType:
 			break;
-		case 4:
+		case BRIType:
 			middleFiveDigit =instructionType.middleFiveDigitDefine(this->results[0], instrType);
 			break;
 		default:
@@ -256,15 +258,16 @@ int InstructionParser::parseMiddleFiveDigit(InstrType instrType) {
 
 // parseImmediateValue?
 int InstructionParser::parseImmediateNumber(InstrType instrType) {
-	int immediate = 0;
-
+	
+    int immediate = 0;
+    
 	switch (instrType) {
-		case 0:
+		case RType:
 			break;
-		case 1:
+		case IType:
 			immediate = atoi(this->results[3].c_str());
 			break;
-		case 2:
+		case MBType:
 			if (results.front() == "LW") {
 				int index;
 				index = static_cast<int>(results[2].find("("));
@@ -283,14 +286,14 @@ int InstructionParser::parseImmediateNumber(InstrType instrType) {
 				}
 			}
 			break;
-		case 3:
+		case JType:
 			for (int index = 0; index < labelInstructionList.size(); index++) {
 				if (labelInstructionList[index].getLabelString() == results[1]) {
 					immediate = labelInstructionList[index].getLabelAddress();
 				}
 			}
 			break;
-		case 4:
+		case BRIType:
 			for (int index = 0; index < labelInstructionList.size(); index++) {
 				if (labelInstructionList[index].getLabelString() == results[2]) {
 					immediate = labelInstructionList[index].getLabelAddress();
