@@ -24,6 +24,6 @@ bool RegisterFile::putValue(int value, int address) {
     return false;
 }
 
-int RegisterFile::getValue(int address) const{
+int RegisterFile::getValue(int address) const {
     return registerData[address];
 }

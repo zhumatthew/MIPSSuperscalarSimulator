@@ -24,6 +24,6 @@ bool MainMemory::putValue(int value, int address) {
     return false;
 }
 
-int MainMemory::getValue(int address) {
+int MainMemory::getValue(int address) const {
     return memoryData[address];
 }

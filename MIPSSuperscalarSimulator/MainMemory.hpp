@@ -18,7 +18,7 @@ class MainMemory {
 public:
     MainMemory();
     bool putValue(int value, int address);
-    int getValue(int address);
+    int getValue(int address) const;
     
 private:
     vector<int> memoryData; // holds values in main memory
