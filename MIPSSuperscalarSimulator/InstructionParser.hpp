@@ -23,13 +23,13 @@ public:
 	InstructionParser(vector<string> results, vector<LabelInstruction> aLabelInstructionList);
 	void doSplitLine();
 	vector<string> getSplitLine();
-	int parserOptcode(int instrType);
-	int parserRs(int instrType);
-	int parserRt(int instrType);
-	int parserRd(int instrType);
-	int parserLowSixDigit(int instrType);
-	int parserMiddleFiveDigit(int instrType);
-	int parserImmediateNumber(int instrType);
+	int parseOpcode(int instrType);
+	int parseRs(int instrType);
+	int parseRt(int instrType);
+	int parseRd(int instrType);
+	int parseLowSixDigit(int instrType);
+	int parseMiddleFiveDigit(int instrType);
+	int parseImmediateNumber(int instrType);
 
 private:
     string line;

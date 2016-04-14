@@ -13,8 +13,8 @@
 FetchStage::FetchStage(int instructionLength) : lastPC(0), instrSize(instructionLength), windowSize(8), pairwise(false), windowTail(0), upBranch(0) {
     
 	PC = 0;
-	window = vector<SimulationInstruction>();
-
+	
+    window = vector<SimulationInstruction>();
 	for(tempCnt = 0; tempCnt < windowSize; tempCnt++)
         window.push_back(SimulationInstruction("nop"));
 }

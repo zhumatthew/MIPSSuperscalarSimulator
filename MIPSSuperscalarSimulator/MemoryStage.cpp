@@ -11,7 +11,7 @@
 using namespace std;
 
 // In the memory stage, load word and store word operations are performed
-void MemoryStage::implement(MainMemory mmemo, RegisterFile regfile) {
+void MemoryStage::implement(MainMemory& mmemo, RegisterFile& regfile) {
 
 	if (currentInstructionList.front().effectiveAddress != 0) {
         cout << "MemoryAddress [ " << currentInstructionList.front().effectiveAddress << "] = " << endl;

@@ -91,8 +91,7 @@ void Simulator::implement() {
         
         // At the second cycle since the RAW hazard was detected (lastStall==2), a NOP needs to be inserted into the MEM stage, but this can lead to the unsuccessful forwarding with an origin stage of MEM since the information in MEM is discarded before it is forwarded to the execution stage of the same cycle
 
-		if (lastStall == 2)
-		{
+		if (lastStall == 2) {
 			simuWriteBack.currentInstructionList[0] = simuMemory.currentInstructionList[0];
 			simuWriteBack.currentInstructionList[1] = simuMemory.currentInstructionList[1];
 			tempInstrList[0] = simuMemory.currentInstructionList[0];
@@ -101,8 +100,7 @@ void Simulator::implement() {
 			simuMemory.currentInstructionList[1] = SimulationInstruction("Empty");
 		}
 
-		if (falsePrediction)
-		{
+		if (falsePrediction) {
 			falsePrediction = false;
 			simuExecute.currentInstructionList[0] = SimulationInstruction("NOP");
 			simuExecute.currentInstructionList[1] = SimulationInstruction("NOP");
@@ -198,7 +196,7 @@ void Simulator::implement() {
 		cycleCount++;
 		cout << "-------------------------------------------------" << endl;
 	}
-	cout << "Total number of cycle count after simulation: " << cycleCount << endl;
+	cout << "Total number of cycles after simulation: " << cycleCount << endl;
 }
 
 void Simulator::stepImplement() {
@@ -319,7 +317,7 @@ void Simulator::stepImplement() {
 	cout << "total cycle count : " << cycleCount << endl;
 }
 
-void Simulator::main() {
+//  void Simulator::main() {
 //	SourceReader reader = new SourceReader("D:/Code/AssemblerApp0.99/AssemblerApp/InstructionList.dat");
 //	vector<SimulationInstruction> simuInstrList = vector<SimulationInstruction>();
 //	// vector<Instruction> originInstrList = reader.readInstrList();
@@ -335,4 +333,4 @@ void Simulator::main() {
 //	simuInstrList.add(nopInstr);
 //	simuInstrList.add(nopInstr);
 //	System.out.println(simuInstrList.size());
-}
+//  }

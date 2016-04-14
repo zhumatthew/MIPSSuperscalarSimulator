@@ -38,36 +38,36 @@ void Instruction::handleInstruction(vector<string> results) {
 
 	switch(instructionType){
 		case 0:
-			opcodeString = parser.parserOptcode(instructionType);
-			rs = parser.parserRs(instructionType);
-			rt = parser.parserRt(instructionType);
-			rd = parser.parserRd(instructionType);
-			middleFiveDigital = parser.parserMiddleFiveDigit(instructionType);
-			lowSixDigital = parser.parserLowSixDigit(instructionType);
+			opcodeString = parser.parseOpcode(instructionType);
+			rs = parser.parseRs(instructionType);
+			rt = parser.parseRt(instructionType);
+			rd = parser.parseRd(instructionType);
+			middleFiveDigital = parser.parseMiddleFiveDigit(instructionType);
+			lowSixDigital = parser.parseLowSixDigit(instructionType);
 			break;
 		case 1:
-			opcode = parser.parserOptcode(instructionType);
-			rs = parser.parserRs(instructionType);
-			rd = parser.parserRd(instructionType);
+			opcode = parser.parseOpcode(instructionType);
+			rs = parser.parseRs(instructionType);
+			rd = parser.parseRd(instructionType);
 			rt = rd;
-			immediate = parser.parserImmediateNumber(instructionType);
+			immediate = parser.parseImmediateNumber(instructionType);
 			break;
 		case 2:
-			opcode = parser.parserOptcode(instructionType);
-			rt = parser.parserRt(instructionType);
-			rd = parser.parserRd(instructionType);
-			rs = parser.parserRs(instructionType);
-			immediate = parser.parserImmediateNumber(instructionType);
+			opcode = parser.parseOpcode(instructionType);
+			rt = parser.parseRt(instructionType);
+			rd = parser.parseRd(instructionType);
+			rs = parser.parseRs(instructionType);
+			immediate = parser.parseImmediateNumber(instructionType);
 			break;
 		case 3:
-			opcode = parser.parserOptcode(instructionType);
-			immediate = parser.parserImmediateNumber(instructionType);
+			opcode = parser.parseOpcode(instructionType);
+			immediate = parser.parseImmediateNumber(instructionType);
 			break;
 		case 4:
-			opcode = parser.parserOptcode(instructionType);
-			rs = parser.parserRs(instructionType);
-			middleFiveDigital = parser.parserMiddleFiveDigit(instructionType);
-			immediate = parser.parserImmediateNumber(instructionType);
+			opcode = parser.parseOpcode(instructionType);
+			rs = parser.parseRs(instructionType);
+			middleFiveDigital = parser.parseMiddleFiveDigit(instructionType);
+			immediate = parser.parseImmediateNumber(instructionType);
 			break;
 		default:
 			cout << "instrType Error" << endl;

@@ -46,7 +46,6 @@ public:
 
     void implement();
     void stepImplement();
-    void main();
     
 private:
     vector<int> registerData;

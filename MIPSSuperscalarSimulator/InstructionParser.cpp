@@ -37,13 +37,11 @@
 
 using namespace std;
 
-InstructionParser::InstructionParser(string aLine) {
-	this->line = aLine;
-}
+InstructionParser::InstructionParser(string line) : line(line) {}
 
-InstructionParser::InstructionParser(vector<string> results, vector<LabelInstruction> aLabelInstructionList) {
+InstructionParser::InstructionParser(vector<string> results, vector<LabelInstruction> labelInstructionList) {
 	this->results = results;
-	this->labelInstructionList = aLabelInstructionList;
+	this->labelInstructionList = labelInstructionList;
 }
 
 bool starts_with(const string& s1, const string& s2) {
@@ -83,7 +81,7 @@ vector<string> InstructionParser::getSplitLine() {
 	return this->results;
 }
 
-int InstructionParser::parserOptcode(int instrType) {
+int InstructionParser::parseOpcode(int instrType) {
 	string operation = "";
 	operation = this->results[0];
 
@@ -91,10 +89,10 @@ int InstructionParser::parserOptcode(int instrType) {
 	return instructionType.operationCodeDefine(operation, instrType);
 }
 
-int InstructionParser::parserRs(int instrType) {
+int InstructionParser::parseRs(int instrType) {
 	int rs = 0;
 
-	switch(instrType) {
+	switch (instrType) {
 		case 0:
 			if(starts_with(this->results[2], "r")) {
 				string strValue = this->results[2].substr(1 ,this->results[2].length());
@@ -146,7 +144,7 @@ int InstructionParser::parserRs(int instrType) {
 }
 
 // remove extraneous breaks?
-int InstructionParser::parserRt(int instrType) {
+int InstructionParser::parseRt(int instrType) {
 	int rt = 0;
 
 	switch (instrType) {
@@ -185,7 +183,7 @@ int InstructionParser::parserRt(int instrType) {
 }
 
 // remove extraneous breaks?
-int InstructionParser::parserRd(int instrType) {
+int InstructionParser::parseRd(int instrType) {
 	int rd = 0;
 	switch(instrType){
 		case 0:
@@ -220,7 +218,7 @@ int InstructionParser::parserRd(int instrType) {
 	return rd;
 }
 
-int InstructionParser::parserLowSixDigit(int instrType) {
+int InstructionParser::parseLowSixDigit(int instrType) {
 	int lowSixDigit = 0;
 	InstructionType instructionType = InstructionType();
 
@@ -237,7 +235,7 @@ int InstructionParser::parserLowSixDigit(int instrType) {
 	return lowSixDigit;
 }
 
-int InstructionParser::parserMiddleFiveDigit(int instrType) {
+int InstructionParser::parseMiddleFiveDigit(int instrType) {
 	int middleFiveDigit = 0;
 	InstructionType instructionType = InstructionType();
 
@@ -261,7 +259,7 @@ int InstructionParser::parserMiddleFiveDigit(int instrType) {
 }
 
 // parseImmediateValue?
-int InstructionParser::parserImmediateNumber(int instrType) {
+int InstructionParser::parseImmediateNumber(int instrType) {
 	int immediate = 0;
 
 	switch (instrType) {

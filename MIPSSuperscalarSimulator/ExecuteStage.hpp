@@ -19,7 +19,7 @@ using namespace std;
 class ExecuteStage : public Stage {
 
 public:
-	void implement(DecodeStage currentDecode, MemoryStage currentMemory, RegisterFile simuRegFile, int lastStall, bool falsePrediction);
+	void implement(DecodeStage currentDecode, MemoryStage currentMemory, const RegisterFile& regFile, int lastStall, bool falsePrediction);
 	int getSavedPC();
 
 private:

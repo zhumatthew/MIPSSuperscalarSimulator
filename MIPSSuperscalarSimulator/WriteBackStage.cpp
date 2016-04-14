@@ -13,7 +13,7 @@ using namespace std;
 
 // Places the destination register value into the destination register
 // returns an increment for the simulator's instruction count
-int WriteBackStage::implement(RegisterFile regFile, DecodeStage currentDecode){
+int WriteBackStage::implement(RegisterFile& regFile, DecodeStage currentDecode){
 
     int increment = 0;
 	if (currentInstructionList[0].opcodeString == "NOP" || currentInstructionList[0].opcodeString == "nop" || currentInstructionList[0].opcodeString == "Empty") {

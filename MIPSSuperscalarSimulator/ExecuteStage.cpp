@@ -11,7 +11,7 @@
 // example instruction
 // $d = $s + $t
 
-void ExecuteStage::implement(DecodeStage currentDecode, MemoryStage currentMemory, RegisterFile simuRegFile, int lastStall, bool falsePrediction) {
+void ExecuteStage::implement(DecodeStage currentDecode, MemoryStage currentMemory, const RegisterFile& regFile, int lastStall, bool falsePrediction) {
     // In case a RAW hazard is detected in last cycle
 	if (currentDecode.readAfterWriteHazard || (currentInstructionList.front().opcodeString=="NOP"))
 		return;
@@ -20,11 +20,11 @@ void ExecuteStage::implement(DecodeStage currentDecode, MemoryStage currentMemor
         SimulationInstruction instruction = currentInstructionList[i];
         
 		if (instruction.currentForward.rsDelayedForward) {
-			instruction.rsValue = simuRegFile.getValue(instruction.rs);
+			instruction.rsValue = regFile.getValue(instruction.rs);
 		}
 
 		if (instruction.currentForward.rtDelayedForward) {
-			instruction.rtValue = simuRegFile.getValue(instruction.rt);
+			instruction.rtValue = regFile.getValue(instruction.rt);
 		}
         
         // At the second cycle since the RAW hazard was detected (lastStall==2), a NOP needs to be inserted into the MEM stage, but this can lead to the unsuccessful forwarding with an origin stage of MEM since the information in MEM is discarded before it is forwarded to the execution stage of the same cycle
@@ -46,10 +46,10 @@ void ExecuteStage::implement(DecodeStage currentDecode, MemoryStage currentMemor
 
 		if (lastStall == 2) {
 			if (instruction.currentForward.rsForward)
-				instruction.rsValue = simuRegFile.getValue(instruction.rs);
+				instruction.rsValue = regFile.getValue(instruction.rs);
 
 			if (instruction.currentForward.rtForward)
-				instruction.rtValue = simuRegFile.getValue(instruction.rt);
+				instruction.rtValue = regFile.getValue(instruction.rt);
 		}
 
 		instruction.currentForward.rsDelayedForward = false;
@@ -98,6 +98,6 @@ void ExecuteStage::implement(DecodeStage currentDecode, MemoryStage currentMemor
 	}
 }
 
-int ExecuteStage::getSavedPC(){
+int ExecuteStage::getSavedPC() {
 	return tempPC;
 }

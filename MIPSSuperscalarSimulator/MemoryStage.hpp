@@ -16,10 +16,9 @@
 #include "RegisterFile.hpp"
 
 class MemoryStage : public Stage {
+    
 public:
-	void implement(MainMemory mmemo, RegisterFile regfile);
-
-private:
+	void implement(MainMemory& mmemo, RegisterFile& regfile);
 
 };
 
