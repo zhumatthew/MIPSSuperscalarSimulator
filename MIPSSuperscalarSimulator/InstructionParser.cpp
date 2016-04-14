@@ -38,10 +38,7 @@ using namespace std;
 
 InstructionParser::InstructionParser(string line) : line(line) {}
 
-InstructionParser::InstructionParser(vector<string> results, vector<LabelInstruction> labelInstructionList) {
-	this->results = results;
-	this->labelInstructionList = labelInstructionList;
-}
+InstructionParser::InstructionParser(vector<string> results, vector<LabelInstruction> labelInstructionList) : results(results), labelInstructionList(labelInstructionList) {}
 
 bool starts_with(const string& s1, const string& s2) {
     return s2.size() <= s1.size() && s1.compare(0, s2.size(), s2) == 0;

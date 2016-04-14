@@ -12,8 +12,7 @@
 #include <stdio.h>
 #include <string>
 
-//Class InstrType to determine the three type of instruction: Register to
-//Register; Register to Immediate; Jump
+//Register to Register; Register to Immediate; Jump
 
 using namespace std;
 
@@ -21,8 +20,6 @@ using namespace std;
 enum InstrType {RType, IType, MBType, JType, BRIType, Label};
 
 class InstructionType {
-
-    // enum InstructionType { register_, immediate,
     
 // static members??
     
