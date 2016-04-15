@@ -27,7 +27,7 @@ void SourceReader::setFilePath(string filePath) {
 }
 
 string SourceReader::trim(string str) {
-    if(str.length() == 0) return str;
+    if (str.length() == 0) return str;
 
     int beg = 0, end = static_cast<int>(str.length()) - 1;
     while (str[beg] == ' ') beg++;

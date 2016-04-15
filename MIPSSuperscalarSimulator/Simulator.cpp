@@ -74,11 +74,9 @@ Simulator::Simulator(vector<SimulationInstruction> simulationInstrList) : simuFe
 
 void Simulator::implement() {
 	cycleCount = 0;
-	while (simuMemory.currentInstructionList[0].originalString != "end")
-	{
+	while (simuMemory.currentInstructionList[0].originalString != "end") {
 		cout << "clockCycle:" << cycleCount + 1 << endl;
-		if (lastStall != 2)
-		{
+		if (lastStall != 2) {
 			simuWriteBack.currentInstructionList[0] = simuMemory.currentInstructionList[0];
 			simuWriteBack.currentInstructionList[1] = simuMemory.currentInstructionList[1];
 			simuMemory.currentInstructionList[0] = simuExecute.currentInstructionList[0];
@@ -140,7 +138,7 @@ void Simulator::implement() {
 		cout << "WriteBack:" << simuWriteBack.currentInstructionList[1].originalString << endl;
 		cout << "-------------------------------------------------" << endl;
 
-		if(simuFetch.currentInstructionList[0].opcodeString == "BGEZ"
+		if (simuFetch.currentInstructionList[0].opcodeString == "BGEZ"
 				|| simuFetch.currentInstructionList[0].opcodeString == "BLEZ"
 				|| simuFetch.currentInstructionList[0].opcodeString == "BEQ"
 				|| simuFetch.currentInstructionList[0].opcodeString == "J") {
@@ -175,8 +173,8 @@ void Simulator::implement() {
 				break;
 			case 2:
 				hazardList[4] = simuFetch.currentInstructionList[0];
-				hazardList[5] = simuFetch.currentInstructionList[1]
-				                                                 ;
+				hazardList[5] = simuFetch.currentInstructionList[1];
+                
 				for (int i = 0; i < 6; i++) {
 					cout << "hazardList[" << i << "]: " << hazardList[i].originalString << endl;
 				}
@@ -198,6 +196,9 @@ void Simulator::implement() {
 	}
 	cout << "Total number of cycles after simulation: " << cycleCount << endl;
 }
+
+// Maybe we should allow the user to press enter to run the entire simulation
+// or press space to run one step at a time
 
 void Simulator::stepImplement() {
 	if (lastStall != 2) {

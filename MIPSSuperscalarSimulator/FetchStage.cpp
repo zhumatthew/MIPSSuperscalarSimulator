@@ -50,7 +50,7 @@ bool FetchStage::regNameMatch(int check)
 	if((window[0].opcodeString == "end") || (window[0].opcodeString == "nop") || (window[0].opcodeString == "NOP"))
 		return true;
 
-	while(tempCnti < check) {
+	while (tempCnti < check) {
 		tempCnti++;
 		if((window[check].rd == window[0].rd)
 			|| (window[check].rd == window[check-tempCnti].rd)

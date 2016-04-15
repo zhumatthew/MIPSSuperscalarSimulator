@@ -12,11 +12,12 @@
 // $d = $s + $t
 
 void ExecuteStage::implement(DecodeStage currentDecode, MemoryStage currentMemory, const RegisterFile& regFile, int lastStall, bool falsePrediction) {
+    
     // In case a RAW hazard is detected in last cycle
 	if (currentDecode.readAfterWriteHazard || (currentInstructionList.front().opcodeString=="NOP"))
 		return;
+    
 	for (int i = 0; i <= 1; i++) {
-        
         SimulationInstruction instruction = currentInstructionList[i];
         
 		if (instruction.currentForward.rsDelayedForward) {
