@@ -13,8 +13,6 @@
 #include <vector>
 #include "SimulationInstruction.hpp"
 
-using namespace std;
-
 class Stage {
 public:
 	Stage();

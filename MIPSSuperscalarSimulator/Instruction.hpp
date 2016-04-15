@@ -15,8 +15,6 @@
 #include "LabelInstruction.hpp"
 #include "InstructionType.hpp"
 
-using namespace std;
-
 class Instruction {
     
 public:
@@ -26,10 +24,11 @@ public:
     InstrType instrType;
     string opcodeString;
     void handleInstruction(vector<string> results);
-    vector<string> resultDec(vector<string> results);
     
 private:
     vector<LabelInstruction> labelInstructionList;
+    vector<string> removeLabel(vector<string> results);
+
     
     // Instruction(string str);
 };

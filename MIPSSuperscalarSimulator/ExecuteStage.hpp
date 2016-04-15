@@ -14,8 +14,6 @@
 #include "DecodeStage.hpp"
 #include "MemoryStage.hpp"
 
-using namespace std;
-
 class ExecuteStage : public Stage {
 
 public:

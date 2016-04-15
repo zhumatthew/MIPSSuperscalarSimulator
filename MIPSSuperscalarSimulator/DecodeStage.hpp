@@ -14,8 +14,6 @@
 #include "MainMemory.hpp"
 #include "RegisterFile.hpp"
 
-using namespace std;
-
 class DecodeStage : public Stage {
 
 public:

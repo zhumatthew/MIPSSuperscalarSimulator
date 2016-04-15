@@ -13,16 +13,13 @@
 
 using namespace std;
 
-// enumeration for instruction types??
-
-// array?
 Instruction::Instruction(vector<string> results, InstrType type, vector<LabelInstruction> labelInstrList) : instrType(type), labelInstructionList(labelInstrList) {
 
 	InstructionType instructionType= InstructionType();
 
 	if (instrType == Label) {
 		instrType = instructionType.instrTypeDefine(results[1]);
-		results = resultDec(results);
+		results = removeLabel(results);
 	}
 	opcodeString = results[0];
 	handleInstruction(results);
@@ -31,7 +28,7 @@ Instruction::Instruction(vector<string> results, InstrType type, vector<LabelIns
 
 // name this function parse instruction??
 void Instruction::handleInstruction(vector<string> results) {
-    // this needs to be a vector for input, not an array of strings or something
+    
 	InstructionParser parser = InstructionParser(results, labelInstructionList);
 
 	switch (instrType) {
@@ -48,32 +45,32 @@ void Instruction::handleInstruction(vector<string> results) {
 			rs = parser.parseRs(instrType);
 			rd = parser.parseRd(instrType);
 			rt = rd;
-			immediate = parser.parseImmediateNumber(instrType);
+			immediate = parser.parseImmediateValue(instrType);
 			break;
 		case MBType:
 			opcode = parser.parseOpcode(instrType);
 			rt = parser.parseRt(instrType);
 			rd = parser.parseRd(instrType);
 			rs = parser.parseRs(instrType);
-			immediate = parser.parseImmediateNumber(instrType);
+			immediate = parser.parseImmediateValue(instrType);
 			break;
 		case JType:
 			opcode = parser.parseOpcode(instrType);
-			immediate = parser.parseImmediateNumber(instrType);
+			immediate = parser.parseImmediateValue(instrType);
 			break;
 		case BRIType:
 			opcode = parser.parseOpcode(instrType);
 			rs = parser.parseRs(instrType);
 			middleFiveDigital = parser.parseMiddleFiveDigit(instrType);
-			immediate = parser.parseImmediateNumber(instrType);
+			immediate = parser.parseImmediateValue(instrType);
 			break;
 		default:
 			cout << "instrType Error" << endl;
 	}
 }
 
-// call this function removeLabel??
-vector<string> Instruction::resultDec(vector<string> results) {
+// Remove the label at the start of the results line
+vector<string> Instruction::removeLabel(vector<string> results) {
     results.erase(results.begin());
     return results;
 }

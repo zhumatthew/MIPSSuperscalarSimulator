@@ -6,10 +6,9 @@
 //  Copyright © 2016 ZhuKim. All rights reserved.
 //
 
+#include "Simulator.hpp"
 #include <stdio.h>
 #include <vector>
-
-#include "Simulator.hpp"
 
 using namespace std;
 

@@ -12,8 +12,6 @@
 #include <stdio.h>
 #include "Stage.hpp"
 
-using namespace std;
-
 class FetchStage : public Stage {
 
 public:

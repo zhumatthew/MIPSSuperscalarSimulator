@@ -30,7 +30,7 @@ public:
 	int parseRd(InstrType instrType);
 	int parseLowSixDigit(InstrType instrType);
 	int parseMiddleFiveDigit(InstrType instrType);
-	int parseImmediateNumber(InstrType instrType);
+	int parseImmediateValue(InstrType instrType);
 
 private:
     string line;
