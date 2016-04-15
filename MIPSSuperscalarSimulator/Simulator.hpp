@@ -32,16 +32,20 @@ public:
     MemoryStage simuMemory;
     WriteBackStage simuWriteBack;
 
-    MainMemory simuMainMemory;
+    // Register file and main memory will be initialized implicitly (default constructor is provided)
     RegisterFile simuRegFile;
+    MainMemory simuMainMemory;
+    
     vector<SimulationInstruction> simulationInstructionList;
 
     int cycleCount;
     int lastStall;
+    
+    // Order of declaration for member variables is the order of initialization
     SimulationInstruction tempInstr;
     vector<SimulationInstruction> tempInstrList;
-    bool falsePrediction;
     vector<SimulationInstruction> hazardList, tempHazardList;
+    bool falsePrediction;
     int instrCount;
 
     void implement();

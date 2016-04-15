@@ -21,7 +21,8 @@ Instruction::Instruction(vector<string> results, InstrType type, vector<LabelIns
 		instrType = instructionType.instrTypeDefine(results[1]);
 		results = removeLabel(results);
 	}
-	opcodeString = results[0];
+    
+	opcodeString = results.front();
 	handleInstruction(results);
 }
 

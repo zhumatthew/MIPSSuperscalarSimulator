@@ -15,31 +15,7 @@ using namespace std;
 // if the type of 'simuDecode' is 'DecodeStage' and it has a default constructor, then you don't need to initialize it manually.
 // you do not need to define default constructors; they are there implicitly unless you define another constructor
 
-Simulator::Simulator(vector<SimulationInstruction> simulationInstrList) : simuFetch(FetchStage((int) simulationInstrList.size())), tempInstr(SimulationInstruction("nop")), instrCount(0), lastStall(0) {
-	simulationInstructionList = simulationInstrList;
-	// simuFetch = FetchStage((int) simulationInstrList.size());
-    // is decode stage's constructor with an initialization list considered a default constructor?
-//	simuDecode = DecodeStage();
-//	simuExecute = ExecuteStage();
-//	simuMemory = MemoryStage();
-//	simuWriteBack = WriteBackStage();
-	simuRegFile = RegisterFile();
-	simuMainMemory = MainMemory();
-	// tempInstr = SimulationInstruction("nop");
-	hazardList = vector<SimulationInstruction>();
-	tempHazardList = vector<SimulationInstruction>();
-    tempInstrList = vector<SimulationInstruction>();
-
-	for (int i = 0; i < 6; i++) {
-		hazardList.push_back(tempInstr);
-	}
-	for (int i = 0; i < 4; i++) {
-		tempHazardList.push_back(tempInstr);
-	}
-	for (int i = 0; i < 2; i++) {
-		tempInstrList.push_back(tempInstr);
-	}
-}
+Simulator::Simulator(vector<SimulationInstruction> simulationInstrList) : simulationInstructionList(simulationInstrList), simuFetch(FetchStage((int) simulationInstrList.size())), tempInstr(SimulationInstruction("nop")), instrCount(0), lastStall(0), hazardList(6, tempInstr), tempHazardList(4, tempInstr), tempInstrList(2, tempInstr) {}
 
 //Simulator::Simulator(vector<SimulationInstruction> simulationInstrList) {
 //    simulationInstrList = simulationInstrList;
