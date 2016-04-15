@@ -10,11 +10,11 @@
 #define ExecuteStage_hpp
 
 #include <stdio.h>
-#include "Stage.hpp"
+#include "PipelineStage.hpp"
 #include "DecodeStage.hpp"
 #include "MemoryStage.hpp"
 
-class ExecuteStage : public Stage {
+class ExecuteStage : public PipelineStage {
 
 public:
 	void implement(DecodeStage currentDecode, MemoryStage currentMemory, const RegisterFile& regFile, int lastStall, bool falsePrediction);

@@ -10,11 +10,11 @@
 #define WriteBackStage_hpp
 
 #include <stdio.h>
-#include "Stage.hpp"
+#include "PipelineStage.hpp"
 #include "RegisterFile.hpp"
 #include "DecodeStage.hpp"
 
-class WriteBackStage : public Stage {
+class WriteBackStage : public PipelineStage {
     
 public:
 	int implement(RegisterFile& regFile, DecodeStage currentDecode);

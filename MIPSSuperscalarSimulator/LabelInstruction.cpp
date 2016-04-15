@@ -10,7 +10,7 @@
 #include "LabelInstruction.hpp"
 
 LabelInstruction::LabelInstruction(string label, int lineNumber) {
-    if (label.back() == ':') {
+    if (!label.empty() && label.back() == ':') {
         label.pop_back();
     }
     

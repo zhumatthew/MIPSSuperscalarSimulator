@@ -11,14 +11,14 @@
 
 #include <stdio.h>
 #include <iostream>
-#include "Stage.hpp"
+#include "PipelineStage.hpp"
 #include "MainMemory.hpp"
 #include "RegisterFile.hpp"
 
-class MemoryStage : public Stage {
+class MemoryStage : public PipelineStage {
     
 public:
-	void implement(MainMemory& mmemo, RegisterFile& regfile);
+	void implement(MainMemory& mainMemory, RegisterFile& regfile);
 
 };
 

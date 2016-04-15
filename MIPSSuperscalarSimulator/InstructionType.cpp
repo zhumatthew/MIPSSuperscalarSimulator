@@ -51,51 +51,51 @@ bool InstructionType::isLabel(string strOpcode) {
 // case 5 involves labels
 
 int InstructionType::operationCodeDefine(string str, InstrType instrType) {
-    int optcode = 0;
+    int opcode = 0;
     switch (instrType) {
         case RType:
             if (str == "ADD") {
-                optcode = 0;
+                opcode = 0;
             } else if (str == "MUL") {
-                optcode = 28;
+                opcode = 28;
             } else if (str == "SUB") {
-                optcode = 0;
+                opcode = 0;
             } else if (str == "DIV") {
-                optcode = 0;
+                opcode = 0;
             }
             break;
         case IType:
             if (str == "ADDI") {
-                optcode = 8;
+                opcode = 8;
             }
             break;
         case MBType:
             if (str == "LW") {
-                optcode = 35;
+                opcode = 35;
             } else if (str == "SW") {
-                optcode = 43;
+                opcode = 43;
             } else if (str == "BEQ") {
-                optcode = 4;
+                opcode = 4;
             } else if (str == "BEQL") {
-                optcode = 20;
+                opcode = 20;
             }
             break;
         case JType:
             if (str == "J") {
-                optcode = 2;
+                opcode = 2;
             }
             break;
         case BRIType:
             if (str == "BGEZ") {
-                optcode = 1;
+                opcode = 1;
             } else if (str == "BLEZ") {
-                optcode = 6;
+                opcode = 6;
             }
             break;
         default:
-            optcode = 0;
+            opcode = 0;
     }
-    return optcode;
+    return opcode;
 }
 
 int InstructionType::lowSixDigitDefine(string str, InstrType instrType) {

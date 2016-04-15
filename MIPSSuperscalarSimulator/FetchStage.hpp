@@ -10,9 +10,9 @@
 #define FetchStage_hpp
 
 #include <stdio.h>
-#include "Stage.hpp"
+#include "PipelineStage.hpp"
 
-class FetchStage : public Stage {
+class FetchStage : public PipelineStage {
 
 public:
 	FetchStage(int instructionLength);
@@ -21,7 +21,6 @@ public:
 private:
     int upBranch;
     int lastPC;
-    int tempCnt;
     bool pairwise;
     int windowTail; // number of instructions in the window
     int instrSize; // number of instructions in the benchmark

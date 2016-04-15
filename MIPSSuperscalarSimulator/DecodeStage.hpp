@@ -10,11 +10,11 @@
 #define DecodeStage_hpp
 
 #include <stdio.h>
-#include "Stage.hpp"
+#include "PipelineStage.hpp"
 #include "MainMemory.hpp"
 #include "RegisterFile.hpp"
 
-class DecodeStage : public Stage {
+class DecodeStage : public PipelineStage {
 
 public:
 	DecodeStage();

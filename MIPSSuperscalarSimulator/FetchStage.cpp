@@ -10,26 +10,19 @@
 
 // No "this" required unless parameter/local variable name overloading
 
-FetchStage::FetchStage(int instructionLength) : lastPC(0), instrSize(instructionLength), windowSize(8), pairwise(false), windowTail(0), upBranch(0) {
-    
-	PC = 0;
-	
-    window = vector<SimulationInstruction>();
-	for(tempCnt = 0; tempCnt < windowSize; tempCnt++)
-        window.push_back(SimulationInstruction("nop"));
-}
+FetchStage::FetchStage(int instructionLength) : lastPC(0), instrSize(instructionLength), windowSize(8), pairwise(false), windowTail(0), upBranch(0), window(windowSize, SimulationInstruction("nop")) { PC = 0; } // does this pc just get initialized by the super's initializer list?
 
 // Program counter may add one or two
 void FetchStage::windowMove(vector<SimulationInstruction> simulationInstructionList)
 {
 	windowTail = 0;
-	tempCnt = PC;
+	int i = PC;
     
     // First condition is to ensure window shrinks when approaching the edge of the instruction queue as there are fewer instructions to fetch
     // Second condition is to ensure that the length of the window will not be greater than the window size
     // Instruction size takes into account one "end" and three "nop" at the end of the simulated instruction list
-	while (((tempCnt - PC) < (instrSize - PC)) && (windowTail < windowSize)) {
-		window[windowTail] = simulationInstructionList[tempCnt];
+	while (((i - PC) < (instrSize - PC)) && (windowTail < windowSize)) {
+		window[windowTail] = simulationInstructionList[i];
 		if (!window[windowTail].reordered) { // reordered instructions have entered the pipeline; if they enter the window again, they are executed twice
 			windowTail++;
 		} else { // Avoids a second execution of the instruction after the reordered one
@@ -37,31 +30,30 @@ void FetchStage::windowMove(vector<SimulationInstruction> simulationInstructionL
 				PC++;
 			}
 		}
-		tempCnt++;
+		i++;
 	}
 }
 
 // determines if window[check] can be reordered into window[1] to make a pair with window [0] for simultaneous pipeline entering
 bool FetchStage::regNameMatch(int check)
 {
-	bool tempFlag = false;
-	int tempCnti = 0;
+	bool flag = false;
 
-	if((window[0].opcodeString == "end") || (window[0].opcodeString == "nop") || (window[0].opcodeString == "NOP"))
+	if ((window[0].opcodeString == "end") || (window[0].opcodeString == "nop") || (window[0].opcodeString == "NOP"))
 		return true;
-
-	while (tempCnti < check) {
-		tempCnti++;
-		if((window[check].rd == window[0].rd)
-			|| (window[check].rd == window[check-tempCnti].rd)
-			|| (window[check].rs == window[check-tempCnti].rd)
-			|| (window[check].rt == window[check-tempCnti].rd)
-			|| (((window[check].rd == window[check-tempCnti].rt) || (window[check].rd == window[check-tempCnti].rs)) && ((check-tempCnti)>2))) {
-			tempFlag = true;
+    
+    for (int i = 0; i < check; i++) {
+        
+		if ((window[check].rd == window[0].rd)
+			|| (window[check].rd == window[check-i].rd)
+			|| (window[check].rs == window[check-i].rd)
+			|| (window[check].rt == window[check-i].rd)
+			|| (((window[check].rd == window[check-i].rt) || (window[check].rd == window[check-i].rs)) && ((check-i) > 2))) {
+			flag = true;
 			break;
 		}
 	}
-	return tempFlag;
+	return flag;
 }
 
 // For a pipeline stop, an "end" is inserted at the end of the benchmark (when an "end" is detected in the MEM stage) To stay within array borders, three "nops" are inserted after "end".  "end"/"nop" is not included in reordering, but enters the window/pipeline to stop the pipeline.
@@ -75,14 +67,14 @@ void FetchStage::reorder(vector<SimulationInstruction> simulationInstructionList
 		return;
 	}
 
-	for (tempCnt = 2; tempCnt < windowTail; tempCnt++) {
-		if(window[tempCnt].opcodeString == "BGEZ" || window[tempCnt].opcodeString == "BLEZ" || window[tempCnt].opcodeString == "BEQ" || window[tempCnt].opcodeString == "J" || window[tempCnt].opcodeString == "end" || window[tempCnt].opcodeString == "nop" || window[tempCnt].opcodeString == "NOP") // cannot be reordered if it is one of these instructions
+	for (int i = 2; i < windowTail; i++) {
+		if(window[i].opcodeString == "BGEZ" || window[i].opcodeString == "BLEZ" || window[i].opcodeString == "BEQ" || window[i].opcodeString == "J" || window[i].opcodeString == "end" || window[i].opcodeString == "nop" || window[i].opcodeString == "NOP") // cannot be reordered if it is one of these instructions
 			return;
-		if (!regNameMatch(tempCnt)) {
-			window[tempCnt].reordered = true; // set reordered true for the instruction in the window to prevent it from forwarding
-			simulationInstructionList[PC+tempCnt].reordered = true; // set reordered true for the instruction in the instruction queue such that it cannot enter the window on the next cycle
-			window.insert(window.begin() + 1, window[tempCnt]); // reorder window[tempcount] to enter pipeline with window[0]
-			window.erase(window.begin() + (tempCnt+1));
+		if (!regNameMatch(i)) {
+			window[i].reordered = true; // set reordered true for the instruction in the window to prevent it from forwarding
+			simulationInstructionList[PC+i].reordered = true; // set reordered true for the instruction in the instruction queue such that it cannot enter the window on the next cycle
+			window.insert(window.begin() + 1, window[i]); // reorder window[tempcount] to enter pipeline with window[0]
+			window.erase(window.begin() + (i+1));
 			pairwise = true;
 			return;
 		}

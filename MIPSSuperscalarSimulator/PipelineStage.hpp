@@ -6,16 +6,16 @@
 //  Copyright © 2016 ZhuKim. All rights reserved.
 //
 
-#ifndef Stage_hpp
-#define Stage_hpp
+#ifndef PipelineStage_hpp
+#define PipelineStage_hpp
 
 #include <stdio.h>
 #include <vector>
 #include "SimulationInstruction.hpp"
 
-class Stage {
+class PipelineStage {
 public:
-	Stage();
+	PipelineStage();
 	vector<SimulationInstruction> currentInstructionList;
 //    static int PC;
     

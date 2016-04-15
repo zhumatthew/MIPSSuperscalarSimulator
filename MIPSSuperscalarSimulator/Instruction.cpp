@@ -27,6 +27,7 @@ Instruction::Instruction(vector<string> results, InstrType type, vector<LabelIns
 }
 
 
+// opcodeString is assigned the int return value of parseOpcode function??
 // name this function parse instruction??
 void Instruction::handleInstruction(vector<string> results) {
     

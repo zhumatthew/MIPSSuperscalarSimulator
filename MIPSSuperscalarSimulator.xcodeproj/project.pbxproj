@@ -17,13 +17,13 @@
 		B35560351CB590870043584B /* MemoryStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B35560331CB590870043584B /* MemoryStage.cpp */; };
 		B355603B1CB737AE0043584B /* RegisterFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B35560391CB737AE0043584B /* RegisterFile.cpp */; };
 		B355603E1CB737C00043584B /* MainMemory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B355603C1CB737C00043584B /* MainMemory.cpp */; };
-		B35560411CB7416A0043584B /* Stage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B355603F1CB7416A0043584B /* Stage.cpp */; };
 		B35560441CB7421D0043584B /* Instruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B35560421CB7421D0043584B /* Instruction.cpp */; };
 		B35560471CB746A30043584B /* LabelInstruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B35560451CB746A30043584B /* LabelInstruction.cpp */; };
 		B36AB3F41CB88345009C3275 /* Forwarding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B36AB3F21CB88345009C3275 /* Forwarding.cpp */; };
 		B3E8DC521CBC5BAF00E99EDD /* InstructionParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3E8DC4E1CBC5BAE00E99EDD /* InstructionParser.cpp */; };
 		B3E8DC531CBC5BAF00E99EDD /* InstructionType.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3E8DC501CBC5BAF00E99EDD /* InstructionType.cpp */; };
 		B3E8DC561CBC965D00E99EDD /* SourceReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3E8DC541CBC965C00E99EDD /* SourceReader.cpp */; };
+		B3E8DC5C1CC19BF100E99EDD /* PipelineStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3E8DC5A1CC19BF100E99EDD /* PipelineStage.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -59,8 +59,6 @@
 		B355603A1CB737AE0043584B /* RegisterFile.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RegisterFile.hpp; sourceTree = "<group>"; };
 		B355603C1CB737C00043584B /* MainMemory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainMemory.cpp; sourceTree = "<group>"; };
 		B355603D1CB737C00043584B /* MainMemory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MainMemory.hpp; sourceTree = "<group>"; };
-		B355603F1CB7416A0043584B /* Stage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Stage.cpp; sourceTree = "<group>"; };
-		B35560401CB7416A0043584B /* Stage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Stage.hpp; sourceTree = "<group>"; };
 		B35560421CB7421D0043584B /* Instruction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Instruction.cpp; sourceTree = "<group>"; };
 		B35560431CB7421D0043584B /* Instruction.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Instruction.hpp; sourceTree = "<group>"; };
 		B35560451CB746A30043584B /* LabelInstruction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LabelInstruction.cpp; sourceTree = "<group>"; };
@@ -73,6 +71,8 @@
 		B3E8DC511CBC5BAF00E99EDD /* InstructionType.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InstructionType.hpp; sourceTree = "<group>"; };
 		B3E8DC541CBC965C00E99EDD /* SourceReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SourceReader.cpp; sourceTree = "<group>"; };
 		B3E8DC551CBC965C00E99EDD /* SourceReader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SourceReader.hpp; sourceTree = "<group>"; };
+		B3E8DC5A1CC19BF100E99EDD /* PipelineStage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PipelineStage.cpp; sourceTree = "<group>"; };
+		B3E8DC5B1CC19BF100E99EDD /* PipelineStage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PipelineStage.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,8 +126,8 @@
 				B35560391CB737AE0043584B /* RegisterFile.cpp */,
 				B355603D1CB737C00043584B /* MainMemory.hpp */,
 				B355603C1CB737C00043584B /* MainMemory.cpp */,
-				B35560401CB7416A0043584B /* Stage.hpp */,
-				B355603F1CB7416A0043584B /* Stage.cpp */,
+				B3E8DC5B1CC19BF100E99EDD /* PipelineStage.hpp */,
+				B3E8DC5A1CC19BF100E99EDD /* PipelineStage.cpp */,
 				B35560251CB5903D0043584B /* FetchStage.hpp */,
 				B35560241CB5903D0043584B /* FetchStage.cpp */,
 				B35560281CB5904C0043584B /* DecodeStage.hpp */,
@@ -205,6 +205,7 @@
 				B35560321CB590780043584B /* WriteBackStage.cpp in Sources */,
 				B355602F1CB590680043584B /* ExecuteStage.cpp in Sources */,
 				B35560441CB7421D0043584B /* Instruction.cpp in Sources */,
+				B3E8DC5C1CC19BF100E99EDD /* PipelineStage.cpp in Sources */,
 				B32A0D091CB7581A00216F67 /* SimulationInstruction.cpp in Sources */,
 				B35560351CB590870043584B /* MemoryStage.cpp in Sources */,
 				B3E8DC531CBC5BAF00E99EDD /* InstructionType.cpp in Sources */,
@@ -213,7 +214,6 @@
 				B3E8DC521CBC5BAF00E99EDD /* InstructionParser.cpp in Sources */,
 				B355603B1CB737AE0043584B /* RegisterFile.cpp in Sources */,
 				B35560471CB746A30043584B /* LabelInstruction.cpp in Sources */,
-				B35560411CB7416A0043584B /* Stage.cpp in Sources */,
 				B32A0D0A1CB7581A00216F67 /* Simulator.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
