@@ -73,6 +73,7 @@
 		B3E8DC551CBC965C00E99EDD /* SourceReader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SourceReader.hpp; sourceTree = "<group>"; };
 		B3E8DC5A1CC19BF100E99EDD /* PipelineStage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PipelineStage.cpp; sourceTree = "<group>"; };
 		B3E8DC5B1CC19BF100E99EDD /* PipelineStage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PipelineStage.hpp; sourceTree = "<group>"; };
+		B3E8DC5D1CC1BB7000E99EDD /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +90,7 @@
 		B3555FFF1CB4D02F0043584B = {
 			isa = PBXGroup;
 			children = (
+				B3E8DC5D1CC1BB7000E99EDD /* CMakeLists.txt */,
 				B355600A1CB4D02F0043584B /* MIPSSuperscalarSimulator */,
 				B35560091CB4D02F0043584B /* Products */,
 			);
