@@ -9,6 +9,10 @@
 #include <iostream>
 #include "InstructionType.hpp"
 
+// enum for each opcode
+// enum Opcode { ADDI = 8 }
+// enum Funct { ADD = 32 }
+
 using namespace std;
 
 // R-type instructions (register)
@@ -53,33 +57,33 @@ bool InstructionType::isLabel(string strOpcode) {
 
 // binary literals?
 int InstructionType::operationCodeDefine(string str, InstrType instrType) {
-    int opcode = 0;
+    int opcode = 0b000000;
     switch (instrType) {
         case RType:
             if (str == "ADD") {
-                opcode = 0;
+                opcode = 0b000000;
             } else if (str == "MUL") {
-                opcode = 28;
+                opcode = 0b011100;
             } else if (str == "SUB") {
-                opcode = 0;
+                opcode = 0b000000;
             } else if (str == "DIV") {
-                opcode = 0;
+                opcode = 0b000000;
             }
             break;
         case IType:
             if (str == "ADDI") {
-                opcode = 8;
+                opcode = 0b001000;
             }
             break;
         case MBType:
             if (str == "LW") {
-                opcode = 35;
+                opcode = 0b100011;
             } else if (str == "SW") {
-                opcode = 43;
+                opcode = 0b101011;
             } else if (str == "BEQ") {
-                opcode = 4;
+                opcode = 0b000100;
             } else if (str == "BEQL") {
-                opcode = 20;
+                opcode = 0b010100;
             }
             break;
         case JType:

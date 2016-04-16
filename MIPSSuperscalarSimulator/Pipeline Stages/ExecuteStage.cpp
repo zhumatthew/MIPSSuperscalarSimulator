@@ -57,6 +57,9 @@ void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory,
 		instruction.currentForward.rsForward = false;
 		instruction.currentForward.rtDelayedForward = false;
 		instruction.currentForward.rtForward = false;
+        
+        // If it is a R-type opcode, then switch on funct
+        // Otherwise, switch on opcode
 
 		if (instruction.opcodeString == "ADD") {
 			instruction.rdValue = instruction.rsValue + instruction.rtValue;
