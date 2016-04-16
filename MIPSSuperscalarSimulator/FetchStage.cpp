@@ -10,24 +10,24 @@
 
 // No "this" required unless parameter/local variable name overloading
 
-FetchStage::FetchStage(int instructionLength) : lastPC(0), instrSize(instructionLength), windowSize(8), pairwise(false), windowTail(0), upBranch(0), window(windowSize, SimulationInstruction("nop")) { PC = 0; } // does this pc just get initialized by the super's initializer list?
+FetchStage::FetchStage(int instructionLength) : lastPC(0), instrSize(instructionLength), windowSize(8), pairwise(false), windowTail(0), upBranch(0), window(windowSize, SimulationInstruction("nop")) { programCounter = 0; } // does this pc just get initialized by the super's initializer list?
 
 // Program counter may add one or two
 void FetchStage::windowMove(vector<SimulationInstruction> simulationInstructionList)
 {
 	windowTail = 0;
-	int i = PC;
+	int i = programCounter;
     
     // First condition is to ensure window shrinks when approaching the edge of the instruction queue as there are fewer instructions to fetch
     // Second condition is to ensure that the length of the window will not be greater than the window size
     // Instruction size takes into account one "end" and three "nop" at the end of the simulated instruction list
-	while (((i - PC) < (instrSize - PC)) && (windowTail < windowSize)) {
+	while (((i - programCounter) < (instrSize - programCounter)) && (windowTail < windowSize)) {
 		window[windowTail] = simulationInstructionList[i];
 		if (!window[windowTail].reordered) { // reordered instructions have entered the pipeline; if they enter the window again, they are executed twice
 			windowTail++;
 		} else { // Avoids a second execution of the instruction after the reordered one
 			if (windowTail < 2) {
-				PC++;
+				programCounter++;
 			}
 		}
 		i++;
@@ -72,7 +72,7 @@ void FetchStage::reorder(vector<SimulationInstruction> simulationInstructionList
 			return;
 		if (!regNameMatch(i)) {
 			window[i].reordered = true; // set reordered true for the instruction in the window to prevent it from forwarding
-			simulationInstructionList[PC+i].reordered = true; // set reordered true for the instruction in the instruction queue such that it cannot enter the window on the next cycle
+			simulationInstructionList[programCounter+i].reordered = true; // set reordered true for the instruction in the instruction queue such that it cannot enter the window on the next cycle
 			window.insert(window.begin() + 1, window[i]); // reorder window[tempcount] to enter pipeline with window[0]
 			window.erase(window.begin() + (i+1));
 			pairwise = true;
@@ -91,7 +91,7 @@ void FetchStage::clear_reordered(vector<SimulationInstruction> simulationInstruc
 void FetchStage::process(vector<SimulationInstruction> simulationInstructionList, int lastStall, bool falsePrediction, int savedPC)
 {
 	pairwise = false;
-	lastPC = PC;
+	lastPC = programCounter;
 	windowMove(simulationInstructionList);
 	reorder(simulationInstructionList);
 
@@ -103,22 +103,22 @@ void FetchStage::process(vector<SimulationInstruction> simulationInstructionList
 			window[1].loopCount = window[1].instructionLocation + upBranch;
 			currentInstructionList[0] = window[0];
 			currentInstructionList[1] = window[1];
-			PC = PC + 2;
+			programCounter = programCounter + 2;
 			if (window[1].reordered) // The pair of instructions are the result of reordering, so the next sequential address simuInstrList[PC+1] will not enter the pipeline in this cycle
-				PC = PC - 1; // simuInstrList[PC+1] will be window[0] the next cycle
+				programCounter = programCounter - 1; // simuInstrList[PC+1] will be window[0] the next cycle
 		} else { // "nop" is inserted at depth of two and window[0] enters pipeline alone
 			window[0].loopCount = window[0].instructionLocation + upBranch;
 			currentInstructionList[0] = window[0];
 			currentInstructionList[1] = SimulationInstruction("NOP");
-			PC++;
+			programCounter++;
 		}
-		clear_reordered(simulationInstructionList, PC, lastPC);
+		clear_reordered(simulationInstructionList, programCounter, lastPC);
 
 		if (falsePrediction) {
 			int updatedPC = savedPC;
-			upBranch = upBranch + (PC - updatedPC);
-			simulationInstructionList[PC].reordered = false;
-			PC = updatedPC;
+			upBranch = upBranch + (programCounter - updatedPC);
+			simulationInstructionList[programCounter].reordered = false;
+			programCounter = updatedPC;
 		}
 	}
 }
