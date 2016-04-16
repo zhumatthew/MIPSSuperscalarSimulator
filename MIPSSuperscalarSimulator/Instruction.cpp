@@ -40,7 +40,7 @@ void Instruction::handleInstruction(vector<string> results) {
 			rt = parser.parseRt(instrType);
 			rd = parser.parseRd(instrType);
 			middleFiveDigital = parser.parseMiddleFiveDigit(instrType);
-			lowSixDigital = parser.parseLowSixDigit(instrType);
+			lowSixDigital = parser.parseFunct(instrType);
 			break;
 		case IType:
 			opcode = parser.parseOpcode(instrType);
