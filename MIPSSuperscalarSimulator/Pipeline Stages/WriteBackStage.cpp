@@ -12,7 +12,7 @@
 using namespace std;
 
 // Places the destination register value into the destination register of the register file
-// returns an increment for the simulator's instruction count
+// Returns an increment for the simulator's instruction count
 // If the first instruction is NOP or is empty, then the instruction count is not incremented at all.
 // If the second instruction in the list is a NOP, the instruction count is incremented by one. Otherwise, it is incremented by two.
 int WriteBackStage::process(RegisterFile& regFile, DecodeStage currentDecode){

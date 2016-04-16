@@ -97,7 +97,7 @@ void Simulator::process() {
         int increment = simuWriteBack.process(simuRegFile, simuDecode);
         simuMemory.process(simuMainMemory, simuRegFile);
         simuExecute.process(simuDecode, simuMemory, simuRegFile, lastStall, falsePrediction);
-        simuDecode.process(simuMainMemory, simuRegFile, hazardList, lastStall);
+        simuDecode.process(simuRegFile, hazardList, lastStall);
         simuFetch.process(simulationInstructionList, lastStall, falsePrediction, simuExecute.getSavedProgramCounter());
         instrCount += increment;
         
@@ -220,7 +220,7 @@ void Simulator::stepImplement() {
     int increment = simuWriteBack.process(simuRegFile, simuDecode);
     simuMemory.process(simuMainMemory, simuRegFile);
     simuExecute.process(simuDecode, simuMemory, simuRegFile, lastStall, falsePrediction);
-    simuDecode.process(simuMainMemory, simuRegFile, hazardList, lastStall);
+    simuDecode.process(simuRegFile, hazardList, lastStall);
     simuFetch.process(simulationInstructionList, lastStall, falsePrediction, simuExecute.getSavedProgramCounter());
     instrCount += increment;
     
