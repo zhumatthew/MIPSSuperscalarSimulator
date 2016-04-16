@@ -12,13 +12,13 @@
 #include <stdio.h>
 #include <vector>
 
-#include "MainMemory.hpp"
-#include "RegisterFile.hpp"
-#include "FetchStage.hpp"
-#include "DecodeStage.hpp"
-#include "ExecuteStage.hpp"
-#include "MemoryStage.hpp"
-#include "WriteBackStage.hpp"
+#include "./Memory/MainMemory.hpp"
+#include "./Memory/RegisterFile.hpp"
+#include "./Pipeline Stages/FetchStage.hpp"
+#include "./Pipeline Stages/DecodeStage.hpp"
+#include "./Pipeline Stages/ExecuteStage.hpp"
+#include "./Pipeline Stages/MemoryStage.hpp"
+#include "./Pipeline Stages/WriteBackStage.hpp"
 #include "SimulationInstruction.hpp"
 
 class Simulator {
