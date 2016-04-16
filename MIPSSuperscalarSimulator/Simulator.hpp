@@ -48,7 +48,7 @@ public:
     bool falsePrediction;
     int instrCount;
 
-    void implement();
+    void process();
     void stepImplement();
     
 private:

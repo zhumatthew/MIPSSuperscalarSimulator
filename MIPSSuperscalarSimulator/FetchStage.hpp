@@ -16,7 +16,7 @@ class FetchStage : public PipelineStage {
 
 public:
 	FetchStage(int instructionLength);
-    void implement(vector<SimulationInstruction> simulationInstructionList, int lastStall, bool falsePrediction, int savedPC);
+    void process(vector<SimulationInstruction> simulationInstructionList, int lastStall, bool falsePrediction, int savedPC);
     
 private:
     int upBranch;

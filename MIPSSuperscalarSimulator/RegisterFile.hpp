@@ -17,7 +17,7 @@ using namespace std;
 class RegisterFile {
 public:
     RegisterFile();
-    bool putValue(int value, int address);
+    bool setValue(int value, int address);
     int getValue(int address) const;
     
 private:

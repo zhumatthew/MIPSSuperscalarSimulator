@@ -11,7 +11,7 @@
 using namespace std;
 
 // In the memory stage, load word and store word operations are performed
-void MemoryStage::implement(MainMemory& mainMemory, RegisterFile& regfile) {
+void MemoryStage::process(MainMemory& mainMemory, RegisterFile& regfile) {
 
 	if (currentInstructionList.front().effectiveAddress != 0) {
         cout << "MemoryAddress [ " << currentInstructionList.front().effectiveAddress << "] = " << endl;
@@ -36,10 +36,10 @@ void MemoryStage::implement(MainMemory& mainMemory, RegisterFile& regfile) {
 
     // GPR[rs] is placed in Mem[effectiveAddress]
 	if (currentInstructionList.front().opcodeString == "SW")
-		mainMemory.putValue(regfile.getValue(currentInstructionList.front().rt), currentInstructionList.front().effectiveAddress);
+		mainMemory.setValue(regfile.getValue(currentInstructionList.front().rt), currentInstructionList.front().effectiveAddress);
 
 	if (currentInstructionList[1].opcodeString == "SW")
-		mainMemory.putValue(regfile.getValue(currentInstructionList[1].rt), currentInstructionList[1].effectiveAddress);
+		mainMemory.setValue(regfile.getValue(currentInstructionList[1].rt), currentInstructionList[1].effectiveAddress);
     
     
 }

@@ -47,7 +47,7 @@ Simulator::Simulator(vector<SimulationInstruction> simulationInstrList) : simula
 //    }
 //}
 
-void Simulator::implement() {
+void Simulator::process() {
     cycleCount = 0;
     while (simuMemory.currentInstructionList[0].originalString != "end") {
         cout << "clockCycle:" << cycleCount + 1 << endl;
@@ -94,11 +94,11 @@ void Simulator::implement() {
         cout << "WriteBack:" << simuWriteBack.currentInstructionList[0].originalString << endl;
         cout << "WriteBack:" << simuWriteBack.currentInstructionList[1].originalString << endl;
         
-        int increment = simuWriteBack.implement(simuRegFile, simuDecode);
-        simuMemory.implement(simuMainMemory, simuRegFile);
-        simuExecute.implement(simuDecode, simuMemory, simuRegFile, lastStall, falsePrediction);
-        simuDecode.implement(simuMainMemory, simuRegFile, hazardList, lastStall);
-        simuFetch.implement(simulationInstructionList, lastStall, falsePrediction, simuExecute.getSavedPC());
+        int increment = simuWriteBack.process(simuRegFile, simuDecode);
+        simuMemory.process(simuMainMemory, simuRegFile);
+        simuExecute.process(simuDecode, simuMemory, simuRegFile, lastStall, falsePrediction);
+        simuDecode.process(simuMainMemory, simuRegFile, hazardList, lastStall);
+        simuFetch.process(simulationInstructionList, lastStall, falsePrediction, simuExecute.getSavedProgramCounter());
         instrCount += increment;
         
         cout << "Fetch:" << simuFetch.currentInstructionList[0].originalString << endl;
@@ -217,11 +217,11 @@ void Simulator::stepImplement() {
     cout << "WriteBack:" << simuWriteBack.currentInstructionList[0].originalString << endl;
     cout << "WriteBack:" << simuWriteBack.currentInstructionList[1].originalString << endl;
     
-    int increment = simuWriteBack.implement(simuRegFile, simuDecode);
-    simuMemory.implement(simuMainMemory, simuRegFile);
-    simuExecute.implement(simuDecode, simuMemory, simuRegFile, lastStall, falsePrediction);
-    simuDecode.implement(simuMainMemory, simuRegFile, hazardList, lastStall);
-    simuFetch.implement(simulationInstructionList, lastStall, falsePrediction, simuExecute.getSavedPC());
+    int increment = simuWriteBack.process(simuRegFile, simuDecode);
+    simuMemory.process(simuMainMemory, simuRegFile);
+    simuExecute.process(simuDecode, simuMemory, simuRegFile, lastStall, falsePrediction);
+    simuDecode.process(simuMainMemory, simuRegFile, hazardList, lastStall);
+    simuFetch.process(simulationInstructionList, lastStall, falsePrediction, simuExecute.getSavedProgramCounter());
     instrCount += increment;
     
     cout << "Fetch:" + simuFetch.currentInstructionList[0].originalString << endl;

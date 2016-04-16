@@ -10,7 +10,7 @@
 
 DecodeStage::DecodeStage() : readAfterWriteHazard(false) {}
 
-void DecodeStage::implement(const MainMemory& mmem, const RegisterFile& regm, const vector<SimulationInstruction>& hazardList, int lastStall) {
+void DecodeStage::process(const MainMemory& mmem, const RegisterFile& regm, const vector<SimulationInstruction>& hazardList, int lastStall) {
 	
     if (readAfterWriteHazard || (currentInstructionList.front().opcodeString == "NOP")) {
 		return;
@@ -148,7 +148,7 @@ void DecodeStage::check(const vector<SimulationInstruction>& hazardList, int las
             if (instruction.rs == hazardList[0].rd) {
                 if (instruction.loopCount > hazardList[0].loopCount) {
                     instruction.currentForward.rsDelayedForward = true;
-                    instruction.currentForward.rsDelayForwardDepth = 0;
+                    instruction.currentForward.rsDelayedForwardDepth = 0;
                 } else {
                     instruction.currentForward.rsDelayedForward = false;
                 }
@@ -157,7 +157,7 @@ void DecodeStage::check(const vector<SimulationInstruction>& hazardList, int las
             if (instruction.rt == hazardList[0].rd) {
                 if (instruction.loopCount > hazardList[0].loopCount) {
                     instruction.currentForward.rtDelayedForward = true;
-                    instruction.currentForward.rtDelayForwardDepth = 0;
+                    instruction.currentForward.rtDelayedForwardDepth = 0;
                 } else {
                     instruction.currentForward.rtDelayedForward = false;
                 }
@@ -166,7 +166,7 @@ void DecodeStage::check(const vector<SimulationInstruction>& hazardList, int las
             if (instruction.rs == hazardList[1].rd) {
                 if (instruction.loopCount > hazardList[1].loopCount) {
                     instruction.currentForward.rsDelayedForward = true;
-                    instruction.currentForward.rsDelayForwardDepth = 1;
+                    instruction.currentForward.rsDelayedForwardDepth = 1;
                 } else {
                     instruction.currentForward.rsDelayedForward = false;
                 }
@@ -175,7 +175,7 @@ void DecodeStage::check(const vector<SimulationInstruction>& hazardList, int las
             if (instruction.rt == hazardList[1].rd) {
                 if (instruction.loopCount > hazardList[1].loopCount) {
                     instruction.currentForward.rtDelayedForward = true;
-                    instruction.currentForward.rtDelayForwardDepth = 1;
+                    instruction.currentForward.rtDelayedForwardDepth = 1;
                 } else {
                     instruction.currentForward.rtDelayedForward = false;
                 }

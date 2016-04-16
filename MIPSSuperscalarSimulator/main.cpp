@@ -47,7 +47,7 @@ int main(int argc, const char * argv[]) {
 	}
 
 	Simulator sim = Simulator(simulationInstructionList);
-	sim.implement();
+	sim.process();
 
 	return 0;
 }

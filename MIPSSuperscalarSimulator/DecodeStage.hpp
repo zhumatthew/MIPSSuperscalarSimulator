@@ -18,11 +18,10 @@ class DecodeStage : public PipelineStage {
 
 public:
 	DecodeStage();
-    int pcSaved;
     // SimulationInstruction instructionSaved;
     bool readAfterWriteHazard;
 
-    void implement(const MainMemory& mmem, const RegisterFile& regm, const vector<SimulationInstruction>& hazardList, int lastStall);
+    void process(const MainMemory& mmem, const RegisterFile& regm, const vector<SimulationInstruction>& hazardList, int lastStall);
     void check(const vector<SimulationInstruction>& hazardList, int lastStall);
 
 };

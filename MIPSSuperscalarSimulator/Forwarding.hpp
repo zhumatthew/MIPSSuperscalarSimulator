@@ -23,8 +23,8 @@ public:
 
     int rsForwardDepth;
     int rtForwardDepth;
-    int rsDelayForwardDepth;
-    int rtDelayForwardDepth;
+    int rsDelayedForwardDepth;
+    int rtDelayedForwardDepth;
 
 };
 

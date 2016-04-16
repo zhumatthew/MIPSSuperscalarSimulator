@@ -16,7 +16,7 @@ MainMemory::MainMemory() {
     }
 }
 
-bool MainMemory::putValue(int value, int address) {
+bool MainMemory::setValue(int value, int address) {
     if (address >= 0 && address < MEMORY_SIZE) {
         memoryData[address] = value;
         return true;

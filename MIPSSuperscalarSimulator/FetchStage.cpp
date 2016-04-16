@@ -88,7 +88,7 @@ void FetchStage::clear_reordered(vector<SimulationInstruction> simulationInstruc
 	}
 }
 
-void FetchStage::implement(vector<SimulationInstruction> simulationInstructionList, int lastStall, bool falsePrediction, int savedPC)
+void FetchStage::process(vector<SimulationInstruction> simulationInstructionList, int lastStall, bool falsePrediction, int savedPC)
 {
 	pairwise = false;
 	lastPC = PC;

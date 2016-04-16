@@ -11,7 +11,7 @@
 // example instruction
 // $d = $s + $t
 
-void ExecuteStage::implement(DecodeStage currentDecode, MemoryStage currentMemory, const RegisterFile& regFile, int lastStall, bool falsePrediction) {
+void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory, const RegisterFile& regFile, int lastStall, bool falsePrediction) {
     
     // In case a RAW hazard is detected in last cycle
 	if (currentDecode.readAfterWriteHazard || (currentInstructionList.front().opcodeString=="NOP"))
@@ -89,7 +89,7 @@ void ExecuteStage::implement(DecodeStage currentDecode, MemoryStage currentMemor
 			if (instruction.branchCondition == true) {
                 // Save the PC. just for convenience, actually the target address will be updated to PC (all the five stages share this
                 // static field) in this cycle, but every instruction indicated by PC won't be fetched until next cycle's IF stage
-				tempPC = instruction.immediate;
+				savedProgramCounter = instruction.immediate;
 				falsePrediction = true; // This flag is set so that a bubble is inserted into EX and ID stages in the next cycle
 				instruction.branchCondition = false; // Every time after this flag is used, it should be reset to false so that the next time it can be set or reset based on the outcome of the condition evaluation.
 			}
@@ -99,6 +99,6 @@ void ExecuteStage::implement(DecodeStage currentDecode, MemoryStage currentMemor
 	}
 }
 
-int ExecuteStage::getSavedPC() {
-	return tempPC;
+int ExecuteStage::getSavedProgramCounter() {
+	return savedProgramCounter;
 }

@@ -18,7 +18,7 @@
 class MemoryStage : public PipelineStage {
     
 public:
-	void implement(MainMemory& mainMemory, RegisterFile& regfile);
+	void process(MainMemory& mainMemory, RegisterFile& regfile);
 
 };
 

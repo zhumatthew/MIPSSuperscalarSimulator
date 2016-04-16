@@ -16,7 +16,7 @@ RegisterFile::RegisterFile() {
     }
 }
 
-bool RegisterFile::putValue(int value, int address) {
+bool RegisterFile::setValue(int value, int address) {
     if (address >= 0 && address < REGISTER_SIZE) {
         registerData[address] = value;
         return true;
