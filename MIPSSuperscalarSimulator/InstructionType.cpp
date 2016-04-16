@@ -50,6 +50,8 @@ bool InstructionType::isLabel(string strOpcode) {
 // all but case 0 involve immediates
 // case 5 involves labels
 
+
+// binary literals?
 int InstructionType::operationCodeDefine(string str, InstrType instrType) {
     int opcode = 0;
     switch (instrType) {

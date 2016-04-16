@@ -10,7 +10,7 @@
 
 DecodeStage::DecodeStage() : readAfterWriteHazard(false) {}
 
-void DecodeStage::process(const MainMemory& mmem, const RegisterFile& regm, const vector<SimulationInstruction>& hazardList, int lastStall) {
+void DecodeStage::process(const RegisterFile& regFile, const vector<SimulationInstruction>& hazardList, int lastStall) {
 	
     if (readAfterWriteHazard || (currentInstructionList.front().opcodeString == "NOP")) {
 		return;
@@ -19,10 +19,10 @@ void DecodeStage::process(const MainMemory& mmem, const RegisterFile& regm, cons
 	check(hazardList, lastStall);
     
     // Retrieve rs and rt values for the two instructions from the register file
-	currentInstructionList[0].rsValue = regm.getValue(currentInstructionList[0].rs);
-	currentInstructionList[0].rtValue = regm.getValue(currentInstructionList[0].rt);
-	currentInstructionList[1].rsValue = regm.getValue(currentInstructionList[1].rs);
-	currentInstructionList[1].rtValue = regm.getValue(currentInstructionList[1].rt);
+	currentInstructionList[0].rsValue = regFile.getValue(currentInstructionList[0].rs);
+	currentInstructionList[0].rtValue = regFile.getValue(currentInstructionList[0].rt);
+	currentInstructionList[1].rsValue = regFile.getValue(currentInstructionList[1].rs);
+	currentInstructionList[1].rtValue = regFile.getValue(currentInstructionList[1].rt);
 }
 
 // Instructions such as SW and LW only have rt or rs and will assign 0 values to rt or rs that is not needed

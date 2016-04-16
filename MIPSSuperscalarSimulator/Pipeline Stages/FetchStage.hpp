@@ -20,8 +20,6 @@ public:
     
 private:
     int upBranch;
-    int lastPC;
-    bool pairwise;
     int windowTail; // number of instructions in the window
     int instrSize; // number of instructions in the benchmark
     int windowSize; // number of instructions in the reorder window
@@ -32,7 +30,7 @@ private:
     // window/check/count?
 	void windowMove(vector<SimulationInstruction> simulationInstructionList);
 	bool regNameMatch(int check);
-	void reorder(vector<SimulationInstruction> simuInstrList);
+	bool reorder(vector<SimulationInstruction> simuInstrList);
 	void clear_reordered(vector<SimulationInstruction> simulationInstructionList, int cnt1, int cnt2);
 };
 
