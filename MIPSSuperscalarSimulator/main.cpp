@@ -12,8 +12,15 @@
 #include "SimulationInstruction.hpp"
 
 int main(int argc, const char * argv[]) {
+
+	if(argc < 2) {
+		cout << "Usage: " << argv[0] << " assembly_file_name" << endl;
+		return 0;
+	}
+
 //	SourceReader sourceReader("C:\\Users\\jm28550\\Downloads\\alu_reg_1.asm");
-    SourceReader sourceReader("/Users/zhumatthew/Desktop/Benchmarks/alu_reg_3/alu_reg_3.asm");
+//	SourceReader sourceReader("/Users/zhumatthew/Desktop/Benchmarks/alu_reg_3/alu_reg_3.asm");
+	SourceReader sourceReader(argv[1]);
 	sourceReader.findLabel();
 	sourceReader.constructInstrList();
 
