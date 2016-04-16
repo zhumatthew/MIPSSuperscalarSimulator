@@ -29,7 +29,7 @@ public:
 	int parseRt(InstrType instrType);
 	int parseRd(InstrType instrType);
 	int parseLowSixDigit(InstrType instrType);
-	int parseMiddleFiveDigit(InstrType instrType);
+	int parseFunct(InstrType instrType);
 	int parseImmediateValue(InstrType instrType);
 
 private:

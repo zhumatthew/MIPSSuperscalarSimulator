@@ -99,18 +99,18 @@ int InstructionType::operationCodeDefine(string str, InstrType instrType) {
 }
 
 int InstructionType::functDefine(string str, InstrType instrType) {
-	int low = 0;
+	int funct = 0;
 
 	switch (instrType) {
 		case RType:
 			if (str == "ADD") {
-				low = 32;
+				funct = 32;
 			} else if (str == "MUL") {
-				low = 2;
+				funct = 2;
 			} else if (str == "SUB") {
-				low = 34;
+				funct = 34;
 			} else if (str == "DIV") {
-				low = 26;
+				funct = 26;
 			}
 			break;
 		case IType:
@@ -119,7 +119,7 @@ int InstructionType::functDefine(string str, InstrType instrType) {
 		default:
             break;
 	}
-	return low;
+	return funct;
 }
 
 int InstructionType::middleFiveDigitDefine(string str, InstrType instrType) {

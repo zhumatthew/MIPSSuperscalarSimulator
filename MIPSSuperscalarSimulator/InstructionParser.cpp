@@ -214,13 +214,13 @@ int InstructionParser::parseRd(InstrType instrType) {
     return rd;
 }
 
-int InstructionParser::parseLowSixDigit(InstrType instrType) {
-    int lowSixDigit = 0;
+int InstructionParser::parseFunct(InstrType instrType) {
+    int funct = 0;
     InstructionType instructionType = InstructionType();
     
     switch (instrType) {
         case RType:
-            lowSixDigit = instructionType.lowSixDigitDefine(this->results[0], instrType);
+            funct = instructionType.functDefine(results[0], instrType);
             break;
         case IType:
         case MBType:
@@ -228,7 +228,7 @@ int InstructionParser::parseLowSixDigit(InstrType instrType) {
         default:
             break;
     }
-    return lowSixDigit;
+    return funct;
 }
 
 int InstructionParser::parseMiddleFiveDigit(InstrType instrType) {
