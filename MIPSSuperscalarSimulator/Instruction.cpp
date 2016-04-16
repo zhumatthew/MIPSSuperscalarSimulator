@@ -35,7 +35,7 @@ void Instruction::handleInstruction(vector<string> results) {
 
 	switch (instrType) {
 		case RType:
-			opcodeString = parser.parseOpcode(instrType);
+			opcode = parser.parseOpcode(instrType);
 			rs = parser.parseRs(instrType);
 			rt = parser.parseRt(instrType);
 			rd = parser.parseRd(instrType);

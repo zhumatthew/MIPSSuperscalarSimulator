@@ -17,11 +17,11 @@
 class ExecuteStage : public PipelineStage {
 
 public:
-	void implement(DecodeStage currentDecode, MemoryStage currentMemory, const RegisterFile& regFile, int lastStall, bool falsePrediction);
-	int getSavedPC();
+	void process(DecodeStage currentDecode, MemoryStage currentMemory, const RegisterFile& regFile, int lastStall, bool falsePrediction);
+	int getSavedProgramCounter();
 
 private:
-	int tempPC;
+	int savedProgramCounter;
 };
 
 #endif /* ExecuteStage_hpp */

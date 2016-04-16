@@ -17,7 +17,7 @@
 class WriteBackStage : public PipelineStage {
     
 public:
-	int implement(RegisterFile& regFile, DecodeStage currentDecode);
+	int process(RegisterFile& regFile, DecodeStage currentDecode);
 
 };
 

@@ -17,12 +17,12 @@ class PipelineStage {
 public:
 	PipelineStage();
 	vector<SimulationInstruction> currentInstructionList;
-//    static int PC;
+//    static int programCounter;
     
     // should be static?
     // index of instruction queue / instruction list
     // index of instruction that is being fetched at this cycle
-    int PC;
+    int programCounter;
     
     
     /*
