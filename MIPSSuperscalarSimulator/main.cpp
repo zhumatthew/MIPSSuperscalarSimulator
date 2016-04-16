@@ -12,7 +12,8 @@
 #include "SimulationInstruction.hpp"
 
 int main(int argc, const char * argv[]) {
-	SourceReader sourceReader("C:\\Users\\jm28550\\Downloads\\alu_reg_1.asm");
+//	SourceReader sourceReader("C:\\Users\\jm28550\\Downloads\\alu_reg_1.asm");
+    SourceReader sourceReader("/Users/zhumatthew/Desktop/Benchmarks/alu_reg_3/alu_reg_3.asm");
 	sourceReader.findLabel();
 	sourceReader.constructInstrList();
 
