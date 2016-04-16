@@ -39,32 +39,32 @@ void Instruction::handleInstruction(vector<string> results) {
 			rs = parser.parseRs(instrType);
 			rt = parser.parseRt(instrType);
 			rd = parser.parseRd(instrType);
-			middleFiveDigital = parser.parseMiddleFiveDigit(instrType);
-			lowSixDigital = parser.parseFunct(instrType);
+			shamt = parser.parseShamt(instrType);
+			funct = parser.parseFunct(instrType);
 			break;
 		case IType:
 			opcode = parser.parseOpcode(instrType);
 			rs = parser.parseRs(instrType);
 			rd = parser.parseRd(instrType);
 			rt = rd;
-			immediate = parser.parseImmediateValue(instrType);
+			immediate = parser.parseImmediate(instrType);
 			break;
 		case MBType:
 			opcode = parser.parseOpcode(instrType);
 			rt = parser.parseRt(instrType);
 			rd = parser.parseRd(instrType);
 			rs = parser.parseRs(instrType);
-			immediate = parser.parseImmediateValue(instrType);
+			immediate = parser.parseImmediate(instrType);
 			break;
 		case JType:
 			opcode = parser.parseOpcode(instrType);
-			immediate = parser.parseImmediateValue(instrType);
+			immediate = parser.parseImmediate(instrType);
 			break;
 		case BRIType:
 			opcode = parser.parseOpcode(instrType);
 			rs = parser.parseRs(instrType);
-			middleFiveDigital = parser.parseMiddleFiveDigit(instrType);
-			immediate = parser.parseImmediateValue(instrType);
+			shamt = parser.parseShamt(instrType);
+			immediate = parser.parseImmediate(instrType);
 			break;
 		default:
 			cout << "instrType Error" << endl;

@@ -55,7 +55,7 @@ bool InstructionType::isLabel(string strOpcode) {
 // case 5 involves labels
 
 
-// binary literals?
+// 6-bit operation code
 int InstructionType::operationCodeDefine(string str, InstrType instrType) {
     int opcode = 0b000000;
     switch (instrType) {
@@ -88,35 +88,36 @@ int InstructionType::operationCodeDefine(string str, InstrType instrType) {
             break;
         case JType:
             if (str == "J") {
-                opcode = 2;
+                opcode = 0b000010;
             }
             break;
         case BRIType:
             if (str == "BGEZ") {
-                opcode = 1;
+                opcode = 0b000001;
             } else if (str == "BLEZ") {
-                opcode = 6;
+                opcode = 0b000110;
             }
             break;
         default:
-            opcode = 0;
+            opcode = 0b000000;
     }
     return opcode;
 }
 
+// 6-bit function
 int InstructionType::functDefine(string str, InstrType instrType) {
-	int funct = 0;
+	int funct = 0b000000;
 
 	switch (instrType) {
 		case RType:
 			if (str == "ADD") {
-				funct = 32;
+				funct = 0b100000;
 			} else if (str == "MUL") {
-				funct = 2;
+				funct = 0b000010;
 			} else if (str == "SUB") {
-				funct = 34;
+				funct = 0b100010;
 			} else if (str == "DIV") {
-				funct = 26;
+				funct = 0b011010;
 			}
 			break;
 		case IType:
@@ -128,19 +129,20 @@ int InstructionType::functDefine(string str, InstrType instrType) {
 	return funct;
 }
 
-int InstructionType::middleFiveDigitDefine(string str, InstrType instrType) {
-	int middle = 0;
+// 5-bit shift amount
+int InstructionType::shamtDefine(string str, InstrType instrType) {
+	int shamt = 0b00000;
 
 	switch (instrType) {
 		case RType:
 			if (str == "ADD") {
-				middle = 0;
+				shamt = 0b00000;
 			} else if(str == "MUL") {
-				middle = 0;
+				shamt = 0b00000;
 			} else if(str == "SUB") {
-				middle = 0;
+				shamt = 0b00000;
 			} else if(str == "DIV") {
-				middle = 0;
+				shamt = 0b00000;
 			}
 			break;
 		case IType:
@@ -149,13 +151,13 @@ int InstructionType::middleFiveDigitDefine(string str, InstrType instrType) {
 			break;
 		case BRIType:
 			if (str == "BGEZ") {
-				middle = 1;
+				shamt = 0b00001;
 			} else if (str == "BLEZ") {
-				middle = 0;
+				shamt = 0b00000;
 			}
 			break;
 		default:
-			middle = 0;
+            break;
 	}
-	return middle;
+	return shamt;
 }

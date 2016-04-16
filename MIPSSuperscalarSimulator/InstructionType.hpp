@@ -28,7 +28,7 @@ public:
 	bool isLabel(string strOpcode);
 	int operationCodeDefine(string str, InstrType instrType);
 	int functDefine(string str, InstrType instrType);
-	int middleFiveDigitDefine(string str, InstrType instrType);
+	int shamtDefine(string str, InstrType instrType);
 
 private:
 	InstrType instrType;

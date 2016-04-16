@@ -231,29 +231,30 @@ int InstructionParser::parseFunct(InstrType instrType) {
     return funct;
 }
 
-int InstructionParser::parseMiddleFiveDigit(InstrType instrType) {
-    int middleFiveDigit = 0;
+// Parse shift amount
+int InstructionParser::parseShamt(InstrType instrType) {
+    int shamt = 0;
     InstructionType instructionType = InstructionType();
     
     switch(instrType){
         case RType:
-            middleFiveDigit =instructionType.middleFiveDigitDefine(this->results[0], instrType);
+            shamt =instructionType.shamtDefine(this->results[0], instrType);
             break;
         case IType:
         case MBType:
         case JType:
             break;
         case BRIType:
-            middleFiveDigit =instructionType.middleFiveDigitDefine(this->results[0], instrType);
+            shamt =instructionType.shamtDefine(this->results[0], instrType);
             break;
         default:
             break;
     }
-    return middleFiveDigit;
+    return shamt;
 }
 
 // parseImmediateValue?
-int InstructionParser::parseImmediateValue(InstrType instrType) {
+int InstructionParser::parseImmediate(InstrType instrType) {
     
     int immediate = 0;
     

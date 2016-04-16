@@ -93,8 +93,8 @@ void SourceReader::constructInstrList() {
 			cout << "rt: " << instr.rt << endl;
 			cout << "rd: " << instr.rd << endl;
 			cout << "immediate: " << instr.immediate << endl;
-			cout << "lowSixDigital: " << instr.lowSixDigital << endl;
-			cout << "middleFiveDigital: " << instr.middleFiveDigital << endl;
+			cout << "funct: " << instr.funct << endl;
+			cout << "shamt: " << instr.shamt << endl;
 			instrList.push_back(instr);
 			lineNumber++;
 		}

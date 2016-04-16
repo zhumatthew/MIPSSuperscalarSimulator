@@ -29,8 +29,8 @@ public:
 	int parseRt(InstrType instrType);
 	int parseRd(InstrType instrType);
 	int parseFunct(InstrType instrType);
-	int parseMiddleFiveDigit(InstrType instrType);
-	int parseImmediateValue(InstrType instrType);
+	int parseShamt(InstrType instrType);
+	int parseImmediate(InstrType instrType);
 
 private:
     string line;
