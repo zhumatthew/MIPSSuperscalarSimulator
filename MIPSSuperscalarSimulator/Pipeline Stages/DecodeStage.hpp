@@ -11,8 +11,8 @@
 
 #include <stdio.h>
 #include "PipelineStage.hpp"
-#include "MainMemory.hpp"
-#include "RegisterFile.hpp"
+#include "../Memory/MainMemory.hpp"
+#include "../Memory/RegisterFile.hpp"
 
 class DecodeStage : public PipelineStage {
 

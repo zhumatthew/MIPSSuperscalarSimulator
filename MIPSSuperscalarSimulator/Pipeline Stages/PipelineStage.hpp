@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 #include <vector>
-#include "SimulationInstruction.hpp"
+#include "../SimulationInstruction.hpp"
 
 class PipelineStage {
 public:
