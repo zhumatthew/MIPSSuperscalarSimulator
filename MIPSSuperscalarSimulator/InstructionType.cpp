@@ -98,6 +98,7 @@ int InstructionType::operationCodeDefine(string str, InstrType instrType) {
     return opcode;
 }
 
+// rename funct
 int InstructionType::lowSixDigitDefine(string str, InstrType instrType) {
 	int low = 0;
 
@@ -123,6 +124,7 @@ int InstructionType::lowSixDigitDefine(string str, InstrType instrType) {
 	return low;
 }
 
+// rename shamt
 int InstructionType::middleFiveDigitDefine(string str, InstrType instrType) {
 	int middle = 0;
 
