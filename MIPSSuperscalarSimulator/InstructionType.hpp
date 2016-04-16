@@ -27,7 +27,7 @@ public:
 	InstrType instrTypeDefine(string strOpcode);
 	bool isLabel(string strOpcode);
 	int operationCodeDefine(string str, InstrType instrType);
-	int lowSixDigitDefine(string str, InstrType instrType);
+	int functDefine(string str, InstrType instrType);
 	int middleFiveDigitDefine(string str, InstrType instrType);
 
 private:
