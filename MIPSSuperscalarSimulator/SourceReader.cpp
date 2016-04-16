@@ -88,13 +88,13 @@ void SourceReader::constructInstrList() {
 			Instruction instr(results,instrType,labelInstrList);
 			instr.originalString = line;
 
-			cout << "Opcode" << "----->" << instr.opcode << endl;
-			cout << "rs" << "----->" << instr.rs << endl;
-			cout << "rt" << "----->" << instr.rt << endl;
-			cout << "rd" << "----->" << instr.rd << endl;
-			cout << "immediate" << "----->" << instr.immediate << endl;
-			cout << "lowSixDigital" << "----->" << instr.lowSixDigital << endl;
-			cout << "middleFiveDigital" << "----->" << instr.middleFiveDigital << endl;
+			cout << "opcode: " << instr.opcode << endl;
+			cout << "rs: " << instr.rs << endl;
+			cout << "rt: " << instr.rt << endl;
+			cout << "rd: " << instr.rd << endl;
+			cout << "immediate: " << instr.immediate << endl;
+			cout << "lowSixDigital: " << instr.lowSixDigital << endl;
+			cout << "middleFiveDigital: " << instr.middleFiveDigital << endl;
 			instrList.push_back(instr);
 			lineNumber++;
 		}
