@@ -50,115 +50,7 @@ Simulator::Simulator(vector<SimulatedInstruction> simulatedInstructionList) : si
 void Simulator::process() {
     cycleCount = 0;
     while (simuMemory.currentInstructionList[0].originalString != "end") {
-        cout << "clockCycle:" << cycleCount + 1 << endl;
-        if (lastStall != 2) {
-            simuWriteBack.currentInstructionList[0] = simuMemory.currentInstructionList[0];
-            simuWriteBack.currentInstructionList[1] = simuMemory.currentInstructionList[1];
-            simuMemory.currentInstructionList[0] = simuExecute.currentInstructionList[0];
-            simuMemory.currentInstructionList[1] = simuExecute.currentInstructionList[1];
-            simuExecute.currentInstructionList[0] = simuDecode.currentInstructionList[0];
-            simuExecute.currentInstructionList[1] = simuDecode.currentInstructionList[1];
-            simuDecode.currentInstructionList[0] = simuFetch.currentInstructionList[0];
-            simuDecode.currentInstructionList[1] = simuFetch.currentInstructionList[1];
-        }
-        
-        // At the second cycle since the RAW hazard was detected (lastStall==2), a NOP needs to be inserted into the MEM stage, but this can lead to the unsuccessful forwarding with an origin stage of MEM since the information in MEM is discarded before it is forwarded to the execution stage of the same cycle
-        
-        if (lastStall == 2) {
-            simuWriteBack.currentInstructionList[0] = simuMemory.currentInstructionList[0];
-            simuWriteBack.currentInstructionList[1] = simuMemory.currentInstructionList[1];
-            
-            // Temporary storage of instruction for forwarding to this cycle's execution stage
-            tempInstrList[0] = simuMemory.currentInstructionList[0];
-            tempInstrList[1] = simuMemory.currentInstructionList[1];
-            
-            simuMemory.currentInstructionList[0] = SimulatedInstruction("Empty");
-            simuMemory.currentInstructionList[1] = SimulatedInstruction("Empty");
-        }
-        
-        if (branchMisprediction) {
-            branchMisprediction = false;
-            simuExecute.currentInstructionList[0] = SimulatedInstruction("NOP");
-            simuExecute.currentInstructionList[1] = SimulatedInstruction("NOP");
-            simuDecode.currentInstructionList[0] = SimulatedInstruction("NOP");
-            simuDecode.currentInstructionList[1] = SimulatedInstruction("NOP");
-            hazardList[2] = tempHazardList[0];
-            hazardList[3] = tempHazardList[1];
-            hazardList[4] = tempHazardList[2];
-            hazardList[5] = tempHazardList[3];
-        }
-        
-        cout << "Decode:" << simuDecode.currentInstructionList[0].originalString << endl;
-        cout << "Decode:" << simuDecode.currentInstructionList[1].originalString << endl;
-        cout << "Execute:" << simuExecute.currentInstructionList[0].originalString << endl;
-        cout << "Execute:" << simuExecute.currentInstructionList[1].originalString << endl;
-        cout << "Memory:" << simuMemory.currentInstructionList[0].originalString << endl;
-        cout << "Memory:" << simuMemory.currentInstructionList[1].originalString << endl;
-        cout << "WriteBack:" << simuWriteBack.currentInstructionList[0].originalString << endl;
-        cout << "WriteBack:" << simuWriteBack.currentInstructionList[1].originalString << endl;
-        
-        int increment = simuWriteBack.process(simuRegFile, simuDecode);
-        simuMemory.process(simuMainMemory, simuRegFile);
-        simuExecute.process(simuDecode, simuMemory, simuRegFile, lastStall, branchMisprediction);
-        simuDecode.process(simuRegFile, hazardList, lastStall);
-        simuFetch.process(simulatedInstructionList, lastStall, branchMisprediction, simuExecute.getSavedProgramCounter());
-        instrCount += increment;
-        
-        cout << "Fetch:" << simuFetch.currentInstructionList[0].originalString << endl;
-        cout << "Fetch:" << simuFetch.currentInstructionList[1].originalString << endl;
-        cout << "Decode:" << simuDecode.currentInstructionList[0].originalString << endl;
-        cout << "Decode:" << simuDecode.currentInstructionList[1].originalString << endl;
-        cout << "Execute:" << simuExecute.currentInstructionList[0].originalString << endl;
-        cout << "Execute:" << simuExecute.currentInstructionList[1].originalString << endl;
-        cout << "Memory:" << simuMemory.currentInstructionList[0].originalString << endl;
-        cout << "Memory:" << simuMemory.currentInstructionList[1].originalString << endl;
-        cout << "WriteBack:" << simuWriteBack.currentInstructionList[0].originalString << endl;
-        cout << "WriteBack:" << simuWriteBack.currentInstructionList[1].originalString << endl;
-        cout << "-------------------------------------------------" << endl;
-        
-        // If the instruction is a branch, then the instruction and the previous instruction needs to be stored in tempHazardList.
-        if (simuFetch.currentInstructionList[0].opcodeString == "BGEZ"
-            || simuFetch.currentInstructionList[0].opcodeString == "BLEZ"
-            || simuFetch.currentInstructionList[0].opcodeString == "BEQ"
-            || simuFetch.currentInstructionList[0].opcodeString == "J") {
-            tempHazardList[0] = simuDecode.currentInstructionList[0];
-            tempHazardList[1] = simuDecode.currentInstructionList[1];
-            tempHazardList[2] = simuFetch.currentInstructionList[0];
-            tempHazardList[3] = simuFetch.currentInstructionList[1];
-        }
-        
-        // Perhaps add a rotate for this to replace the for loops to 4
-        switch (lastStall) {
-            case 0:
-                rotate(hazardList.begin(), hazardList.begin() + 2, hazardList.end());
-            case 2:
-                hazardList[4] = simuFetch.currentInstructionList[0];
-                hazardList[5] = simuFetch.currentInstructionList[1];
-                break;
-            case 1:
-                rotate(hazardList.begin(), hazardList.begin() + 2, hazardList.end());
-                hazardList[4] = SimulatedInstruction("nop");
-                hazardList[5] = SimulatedInstruction("nop");
-                break;
-        }
-        
-        for (int i = 0; i < 6; i++) {
-            cout << "hazardList[" << i << "]: " << hazardList[i].originalString << endl;
-        }
-        
-        if (lastStall == 2)
-            lastStall = 0;
-        
-        if (lastStall == 1) {
-            lastStall = 2;
-            simuDecode.readAfterWriteHazard = false;
-        }
-        if (simuDecode.readAfterWriteHazard) {
-            lastStall = 1;
-        }
-        
-        cycleCount++;
-        cout << "-------------------------------------------------" << endl;
+        stepProcess();
     }
     cout << "Total number of cycles after simulation: " << cycleCount << endl;
 }
@@ -166,7 +58,8 @@ void Simulator::process() {
 // Maybe we should allow the user to press enter to run the entire simulation
 // or press space to run one step at a time
 
-void Simulator::stepImplement() {
+void Simulator::stepProcess() {
+    cout << "Clock Cycle:" << cycleCount + 1 << endl;
     if (lastStall != 2) {
         simuWriteBack.currentInstructionList[0] = simuMemory.currentInstructionList[0];
         simuWriteBack.currentInstructionList[1] = simuMemory.currentInstructionList[1];
@@ -178,20 +71,25 @@ void Simulator::stepImplement() {
         simuDecode.currentInstructionList[1] = simuFetch.currentInstructionList[1];
     }
     
+    // At the second cycle since the RAW hazard was detected (lastStall==2), a NOP needs to be inserted into the MEM stage, but this can lead to the unsuccessful forwarding with an origin stage of MEM since the information in MEM is discarded before it is forwarded to the execution stage of the same cycle
+    
     if (lastStall == 2) {
         simuWriteBack.currentInstructionList[0] = simuMemory.currentInstructionList[0];
         simuWriteBack.currentInstructionList[1] = simuMemory.currentInstructionList[1];
+        
+        // Temporary storage of instruction for forwarding to this cycle's execution stage
         tempInstrList[0] = simuMemory.currentInstructionList[0];
         tempInstrList[1] = simuMemory.currentInstructionList[1];
+        
         simuMemory.currentInstructionList[0] = SimulatedInstruction("Empty");
         simuMemory.currentInstructionList[1] = SimulatedInstruction("Empty");
     }
     
     if (branchMisprediction) {
         branchMisprediction = false;
-        simuExecute.currentInstructionList[0] =  SimulatedInstruction("NOP");
+        simuExecute.currentInstructionList[0] = SimulatedInstruction("NOP");
         simuExecute.currentInstructionList[1] = SimulatedInstruction("NOP");
-        simuDecode.currentInstructionList[0] =  SimulatedInstruction("NOP");
+        simuDecode.currentInstructionList[0] = SimulatedInstruction("NOP");
         simuDecode.currentInstructionList[1] = SimulatedInstruction("NOP");
         hazardList[2] = tempHazardList[0];
         hazardList[3] = tempHazardList[1];
@@ -215,73 +113,61 @@ void Simulator::stepImplement() {
     simuFetch.process(simulatedInstructionList, lastStall, branchMisprediction, simuExecute.getSavedProgramCounter());
     instrCount += increment;
     
-    cout << "Fetch:" + simuFetch.currentInstructionList[0].originalString << endl;
-    cout << "Fetch:" + simuFetch.currentInstructionList[1].originalString << endl;
-    cout << "Decode:" + simuDecode.currentInstructionList[0].originalString << endl;
-    cout << "Decode:" + simuDecode.currentInstructionList[1].originalString << endl;
-    cout << "Execute:" + simuExecute.currentInstructionList[0].originalString << endl;
-    cout << "Execute:" + simuExecute.currentInstructionList[1].originalString << endl;
-    cout << "Memory:" + simuMemory.currentInstructionList[0].originalString << endl;
-    cout << "Memory:" + simuMemory.currentInstructionList[1].originalString << endl;
-    cout << "WriteBack:" + simuWriteBack.currentInstructionList[0].originalString << endl;
-    cout << "WriteBack:" + simuWriteBack.currentInstructionList[1].originalString << endl;
+    cout << "Fetch:" << simuFetch.currentInstructionList[0].originalString << endl;
+    cout << "Fetch:" << simuFetch.currentInstructionList[1].originalString << endl;
+    cout << "Decode:" << simuDecode.currentInstructionList[0].originalString << endl;
+    cout << "Decode:" << simuDecode.currentInstructionList[1].originalString << endl;
+    cout << "Execute:" << simuExecute.currentInstructionList[0].originalString << endl;
+    cout << "Execute:" << simuExecute.currentInstructionList[1].originalString << endl;
+    cout << "Memory:" << simuMemory.currentInstructionList[0].originalString << endl;
+    cout << "Memory:" << simuMemory.currentInstructionList[1].originalString << endl;
+    cout << "WriteBack:" << simuWriteBack.currentInstructionList[0].originalString << endl;
+    cout << "WriteBack:" << simuWriteBack.currentInstructionList[1].originalString << endl;
     cout << "-------------------------------------------------" << endl;
     
+    // If the instruction is a branch, then the instruction and the previous instruction needs to be stored in tempHazardList.
     if (simuFetch.currentInstructionList[0].opcodeString == "BGEZ"
         || simuFetch.currentInstructionList[0].opcodeString == "BLEZ"
         || simuFetch.currentInstructionList[0].opcodeString == "BEQ"
         || simuFetch.currentInstructionList[0].opcodeString == "J") {
-        tempHazardList[0] =  simuDecode.currentInstructionList[0];
+        tempHazardList[0] = simuDecode.currentInstructionList[0];
         tempHazardList[1] = simuDecode.currentInstructionList[1];
         tempHazardList[2] = simuFetch.currentInstructionList[0];
         tempHazardList[3] = simuFetch.currentInstructionList[1];
     }
     
+    // Perhaps add a rotate for this to replace the for loops to 4
     switch (lastStall) {
         case 0:
-            for (int i = 0; i < 4; i++) {
-                hazardList[i] = hazardList[i+2];
-            }
-            hazardList[4] = simuFetch.currentInstructionList[0];
-            hazardList[5] = simuFetch.currentInstructionList[1];
-            
-            for (int i = 0; i < 6; i++) {
-                cout << "hazardList[" << i << "]: " << hazardList[i].originalString << endl;
-            }
-            break;
-        case 1:
-            for (int i = 0; i < 4; i++) {
-                hazardList[i] = hazardList[i+2];
-            }
-            hazardList[4] = SimulatedInstruction("nop");
-            hazardList[5] = SimulatedInstruction("nop");
-            
-            for (int i = 0; i < 6; i++) {
-                cout << "hazardList[" << i << "]: " << hazardList[i].originalString << endl;
-            }
-            break;
+            rotate(hazardList.begin(), hazardList.begin() + 2, hazardList.end());
         case 2:
             hazardList[4] = simuFetch.currentInstructionList[0];
             hazardList[5] = simuFetch.currentInstructionList[1];
-            for (int i = 0; i < 6; i++) {
-                cout << "hazardList[" << i << "]: " << hazardList[i].originalString << endl;
-            }
+            break;
+        case 1:
+            rotate(hazardList.begin(), hazardList.begin() + 2, hazardList.end());
+            hazardList[4] = SimulatedInstruction("nop");
+            hazardList[5] = SimulatedInstruction("nop");
             break;
     }
     
-    if(lastStall == 2)
+    for (int i = 0; i < 6; i++) {
+        cout << "hazardList[" << i << "]: " << hazardList[i].originalString << endl;
+    }
+    
+    if (lastStall == 2)
         lastStall = 0;
     
-    if(lastStall == 1) {
+    if (lastStall == 1) {
         lastStall = 2;
         simuDecode.readAfterWriteHazard = false;
     }
-    
-    if(simuDecode.readAfterWriteHazard) {
+    if (simuDecode.readAfterWriteHazard) {
         lastStall = 1;
     }
+    
+    cycleCount++;
     cout << "-------------------------------------------------" << endl;
-    cout << "total cycle count : " << cycleCount << endl;
 }
 
 //  void Simulator::main() {

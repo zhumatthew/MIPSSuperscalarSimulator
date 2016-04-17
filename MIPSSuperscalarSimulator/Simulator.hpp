@@ -53,6 +53,7 @@ public:
     int instrCount;
 
     void process();
+    void stepProcess();
     void stepImplement();
     
 private:
