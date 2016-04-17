@@ -16,7 +16,7 @@ class FetchStage : public PipelineStage {
 
 public:
 	FetchStage(int instructionLength);
-    void process(vector<SimulatedInstruction> simulationInstructionList, int lastStall, bool branchMisprediction, int savedPC);
+    void process(vector<SimulatedInstruction>& simulationInstructionList, int lastStall, bool branchMisprediction, int savedPC);
     
 private:
     int upBranch;
@@ -27,10 +27,10 @@ private:
     vector<SimulatedInstruction> window;
 
     // window/check/count?
-	void windowMove(vector<SimulatedInstruction> simulatedInstructionList);
+	void windowMove(vector<SimulatedInstruction>& simulatedInstructionList);
 	bool registerNameMatch(int check);
-	bool reorder(vector<SimulatedInstruction> simulatedInstructionList);
-	void clear_reordered(vector<SimulatedInstruction> simulatedInstructionList, int cnt1, int cnt2);
+	bool reorder(vector<SimulatedInstruction>& simulatedInstructionList);
+	void clear_reordered(vector<SimulatedInstruction>& simulatedInstructionList, int cnt1, int cnt2);
 };
 
 #endif /* FetchStage_hpp */

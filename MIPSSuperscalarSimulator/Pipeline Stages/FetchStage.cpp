@@ -16,7 +16,7 @@
 FetchStage::FetchStage(int instructionListLength) : instructionListSize(instructionListLength), windowTail(0), upBranch(0), window(WINDOW_SIZE, SimulatedInstruction("nop")) {}
 
 // Program counter may add one or two
-void FetchStage::windowMove(vector<SimulatedInstruction> simulatedInstructionList)
+void FetchStage::windowMove(vector<SimulatedInstruction>& simulatedInstructionList)
 {
 	windowTail = 0;
 	int i = programCounter;
@@ -68,7 +68,7 @@ bool FetchStage::registerNameMatch(int check)
 
 // Returns whether instructions should be executed as a pair
 
-bool FetchStage::reorder(vector<SimulatedInstruction> simulatedInstructionList)
+bool FetchStage::reorder(vector<SimulatedInstruction>& simulatedInstructionList)
 {
 	if (window[0].opcodeString == "BGEZ" || window[0].opcodeString == "BLEZ" || window[0].opcodeString == "BEQ" || window[0].opcodeString == "J" // two branch instructions can only enter pipeline with a depth of two (not a single clock cycle) Only a single branch may enter a pipeline for a single cycle. Another condition is false prediction. (pipeline flash cannot be implemented correctly?) (pipeline flush?)
         || window[0].opcodeString == "end" || window[0].opcodeString == "nop" || window[0].opcodeString == "NOP")
@@ -90,14 +90,14 @@ bool FetchStage::reorder(vector<SimulatedInstruction> simulatedInstructionList)
     return false;
 }
 
-void FetchStage::clear_reordered(vector<SimulatedInstruction> simulatedInstructionList, int cnt1, int cnt2)
+void FetchStage::clear_reordered(vector<SimulatedInstruction>& simulatedInstructionList, int cnt1, int cnt2)
 {   // reset reordered for all instructions that are executed or leaped over this cycle
 	for (int i = cnt1 - 1; i >= cnt2; i--) {
 		simulatedInstructionList[i].reordered = false;
 	}
 }
 
-void FetchStage::process(vector<SimulatedInstruction> simulatedInstructionList, int lastStall, bool branchMisprediction, int savedPC)
+void FetchStage::process(vector<SimulatedInstruction>& simulatedInstructionList, int lastStall, bool branchMisprediction, int savedPC)
 {
 	bool pairwise;
 	int lastPC = programCounter;
