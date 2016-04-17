@@ -15,7 +15,7 @@ using namespace std;
 // Returns an increment for the simulator's instruction count
 // If the first instruction is NOP or is empty, then the instruction count is not incremented at all.
 // If the second instruction in the list is a NOP, the instruction count is incremented by one. Otherwise, it is incremented by two.
-int WriteBackStage::process(RegisterFile& regFile, DecodeStage currentDecode){
+int WriteBackStage::process(RegisterFile& regFile, DecodeStage currentDecode) {
 
     int increment = 0;
 	if (currentInstructionList[0].opcodeString == "NOP" || currentInstructionList[0].opcodeString == "nop" || currentInstructionList[0].opcodeString == "Empty") {

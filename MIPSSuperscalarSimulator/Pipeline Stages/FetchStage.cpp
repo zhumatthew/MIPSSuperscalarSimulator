@@ -11,19 +11,19 @@
 
 // No "this" keyword is required unless there is parameter/local variable name overloading
 
-FetchStage::FetchStage(int instructionLength) : instrSize(instructionLength), windowSize(8), windowTail(0), upBranch(0), window(windowSize, SimulatedInstruction("nop")) {}
+FetchStage::FetchStage(int instructionListLength) : instructionListSize(instructionListLength), windowSize(8), windowTail(0), upBranch(0), window(windowSize, SimulatedInstruction("nop")) {}
 
 // Program counter may add one or two
-void FetchStage::windowMove(vector<SimulatedInstruction> simulationInstructionList)
+void FetchStage::windowMove(vector<SimulatedInstruction> simulatedInstructionList)
 {
 	windowTail = 0;
 	int i = programCounter;
     
     // First condition is to ensure window shrinks when approaching the edge of the instruction queue as there are fewer instructions to fetch
     // Second condition is to ensure that the length of the window will not be greater than the window size
-    // Instruction size takes into account one "end" and three "nop" at the end of the simulated instruction list
-	while (((i - programCounter) < (instrSize - programCounter)) && (windowTail < windowSize)) {
-		window[windowTail] = simulationInstructionList[i];
+    // Instruction list size takes into account one "end" and three "nop" at the end of the simulated instruction list
+	while (((i - programCounter) < (instructionListSize - programCounter)) && (windowTail < windowSize)) {
+		window[windowTail] = simulatedInstructionList[i];
 		if (!window[windowTail].reordered) { // reordered instructions have entered the pipeline; if they enter the window again, they are executed twice
 			windowTail++;
 		} else { // Avoids a second execution of the instruction after the reordered one
@@ -66,7 +66,7 @@ bool FetchStage::registerNameMatch(int check)
 
 // Returns whether instructions should be executed as a pair
 
-bool FetchStage::reorder(vector<SimulatedInstruction> simulationInstructionList)
+bool FetchStage::reorder(vector<SimulatedInstruction> simulatedInstructionList)
 {
 	if (window[0].opcodeString == "BGEZ" || window[0].opcodeString == "BLEZ" || window[0].opcodeString == "BEQ" || window[0].opcodeString == "J" // two branch instructions can only enter pipeline with a depth of two (not a single clock cycle) Only a single branch may enter a pipeline for a single cycle. Another condition is false prediction. (pipeline flash cannot be implemented correctly?) (pipeline flush?)
         || window[0].opcodeString == "end" || window[0].opcodeString == "nop" || window[0].opcodeString == "NOP")
@@ -80,7 +80,7 @@ bool FetchStage::reorder(vector<SimulatedInstruction> simulationInstructionList)
 			return false;
 		if (!registerNameMatch(i)) {
 			window[i].reordered = true; // set reordered true for the instruction in the window to prevent it from being the source for forwarding
-			simulationInstructionList[programCounter+i].reordered = true; // set reordered true for the instruction in the instruction queue such that it cannot enter the window on the next cycle
+			simulatedInstructionList[programCounter+i].reordered = true; // set reordered true for the instruction in the instruction queue such that it cannot enter the window on the next cycle
             rotate(window.begin() + 1, window.begin() + i, window.begin() + i + 1); // reorder window[tempcount] to enter pipeline with window[0]
 			return true;
 		}
@@ -88,19 +88,19 @@ bool FetchStage::reorder(vector<SimulatedInstruction> simulationInstructionList)
     return false;
 }
 
-void FetchStage::clear_reordered(vector<SimulatedInstruction> simulationInstructionList, int cnt1, int cnt2)
+void FetchStage::clear_reordered(vector<SimulatedInstruction> simulatedInstructionList, int cnt1, int cnt2)
 {   // reset reordered for all instructions that are executed or leaped over this cycle
 	for (int i = cnt1 - 1; i >= cnt2; i--) {
-		simulationInstructionList[i].reordered = false;
+		simulatedInstructionList[i].reordered = false;
 	}
 }
 
-void FetchStage::process(vector<SimulatedInstruction> simulationInstructionList, int lastStall, bool branchMisprediction, int savedPC)
+void FetchStage::process(vector<SimulatedInstruction> simulatedInstructionList, int lastStall, bool branchMisprediction, int savedPC)
 {
 	bool pairwise;
 	int lastPC = programCounter;
-	windowMove(simulationInstructionList);
-	pairwise = reorder(simulationInstructionList);
+	windowMove(simulatedInstructionList);
+	pairwise = reorder(simulatedInstructionList);
 
 	if (lastStall == 1) {
 		return; // no instruction is fetched on a stall
@@ -119,12 +119,12 @@ void FetchStage::process(vector<SimulatedInstruction> simulationInstructionList,
 			currentInstructionList[1] = SimulatedInstruction("NOP");
 			programCounter++;
 		}
-		clear_reordered(simulationInstructionList, programCounter, lastPC); // Clear all the instructions that have entered the pipeline this cycle so that when the program counter branches upper address, the instructions can be executed again. If an instruction's reordered flag is set, it cannot enter the instruction window.
+		clear_reordered(simulatedInstructionList, programCounter, lastPC); // Clear all the instructions that have entered the pipeline this cycle so that when the program counter branches upper address, the instructions can be executed again. If an instruction's reordered flag is set, it cannot enter the instruction window.
 
 		if (branchMisprediction) { // The five stages are processed in reverse order, so the changed PC must not be used by this cycle's fetch stage.  To ensure this, the program counter is only updated after actual issuing is finished using the old program counter.
 			int updatedPC = savedPC;
 			upBranch = upBranch + (programCounter - updatedPC);
-			simulationInstructionList[programCounter].reordered = false;
+			simulatedInstructionList[programCounter].reordered = false;
 			programCounter = updatedPC;
 		}
 	}

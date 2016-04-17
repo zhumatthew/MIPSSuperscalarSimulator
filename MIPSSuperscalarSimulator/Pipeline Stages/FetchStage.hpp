@@ -21,17 +21,17 @@ public:
 private:
     int upBranch;
     int windowTail; // number of instructions in the window
-    int instrSize; // number of instructions in the benchmark
+    int instructionListSize; // number of instructions in the benchmark
     int windowSize; // number of instructions in the reorder window
     
     // Before IF is implemented, the window contains all instructions that can potentially be reordered. After the IF is implemented, the window contains all reordered instructions. Instructions enter ID stage according to the order of instructions in the window
     vector<SimulatedInstruction> window;
 
     // window/check/count?
-	void windowMove(vector<SimulatedInstruction> simulationInstructionList);
+	void windowMove(vector<SimulatedInstruction> simulatedInstructionList);
 	bool registerNameMatch(int check);
-	bool reorder(vector<SimulatedInstruction> simuInstrList);
-	void clear_reordered(vector<SimulatedInstruction> simulationInstructionList, int cnt1, int cnt2);
+	bool reorder(vector<SimulatedInstruction> simulatedInstructionList);
+	void clear_reordered(vector<SimulatedInstruction> simulatedInstructionList, int cnt1, int cnt2);
 };
 
 #endif /* FetchStage_hpp */

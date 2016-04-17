@@ -16,7 +16,7 @@ using namespace std;
 // if the type of 'simuDecode' is 'DecodeStage' and it has a default constructor, then you don't need to initialize it manually.
 // you do not need to define default constructors; they are there implicitly unless you define another constructor
 
-Simulator::Simulator(vector<SimulatedInstruction> simulatedInstructionList) : simulatedInstructionList(simulatedInstructionList), simuFetch(FetchStage((int) simulatedInstructionList.size())), tempInstr(SimulatedInstruction("nop")), instrCount(0), lastStall(0), hazardList(6, tempInstr), tempHazardList(4, tempInstr), tempInstrList(2, tempInstr) {}
+Simulator::Simulator(vector<SimulatedInstruction> simulatedInstructionList) : simulatedInstructionList(simulatedInstructionList), simuFetch(FetchStage(static_cast<int>(simulatedInstructionList.size()))), tempInstr(SimulatedInstruction("nop")), instrCount(0), lastStall(0), hazardList(6, tempInstr), tempHazardList(4, tempInstr), tempInstrList(2, tempInstr) {}
 
 //Simulator::Simulator(vector<SimulatedInstruction> simulationInstrList) {
 //    simulationInstrList = simulationInstrList;
@@ -60,7 +60,10 @@ void Simulator::process() {
 // or press space to run one step at a time
 
 void Simulator::stepProcess() {
+    
     cout << "Clock Cycle:" << cycleCount + 1 << endl;
+    
+    // ? -> IF -> ID -> EX -> MEM -> WB
     if (lastStall != 2) {
         simuWriteBack.currentInstructionList[0] = simuMemory.currentInstructionList[0];
         simuWriteBack.currentInstructionList[1] = simuMemory.currentInstructionList[1];
@@ -138,8 +141,10 @@ void Simulator::stepProcess() {
     }
     
     switch (lastStall) {
+        // Shift elements of hazardList left by two
         case 0:
             rotate(hazardList.begin(), hazardList.begin() + 2, hazardList.end());
+        // Assign the last two elements of hazardList to be the two instructions of the fetch stage
         case 2:
             hazardList[4] = simuFetch.currentInstructionList[0];
             hazardList[5] = simuFetch.currentInstructionList[1];

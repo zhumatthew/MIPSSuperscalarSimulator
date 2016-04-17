@@ -25,13 +25,13 @@ int main(int argc, const char * argv[]) {
 	sourceReader.constructInstrList();
 
 	vector<SimulatedInstruction> simulatedInstructionList = vector<SimulatedInstruction>();
-	vector<Instruction> originInstructionList = sourceReader.getInstructionList();
+	vector<Instruction> originalInstructionList = sourceReader.getInstructionList();
 
 	cout << "-----------Start Simulation-----------" << endl;
-	cout << "Original number of instructions : " << originInstructionList.size() << endl;
+	cout << "Original number of instructions : " << originalInstructionList.size() << endl;
 
-	for (int i = 0; i < originInstructionList.size(); i++) {
-		SimulatedInstruction simInstr = SimulatedInstruction(originInstructionList[i]);
+	for (int i = 0; i < originalInstructionList.size(); i++) {
+		SimulatedInstruction simInstr = SimulatedInstruction(originalInstructionList[i]);
 		simulatedInstructionList.push_back(simInstr);
 	}
 
