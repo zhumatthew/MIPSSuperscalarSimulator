@@ -9,7 +9,7 @@
 #include <iostream>
 #include "SourceReader.hpp"
 #include "Simulator.hpp"
-#include "SimulationInstruction.hpp"
+#include "SimulatedInstruction.hpp"
 
 int main(int argc, const char * argv[]) {
 
@@ -24,29 +24,32 @@ int main(int argc, const char * argv[]) {
 	sourceReader.findLabel();
 	sourceReader.constructInstrList();
 
-	vector<SimulationInstruction> simulationInstructionList = vector<SimulationInstruction>();
+	vector<SimulatedInstruction> simulatedInstructionList = vector<SimulatedInstruction>();
 	vector<Instruction> originInstructionList = sourceReader.getInstructionList();
 
 	cout << "-----------Start Simulation-----------" << endl;
-	cout << "Original number of Instruction : " << originInstructionList.size() << endl;
+	cout << "Original number of instructions : " << originInstructionList.size() << endl;
 
 	for (int i = 0; i < originInstructionList.size(); i++) {
-		SimulationInstruction simInstr = SimulationInstruction(originInstructionList[i]);
-		simulationInstructionList.push_back(simInstr);
+		SimulatedInstruction simInstr = SimulatedInstruction(originInstructionList[i]);
+		simulatedInstructionList.push_back(simInstr);
 	}
 
-	SimulationInstruction endInstr = SimulationInstruction("end");
-	simulationInstructionList.push_back(endInstr);
-	SimulationInstruction nopInstr = SimulationInstruction("nop");
-	simulationInstructionList.push_back(nopInstr);
-	simulationInstructionList.push_back(nopInstr);
-	simulationInstructionList.push_back(nopInstr);
+	SimulatedInstruction endInstr = SimulatedInstruction("end");
+    SimulatedInstruction nopInstr = SimulatedInstruction("nop");
 
-	for (int i = 0; i < simulationInstructionList.size(); i++) {
-		simulationInstructionList[i].instructionLocation = i;
+	simulatedInstructionList.push_back(endInstr);
+    fill_n(back_inserter(simulatedInstructionList), 3, nopInstr);
+    
+//	simulationInstructionList.push_back(nopInstr);
+//	simulationInstructionList.push_back(nopInstr);
+//	simulationInstructionList.push_back(nopInstr);
+
+	for (int i = 0; i < simulatedInstructionList.size(); i++) {
+		simulatedInstructionList[i].instructionLocation = i;
 	}
 
-	Simulator sim = Simulator(simulationInstructionList);
+	Simulator sim = Simulator(simulatedInstructionList);
 	sim.process();
 
 	return 0;

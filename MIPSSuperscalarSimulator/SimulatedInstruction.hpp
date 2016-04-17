@@ -1,24 +1,24 @@
 //
-//  SimulationInstruction.hpp
+//  SimulatedInstruction.hpp
 //  MIPSSuperscalarSimulator
 //
 //  Created by Matt Zhu on 4/6/16.
 //  Copyright © 2016 ZhuKim. All rights reserved.
 //
 
-#ifndef SimulationInstruction_hpp
-#define SimulationInstruction_hpp
+#ifndef SimulatedInstruction_hpp
+#define SimulatedInstruction_hpp
 
 #include <stdio.h>
 #include <string>
 #include "Forwarding.hpp"
 #include "Instruction.hpp"
 
-class SimulationInstruction {
+class SimulatedInstruction {
     
 public:
-	SimulationInstruction(string str); // used for nop instruction
-    SimulationInstruction(Instruction instr); // used for instructions that are not nop instructions
+	SimulatedInstruction(string str); // used for nop instruction
+    SimulatedInstruction(Instruction instr); // used for instructions that are not nop instructions
     
     // destination register, target register, source register
     int rd, rt, rs;
@@ -47,4 +47,4 @@ public:
 
 };
 
-#endif /* SimulationInstruction_hpp */
+#endif /* SimulatedInstruction_hpp */

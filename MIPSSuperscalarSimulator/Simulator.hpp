@@ -19,13 +19,15 @@
 #include "./Pipeline Stages/ExecuteStage.hpp"
 #include "./Pipeline Stages/MemoryStage.hpp"
 #include "./Pipeline Stages/WriteBackStage.hpp"
-#include "SimulationInstruction.hpp"
+#include "SimulatedInstruction.hpp"
+
+// Order of declaration for member variables is the order of initialization
 
 class Simulator {
 
 public:
     
-	Simulator(vector<SimulationInstruction> simulationInstrList);
+	Simulator(vector<SimulatedInstruction> simulatedInstructionList);
 	FetchStage simuFetch;
 	DecodeStage simuDecode;
 	ExecuteStage simuExecute;
@@ -36,16 +38,18 @@ public:
     RegisterFile simuRegFile;
     MainMemory simuMainMemory;
     
-    vector<SimulationInstruction> simulationInstructionList;
+    vector<SimulatedInstruction> simulatedInstructionList;
 
     int cycleCount;
     int lastStall;
     
-    // Order of declaration for member variables is the order of initialization
-    SimulationInstruction tempInstr;
-    vector<SimulationInstruction> tempInstrList;
-    vector<SimulationInstruction> hazardList, tempHazardList;
-    bool falsePrediction;
+    SimulatedInstruction tempInstr;
+    vector<SimulatedInstruction> tempInstrList;
+    vector<SimulatedInstruction> hazardList, tempHazardList;
+    
+    // This flag is set at the execution stage of a conditional branch instruction for a mispredicted branch. At the next cycle, the decision of whether or not bubbles will be inserted will be based on this flag.
+    bool branchMisprediction;
+    
     int instrCount;
 
     void process();

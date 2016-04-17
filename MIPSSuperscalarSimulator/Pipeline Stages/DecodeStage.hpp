@@ -21,8 +21,8 @@ public:
     // SimulationInstruction instructionSaved;
     bool readAfterWriteHazard;
 
-    void process(const RegisterFile& regFile, const vector<SimulationInstruction>& hazardList, int lastStall);
-    void check(const vector<SimulationInstruction>& hazardList, int lastStall);
+    void process(const RegisterFile& regFile, const vector<SimulatedInstruction>& hazardList, int lastStall);
+    void check(const vector<SimulatedInstruction>& hazardList, int lastStall);
 
 };
 

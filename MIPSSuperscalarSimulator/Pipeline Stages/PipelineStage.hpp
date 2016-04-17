@@ -11,12 +11,12 @@
 
 #include <stdio.h>
 #include <vector>
-#include "../SimulationInstruction.hpp"
+#include "../SimulatedInstruction.hpp"
 
 class PipelineStage {
 public:
 	PipelineStage();
-	vector<SimulationInstruction> currentInstructionList;
+	vector<SimulatedInstruction> currentInstructionList;
 //    static int programCounter;
     
     // should be static?

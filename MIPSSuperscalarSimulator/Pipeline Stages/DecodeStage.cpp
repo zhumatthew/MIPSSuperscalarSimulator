@@ -10,7 +10,7 @@
 
 DecodeStage::DecodeStage() : readAfterWriteHazard(false) {}
 
-void DecodeStage::process(const RegisterFile& regFile, const vector<SimulationInstruction>& hazardList, int lastStall) {
+void DecodeStage::process(const RegisterFile& regFile, const vector<SimulatedInstruction>& hazardList, int lastStall) {
 	
     if (readAfterWriteHazard || (currentInstructionList.front().opcodeString == "NOP")) {
 		return;
@@ -30,11 +30,11 @@ void DecodeStage::process(const RegisterFile& regFile, const vector<SimulationIn
 // Forwarding occurs between the rdValue of an instruction in the MEM stage and an instruction with rsForward(rtForwarding) set at the beginning of the EX stage
 
 // read after write hazards and forwarding possibilities
-void DecodeStage::check(const vector<SimulationInstruction>& hazardList, int lastStall) {
+void DecodeStage::check(const vector<SimulatedInstruction>& hazardList, int lastStall) {
     
     for (int i = 0; i <= 1; i++) {
         
-        SimulationInstruction instruction = currentInstructionList[i];
+        SimulatedInstruction instruction = currentInstructionList[i];
         if (lastStall == 2) {
             
             // Judge 1 is based on hazardList index of 0

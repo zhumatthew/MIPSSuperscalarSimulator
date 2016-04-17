@@ -18,7 +18,7 @@ void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory,
         return;
     
     for (int i = 0; i <= 1; i++) {
-        SimulationInstruction instruction = currentInstructionList[i];
+        SimulatedInstruction instruction = currentInstructionList[i];
         
         if (instruction.currentForward.rsDelayedForward) {
             instruction.rsValue = regFile.getValue(instruction.rs);

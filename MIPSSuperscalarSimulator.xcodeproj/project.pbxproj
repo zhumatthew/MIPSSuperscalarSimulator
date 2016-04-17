@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B32A0D091CB7581A00216F67 /* SimulationInstruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B32A0D051CB7581900216F67 /* SimulationInstruction.cpp */; };
+		B32A0D091CB7581A00216F67 /* SimulatedInstruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B32A0D051CB7581900216F67 /* SimulatedInstruction.cpp */; };
 		B32A0D0A1CB7581A00216F67 /* Simulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B32A0D071CB7581A00216F67 /* Simulator.cpp */; };
 		B355600C1CB4D02F0043584B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B355600B1CB4D02F0043584B /* main.cpp */; };
 		B355603B1CB737AE0043584B /* RegisterFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B35560391CB737AE0043584B /* RegisterFile.cpp */; };
@@ -39,8 +39,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		B32A0D051CB7581900216F67 /* SimulationInstruction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimulationInstruction.cpp; sourceTree = "<group>"; };
-		B32A0D061CB7581900216F67 /* SimulationInstruction.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SimulationInstruction.hpp; sourceTree = "<group>"; };
+		B32A0D051CB7581900216F67 /* SimulatedInstruction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimulatedInstruction.cpp; sourceTree = "<group>"; };
+		B32A0D061CB7581900216F67 /* SimulatedInstruction.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SimulatedInstruction.hpp; sourceTree = "<group>"; };
 		B32A0D071CB7581A00216F67 /* Simulator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Simulator.cpp; sourceTree = "<group>"; };
 		B32A0D081CB7581A00216F67 /* Simulator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Simulator.hpp; sourceTree = "<group>"; };
 		B35560081CB4D02F0043584B /* MIPSSuperscalarSimulator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MIPSSuperscalarSimulator; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,8 +150,8 @@
 				B3E8DC501CBC5BAF00E99EDD /* InstructionType.cpp */,
 				B36AB3F31CB88345009C3275 /* Forwarding.hpp */,
 				B36AB3F21CB88345009C3275 /* Forwarding.cpp */,
-				B32A0D061CB7581900216F67 /* SimulationInstruction.hpp */,
-				B32A0D051CB7581900216F67 /* SimulationInstruction.cpp */,
+				B32A0D061CB7581900216F67 /* SimulatedInstruction.hpp */,
+				B32A0D051CB7581900216F67 /* SimulatedInstruction.cpp */,
 				B32A0D081CB7581A00216F67 /* Simulator.hpp */,
 				B32A0D071CB7581A00216F67 /* Simulator.cpp */,
 				B35560461CB746A30043584B /* LabelInstruction.hpp */,
@@ -296,7 +296,7 @@
 				B3E8DC561CBC965D00E99EDD /* SourceReader.cpp in Sources */,
 				B35560441CB7421D0043584B /* Instruction.cpp in Sources */,
 				B3E8DC701CC1E73000E99EDD /* ExecuteStage.cpp in Sources */,
-				B32A0D091CB7581A00216F67 /* SimulationInstruction.cpp in Sources */,
+				B32A0D091CB7581A00216F67 /* SimulatedInstruction.cpp in Sources */,
 				B3E8DC531CBC5BAF00E99EDD /* InstructionType.cpp in Sources */,
 				B3E8DC621CC1E71B00E99EDD /* MainMemory.cpp in Sources */,
 				B3E8DC721CC1E73000E99EDD /* MemoryStage.cpp in Sources */,

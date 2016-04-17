@@ -54,7 +54,7 @@ void SourceReader::findLabel() {
 
 			InstructionType type;
 
-			if(type.isLabel(strOpcode)) {
+			if (type.isLabel(strOpcode)) {
 				LabelInstruction label(strOpcode,lineNumber);
 				labelInstrList.push_back(label);
 				cout << label.getLabelString() <<  "---------" << label.getLabelAddress() << endl;
