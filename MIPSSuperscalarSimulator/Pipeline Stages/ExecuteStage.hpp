@@ -17,7 +17,7 @@
 class ExecuteStage : public PipelineStage {
 
 public:
-	void process(DecodeStage currentDecode, MemoryStage currentMemory, const RegisterFile& regFile, int lastStall, bool falsePrediction);
+	void process(DecodeStage currentDecode, MemoryStage currentMemory, const RegisterFile& regFile, int lastStall, bool branchMisprediction);
 	int getSavedProgramCounter();
 
 private:

@@ -137,7 +137,6 @@ void Simulator::stepProcess() {
         tempHazardList[3] = simuFetch.currentInstructionList[1];
     }
     
-    // Perhaps add a rotate for this to replace the for loops to 4
     switch (lastStall) {
         case 0:
             rotate(hazardList.begin(), hazardList.begin() + 2, hazardList.end());
