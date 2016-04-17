@@ -9,6 +9,7 @@
 #include "Simulator.hpp"
 #include <stdio.h>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
