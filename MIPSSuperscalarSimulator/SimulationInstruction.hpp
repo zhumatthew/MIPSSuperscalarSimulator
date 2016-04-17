@@ -29,16 +29,18 @@ public:
     int opcode, immediate;
     string originalString, opcodeString;
     
-    // indicates the instruction location in the simuInstrList
+    // indicates the instruction location in the simulated instruction list
     int instructionLocation;
     
-    // this variable is equal to its index in instrList plus total length of upper branch each instruction entered the pipeline and hazard list will has its own loopCnt according to its original index in the instruction queue and its sequence in execution, which will be used to implement correct data forwarding involving reordered instruction
+    // this variable is equal to the instruction's index in the instruction list plus the total length of upper branch each instruction entered the pipeline and hazard list will have its own loopCount according to its original index in the instruction queue and its sequence in execution, which will be used to implement correct data forwarding involving reordered instructions
     int loopCount;
     
-    int effectiveAddress;
+    int effectiveAddress; // Temporarily store the effective address as it is generated in the EX stage and is used in the WB or MEM stage
+    
+    // The evaluated outcome of a conditional branch.
     bool branchCondition;
     
-    // Indicates whether this instruction has been reordered. If true, it cannot be the source for data forwarding.
+    // Indicates whether this instruction has been reordered. If true, the instruction cannot be the source for data forwarding.
     bool reordered;
     
     Forwarding currentForward;

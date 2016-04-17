@@ -56,7 +56,7 @@ void DecodeStage::check(const vector<SimulationInstruction>& hazardList, int las
                 }
             }
             
-            // Judge 2 is based on hazard list index of 2
+            // Judge 2 is based on hazard list index of 1
             if (instruction.rs == hazardList[1].rd) {
                 if(instruction.loopCount > hazardList[1].loopCount) {
                     instruction.currentForward.rsForward = true;
@@ -111,7 +111,8 @@ void DecodeStage::check(const vector<SimulationInstruction>& hazardList, int las
                 }
             }
             
-            if (instruction.currentForward.rsForward || instruction.currentForward.rtForward) {
+            // Judge read after write hazard
+            if (instruction.currentForward.rsForward || instruction.currentForward.rtForward) {  // In case this instruction has data dependence
                 
                 if (instruction.currentForward.rsForward) {
                     int index = instruction.currentForward.rsForwardDepth + 2;

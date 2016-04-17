@@ -112,15 +112,15 @@ void FetchStage::process(vector<SimulationInstruction> simulationInstructionList
 			programCounter = programCounter + 2;
 			if (window[1].reordered) // The pair of instructions are the result of reordering, so the next sequential address simuInstrList[PC+1] will not enter the pipeline in this cycle
 				programCounter = programCounter - 1; // simuInstrList[PC+1] will be window[0] the next cycle
-		} else { // "nop" is inserted at depth of two and window[0] enters pipeline alone
+		} else { // "nop" is inserted at second depth and window[0] enters pipeline alone
 			window[0].loopCount = window[0].instructionLocation + upBranch;
 			currentInstructionList[0] = window[0];
 			currentInstructionList[1] = SimulationInstruction("NOP");
 			programCounter++;
 		}
-		clear_reordered(simulationInstructionList, programCounter, lastPC);
+		clear_reordered(simulationInstructionList, programCounter, lastPC); // Clear all the instructions that have entered the pipeline this cycle so that when the program counter branches upper address, the instructions can be executed again. If an instruction's reordered flag is set, it cannot enter the instruction window.
 
-		if (falsePrediction) {
+		if (falsePrediction) { // The five stages are processed in reverse order, so the changed PC must not be used by this cycle's fetch stage.  To ensure this, the program counter is only updated after actual issuing is finished using the old program counter.
 			int updatedPC = savedPC;
 			upBranch = upBranch + (programCounter - updatedPC);
 			simulationInstructionList[programCounter].reordered = false;

@@ -82,9 +82,9 @@ void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory,
             // Add actions required by branch instructions in this stage
             // The label produced by the assembler is the number for the target instruction in the instruction queue
             // The instruction queue is indexed starting at 0
-            if((instruction.opcodeString == "BGEZ" && instruction.rsValue >= 0)
-               || (instruction.opcodeString == "BLEZ" && instruction.rsValue <= 0)
-               || (instruction.opcodeString == "BEQ" && (instruction.rsValue == instruction.rtValue))) {
+            if ((instruction.opcodeString == "BGEZ" && instruction.rsValue >= 0)
+                || (instruction.opcodeString == "BLEZ" && instruction.rsValue <= 0)
+                || (instruction.opcodeString == "BEQ" && (instruction.rsValue == instruction.rtValue))) {
                 instruction.branchCondition = true; // branch condition variable will only be tested or changed in the implement function of execution stage
             } // condition evaluation of conditional branch
             if (instruction.opcodeString == "J") // unconditional branch
