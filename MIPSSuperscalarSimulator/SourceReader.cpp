@@ -72,7 +72,7 @@ void SourceReader::constructInstrList() {
 	int lineNumber = 0;
 	instrList = vector<Instruction>();
 
-	cout << "--------Printing out the each component-------" << endl;
+	cout << "--------Printing out each component-------" << endl;
 
 	while (getline(reader, line)) {
         if (!line.empty()) {

@@ -35,20 +35,25 @@ void FetchStage::windowMove(vector<SimulationInstruction> simulationInstructionL
 }
 
 // determines if window[check] can be reordered into window[1] to make a pair with window [0] for simultaneous pipeline entering
-bool FetchStage::regNameMatch(int check)
+bool FetchStage::registerNameMatch(int check)
 {
+    // fuction returns true if a hazard is found
 	bool flag = false;
 
 	if ((window[0].opcodeString == "end") || (window[0].opcodeString == "nop") || (window[0].opcodeString == "NOP"))
 		return true;
     
-    for (int i = 0; i < check; i++) {
+//    if (window[check].rd == window[0].rd) flag = true; // WAW hazard (If the loop goes until i <= check), then this instruction is redundant
+    
+    // Compare window[check] to previous instructions window[0] to window [check-1]
+    for (int i = 1; i <= check; i++) {
         
-		if ((window[check].rd == window[0].rd)
-			|| (window[check].rd == window[check-i].rd)
-			|| (window[check].rs == window[check-i].rd)
-			|| (window[check].rt == window[check-i].rd)
-			|| (((window[check].rd == window[check-i].rt) || (window[check].rd == window[check-i].rs)) && ((check-i) > 2))) {
+		if ((window[check].rd == window[check-i].rd) // WAW hazard
+			|| (window[check].rs == window[check-i].rd) // RAW hazard
+			|| (window[check].rt == window[check-i].rd) // RAW hazard (isn't rt the destination for certain instructions?)
+			|| (((window[check].rd == window[check-i].rt) || (window[check].rd == window[check-i].rs)) // WAR hazard
+                && ((check-i) > 2) // No WAR hazard if earlier instruction (at check-i) reads before the later instruction (at check) updates
+                )) {
 			flag = true;
 			break;
 		}
@@ -56,14 +61,15 @@ bool FetchStage::regNameMatch(int check)
 	return flag;
 }
 
-// For a pipeline stop, an "end" is inserted at the end of the benchmark (when an "end" is detected in the MEM stage) To stay within array borders, three "nops" are inserted after "end".  "end"/"nop" is not included in reordering, but enters the window/pipeline to stop the pipeline.
+// For the pipeline to stop, an "end" is inserted at the end of the benchmark (when an "end" is detected in the MEM stage) To stay within array borders, three "nops" are inserted after "end".  "end"/"nop" is not included in reordering, but enters the window/pipeline to stop the pipeline.
 
 // Returns whether instructions should be executed as a pair
 
 bool FetchStage::reorder(vector<SimulationInstruction> simulationInstructionList)
 {
-	if (window[0].opcodeString == "BGEZ" || window[0].opcodeString == "BLEZ" || window[0].opcodeString == "BEQ" || window[0].opcodeString == "J" || window[0].opcodeString == "end" || window[0].opcodeString == "nop" || window[0].opcodeString == "NOP")
-		return false; // two branch instructions can only enter pipeline with a depth of two (not a single clock cycle) Only a single branch may enter a pipeline for a single cycle. Another condition is false prediction. (pipeline flash cannot be implemented correctly?)
+	if (window[0].opcodeString == "BGEZ" || window[0].opcodeString == "BLEZ" || window[0].opcodeString == "BEQ" || window[0].opcodeString == "J" // two branch instructions can only enter pipeline with a depth of two (not a single clock cycle) Only a single branch may enter a pipeline for a single cycle. Another condition is false prediction. (pipeline flash cannot be implemented correctly?) (pipeline flush?)
+        || window[0].opcodeString == "end" || window[0].opcodeString == "nop" || window[0].opcodeString == "NOP")
+		return false; // window[0] needs to enter the pipeline alone
 	if ((window[1].rs != window[0].rd) && (window[1].rt != window[0].rd) && (window[1].opcodeString != "end") && (window[1].opcodeString != "nop") && (window[1].opcodeString != "NOP")) {
 		return true; // no data dependence between [0] and [1]; (end cannot enter second depth?)
 	}
@@ -71,11 +77,10 @@ bool FetchStage::reorder(vector<SimulationInstruction> simulationInstructionList
 	for (int i = 2; i < windowTail; i++) {
 		if (window[i].opcodeString == "BGEZ" || window[i].opcodeString == "BLEZ" || window[i].opcodeString == "BEQ" || window[i].opcodeString == "J" || window[i].opcodeString == "end" || window[i].opcodeString == "nop" || window[i].opcodeString == "NOP") // cannot be reordered if it is one of these instructions
 			return false;
-		if (!regNameMatch(i)) {
-			window[i].reordered = true; // set reordered true for the instruction in the window to prevent it from forwarding
+		if (!registerNameMatch(i)) {
+			window[i].reordered = true; // set reordered true for the instruction in the window to prevent it from being the source for forwarding
 			simulationInstructionList[programCounter+i].reordered = true; // set reordered true for the instruction in the instruction queue such that it cannot enter the window on the next cycle
-			window.insert(window.begin() + 1, window[i]); // reorder window[tempcount] to enter pipeline with window[0]
-			window.erase(window.begin() + (i+1));
+            rotate(window.begin() + 1, window.begin() + i, window.begin() + i + 1); // reorder window[tempcount] to enter pipeline with window[0]
 			return true;
 		}
 	}
@@ -83,7 +88,7 @@ bool FetchStage::reorder(vector<SimulationInstruction> simulationInstructionList
 }
 
 void FetchStage::clear_reordered(vector<SimulationInstruction> simulationInstructionList, int cnt1, int cnt2)
-{
+{   // reset reordered for all instructions that are executed or leaped over this cycle
 	for (int i = cnt1 - 1; i >= cnt2; i--) {
 		simulationInstructionList[i].reordered = false;
 	}
