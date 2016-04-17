@@ -66,7 +66,7 @@ void DecodeStage::check(const vector<SimulatedInstruction>& hazardList, int last
                 }
             }
             
-            if(instruction.rt == hazardList[1].rd) {
+            if (instruction.rt == hazardList[1].rd) {
                 if(instruction.loopCount > hazardList[1].loopCount) {
                     instruction.currentForward.rtForward = true;
                     instruction.currentForward.rtForwardDepth = 1;
