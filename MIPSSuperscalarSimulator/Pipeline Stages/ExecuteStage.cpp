@@ -11,7 +11,7 @@
 // example instruction
 // $d = $s + $t
 
-void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory, const RegisterFile& regFile, int lastStall, bool branchMisprediction) {
+void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory, const RegisterFile& regFile, int lastStall, bool& branchMisprediction) {
     
     // In case a RAW hazard is detected in last cycle
     if (currentDecode.readAfterWriteHazard || (currentInstructionList.front().opcodeString=="NOP"))
@@ -58,8 +58,10 @@ void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory,
         instruction.currentForward.rtDelayedForward = false;
         instruction.currentForward.rtForward = false;
         
+        /* To be implemented
         // If it is a R-type opcode, then switch on funct
         // Otherwise, switch on opcode
+        */
         
         if (instruction.opcodeString == "ADD") {
             instruction.rdValue = instruction.rsValue + instruction.rtValue;
@@ -94,7 +96,6 @@ void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory,
                 // static field) in this cycle, but every instruction indicated by PC won't be fetched until next cycle's IF stage
                 savedProgramCounter = instruction.immediate;
                 branchMisprediction = true; // This flag is set so that a bubble is inserted into EX and ID stages in the next cycle
-                // branchMisprediction is not returned?
                 instruction.branchCondition = false; // Every time after this flag is used, it should be reset to false so that the next time it can be set or reset based on the outcome of the condition evaluation.
             }
             // For this instruction set, the target's absolute address (rather than the relative address to the PC) is assigned to the immediate of the branch instruction. The calculation of the effective address is not needed.
