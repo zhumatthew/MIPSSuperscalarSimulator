@@ -7,6 +7,7 @@
 //
 
 #include "FetchStage.hpp"
+#include <algorithm>
 
 // No "this" keyword is required unless there is parameter/local variable name overloading
 
