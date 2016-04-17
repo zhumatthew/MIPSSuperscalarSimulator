@@ -1,5 +1,5 @@
 //
-//  Stage.hpp
+//  PipelineStage.hpp
 //  MIPSSuperscalarSimulator
 //
 //  Created by Matt Zhu on 4/7/16.
@@ -34,4 +34,4 @@ private:
 
 };
 
-#endif /* Stage_hpp */
+#endif /* PipelineStage_hpp */

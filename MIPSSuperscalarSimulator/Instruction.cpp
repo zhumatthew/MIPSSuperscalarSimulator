@@ -51,9 +51,9 @@ void Instruction::handleInstruction(vector<string> results) {
 			break;
 		case MBType:
 			opcode = parser.parseOpcode(instrType);
+            rs = parser.parseRs(instrType);
 			rt = parser.parseRt(instrType);
 			rd = parser.parseRd(instrType);
-			rs = parser.parseRs(instrType);
 			immediate = parser.parseImmediate(instrType);
 			break;
 		case JType:

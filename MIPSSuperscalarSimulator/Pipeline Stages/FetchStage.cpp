@@ -8,9 +8,9 @@
 
 #include "FetchStage.hpp"
 
-// No "this" required unless parameter/local variable name overloading
+// No "this" keyword is required unless there is parameter/local variable name overloading
 
-FetchStage::FetchStage(int instructionLength) : instrSize(instructionLength), windowSize(8), windowTail(0), upBranch(0), window(windowSize, SimulationInstruction("nop")) { programCounter = 0; } // does this pc just get initialized by the super's initializer list?
+FetchStage::FetchStage(int instructionLength) : instrSize(instructionLength), windowSize(8), windowTail(0), upBranch(0), window(windowSize, SimulationInstruction("nop")) {}
 
 // Program counter may add one or two
 void FetchStage::windowMove(vector<SimulationInstruction> simulationInstructionList)
@@ -69,7 +69,7 @@ bool FetchStage::reorder(vector<SimulationInstruction> simulationInstructionList
 	}
 
 	for (int i = 2; i < windowTail; i++) {
-		if(window[i].opcodeString == "BGEZ" || window[i].opcodeString == "BLEZ" || window[i].opcodeString == "BEQ" || window[i].opcodeString == "J" || window[i].opcodeString == "end" || window[i].opcodeString == "nop" || window[i].opcodeString == "NOP") // cannot be reordered if it is one of these instructions
+		if (window[i].opcodeString == "BGEZ" || window[i].opcodeString == "BLEZ" || window[i].opcodeString == "BEQ" || window[i].opcodeString == "J" || window[i].opcodeString == "end" || window[i].opcodeString == "nop" || window[i].opcodeString == "NOP") // cannot be reordered if it is one of these instructions
 			return false;
 		if (!regNameMatch(i)) {
 			window[i].reordered = true; // set reordered true for the instruction in the window to prevent it from forwarding

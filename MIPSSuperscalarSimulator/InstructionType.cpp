@@ -25,6 +25,7 @@ using namespace std;
 // JAL is jump and link
 // SLLI is shift left logical immediate
 // SRLI is shift right logical immediate
+// R-type shift example is SLL $rd, $rt, shamt:  R[$rd] <- R[$rt] << shamt
 
 InstrType InstructionType::instrTypeDefine(string strOpcode) {
     if(strOpcode == "ADD" || strOpcode == "SUB" || strOpcode == "MUL"|| strOpcode == "DIV" || strOpcode == "AND")
