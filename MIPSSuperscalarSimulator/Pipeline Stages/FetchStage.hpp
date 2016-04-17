@@ -22,7 +22,6 @@ private:
     int upBranch;
     int windowTail; // number of instructions in the window
     int instructionListSize; // number of instructions in the benchmark
-    int windowSize; // number of instructions in the reorder window
     
     // Before IF is implemented, the window contains all instructions that can potentially be reordered. After the IF is implemented, the window contains all reordered instructions. Instructions enter ID stage according to the order of instructions in the window
     vector<SimulatedInstruction> window;

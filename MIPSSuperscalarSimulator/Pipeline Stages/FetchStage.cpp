@@ -9,9 +9,11 @@
 #include "FetchStage.hpp"
 #include <algorithm>
 
+#define WINDOW_SIZE 8 // maximum number of instructions in the reorder window
+
 // No "this" keyword is required unless there is parameter/local variable name overloading
 
-FetchStage::FetchStage(int instructionListLength) : instructionListSize(instructionListLength), windowSize(8), windowTail(0), upBranch(0), window(windowSize, SimulatedInstruction("nop")) {}
+FetchStage::FetchStage(int instructionListLength) : instructionListSize(instructionListLength), windowTail(0), upBranch(0), window(WINDOW_SIZE, SimulatedInstruction("nop")) {}
 
 // Program counter may add one or two
 void FetchStage::windowMove(vector<SimulatedInstruction> simulatedInstructionList)
@@ -22,7 +24,7 @@ void FetchStage::windowMove(vector<SimulatedInstruction> simulatedInstructionLis
     // First condition is to ensure window shrinks when approaching the edge of the instruction queue as there are fewer instructions to fetch
     // Second condition is to ensure that the length of the window will not be greater than the window size
     // Instruction list size takes into account one "end" and three "nop" at the end of the simulated instruction list
-	while (((i - programCounter) < (instructionListSize - programCounter)) && (windowTail < windowSize)) {
+	while (((i - programCounter) < (instructionListSize - programCounter)) && (windowTail < WINDOW_SIZE)) {
 		window[windowTail] = simulatedInstructionList[i];
 		if (!window[windowTail].reordered) { // reordered instructions have entered the pipeline; if they enter the window again, they are executed twice
 			windowTail++;
