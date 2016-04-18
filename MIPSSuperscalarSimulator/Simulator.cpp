@@ -85,7 +85,7 @@ void Simulator::stepProcess() {
         tempInstrList[0] = simuMemory.currentInstructionList[0];
         tempInstrList[1] = simuMemory.currentInstructionList[1];
         
-        // Is the simuMemory's instructions wiped? This leads to the process of simuMemory to return immediately without performing any functions. rs and rt of the instructions in the execute stage are forwarded from these Empty instructions and tempInstrList is never used.
+        // Is the simuMemory's instructions wiped? This leads to the process of simuMemory to return immediately without performing any functions. Then, rs and rt of the instructions in the execute stage are forwarded from these "Empty" instructions and tempInstrList is never used.
         
         simuMemory.currentInstructionList[0] = SimulatedInstruction("Empty");
         simuMemory.currentInstructionList[1] = SimulatedInstruction("Empty");
@@ -154,7 +154,7 @@ void Simulator::stepProcess() {
             hazardList[5] = simuFetch.currentInstructionList[1];
             break;
         case 1:
-            // Shift elements of hazardList left by two
+            // Rotate elements of hazardList left by two
             rotate(hazardList.begin(), hazardList.begin() + 2, hazardList.end());
             // Assign the last two elements of hazardList to "nop"
             hazardList[4] = SimulatedInstruction("nop");

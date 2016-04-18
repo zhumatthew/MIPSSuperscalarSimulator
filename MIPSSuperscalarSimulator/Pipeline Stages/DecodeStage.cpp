@@ -114,6 +114,7 @@ void DecodeStage::check(const vector<SimulatedInstruction>& hazardList, int last
             // Judge read after write hazard
             if (instruction.currentForward.rsForward || instruction.currentForward.rtForward) {  // In case this instruction has data dependence
                 
+                // typo??? the innermost if statement may need to be checked against rtForward not rsForward
                 if (instruction.currentForward.rsForward) {
                     int index = instruction.currentForward.rsForwardDepth + 2;
                     if (hazardList[index].opcodeString == "LW") {
