@@ -28,7 +28,7 @@ void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory,
             instruction.rtValue = regFile.getValue(instruction.rt);
         }
         
-        // At the second cycle since the RAW hazard was detected (lastStall==2), a NOP needs to be inserted into the MEM stage, but this can lead to the unsuccessful forwarding with an origin stage of MEM since the information in MEM is discarded before it is forwarded to the execution stage of the same cycle
+        // At the second cycle since the RAW hazard was detected (lastStall == 2), a NOP needs to be inserted into the MEM stage, but this can lead to the unsuccessful forwarding with an origin stage of MEM since the information in MEM is discarded before it is forwarded to the execution stage of the same cycle
         
         // Implement forwarding with MEM as origin stage (origin = source?)
         

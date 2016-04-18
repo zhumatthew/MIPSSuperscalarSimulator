@@ -63,7 +63,7 @@ void Simulator::stepProcess() {
     
     cout << "Clock Cycle:" << cycleCount + 1 << endl;
     
-    // ? -> IF -> ID -> EX -> MEM -> WB
+    // IF -> ID -> EX -> MEM -> WB
     if (lastStall != 2) {
         simuWriteBack.currentInstructionList[0] = simuMemory.currentInstructionList[0];
         simuWriteBack.currentInstructionList[1] = simuMemory.currentInstructionList[1];
@@ -75,7 +75,7 @@ void Simulator::stepProcess() {
         simuDecode.currentInstructionList[1] = simuFetch.currentInstructionList[1];
     }
     
-    // At the second cycle since the RAW hazard was detected (lastStall==2), a NOP needs to be inserted into the MEM stage, but this can lead to the unsuccessful forwarding with an origin stage of MEM since the information in MEM is discarded before it is forwarded to the execution stage of the same cycle
+    // At the second cycle since the RAW hazard was detected (lastStall == 2), a NOP needs to be inserted into the MEM stage, but this can lead to the unsuccessful forwarding with an origin stage of MEM since the information in MEM is discarded before it is forwarded to the execution stage of the same cycle
     
     if (lastStall == 2) {
         simuWriteBack.currentInstructionList[0] = simuMemory.currentInstructionList[0];
@@ -84,6 +84,8 @@ void Simulator::stepProcess() {
         // Temporary storage of instruction for forwarding to this cycle's execution stage
         tempInstrList[0] = simuMemory.currentInstructionList[0];
         tempInstrList[1] = simuMemory.currentInstructionList[1];
+        
+        // Is the simuMemory's instructions wiped? This leads to the process of simuMemory to return immediately without performing any functions. rs and rt of the instructions in the execute stage are forwarded from these Empty instructions and tempInstrList is never used.
         
         simuMemory.currentInstructionList[0] = SimulatedInstruction("Empty");
         simuMemory.currentInstructionList[1] = SimulatedInstruction("Empty");
@@ -111,8 +113,8 @@ void Simulator::stepProcess() {
     cout << "WriteBack:" << simuWriteBack.currentInstructionList[0].originalString << endl;
     cout << "WriteBack:" << simuWriteBack.currentInstructionList[1].originalString << endl;
     
-    // potentially pass increment as a reference
-    int increment = simuWriteBack.process(simuRegFile, simuDecode);
+    int increment;
+    simuWriteBack.process(simuRegFile, simuDecode, increment);
     simuMemory.process(simuMainMemory, simuRegFile);
     simuExecute.process(simuDecode, simuMemory, simuRegFile, lastStall, branchMisprediction);
     simuDecode.process(simuRegFile, hazardList, lastStall);
@@ -131,7 +133,7 @@ void Simulator::stepProcess() {
     cout << "WriteBack:" << simuWriteBack.currentInstructionList[1].originalString << endl;
     cout << "-------------------------------------------------" << endl;
     
-    // If the instruction is a branch, then the instruction and the previous instruction needs to be stored in tempHazardList.
+    // If the instruction is a branch, then the instructions in the fetch stage and the instruction of the last cycle in the decode stage need to be stored in tempHazardList.
     if (simuFetch.currentInstructionList[0].opcodeString == "BGEZ"
         || simuFetch.currentInstructionList[0].opcodeString == "BLEZ"
         || simuFetch.currentInstructionList[0].opcodeString == "BEQ"
@@ -143,16 +145,18 @@ void Simulator::stepProcess() {
     }
     
     switch (lastStall) {
-        // Shift elements of hazardList left by two
         case 0:
+            // Rotate elements of hazardList left by two
             rotate(hazardList.begin(), hazardList.begin() + 2, hazardList.end());
-        // Assign the last two elements of hazardList to be the two instructions of the fetch stage
         case 2:
+            // Assign the last two elements of hazardList to be the two instructions in the fetch stage
             hazardList[4] = simuFetch.currentInstructionList[0];
             hazardList[5] = simuFetch.currentInstructionList[1];
             break;
         case 1:
+            // Shift elements of hazardList left by two
             rotate(hazardList.begin(), hazardList.begin() + 2, hazardList.end());
+            // Assign the last two elements of hazardList to "nop"
             hazardList[4] = SimulatedInstruction("nop");
             hazardList[5] = SimulatedInstruction("nop");
             break;
