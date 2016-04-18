@@ -13,7 +13,7 @@
 
 // No "this" keyword is required unless there is parameter/local variable name overloading
 
-FetchStage::FetchStage(int instructionListLength) : instructionListSize(instructionListLength), windowTail(0), upBranch(0), window(WINDOW_SIZE, SimulatedInstruction("nop")) {}
+FetchStage::FetchStage(int instructionListSize) : instructionListSize(instructionListSize), windowTail(0), upBranch(0), window(WINDOW_SIZE, SimulatedInstruction("nop")) {}
 
 // Program counter may add one or two
 void FetchStage::windowMove(vector<SimulatedInstruction>& simulatedInstructionList)

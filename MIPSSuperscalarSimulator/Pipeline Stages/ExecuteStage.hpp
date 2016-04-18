@@ -21,6 +21,8 @@ public:
 	int getSavedProgramCounter();
 
 private:
+    // other stages have public fields with direct access, but this stage providers a getter
+    // rename branch target?
 	int savedProgramCounter;
 };
 

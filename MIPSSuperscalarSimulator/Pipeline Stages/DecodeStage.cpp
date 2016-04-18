@@ -187,3 +187,7 @@ void DecodeStage::check(const vector<SimulatedInstruction>& hazardList, int last
         }
     }
 }
+
+// In consideration of forwarding, only the EX stage needs to implement forwarding by first checking the rsForward and rtForward boolean values. The RAW hazard boolean must be false for forwarding to occur, otherwise forwarding must be performed on a cycle when the boolean is false. When performing forwarding, rs, rt, or both rs and rt must be forwarded from the first instruction of the MEM stage (currentInstructionList[0]).
+
+// Rollover appears to refer to moving instructions from one stage to the next.
