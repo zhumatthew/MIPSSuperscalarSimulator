@@ -20,6 +20,11 @@ public:
 	SimulatedInstruction(string str); // used for nop instruction
     SimulatedInstruction(Instruction instr); // used for instructions that are not nop instructions
     
+    
+    string originalString;
+    
+    string opcodeString;
+
     // destination register, target register, source register
     int rd, rt, rs;
     
@@ -27,7 +32,6 @@ public:
     int rdValue, rtValue, rsValue;
     
     int opcode, immediate;
-    string originalString, opcodeString;
     
     // indicates the instruction location in the simulated instruction list
     int instructionLocation;

@@ -89,6 +89,7 @@ void Simulator::stepProcess() {
         simuMemory.currentInstructionList[1] = SimulatedInstruction("Empty");
     }
     
+    // If branchMisprediction is set in the execute stage of the previous cycle
     if (branchMisprediction) {
         branchMisprediction = false;
         simuExecute.currentInstructionList[0] = SimulatedInstruction("NOP");
@@ -110,6 +111,7 @@ void Simulator::stepProcess() {
     cout << "WriteBack:" << simuWriteBack.currentInstructionList[0].originalString << endl;
     cout << "WriteBack:" << simuWriteBack.currentInstructionList[1].originalString << endl;
     
+    // potentially pass increment as a reference
     int increment = simuWriteBack.process(simuRegFile, simuDecode);
     simuMemory.process(simuMainMemory, simuRegFile);
     simuExecute.process(simuDecode, simuMemory, simuRegFile, lastStall, branchMisprediction);
