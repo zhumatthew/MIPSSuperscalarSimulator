@@ -166,6 +166,7 @@ void Simulator::stepProcess() {
         cout << "hazardList[" << i << "]: " << hazardList[i].originalString << endl;
     }
     
+    // lastStall indicates the number of cycles that have passed since a RAW hazard was detected
     if (lastStall == 2)
         lastStall = 0;
     
