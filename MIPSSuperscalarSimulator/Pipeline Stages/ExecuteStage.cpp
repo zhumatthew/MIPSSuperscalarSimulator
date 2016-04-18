@@ -14,7 +14,7 @@
 void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory, const RegisterFile& regFile, int lastStall, bool& branchMisprediction) {
     
     // In case a RAW hazard is detected in last cycle
-    if (currentDecode.readAfterWriteHazard || (currentInstructionList.front().opcodeString=="NOP"))
+    if (currentDecode.readAfterWriteHazard || (currentInstructionList.front().opcodeString == "NOP"))
         return;
     
     for (int i = 0; i <= 1; i++) {
@@ -30,7 +30,9 @@ void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory,
         
         // At the second cycle since the RAW hazard was detected (lastStall == 2), a NOP needs to be inserted into the MEM stage, but this can lead to the unsuccessful forwarding with an origin stage of MEM since the information in MEM is discarded before it is forwarded to the execution stage of the same cycle
         
-        // Implement forwarding with MEM as origin stage (origin = source?)
+        // Implement forwarding with MEM as source for forwarding
+        // Since MEM is processed before EX, the rdValue of the instruction in the memory stage may be the result of a "lw" instruction (is this accounted for by hazards?)
+        // Otherwise, the rdValue of the instructions in MEM will be the result of the preceding calculations of the EX stage
         
         if (instruction.currentForward.rsForward) {
             int depthIndex = instruction.currentForward.rsForwardDepth;
@@ -66,7 +68,7 @@ void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory,
         if (instruction.opcodeString == "ADD") {
             instruction.rdValue = instruction.rsValue + instruction.rtValue;
         } else if (instruction.opcodeString == "DIV") {
-            if (instruction.rtValue == 0)
+            if (instruction.rtValue == 0) // cannot divide by 0
                 return;
             else
                 instruction.rdValue = instruction.rsValue / instruction.rtValue;
@@ -91,7 +93,7 @@ void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory,
             } // condition evaluation of conditional branch
             if (instruction.opcodeString == "J") // unconditional branch
                 instruction.branchCondition = true;
-            if (instruction.branchCondition == true) {
+            if (instruction.branchCondition) {
                 // Save the PC. just for convenience, actually the target address will be updated to PC (all the five stages share this
                 // static field) in this cycle, but every instruction indicated by PC won't be fetched until next cycle's IF stage
                 savedProgramCounter = instruction.immediate;

@@ -35,6 +35,8 @@ void DecodeStage::check(const vector<SimulatedInstruction>& hazardList, int last
     for (int i = 0; i <= 1; i++) {
         
         SimulatedInstruction instruction = currentInstructionList[i];
+        
+        // lastStall refers to the number of cycles since the last stall
         if (lastStall == 2) {
             
             // Judge 1 is based on hazardList index of 0
@@ -119,7 +121,7 @@ void DecodeStage::check(const vector<SimulatedInstruction>& hazardList, int last
                     int index = instruction.currentForward.rsForwardDepth + 2;
                     if (hazardList[index].opcodeString == "LW") {
                         if (instruction.opcodeString == "SW") {
-                            if (instruction.currentForward.rsForward == true) {
+                            if (instruction.currentForward.rsForward) {
                                 readAfterWriteHazard = true;
                             } else {
                                 readAfterWriteHazard = false;
@@ -134,7 +136,7 @@ void DecodeStage::check(const vector<SimulatedInstruction>& hazardList, int last
                     int index = instruction.currentForward.rtForwardDepth + 2;
                     if (hazardList[index].opcodeString == "LW") {
                         if (instruction.opcodeString == "SW") {
-                            if (instruction.currentForward.rsForward == true) {
+                            if (instruction.currentForward.rsForward) {
                                 readAfterWriteHazard = true;
                             } else {
                                 readAfterWriteHazard = false;

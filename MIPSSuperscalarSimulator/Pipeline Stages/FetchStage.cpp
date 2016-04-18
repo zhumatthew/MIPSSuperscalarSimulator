@@ -112,9 +112,9 @@ void FetchStage::process(vector<SimulatedInstruction>& simulatedInstructionList,
 			window[1].loopCount = window[1].instructionLocation + upBranch;
 			currentInstructionList[0] = window[0];
 			currentInstructionList[1] = window[1];
-			programCounter = programCounter + 2;
-			if (window[1].reordered) // The pair of instructions are the result of reordering, so the next sequential address simuInstrList[PC+1] will not enter the pipeline in this cycle
-				programCounter = programCounter - 1; // simuInstrList[PC+1] will be window[0] the next cycle
+			programCounter += 2;
+			if (window[1].reordered) // The pair of instructions are the result of reordering, so the next sequential address simulatedInstructionList[PC+1] will not enter the pipeline in this cycle
+				programCounter -= 1; // simulatedInstructionList[PC+1] will be window[0] the next cycle
 		} else { // "nop" is inserted at second depth and window[0] enters pipeline alone
 			window[0].loopCount = window[0].instructionLocation + upBranch;
 			currentInstructionList[0] = window[0];
@@ -123,6 +123,8 @@ void FetchStage::process(vector<SimulatedInstruction>& simulatedInstructionList,
 		}
 		clear_reordered(simulatedInstructionList, programCounter, lastPC); // Clear all the instructions that have entered the pipeline this cycle so that when the program counter branches upper address, the instructions can be executed again. If an instruction's reordered flag is set, it cannot enter the instruction window.
 
+        // predict not taken policy, but branch was taken
+        // savedPC is the branch target address
 		if (branchMisprediction) { // The five stages are processed in reverse order, so the changed PC must not be used by this cycle's fetch stage.  To ensure this, the program counter is only updated after actual issuing is finished using the old program counter.
 			int updatedPC = savedPC;
 			upBranch = upBranch + (programCounter - updatedPC);
