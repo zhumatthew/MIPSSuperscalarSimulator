@@ -54,10 +54,6 @@ public:
 
     void process();
     void stepProcess();
-    
-private:
-    vector<int> registerData;
-
 };
 
 #endif /* Simulator_hpp */

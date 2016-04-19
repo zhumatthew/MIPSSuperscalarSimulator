@@ -20,10 +20,13 @@ void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory,
     for (int i = 0; i <= 1; i++) {
         SimulatedInstruction instruction = currentInstructionList[i];
         
+        
+        // EX to EX? for delayed?
         if (instruction.currentForward.rsDelayedForward) {
             instruction.rsValue = regFile.getValue(instruction.rs);
         }
         
+        // EX to EX? for delayed?
         if (instruction.currentForward.rtDelayedForward) {
             instruction.rtValue = regFile.getValue(instruction.rt);
         }
@@ -34,11 +37,13 @@ void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory,
         // Since MEM is processed before EX, the rdValue of the instruction in the memory stage may be the result of a "lw" instruction (is this accounted for by hazards?)
         // Otherwise, the rdValue of the instructions in MEM will be the result of the preceding calculations of the EX stage
         
+        // MEM to EX? for regular?
         if (instruction.currentForward.rsForward) {
             int depthIndex = instruction.currentForward.rsForwardDepth;
             instruction.rsValue = currentMemory.currentInstructionList[depthIndex].rdValue;
         }
         
+        // MEM to EX? for regular?
         if (instruction.currentForward.rtForward) {
             int depthIndex = instruction.currentForward.rtForwardDepth;
             instruction.rtValue = currentMemory.currentInstructionList[depthIndex].rdValue;
@@ -96,6 +101,7 @@ void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory,
             if (instruction.branchCondition) {
                 // Save the PC. just for convenience, actually the target address will be updated to PC (all the five stages share this
                 // static field) in this cycle, but every instruction indicated by PC won't be fetched until next cycle's IF stage
+                // The immediate value can be the absolute address specified by a label
                 savedProgramCounter = instruction.immediate;
                 branchMisprediction = true; // This flag is set so that a bubble is inserted into EX and ID stages in the next cycle
                 instruction.branchCondition = false; // Every time after this flag is used, it should be reset to false so that the next time it can be set or reset based on the outcome of the condition evaluation.

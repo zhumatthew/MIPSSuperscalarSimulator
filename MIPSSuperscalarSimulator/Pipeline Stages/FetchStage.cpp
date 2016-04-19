@@ -21,14 +21,14 @@ void FetchStage::windowMove(vector<SimulatedInstruction>& simulatedInstructionLi
 	windowTail = 0;
 	int i = programCounter;
     
-    // First condition is to ensure window shrinks when approaching the edge of the instruction queue as there are fewer instructions to fetch
+    // First condition is to ensure that the the difference between the program counter and 'i' (the index of the remaining instructions between the PC and the end of the list) does not exceed the difference between the program counter and the total instruction list's size (the number of remaining instructions between the PC and the end of the list)
     // Second condition is to ensure that the length of the window will not be greater than the window size
     // Instruction list size takes into account one "end" and three "nop" at the end of the simulated instruction list
 	while (((i - programCounter) < (instructionListSize - programCounter)) && (windowTail < WINDOW_SIZE)) {
 		window[windowTail] = simulatedInstructionList[i];
 		if (!window[windowTail].reordered) { // reordered instructions have entered the pipeline; if they enter the window again, they are executed twice
 			windowTail++;
-		} else { // Avoids a second execution of the instruction after the reordered one
+		} else { // Avoids another execution of the instruction that has been reordered and executed
 			if (windowTail < 2) {
 				programCounter++;
 			}
@@ -48,6 +48,7 @@ bool FetchStage::registerNameMatch(int check)
     
 //    if (window[check].rd == window[0].rd) flag = true; // WAW hazard (If the loop goes until i <= check), then this instruction is redundant
     
+    // should be comparing only down to window[1]?
     // Compare window[check] to previous instructions window[0] to window [check-1]
     for (int i = 1; i <= check; i++) {
         
@@ -77,6 +78,7 @@ bool FetchStage::reorder(vector<SimulatedInstruction>& simulatedInstructionList)
 		return true; // no data dependence between [0] and [1]; (end cannot enter second depth?)
 	}
 
+    // If window[0] can potentially be paired, but the window[1] depends on window[0]
 	for (int i = 2; i < windowTail; i++) {
 		if (window[i].opcodeString == "BGEZ" || window[i].opcodeString == "BLEZ" || window[i].opcodeString == "BEQ" || window[i].opcodeString == "J" || window[i].opcodeString == "end" || window[i].opcodeString == "nop" || window[i].opcodeString == "NOP") // cannot be reordered if it is one of these instructions
 			return false;
@@ -97,6 +99,8 @@ void FetchStage::clear_reordered(vector<SimulatedInstruction>& simulatedInstruct
 	}
 }
 
+
+// rename savedPC to branch target?
 void FetchStage::process(vector<SimulatedInstruction>& simulatedInstructionList, int lastStall, bool branchMisprediction, int savedPC)
 {
 	bool pairwise;
