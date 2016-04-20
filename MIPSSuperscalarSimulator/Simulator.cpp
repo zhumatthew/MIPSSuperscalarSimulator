@@ -54,6 +54,8 @@ void Simulator::process() {
         stepProcess();
     }
     cout << "Total number of cycles after simulation: " << cycleCount << endl;
+    cout << "CPI: " << cycleCount / (simulatedInstructionList.size() - 4)  << endl;
+
 }
 
 // Maybe we should allow the user to press enter to run the entire simulation
