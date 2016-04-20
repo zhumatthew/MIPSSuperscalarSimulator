@@ -29,9 +29,7 @@ public:
 	int operationCodeDefine(string str, InstrType instrType);
 	int functDefine(string str, InstrType instrType);
 	int shamtDefine(string str, InstrType instrType);
-
-private:
-	InstrType instrType;
+    
 };
 
 #endif /* InstructionType_hpp */

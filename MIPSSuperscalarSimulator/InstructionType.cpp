@@ -29,23 +29,23 @@ using namespace std;
 
 InstrType InstructionType::instrTypeDefine(string strOpcode) {
     if(strOpcode == "ADD" || strOpcode == "SUB" || strOpcode == "MUL"|| strOpcode == "DIV" || strOpcode == "AND")
-        return instrType = RType;
+        return RType;
     else if(strOpcode == "ADDI" || strOpcode == "ANDI" || strOpcode == "ORI" || strOpcode == "XORI" || strOpcode == "SUBI" || strOpcode == "SLLI"|| strOpcode == "SRLI")
-        return instrType = IType;
+        return IType;
     else if(strOpcode == "LW" || strOpcode == "SW"||strOpcode == "BEQ" || strOpcode == "BEQL")
-        return instrType = MBType;
+        return MBType;
     else if(strOpcode == "J" || strOpcode == "JAL"|| strOpcode == "B")
-        return instrType = JType;
+        return JType;
     else if(strOpcode == "BGEZ"|| strOpcode == "BLEZ")
-        return instrType = BRIType;
+        return BRIType;
     else
         cout << "It is a label for branch instruction" << endl;
-    return instrType = Label;
+    return Label;
 }
 
 bool InstructionType::isLabel(string strOpcode) {
-	instrTypeDefine(strOpcode);
-	if (instrType == Label)
+	InstrType type = instrTypeDefine(strOpcode);
+	if (type == Label)
 		return true;
 	else
 		return false;
