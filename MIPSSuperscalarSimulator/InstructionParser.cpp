@@ -83,8 +83,7 @@ int InstructionParser::parseOpcode(InstrType instrType) {
     string operation = "";
     operation = results[0];
     
-    InstructionType instructionType = InstructionType();
-    return instructionType.operationCodeDefine(operation, instrType);
+    return InstructionType().operationCodeDefine(operation, instrType);
 }
 
 int InstructionParser::parseRs(InstrType instrType) {

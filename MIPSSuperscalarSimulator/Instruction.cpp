@@ -13,12 +13,10 @@
 
 using namespace std;
 
-Instruction::Instruction(vector<string> results, InstrType type, vector<LabelInstruction> labelInstrList) : instrType(type), labelInstructionList(labelInstrList) {
-
-	InstructionType instructionType= InstructionType();
+Instruction::Instruction(vector<string> results, InstrType type, vector<LabelInstruction> labelInstructionList) : instrType(type), labelInstructionList(labelInstructionList) {
 
 	if (instrType == Label) {
-		instrType = instructionType.instrTypeDefine(results[1]);
+		instrType = InstructionType().instrTypeDefine(results[1]);
 		results = removeLabel(results);
 	}
     

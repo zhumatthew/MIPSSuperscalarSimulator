@@ -21,7 +21,7 @@ class InstructionParser {
     
 public:
 	InstructionParser(string aLine);
-	InstructionParser(vector<string> results, vector<LabelInstruction> aLabelInstructionList);
+	InstructionParser(vector<string> results, vector<LabelInstruction> labelInstructionList);
 	void doSplitLine();
 	vector<string> getSplitLine();
 	int parseOpcode(InstrType instrType);
@@ -34,7 +34,7 @@ public:
 
 private:
     string line;
-    vector<string> results;
+    vector<string> results; // results is simply the line split by the delimiter ' ' space character
     vector<LabelInstruction> labelInstructionList;
 
 };

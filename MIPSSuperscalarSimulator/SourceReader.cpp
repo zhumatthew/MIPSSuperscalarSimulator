@@ -85,7 +85,7 @@ void SourceReader::constructInstrList() {
 
 			InstructionType type;
 			InstrType instrType = type.instrTypeDefine(strOpcode);
-			Instruction instr(results,instrType,labelInstrList);
+			Instruction instr(results, instrType, labelInstrList);
 			instr.originalString = line;
 
 			cout << "opcode: " << instr.opcode << endl;

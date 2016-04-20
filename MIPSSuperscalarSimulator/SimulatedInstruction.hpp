@@ -20,7 +20,6 @@ public:
 	SimulatedInstruction(string str); // used for nop instruction
     SimulatedInstruction(Instruction instr); // used for instructions that are not nop instructions
     
-    
     string originalString;
     
     string opcodeString;

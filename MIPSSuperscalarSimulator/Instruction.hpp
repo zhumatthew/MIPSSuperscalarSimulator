@@ -20,7 +20,7 @@ class Instruction {
 public:
     Instruction(vector<string> results, InstrType instructionType, vector<LabelInstruction> labelInstructionList);
     string originalString;
-    int funct, shamt, rtvalue, rsvalue, rdvalue, immediate, rd, rt, rs, opcode;
+    int funct, shamt, immediate, rd, rt, rs, opcode;
     InstrType instrType;
     string opcodeString;
     void handleInstruction(vector<string> results);
