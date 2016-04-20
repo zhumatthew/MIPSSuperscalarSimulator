@@ -18,15 +18,19 @@ void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory,
         return;
     
     for (int i = 0; i <= 1; i++) {
-        SimulatedInstruction instruction = currentInstructionList[i];
         
+        SimulatedInstruction& instruction = currentInstructionList[i];
         
-        // EX to EX? for delayed?
+        // No pipeline registers
+        // Forwarding is accomplished by simply reading registers because the writeback stage is processed before the decode stage (reverse order from WB to IF)
+        // Delayed forward means that the instruction's read of the register is delayed until
+        // the instruction that passed through the pipeline two cycles ago has written back to the registers
+        // MEM to EX (delayed)
         if (instruction.currentForward.rsDelayedForward) {
             instruction.rsValue = regFile.getValue(instruction.rs);
         }
         
-        // EX to EX? for delayed?
+        // MEM to EX (delayed)
         if (instruction.currentForward.rtDelayedForward) {
             instruction.rtValue = regFile.getValue(instruction.rt);
         }
@@ -37,19 +41,20 @@ void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory,
         // Since MEM is processed before EX, the rdValue of the instruction in the memory stage may be the result of a "lw" instruction (is this accounted for by hazards?)
         // Otherwise, the rdValue of the instructions in MEM will be the result of the preceding calculations of the EX stage
         
-        // MEM to EX? for regular?
+        // Instructions that passed through the pipeline one cycle ago need to be forwarded
+        // EX to EX
         if (instruction.currentForward.rsForward) {
             int depthIndex = instruction.currentForward.rsForwardDepth;
             instruction.rsValue = currentMemory.currentInstructionList[depthIndex].rdValue;
         }
         
-        // MEM to EX? for regular?
+        // EX to EX
         if (instruction.currentForward.rtForward) {
             int depthIndex = instruction.currentForward.rtForwardDepth;
             instruction.rtValue = currentMemory.currentInstructionList[depthIndex].rdValue;
         }
         
-        // Newly loaded, updated register value is required for the operation, so the register file needs to be accessed again
+        // Newly loaded, updated register value is required for the operation, so the register file needs to be accessed again. Instruction that has passed through the pipeline two cycles ago has already written back to the registers after the writeback stage for this cycle has been processed.
         // Implement stage sequence is from WB to IF
         
         if (lastStall == 2) {

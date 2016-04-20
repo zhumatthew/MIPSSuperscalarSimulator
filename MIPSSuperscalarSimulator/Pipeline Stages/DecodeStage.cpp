@@ -32,14 +32,16 @@ void DecodeStage::process(const RegisterFile& regFile, const vector<SimulatedIns
 // read after write hazards and forwarding possibilities
 void DecodeStage::check(const vector<SimulatedInstruction>& hazardList, int lastStall) {
     
+    // True data dependence (RAW hazard) checking
+    
     for (int i = 0; i <= 1; i++) {
         
-        SimulatedInstruction instruction = currentInstructionList[i];
+        SimulatedInstruction& instruction = currentInstructionList[i];
         
         // lastStall refers to the number of cycles since the last stall
         if (lastStall == 2) {
             
-            // Judge 1 is based on hazardList index of 0
+            // hazardList[0] and [1] are instructions decoded two cycles ago
             if (instruction.rs == hazardList[0].rd) {
                 if (instruction.loopCount > hazardList[0].loopCount) {
                     instruction.currentForward.rsForward = true;
@@ -50,7 +52,7 @@ void DecodeStage::check(const vector<SimulatedInstruction>& hazardList, int last
             }
             
             if (instruction.rt == hazardList[0].rd) {
-                if(instruction.loopCount > hazardList[0].loopCount) {
+                if (instruction.loopCount > hazardList[0].loopCount) {
                     instruction.currentForward.rtForward = true;
                     instruction.currentForward.rtForwardDepth = 0;
                 } else {
@@ -77,6 +79,8 @@ void DecodeStage::check(const vector<SimulatedInstruction>& hazardList, int last
                 }
             }
         } else {
+            
+            // hazardList[2] and [3] are the instructions decoded the previous cycle
             if (instruction.rs == hazardList[2].rd) {
                 if(instruction.loopCount > hazardList[2].loopCount) {
                     instruction.currentForward.rsForward = true;
@@ -114,7 +118,12 @@ void DecodeStage::check(const vector<SimulatedInstruction>& hazardList, int last
             }
             
             // Judge read after write hazard
-            if (instruction.currentForward.rsForward || instruction.currentForward.rtForward) {  // In case this instruction has data dependence
+            if (instruction.currentForward.rsForward || instruction.currentForward.rtForward) {  // In case this instruction is data dependent on previous instructions
+                
+                // Only LW has "rd" and it is equal to its "rt"
+                
+                // If the rd of the potential hazard (previous) instruction is this instruction's source register rs or rt and this instruction is SW and the hazard instruction is LW
+                // in case these conditions are true, once this instruction (which is a SW) passes the execute stage, it is nop'ed before it reaches the memory stage, because what it would have wrote into memory is wrong, since it did not get its updated rt or rs value from the previous LW instruction.
                 
                 // typo??? the innermost if statement may need to be checked against rtForward not rsForward
                 if (instruction.currentForward.rsForward) {

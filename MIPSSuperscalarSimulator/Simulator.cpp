@@ -87,7 +87,7 @@ void Simulator::stepProcess() {
         tempInstrList[0] = simuMemory.currentInstructionList[0];
         tempInstrList[1] = simuMemory.currentInstructionList[1];
         
-        // Is the simuMemory's instructions wiped? This leads to the process of simuMemory to return immediately without performing any functions. Then, rs and rtx of the instructions in the execute stage are forwarded from these "Empty" instructions and tempInstrList is never used.
+        // Is the simuMemory's instructions wiped? This leads to the process of simuMemory to return immediately without performing any functions. Then, rs and rt of the instructions in the execute stage are forwarded from these "Empty" instructions and tempInstrList is never used.
         
         simuMemory.currentInstructionList[0] = SimulatedInstruction("Empty");
         simuMemory.currentInstructionList[1] = SimulatedInstruction("Empty");

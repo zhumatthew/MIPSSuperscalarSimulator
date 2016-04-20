@@ -197,10 +197,10 @@ int InstructionParser::parseRd(InstrType instrType) {
             }
             break;
         case MBType:
-            if(results[0] == "LW") {
-                if(starts_with(results[1], "r"))
+            if (results[0] == "LW") {
+                if (starts_with(results[1], "r"))
                     rd = atoi(results[1].substr(1, results[1].length()).c_str());
-            } else if(results[0] == "SW") {
+            } else if (results[0] == "SW") {
                 
             } else {
                 
