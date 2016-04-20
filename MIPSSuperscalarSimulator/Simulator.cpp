@@ -54,7 +54,7 @@ void Simulator::process() {
         stepProcess();
     }
     cout << "Total number of cycles after simulation: " << cycleCount << endl;
-    cout << "CPI: " << static_cast<double>(cycleCount) / static_cast<double>((simulatedInstructionList.size() - 4))  << endl;
+    cout << "CPI: " << static_cast<double>(cycleCount) / static_cast<double>(instrCount)  << endl;
 
 }
 
