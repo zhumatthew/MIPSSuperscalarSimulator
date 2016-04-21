@@ -14,13 +14,13 @@ LabelInstruction::LabelInstruction(string label, int lineNumber) {
 //        label.pop_back();
 //    }
     
-//    if (label.at(label.size() - 1) == ':') {
-//        label = label.substr(0, label.size()-1);
-//    }
-    
-    if (!label.empty() && label.back() == ':') {
-        label.resize(label.size()-1);
+    if (label.at(label.size() - 1) == ':') {
+    	label.resize(label.size()-1);
     }
+
+//    if (!label.empty() && label.back() == ':') {
+//        label.resize(label.size()-1);
+//    }
     
     this->label = label;
     labelAddress = lineNumber;
