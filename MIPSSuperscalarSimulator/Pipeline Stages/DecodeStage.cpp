@@ -36,7 +36,7 @@ void DecodeStage::check(const vector<SimulatedInstruction>& hazardList, int last
     
     for (int i = 0; i <= 1; i++) {
         
-        SimulatedInstruction& instruction = currentInstructionList[i];
+        SimulatedInstruction instruction = currentInstructionList[i];
         
         // lastStall refers to the number of cycles since the last stall
         if (lastStall == 2) {
