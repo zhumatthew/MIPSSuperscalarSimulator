@@ -15,7 +15,7 @@ LabelInstruction::LabelInstruction(string label, int lineNumber) {
 //    }
     
     if (label.at(label.size() - 1) == ':') {
-        label.substr(0, label.size()-1);
+        label = label.substr(0, label.size()-1);
     }
     
     this->label = label;
