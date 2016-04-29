@@ -40,7 +40,7 @@ void FetchStage::windowMove(vector<SimulatedInstruction>& simulatedInstructionLi
 // determines if window[check] can be reordered into window[1] to make a pair with window [0] for simultaneous pipeline entering
 bool FetchStage::registerNameMatch(int check)
 {
-    // fuction returns true if a hazard is found
+    // function returns true if a hazard is found
 	bool flag = false;
 
 	if ((window[0].opcodeString == "end") || (window[0].opcodeString == "nop") || (window[0].opcodeString == "NOP"))

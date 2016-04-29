@@ -59,10 +59,10 @@ void Simulator::stepProcess() {
         // Temporary storage of instruction for forwarding to this cycle's execution stage
         tempInstrList = memoryStage.currentInstructionList;
         
-        // Is the memoryStage's instructions wiped? This leads to the process of memoryStage to return immediately without performing any functions. Then, rs and rt of the instructions in the execute stage are forwarded from these "Empty" instructions and tempInstrList is never used.
+        // Is the memoryStage's instructions wiped? This leads to the process of memoryStage to return immediately without performing any functions. Then, rs and rt of the instructions in the execute stage are forwarded from these "nop" instructions and tempInstrList is never used.
         
-        memoryStage.currentInstructionList[0] = SimulatedInstruction("Empty");
-        memoryStage.currentInstructionList[1] = SimulatedInstruction("Empty");
+        memoryStage.currentInstructionList[0] = SimulatedInstruction("nop");
+        memoryStage.currentInstructionList[1] = SimulatedInstruction("nop");
     }
     
     // If branchMisprediction is set in the execute stage of the previous cycle
