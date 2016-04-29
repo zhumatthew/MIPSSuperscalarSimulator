@@ -20,7 +20,7 @@ using namespace std;
 class InstructionParser {
     
 public:
-	InstructionParser(string aLine);
+	InstructionParser(string line);
 	InstructionParser(vector<string> results, vector<LabelInstruction> labelInstructionList);
 	vector<string> splitLine();
 	int parseOpcode(InstrType instrType);
@@ -33,7 +33,7 @@ public:
 
 private:
     string line;
-    vector<string> results; // results is simply the line split by the delimiter ' ' space character
+    vector<string> separatedLine; // line split by the delimiter ' ' space character
     vector<LabelInstruction> labelInstructionList;
 
 };

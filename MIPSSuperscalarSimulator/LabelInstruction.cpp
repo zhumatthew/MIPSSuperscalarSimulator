@@ -10,17 +10,14 @@
 #include "LabelInstruction.hpp"
 
 LabelInstruction::LabelInstruction(string label, int lineNumber) {
+    
 //    if (!label.empty() && label.back() == ':') {
 //        label.pop_back();
 //    }
     
-    if (label[label.size() - 1] == ':') {
+    if (!label.empty() && label[label.size() - 1] == ':') {
     	label.resize(label.size()-1);
     }
-
-//    if (!label.empty() && label.back() == ':') {
-//        label.resize(label.size()-1);
-//    }
     
     this->label = label;
     labelAddress = lineNumber;

@@ -11,6 +11,8 @@
 #include "Simulator.hpp"
 #include "SimulatedInstruction.hpp"
 
+#define OUTPUT_WIDTH 42
+
 int main(int argc, const char * argv[]) {
 
 	if (argc < 2) {
@@ -25,8 +27,10 @@ int main(int argc, const char * argv[]) {
 	vector<SimulatedInstruction> simulatedInstructionList = vector<SimulatedInstruction>();
 	vector<Instruction> originalInstructionList = sourceReader.getInstructionList();
 
-	cout << "-----------Start Simulation-----------" << endl;
+	cout << "-------------Start Simulation-------------" << endl;
 	cout << "Original number of instructions : " << originalInstructionList.size() << endl;
+    cout << string(OUTPUT_WIDTH, '-') << endl;
+
 
 	for (int i = 0; i < originalInstructionList.size(); i++) {
 		SimulatedInstruction simInstr = SimulatedInstruction(originalInstructionList[i]);

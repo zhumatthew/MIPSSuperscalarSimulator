@@ -13,23 +13,23 @@
 
 using namespace std;
 
-Instruction::Instruction(vector<string> results, InstrType type, vector<LabelInstruction> labelInstructionList) : instrType(type), labelInstructionList(labelInstructionList), funct(0), shamt(0) {
+Instruction::Instruction(vector<string> separatedString, InstrType type, vector<LabelInstruction> labelInstructionList) : instrType(type), labelInstructionList(labelInstructionList), funct(0), shamt(0) {
 
 	if (instrType == Label) {
-		instrType = InstructionType().instrTypeDefine(results[1]);
-		results = removeLabel(results);
+		instrType = InstructionType().instrTypeDefine(separatedString[1]);
+		separatedString = removeLabel(separatedString);
 	}
     
-	opcodeString = results.front();
-	handleInstruction(results);
+	opcodeString = separatedString.front();
+	handleInstruction(separatedString);
 }
 
 
 // opcodeString is assigned the int return value of parseOpcode function??
 // name this function parse instruction??
-void Instruction::handleInstruction(vector<string> results) {
+void Instruction::handleInstruction(vector<string> separatedLine) {
     
-	InstructionParser parser = InstructionParser(results, labelInstructionList);
+	InstructionParser parser(separatedLine, labelInstructionList);
 
 	switch (instrType) {
 		case RType:
@@ -70,7 +70,7 @@ void Instruction::handleInstruction(vector<string> results) {
 }
 
 // Remove the label at the start of the results line
-vector<string> Instruction::removeLabel(vector<string> results) {
-    results.erase(results.begin());
-    return results;
+vector<string> Instruction::removeLabel(vector<string> separatedString) {
+    separatedString.erase(separatedString.begin());
+    return separatedString;
 }

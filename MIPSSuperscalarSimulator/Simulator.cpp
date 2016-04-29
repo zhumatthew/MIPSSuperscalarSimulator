@@ -12,13 +12,14 @@
 #include <algorithm>
 
 #define HAZARD_LIST_SIZE 6
+#define OUTPUT_WIDTH 42
 
 using namespace std;
 
 // if the type of 'decodeStage' is 'DecodeStage' and it has a default constructor, then you don't need to initialize it manually.
 // you do not need to define default constructors; they are there implicitly unless you define another constructor
 
-Simulator::Simulator(vector<SimulatedInstruction> simulatedInstructionList) : simulatedInstructionList(simulatedInstructionList), fetchStage(FetchStage(static_cast<int>(simulatedInstructionList.size()))), tempInstr(SimulatedInstruction("nop")), instrCount(0), lastStall(0), hazardList(HAZARD_LIST_SIZE, tempInstr), tempHazardList(4, tempInstr), tempInstrList(2, tempInstr) {}
+Simulator::Simulator(vector<SimulatedInstruction> simulatedInstructionList) : simulatedInstructionList(simulatedInstructionList), fetchStage(FetchStage(static_cast<int>(simulatedInstructionList.size()))), instructionCount(0), lastStall(0), tempInstr(SimulatedInstruction("nop")), hazardList(HAZARD_LIST_SIZE, tempInstr), tempHazardList(4, tempInstr), tempInstrList(2, tempInstr) {}
 
 //Simulator::Simulator(vector<SimulatedInstruction> simulationInstrList) {
 //    simulationInstrList = simulationInstrList;
@@ -52,43 +53,36 @@ Simulator::Simulator(vector<SimulatedInstruction> simulatedInstructionList) : si
 
 void Simulator::process() {
     cycleCount = 0;
-    while (memoryStage.currentInstructionList[0].originalString != "end") {
+    while (memoryStage.currentInstructionList.front().originalString != "end") {
         stepProcess();
     }
-    cout << "Total original number of instruction count: " << instrCount << endl;
-    cout << "Total number of cycles after simulation: " << cycleCount << endl;
-    cout << "CPI: " << static_cast<double>(cycleCount) / static_cast<double>(instrCount)  << endl;
+    
+    cout << "Committed Instruction count: " << instructionCount << endl;
+    cout << "Total number of cycles: " << cycleCount << endl;
+    cout << "CPI: " << static_cast<double>(cycleCount) / static_cast<double>(instructionCount)  << endl;
 
 }
 
-// Maybe we should allow the user to press enter to run the entire simulation
-// or press space to run one step at a time
+// Potentially allows the user to press enter to run the entire simulation or press space to run one step at a time
 
 void Simulator::stepProcess() {
     
-    cout << "Clock Cycle:" << cycleCount + 1 << endl;
+    cout << "Clock Cycle #" << cycleCount + 1 << endl;
     
     // IF -> ID -> EX -> MEM -> WB
     if (lastStall != 2) {
-        writeBackStage.currentInstructionList[0] = memoryStage.currentInstructionList[0];
-        writeBackStage.currentInstructionList[1] = memoryStage.currentInstructionList[1];
-        memoryStage.currentInstructionList[0] = executeStage.currentInstructionList[0];
-        memoryStage.currentInstructionList[1] = executeStage.currentInstructionList[1];
-        executeStage.currentInstructionList[0] = decodeStage.currentInstructionList[0];
-        executeStage.currentInstructionList[1] = decodeStage.currentInstructionList[1];
-        decodeStage.currentInstructionList[0] = fetchStage.currentInstructionList[0];
-        decodeStage.currentInstructionList[1] = fetchStage.currentInstructionList[1];
-    }
-    
-    // At the second cycle since the RAW hazard was detected (lastStall == 2), a NOP needs to be inserted into the MEM stage, but this can lead to the unsuccessful forwarding with an origin stage of MEM since the information in MEM is discarded before it is forwarded to the execution stage of the same cycle
-    
-    if (lastStall == 2) {
-        writeBackStage.currentInstructionList[0] = memoryStage.currentInstructionList[0];
-        writeBackStage.currentInstructionList[1] = memoryStage.currentInstructionList[1];
+        writeBackStage.currentInstructionList = memoryStage.currentInstructionList;
+        memoryStage.currentInstructionList = executeStage.currentInstructionList;
+        executeStage.currentInstructionList = decodeStage.currentInstructionList;
+        decodeStage.currentInstructionList = fetchStage.currentInstructionList;
+    } else {
+        
+        // At the second cycle since the RAW hazard was detected (lastStall == 2), a NOP needs to be inserted into the MEM stage, but this can lead to the unsuccessful forwarding with an origin stage of MEM since the information in MEM is discarded before it is forwarded to the execution stage of the same cycle
+        
+        writeBackStage.currentInstructionList = memoryStage.currentInstructionList;
         
         // Temporary storage of instruction for forwarding to this cycle's execution stage
-        tempInstrList[0] = memoryStage.currentInstructionList[0];
-        tempInstrList[1] = memoryStage.currentInstructionList[1];
+        tempInstrList = memoryStage.currentInstructionList;
         
         // Is the memoryStage's instructions wiped? This leads to the process of memoryStage to return immediately without performing any functions. Then, rs and rt of the instructions in the execute stage are forwarded from these "Empty" instructions and tempInstrList is never used.
         
@@ -109,40 +103,37 @@ void Simulator::stepProcess() {
         hazardList[5] = tempHazardList[3];
     }
     
-    cout << "Decode:" << decodeStage.currentInstructionList[0].originalString << endl;
-    cout << "Decode:" << decodeStage.currentInstructionList[1].originalString << endl;
-    cout << "Execute:" << executeStage.currentInstructionList[0].originalString << endl;
-    cout << "Execute:" << executeStage.currentInstructionList[1].originalString << endl;
-    cout << "Memory:" << memoryStage.currentInstructionList[0].originalString << endl;
-    cout << "Memory:" << memoryStage.currentInstructionList[1].originalString << endl;
+    int increment;
+    
     cout << "WriteBack:" << writeBackStage.currentInstructionList[0].originalString << endl;
     cout << "WriteBack:" << writeBackStage.currentInstructionList[1].originalString << endl;
-    
-    int increment;
     writeBackStage.process(registerFile, decodeStage, increment);
+    
+    cout << "Memory:" << memoryStage.currentInstructionList[0].originalString << endl;
+    cout << "Memory:" << memoryStage.currentInstructionList[1].originalString << endl;
     memoryStage.process(mainMemory, registerFile);
+    
+    cout << "Execute:" << executeStage.currentInstructionList[0].originalString << endl;
+    cout << "Execute:" << executeStage.currentInstructionList[1].originalString << endl;
     executeStage.process(decodeStage, memoryStage, registerFile, lastStall, branchMisprediction);
+    
+    cout << "Decode:" << decodeStage.currentInstructionList[0].originalString << endl;
+    cout << "Decode:" << decodeStage.currentInstructionList[1].originalString << endl;
     decodeStage.process(registerFile, hazardList, lastStall);
+    
     fetchStage.process(simulatedInstructionList, lastStall, branchMisprediction, executeStage.getSavedProgramCounter());
-    instrCount += increment;
     
     cout << "Fetch:" << fetchStage.currentInstructionList[0].originalString << endl;
     cout << "Fetch:" << fetchStage.currentInstructionList[1].originalString << endl;
-    cout << "Decode:" << decodeStage.currentInstructionList[0].originalString << endl;
-    cout << "Decode:" << decodeStage.currentInstructionList[1].originalString << endl;
-    cout << "Execute:" << executeStage.currentInstructionList[0].originalString << endl;
-    cout << "Execute:" << executeStage.currentInstructionList[1].originalString << endl;
-    cout << "Memory:" << memoryStage.currentInstructionList[0].originalString << endl;
-    cout << "Memory:" << memoryStage.currentInstructionList[1].originalString << endl;
-    cout << "WriteBack:" << writeBackStage.currentInstructionList[0].originalString << endl;
-    cout << "WriteBack:" << writeBackStage.currentInstructionList[1].originalString << endl;
-    cout << "-------------------------------------------------" << endl;
+    instructionCount += increment;
+
+    cout << string(OUTPUT_WIDTH, '-') << endl;
     
-    // If the instruction is a branch, then the instructions in the fetch stage and the instruction of the last cycle in the decode stage need to be stored in tempHazardList.
-    if (fetchStage.currentInstructionList[0].opcodeString == "BGEZ"
-        || fetchStage.currentInstructionList[0].opcodeString == "BLEZ"
-        || fetchStage.currentInstructionList[0].opcodeString == "BEQ"
-        || fetchStage.currentInstructionList[0].opcodeString == "J") {
+    // If a fetched instruction is a branch, then the instructions in the fetch stage and the decode stage (which passed through the fetch stage in the last cycle) need to be stored in tempHazardList.
+    if (fetchStage.currentInstructionList.front().opcodeString == "BGEZ"
+        || fetchStage.currentInstructionList.front().opcodeString == "BLEZ"
+        || fetchStage.currentInstructionList.front().opcodeString == "BEQ"
+        || fetchStage.currentInstructionList.front().opcodeString == "J") {
         tempHazardList[0] = decodeStage.currentInstructionList[0];
         tempHazardList[1] = decodeStage.currentInstructionList[1];
         tempHazardList[2] = fetchStage.currentInstructionList[0];
@@ -161,7 +152,7 @@ void Simulator::stepProcess() {
         case 1:
             // Rotate elements of hazardList left by two
             rotate(hazardList.begin(), hazardList.begin() + 2, hazardList.end());
-            // Assign the last two elements of hazardList to "nop"
+            // Assign "nop" to the last two elements of hazardList
             hazardList[4] = SimulatedInstruction("nop");
             hazardList[5] = SimulatedInstruction("nop");
             break;
@@ -184,7 +175,7 @@ void Simulator::stepProcess() {
     }
     
     cycleCount++;
-    cout << "-------------------------------------------------" << endl;
+    cout << string(OUTPUT_WIDTH, '-') << endl;
 }
 
 //  void Simulator::main() {

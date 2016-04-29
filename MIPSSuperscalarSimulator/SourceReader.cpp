@@ -14,6 +14,8 @@
 #include "InstructionParser.hpp"
 #include "InstructionType.hpp"
 
+#define OUTPUT_WIDTH 42
+
 using namespace std;
 
 SourceReader::SourceReader(string path) : filePath(path){}
@@ -43,14 +45,14 @@ void SourceReader::findLabel() {
 	labelInstructionList = vector<LabelInstruction>();
 
     //
-	cout << "------------Read the assembly File------------" << endl;
+	cout << "----------Read the assembly File----------" << endl;
 
 	while (getline(reader, line)) {
 		if (!line.empty()) {
 			cout << lineNumber << "   " + trim(line) << endl;
-            // MATLAB like formatting?
+            // MATLAB like formatting? printf?
             // String constructor to generate dashes?
-			cout << "------------------------------------------" << endl;
+			cout << string(OUTPUT_WIDTH, '-') << endl;
 			InstructionParser parser(line);
 			string strOpcode = parser.splitLine().front();
 
@@ -59,9 +61,6 @@ void SourceReader::findLabel() {
 			if (type.isLabel(strOpcode)) {
 				LabelInstruction label(strOpcode,lineNumber);
 				labelInstructionList.push_back(label);
-				cout << label.getLabelString() <<  "---------" << label.getLabelAddress() << endl;
-				cout << labelInstructionList.back().getLabelString() << endl;
-				cout << labelInstructionList.size() << endl;
 			}
 			lineNumber++;
 		}
@@ -74,11 +73,13 @@ void SourceReader::constructInstrList() {
 	int lineNumber = 0;
 	instructionList = vector<Instruction>();
 
-	cout << "--------Printing out each component-------" << endl;
+	cout << "-------Printing out each instruction------" << endl;
 
 	while (getline(reader, line)) {
         if (!line.empty()) {
-        	cout << "------------------------------------------" << endl;
+        	cout << string(OUTPUT_WIDTH, '-') << endl;
+//            printf("Width trick: %*d \n", 5, 10);
+//            printf("%d %*s \n", lineNumber, 3, trim(line).c_str());
         	cout << lineNumber << "   " << trim(line) << endl;
 			InstructionParser parser(line);
 			string strOpcode = parser.splitLine().front();
@@ -94,8 +95,9 @@ void SourceReader::constructInstrList() {
 			cout << "rt: " << instr.rt << endl;
 			cout << "rd: " << instr.rd << endl;
 			cout << "immediate: " << instr.immediate << endl;
-			cout << "funct: " << instr.funct << endl;
 			cout << "shamt: " << instr.shamt << endl;
+            cout << "funct: " << instr.funct << endl;
+
 			instructionList.push_back(instr);
 			lineNumber++;
 		}

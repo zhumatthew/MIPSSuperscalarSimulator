@@ -27,24 +27,23 @@ using namespace std;
 // SRLI is shift right logical immediate
 // R-type shift example is SLL $rd, $rt, shamt:  R[$rd] <- R[$rt] << shamt
 
-InstrType InstructionType::instrTypeDefine(string strOpcode) {
-    if (strOpcode == "ADD" || strOpcode == "SUB" || strOpcode == "MUL"|| strOpcode == "DIV" || strOpcode == "AND")
+InstrType InstructionType::instrTypeDefine(string opcode) {
+    if (opcode == "ADD" || opcode == "SUB" || opcode == "MUL"|| opcode == "DIV" || opcode == "AND")
         return RType;
-    else if(strOpcode == "ADDI" || strOpcode == "ANDI" || strOpcode == "ORI" || strOpcode == "XORI" || strOpcode == "SUBI" || strOpcode == "SLLI"|| strOpcode == "SRLI")
+    else if(opcode == "ADDI" || opcode == "ANDI" || opcode == "ORI" || opcode == "XORI" || opcode == "SUBI" || opcode == "SLLI"|| opcode == "SRLI")
         return IType;
-    else if(strOpcode == "LW" || strOpcode == "SW"||strOpcode == "BEQ" || strOpcode == "BEQL")
+    else if(opcode == "LW" || opcode == "SW"||opcode == "BEQ" || opcode == "BEQL")
         return MBType;
-    else if(strOpcode == "J" || strOpcode == "JAL"|| strOpcode == "B")
+    else if(opcode == "J" || opcode == "JAL"|| opcode == "B")
         return JType;
-    else if(strOpcode == "BGEZ"|| strOpcode == "BLEZ")
+    else if(opcode == "BGEZ"|| opcode == "BLEZ")
         return BRIType;
     else
-        cout << "It is a label for branch instruction" << endl;
-    return Label;
+        return Label;
 }
 
-bool InstructionType::isLabel(string strOpcode) {
-	InstrType type = instrTypeDefine(strOpcode);
+bool InstructionType::isLabel(string opcode) {
+	InstrType type = instrTypeDefine(opcode);
 	if (type == Label)
 		return true;
 	else

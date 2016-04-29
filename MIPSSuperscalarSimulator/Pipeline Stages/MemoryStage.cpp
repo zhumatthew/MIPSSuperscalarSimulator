@@ -14,7 +14,7 @@ using namespace std;
 void MemoryStage::process(MainMemory& mainMemory, RegisterFile& regfile) {
 
 	if (currentInstructionList.front().effectiveAddress != 0) {
-        cout << "MemoryAddress [ " << currentInstructionList.front().effectiveAddress << "] = " << endl;
+        cout << "MemoryAddress [ " << currentInstructionList[0].effectiveAddress << "] = " << endl;
 	}
 
 	if (currentInstructionList[1].effectiveAddress != 0) {
@@ -28,14 +28,14 @@ void MemoryStage::process(MainMemory& mainMemory, RegisterFile& regfile) {
     // Mem[effectiveAddress] is placed in LMD (load memory data)
     // rdValue is used to indicate LMD
     // rdValue is a software concept that indicates value should be updated to register file or main memory, it is responding to ALUoutput register
-	if (currentInstructionList.front().opcodeString == "LW")
-		currentInstructionList.front().rdValue = mainMemory.getValue(currentInstructionList.front().effectiveAddress);
+	if (currentInstructionList[0].opcodeString == "LW")
+		currentInstructionList[0].rdValue = mainMemory.getValue(currentInstructionList.front().effectiveAddress);
 
 	if (currentInstructionList[1].opcodeString == "LW")
 		currentInstructionList[1].rdValue = mainMemory.getValue(currentInstructionList[1].effectiveAddress);
 
     // GPR[rs] is placed in Mem[effectiveAddress]
-	if (currentInstructionList.front().opcodeString == "SW")
+	if (currentInstructionList[0].opcodeString == "SW")
 		mainMemory.setValue(regfile.getValue(currentInstructionList.front().rt), currentInstructionList.front().effectiveAddress);
 
 	if (currentInstructionList[1].opcodeString == "SW")

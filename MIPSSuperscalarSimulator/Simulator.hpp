@@ -27,21 +27,24 @@ class Simulator {
 
 public:
     
+    vector<SimulatedInstruction> simulatedInstructionList;
 	Simulator(vector<SimulatedInstruction> simulatedInstructionList);
+    
 	FetchStage fetchStage;
 	DecodeStage decodeStage;
 	ExecuteStage executeStage;
     MemoryStage memoryStage;
     WriteBackStage writeBackStage;
+    
+    int instructionCount;
+    int lastStall;
 
     // Register file and main memory will be initialized implicitly (default constructor is provided)
     RegisterFile registerFile;
     MainMemory mainMemory;
     
-    vector<SimulatedInstruction> simulatedInstructionList;
 
     int cycleCount;
-    int lastStall;
     
     SimulatedInstruction tempInstr;
     vector<SimulatedInstruction> tempInstrList;
@@ -50,7 +53,6 @@ public:
     // This flag is set at the execution stage of a conditional branch instruction for a mispredicted branch. At the next cycle, the decision of whether or not bubbles will be inserted will be based on this flag.
     bool branchMisprediction;
     
-    int instrCount;
 
     void process();
     void stepProcess();
