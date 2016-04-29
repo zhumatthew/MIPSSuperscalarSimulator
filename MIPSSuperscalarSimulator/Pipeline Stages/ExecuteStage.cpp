@@ -9,7 +9,7 @@
 #include "ExecuteStage.hpp"
 #include "../InstructionType.hpp"
 
-void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory, const RegisterFile& regFile, int lastStall, bool& branchMisprediction) {
+void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory, RegisterFile const& regFile, int lastStall, bool& branchMisprediction) {
     
     // In case a RAW hazard is detected in last cycle
     if (currentDecode.readAfterWriteHazard || (currentInstructionList.front().opcodeString == "NOP"))

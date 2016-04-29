@@ -24,17 +24,17 @@ InstructionParser::InstructionParser(string line) : line(line) {}
 
 InstructionParser::InstructionParser(vector<string> separatedLine, vector<LabelInstruction> labelInstructionList) : separatedLine(separatedLine), labelInstructionList(labelInstructionList) {}
 
-bool starts_with(const string& s1, const string& s2) {
+bool starts_with(string const& s1, string const& s2) {
     return s2.size() <= s1.size() && s1.compare(0, s2.size(), s2) == 0;
 }
 
-inline bool ends_with(const string& value, const string& ending)
+inline bool ends_with(string const& value, string const& ending)
 {
     if (ending.size() > value.size()) return false;
     return equal(ending.rbegin(), ending.rend(), value.rbegin());
 }
 
-vector<string> split(const string& text, char sep) {
+vector<string> split(string const& text, char sep) {
     vector<string> tokens;
     size_t start = 0, end = 0;
     while ((end = text.find(sep, start)) != string::npos) {
