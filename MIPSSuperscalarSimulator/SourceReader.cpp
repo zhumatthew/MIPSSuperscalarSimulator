@@ -27,7 +27,7 @@ void SourceReader::setFilePath(string filePath) {
 }
 
 string SourceReader::trim(string str) {
-    if (str.length() == 0) return str;
+    if (str.empty()) return str;
 
     int beg = 0, end = static_cast<int>(str.length()) - 1;
     while (str[beg] == ' ') beg++;
@@ -40,26 +40,28 @@ void SourceReader::findLabel() {
 	ifstream reader(getFilePath().c_str());
 	string line;
 	int lineNumber = 0;
-	labelInstrList = vector<LabelInstruction>();
+	labelInstructionList = vector<LabelInstruction>();
 
+    //
 	cout << "------------Read the assembly File------------" << endl;
 
 	while (getline(reader, line)) {
 		if (!line.empty()) {
 			cout << lineNumber << "   " + trim(line) << endl;
+            // MATLAB like formatting?
+            // String constructor to generate dashes?
 			cout << "------------------------------------------" << endl;
 			InstructionParser parser(line);
-			parser.doSplitLine();
-			string strOpcode = parser.getSplitLine().front();
+			string strOpcode = parser.splitLine().front();
 
 			InstructionType type;
 
 			if (type.isLabel(strOpcode)) {
 				LabelInstruction label(strOpcode,lineNumber);
-				labelInstrList.push_back(label);
+				labelInstructionList.push_back(label);
 				cout << label.getLabelString() <<  "---------" << label.getLabelAddress() << endl;
-				cout << labelInstrList.back().getLabelString() << endl;
-				cout << labelInstrList.size() << endl;
+				cout << labelInstructionList.back().getLabelString() << endl;
+				cout << labelInstructionList.size() << endl;
 			}
 			lineNumber++;
 		}
@@ -70,7 +72,7 @@ void SourceReader::constructInstrList() {
 	ifstream reader(getFilePath().c_str());
 	string line;
 	int lineNumber = 0;
-	instrList = vector<Instruction>();
+	instructionList = vector<Instruction>();
 
 	cout << "--------Printing out each component-------" << endl;
 
@@ -79,13 +81,12 @@ void SourceReader::constructInstrList() {
         	cout << "------------------------------------------" << endl;
         	cout << lineNumber << "   " << trim(line) << endl;
 			InstructionParser parser(line);
-			parser.doSplitLine();
-			string strOpcode = parser.getSplitLine().front();
-			vector<string> results = parser.getSplitLine();
+			string strOpcode = parser.splitLine().front();
+			vector<string> results = parser.splitLine();
 
 			InstructionType type;
 			InstrType instrType = type.instrTypeDefine(strOpcode);
-			Instruction instr(results, instrType, labelInstrList);
+			Instruction instr(results, instrType, labelInstructionList);
 			instr.originalString = line;
 
 			cout << "opcode: " << instr.opcode << endl;
@@ -95,12 +96,12 @@ void SourceReader::constructInstrList() {
 			cout << "immediate: " << instr.immediate << endl;
 			cout << "funct: " << instr.funct << endl;
 			cout << "shamt: " << instr.shamt << endl;
-			instrList.push_back(instr);
+			instructionList.push_back(instr);
 			lineNumber++;
 		}
 	}
 }
 
 vector<Instruction> SourceReader::getInstructionList() {
-	return instrList;
+	return instructionList;
 }

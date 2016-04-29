@@ -14,7 +14,7 @@ LabelInstruction::LabelInstruction(string label, int lineNumber) {
 //        label.pop_back();
 //    }
     
-    if (label.at(label.size() - 1) == ':') {
+    if (label[label.size() - 1] == ':') {
     	label.resize(label.size()-1);
     }
 

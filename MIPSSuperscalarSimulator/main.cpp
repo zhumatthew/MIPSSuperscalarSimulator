@@ -18,8 +18,6 @@ int main(int argc, const char * argv[]) {
 		return 0;
 	}
     
-//	SourceReader sourceReader("C:\\Users\\jm28550\\Downloads\\alu_reg_1.asm");
-//	SourceReader sourceReader("/Users/zhumatthew/Desktop/Benchmarks/alu_reg_3/alu_reg_3.asm");
 	SourceReader sourceReader(argv[1]);
 	sourceReader.findLabel();
 	sourceReader.constructInstrList();

@@ -30,8 +30,8 @@ public:
 
 private:
     string filePath;
-    vector<LabelInstruction> labelInstrList;
-    vector<Instruction> instrList;
+    vector<LabelInstruction> labelInstructionList;
+    vector<Instruction> instructionList;
 };
 
 #endif /* SourceReader_hpp */

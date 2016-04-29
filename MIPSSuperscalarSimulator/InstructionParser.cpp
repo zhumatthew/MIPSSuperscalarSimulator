@@ -66,9 +66,9 @@ vector<string> split(const string& text, char sep) {
     return tokens;
 }
 
-// Splits the line into substrings delimited by ' '
+// Splits the line into substrings delimited by the ' ' space character
 // Remove commas that occur at the end of substrings
-void InstructionParser::doSplitLine() {
+vector<string> InstructionParser::splitLine() {
     results = split(line, ' ');
     
     for (int i = 0; i < results.size(); i++) {
@@ -76,9 +76,7 @@ void InstructionParser::doSplitLine() {
             results[i] = results[i].substr(0, results[i].length()-1);
         }
     }
-}
-
-vector<string> InstructionParser::getSplitLine() {
+    
     return results;
 }
 

@@ -22,8 +22,7 @@ class InstructionParser {
 public:
 	InstructionParser(string aLine);
 	InstructionParser(vector<string> results, vector<LabelInstruction> labelInstructionList);
-	void doSplitLine();
-	vector<string> getSplitLine();
+	vector<string> splitLine();
 	int parseOpcode(InstrType instrType);
 	int parseRs(InstrType instrType);
 	int parseRt(InstrType instrType);
