@@ -13,7 +13,7 @@
 
 using namespace std;
 
-Instruction::Instruction(vector<string> results, InstrType type, vector<LabelInstruction> labelInstructionList) : instrType(type), labelInstructionList(labelInstructionList) {
+Instruction::Instruction(vector<string> results, InstrType type, vector<LabelInstruction> labelInstructionList) : instrType(type), labelInstructionList(labelInstructionList), funct(0), shamt(0) {
 
 	if (instrType == Label) {
 		instrType = InstructionType().instrTypeDefine(results[1]);

@@ -13,7 +13,7 @@
 
 int main(int argc, const char * argv[]) {
 
-	if(argc < 2) {
+	if (argc < 2) {
 		cout << "Usage: " << argv[0] << " assembly_file_name.asm" << endl;
 		return 0;
 	}
@@ -40,10 +40,6 @@ int main(int argc, const char * argv[]) {
 
 	simulatedInstructionList.push_back(endInstr);
     fill_n(back_inserter(simulatedInstructionList), 3, nopInstr);
-    
-//	simulationInstructionList.push_back(nopInstr);
-//	simulationInstructionList.push_back(nopInstr);
-//	simulationInstructionList.push_back(nopInstr);
 
 	for (int i = 0; i < simulatedInstructionList.size(); i++) {
 		simulatedInstructionList[i].instructionLocation = i;

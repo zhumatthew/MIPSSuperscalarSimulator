@@ -28,7 +28,7 @@ using namespace std;
 // R-type shift example is SLL $rd, $rt, shamt:  R[$rd] <- R[$rt] << shamt
 
 InstrType InstructionType::instrTypeDefine(string strOpcode) {
-    if(strOpcode == "ADD" || strOpcode == "SUB" || strOpcode == "MUL"|| strOpcode == "DIV" || strOpcode == "AND")
+    if (strOpcode == "ADD" || strOpcode == "SUB" || strOpcode == "MUL"|| strOpcode == "DIV" || strOpcode == "AND")
         return RType;
     else if(strOpcode == "ADDI" || strOpcode == "ANDI" || strOpcode == "ORI" || strOpcode == "XORI" || strOpcode == "SUBI" || strOpcode == "SLLI"|| strOpcode == "SRLI")
         return IType;
