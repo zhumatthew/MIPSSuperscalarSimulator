@@ -47,7 +47,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "56"
             endingLineNumber = "56"
-            landmarkName = "SourceReader::findLabel()"
+            landmarkName = "SourceReader::findLabelAddresses()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -175,7 +175,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "43"
             endingLineNumber = "43"
-            landmarkName = "DecodeStage::check(const vector&lt;SimulatedInstruction&gt;&amp; hazardList, int lastStall)"
+            landmarkName = "DecodeStage::check(vector&lt;SimulatedInstruction&gt; const&amp; hazardList, int lastStall)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -191,7 +191,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "39"
             endingLineNumber = "39"
-            landmarkName = "DecodeStage::check(const vector&lt;SimulatedInstruction&gt;&amp; hazardList, int lastStall)"
+            landmarkName = "DecodeStage::check(vector&lt;SimulatedInstruction&gt; const&amp; hazardList, int lastStall)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

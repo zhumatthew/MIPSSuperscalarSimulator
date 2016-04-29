@@ -26,8 +26,8 @@ int main(int argc, const char * argv[]) {
 	}
     
 	SourceReader sourceReader(argv[1]);
-	sourceReader.findLabel();
-	sourceReader.constructInstrList();
+	sourceReader.findLabelAddresses();
+	sourceReader.constructInstructionList();
 
 	vector<Instruction> originalInstructionList = sourceReader.getInstructionList();
     vector<SimulatedInstruction> simulatedInstructionList = vector<SimulatedInstruction>();

@@ -38,13 +38,13 @@ string SourceReader::trim(string str) {
     return str.substr(beg, end - beg + 1);
 }
 
-void SourceReader::findLabel() {
+// Finds addresses of labels for branch instruction targets
+void SourceReader::findLabelAddresses() {
 	ifstream reader(getFilePath().c_str());
 	string line;
 	int lineNumber = 0;
 	labelInstructionList = vector<LabelInstruction>();
 
-    //
 	cout << "----------Read the assembly file----------" << endl;
 
 	while (getline(reader, line)) {
@@ -57,7 +57,7 @@ void SourceReader::findLabel() {
 			InstructionType type;
 
 			if (type.isLabel(strOpcode)) {
-				LabelInstruction label(strOpcode,lineNumber);
+				LabelInstruction label(strOpcode, lineNumber);
 				labelInstructionList.push_back(label);
 			}
 			lineNumber++;
@@ -65,7 +65,7 @@ void SourceReader::findLabel() {
 	}
 }
 
-void SourceReader::constructInstrList() {
+void SourceReader::constructInstructionList() {
 	ifstream reader(getFilePath().c_str());
 	string line;
 	int lineNumber = 0;

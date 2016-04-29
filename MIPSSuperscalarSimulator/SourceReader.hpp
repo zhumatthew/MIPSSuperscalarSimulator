@@ -22,8 +22,8 @@ public:
 	SourceReader(string filePath);
 	string getFilePath();
 	void setFilePath(string aFilePath);
-	void findLabel();
-	void constructInstrList();
+	void findLabelAddresses();
+	void constructInstructionList();
 	vector<Instruction> getInstructionList();
 	// vector<Instruction> readInstrList();
 	string trim(string str);
