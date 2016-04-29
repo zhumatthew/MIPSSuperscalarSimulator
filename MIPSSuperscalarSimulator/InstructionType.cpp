@@ -103,8 +103,8 @@ Opcode InstructionType::operationCodeDefine(string str, InstrType instrType) {
 }
 
 // 6-bit function
-int InstructionType::functDefine(string str, InstrType instrType) {
-	int funct;
+Funct InstructionType::functDefine(string str, InstrType instrType) {
+	Funct funct;
 
 	switch (instrType) {
 		case RType:
@@ -116,7 +116,11 @@ int InstructionType::functDefine(string str, InstrType instrType) {
 				funct = funct_sub;
 			} else if (str == "div") {
 				funct = funct_div;
-			}
+            } if (str == "sll") {
+                funct = funct_sll;
+            } if (str == "srl" ) {
+                funct = funct_srl;
+            }
 			break;
 		case IType:
 		case MBType:

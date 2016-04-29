@@ -27,7 +27,7 @@ public:
 	int parseRs(InstrType instrType);
 	int parseRt(InstrType instrType);
 	int parseRd(InstrType instrType);
-	int parseFunct(InstrType instrType);
+    Funct parseFunct(InstrType instrType);
 	int parseShamt(InstrType instrType);
 	int parseImmediate(InstrType instrType);
 

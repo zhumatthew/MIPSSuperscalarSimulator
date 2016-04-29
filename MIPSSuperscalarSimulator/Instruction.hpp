@@ -21,7 +21,8 @@ public:
     Instruction(vector<string> separatedLine, InstrType instructionType, vector<LabelInstruction> labelInstructionList);
     string originalString;
     Opcode opcode;
-    int funct, shamt, immediate, rd, rt, rs;
+    Funct funct;
+    int shamt, immediate, rd, rt, rs;
     InstrType instrType;
     string opcodeString;
     void handleInstruction(vector<string> separatedLine);

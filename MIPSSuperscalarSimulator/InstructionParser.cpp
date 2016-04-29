@@ -203,8 +203,8 @@ int InstructionParser::parseRd(InstrType instrType) {
     return rd;
 }
 
-int InstructionParser::parseFunct(InstrType instrType) {
-    int funct = 0;
+Funct InstructionParser::parseFunct(InstrType instrType) {
+    Funct funct;
     InstructionType instructionType = InstructionType();
     
     switch (instrType) {

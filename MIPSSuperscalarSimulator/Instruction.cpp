@@ -13,7 +13,7 @@
 
 using namespace std;
 
-Instruction::Instruction(vector<string> separatedLine, InstrType type, vector<LabelInstruction> labelInstructionList) : instrType(type), labelInstructionList(labelInstructionList), funct(0), shamt(0) {
+Instruction::Instruction(vector<string> separatedLine, InstrType type, vector<LabelInstruction> labelInstructionList) : instrType(type), labelInstructionList(labelInstructionList), funct(funct_zero), shamt(0) {
 
 	if (instrType == Label) {
 		instrType = InstructionType().instrTypeDefine(separatedLine[1]);
@@ -65,11 +65,11 @@ void Instruction::handleInstruction(vector<string> separatedLine) {
 			immediate = parser.parseImmediate(instrType);
 			break;
 		default:
-			cout << "instrType Error" << endl;
+			cout << "Unknown instruction" << endl;
 	}
 }
 
-// Remove the label at the start of the separated line
+// Removes the label at the start of the separated line
 vector<string> Instruction::removeLabel(vector<string> separatedLine) {
     separatedLine.erase(separatedLine.begin());
     return separatedLine;

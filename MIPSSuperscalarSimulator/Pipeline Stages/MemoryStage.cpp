@@ -21,8 +21,7 @@ void MemoryStage::process(MainMemory& mainMemory, RegisterFile& regfile) {
         cout << "MemoryAddress [ " << currentInstructionList[1].effectiveAddress << "] = " << endl;
 	}
 
-	if (currentInstructionList.front().opcodeString == "NOP" || 
-        currentInstructionList.front().opcodeString == "nop") // in case there is RAW hazard detected last cycle
+	if (currentInstructionList.front().opcodeString == "NOP") // in case there is RAW hazard detected last cycle
 	return;
 
     // Mem[effectiveAddress] is placed in LMD (load memory data)

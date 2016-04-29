@@ -16,15 +16,14 @@
 
 using namespace std;
 
-// The MIPS ISA does not include an explicit NOP (null operation) instruction
-// Use sll $0, $0, 0 as a nop instruction
+
 
 // Classes with default constructors do not need to be explicitly initialized
 // Default constructors are implicitly defined unless a constructor is explicitly defined
 // Default constructors are constructors that do not require any parameters.
 // Default constructors may define default parameters
 
-Simulator::Simulator(vector<SimulatedInstruction> simulatedInstructionList) : simulatedInstructionList(simulatedInstructionList), fetchStage(FetchStage(static_cast<int>(simulatedInstructionList.size()))), committedInstructionCount(0), cycleCount(0), lastStall(0), tempInstr(SimulatedInstruction("nop")), hazardList(HAZARD_LIST_SIZE, tempInstr), tempHazardList(4, tempInstr), tempInstrList(2, tempInstr) {}
+Simulator::Simulator(vector<SimulatedInstruction> simulatedInstructionList) : simulatedInstructionList(simulatedInstructionList), fetchStage(FetchStage(static_cast<int>(simulatedInstructionList.size()))), committedInstructionCount(0), cycleCount(0), lastStall(0), tempInstr(SimulatedInstruction()), hazardList(HAZARD_LIST_SIZE, tempInstr), tempHazardList(4, tempInstr), tempInstrList(2, tempInstr) {}
 
 void Simulator::process() {
 
@@ -61,17 +60,17 @@ void Simulator::stepProcess() {
         
         // Is the memoryStage's instructions wiped? This leads to the process of memoryStage to return immediately without performing any functions. Then, rs and rt of the instructions in the execute stage are forwarded from these "nop" instructions and tempInstrList is never used.
         
-        memoryStage.currentInstructionList[0] = SimulatedInstruction("nop");
-        memoryStage.currentInstructionList[1] = SimulatedInstruction("nop");
+        memoryStage.currentInstructionList[0] = SimulatedInstruction();
+        memoryStage.currentInstructionList[1] = SimulatedInstruction();
     }
     
     // If branchMisprediction is set in the execute stage of the previous cycle
     if (branchMisprediction) {
         branchMisprediction = false;
-        executeStage.currentInstructionList[0] = SimulatedInstruction("NOP");
-        executeStage.currentInstructionList[1] = SimulatedInstruction("NOP");
-        decodeStage.currentInstructionList[0] = SimulatedInstruction("NOP");
-        decodeStage.currentInstructionList[1] = SimulatedInstruction("NOP");
+        executeStage.currentInstructionList[0] = SimulatedInstruction();
+        executeStage.currentInstructionList[1] = SimulatedInstruction();
+        decodeStage.currentInstructionList[0] = SimulatedInstruction();
+        decodeStage.currentInstructionList[1] = SimulatedInstruction();
         hazardList[2] = tempHazardList[0];
         hazardList[3] = tempHazardList[1];
         hazardList[4] = tempHazardList[2];
@@ -130,8 +129,8 @@ void Simulator::stepProcess() {
             // Assign "nop" to the last two elements of hazardList
             
             
-            hazardList[4] = SimulatedInstruction("nop");
-            hazardList[5] = SimulatedInstruction("nop");
+            hazardList[4] = SimulatedInstruction();
+            hazardList[5] = SimulatedInstruction();
             break;
     }
     

@@ -19,7 +19,7 @@ using namespace std;
 void WriteBackStage::process(RegisterFile& regFile, DecodeStage currentDecode, int& increment) {
 
     increment = 0;
-	if (currentInstructionList[0].opcodeString == "NOP" || currentInstructionList[0].opcodeString == "nop") {
+	if (currentInstructionList.front().opcodeString == "NOP") {
 		return;
 	} else {
 		if (currentInstructionList[1].opcodeString == "NOP")

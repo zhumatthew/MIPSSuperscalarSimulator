@@ -10,5 +10,5 @@
 
 #define THROUGHPUT 2
 
-// default (initialized) instruction is a NOP
-PipelineStage::PipelineStage() : currentInstructionList(THROUGHPUT, SimulatedInstruction("nop")), programCounter(0) {}
+// default (initialized) instruction is a nop
+PipelineStage::PipelineStage() : currentInstructionList(THROUGHPUT, SimulatedInstruction()), programCounter(0) {}

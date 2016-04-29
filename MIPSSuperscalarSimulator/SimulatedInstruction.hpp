@@ -17,7 +17,7 @@
 class SimulatedInstruction {
     
 public:
-	SimulatedInstruction(string str); // used for nop instruction
+	SimulatedInstruction(); // used for NOP instruction
     SimulatedInstruction(Instruction instr); // used for instructions that are not nop instructions
     
     string originalString;
@@ -31,7 +31,8 @@ public:
     int rdValue, rtValue, rsValue;
     
     Opcode opcode;
-    int immediate, funct, shamt;
+    Funct funct;
+    int immediate, shamt;
     
     // indicates the instruction location in the simulated instruction list
     int instructionLocation;
