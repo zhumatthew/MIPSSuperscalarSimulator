@@ -7,9 +7,7 @@
 //
 
 // Todo list:
-// Find difference of NOP and nop
 // reduce the 5 types of instructions to the 3 standard types
-// If possible, reduce NOP and nop to simply SimulatedInstruction() which will represent sll r0, r0, 0
 // Figure out the error involving the readAfterWrite flag and the rs-rs, rt-rs control flow issue
 // 
 
@@ -43,10 +41,10 @@ int main(int argc, const char * argv[]) {
 		simulatedInstructionList.push_back(SimulatedInstruction(instruction));
 	}
 
-    // Inserts an end instruction followed by 3 'nops' to terminate the instruction list
+    // Inserts an end instruction followed by 3 'NOPs' to terminate the instruction list
     // This infinite loop can be used to simulate the end of the instruction list
     // end: j end
-    // Alternatively, an instruction such as "end: nop" aka "end: sll r0, r0, 0" may indicate the end
+    // Alternatively, an instruction such as "end: NOP" aka "end: sll r0, r0, 0" may indicate the end
     
     SimulatedInstruction end = SimulatedInstruction();
     end.originalString = "end";

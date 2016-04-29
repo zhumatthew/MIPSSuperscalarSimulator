@@ -45,13 +45,13 @@ vector<string> split(const string& text, char sep) {
     string temp = text.substr(start);
     if (!temp.empty()) tokens.push_back(temp);
     
-    if (tokens.back()[tokens.back().size()-1] == '\r') {
-        tokens.back().resize(tokens.back().size()-1);
-    }
-    
-//    if (tokens.back().back() == '\r') {
-//        tokens.back().pop_back();
+//    if (tokens.back()[tokens.back().size()-1] == '\r') {
+//        tokens.back().resize(tokens.back().size()-1);
 //    }
+    
+    if (tokens.back().back() == '\r') {
+        tokens.back().pop_back();
+    }
     
     return tokens;
 }

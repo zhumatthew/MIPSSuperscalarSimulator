@@ -9,10 +9,6 @@
 #include <iostream>
 #include "InstructionType.hpp"
 
-// enum for each opcode
-// enum Opcode { ADDI = 8 }
-// enum Funct { ADD = 32 }
-
 using namespace std;
 
 // R-type instructions (register)

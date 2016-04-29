@@ -44,7 +44,6 @@ public:
     RegisterFile registerFile;
     MainMemory mainMemory;
     
-    SimulatedInstruction tempInstr;
     vector<SimulatedInstruction> tempInstrList;
     vector<SimulatedInstruction> hazardList, tempHazardList;
     

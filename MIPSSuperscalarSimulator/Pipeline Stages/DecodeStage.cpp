@@ -121,7 +121,7 @@ void DecodeStage::check(const vector<SimulatedInstruction>& hazardList, int last
                 // Only LW has "rd" and it is equal to its "rt"
                 
                 // If the rd of the potential hazard (previous) instruction is this instruction's source register rs or rt and this instruction is SW and the hazard instruction is LW
-                // in case these conditions are true, once this instruction (which is a SW) passes the execute stage, it is nop'ed before it reaches the memory stage, because what it would have wrote into memory is wrong, since it did not get its updated rt or rs value from the previous LW instruction.
+                // in case these conditions are true, once this instruction (which is a SW) passes the execute stage, it is NOP'ed before it reaches the memory stage, because what it would have wrote into memory is wrong, since it did not get its updated rt or rs value from the previous LW instruction.
                 
                 // typo??? the innermost if statement may need to be checked against rtForward not rsForward
                 if (instruction.currentForward.rsForward) {

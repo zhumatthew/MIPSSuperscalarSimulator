@@ -23,7 +23,7 @@ void FetchStage::windowMove(vector<SimulatedInstruction>& simulatedInstructionLi
     
     // First condition is to ensure that the the difference between the program counter and 'i' (the index of the remaining instructions between the PC and the end of the list) does not exceed the difference between the program counter and the total instruction list's size (the number of remaining instructions between the PC and the end of the list)
     // Second condition is to ensure that the length of the window will not be greater than the window size
-    // Instruction list size takes into account one "end" and three "nop" at the end of the simulated instruction list
+    // Instruction list size takes into account one "end" and three "NOP" at the end of the simulated instruction list
 	while (((i - programCounter) < (instructionListSize - programCounter)) && (windowTail < WINDOW_SIZE)) {
 		window[windowTail] = simulatedInstructionList[i];
 		if (!window[windowTail].reordered) { // reordered instructions have entered the pipeline; if they enter the window again, they are executed twice
@@ -65,7 +65,7 @@ bool FetchStage::registerNameMatch(int check)
 	return flag;
 }
 
-// For the pipeline to stop, an "end" is inserted at the end of the benchmark (when an "end" is detected in the MEM stage) To stay within array borders, three "nops" are inserted after "end".  "end"/"nop" is not included in reordering, but enters the window/pipeline to stop the pipeline.
+// For the pipeline to stop, an "end" is inserted at the end of the benchmark (when an "end" is detected in the MEM stage) To stay within array borders, three "NOP" are inserted after "end".  "end"/"NOP" is not included in reordering, but enters the window/pipeline to stop the pipeline.
 
 // Returns whether instructions should be executed as a pair
 

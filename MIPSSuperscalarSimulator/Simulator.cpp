@@ -16,14 +16,12 @@
 
 using namespace std;
 
-
-
 // Classes with default constructors do not need to be explicitly initialized
 // Default constructors are implicitly defined unless a constructor is explicitly defined
 // Default constructors are constructors that do not require any parameters.
 // Default constructors may define default parameters
 
-Simulator::Simulator(vector<SimulatedInstruction> simulatedInstructionList) : simulatedInstructionList(simulatedInstructionList), fetchStage(FetchStage(static_cast<int>(simulatedInstructionList.size()))), committedInstructionCount(0), cycleCount(0), lastStall(0), tempInstr(SimulatedInstruction()), hazardList(HAZARD_LIST_SIZE, tempInstr), tempHazardList(4, tempInstr), tempInstrList(2, tempInstr) {}
+Simulator::Simulator(vector<SimulatedInstruction> simulatedInstructionList) : simulatedInstructionList(simulatedInstructionList), fetchStage(FetchStage(static_cast<int>(simulatedInstructionList.size()))), committedInstructionCount(0), cycleCount(0), lastStall(0), hazardList(HAZARD_LIST_SIZE, SimulatedInstruction()), tempHazardList(4, SimulatedInstruction()), tempInstrList(2, SimulatedInstruction()) {}
 
 void Simulator::process() {
 
@@ -58,7 +56,7 @@ void Simulator::stepProcess() {
         // Temporary storage of instruction for forwarding to this cycle's execution stage
         tempInstrList = memoryStage.currentInstructionList;
         
-        // Is the memoryStage's instructions wiped? This leads to the process of memoryStage to return immediately without performing any functions. Then, rs and rt of the instructions in the execute stage are forwarded from these "nop" instructions and tempInstrList is never used.
+        // Is the memoryStage's instructions wiped? This leads to the process of memoryStage to return immediately without performing any functions. Then, rs and rt of the instructions in the execute stage are forwarded from these "NOP" instructions and tempInstrList is never used.
         
         memoryStage.currentInstructionList[0] = SimulatedInstruction();
         memoryStage.currentInstructionList[1] = SimulatedInstruction();
@@ -126,9 +124,7 @@ void Simulator::stepProcess() {
         case 1:
             // Rotate elements of hazardList left by two
             rotate(hazardList.begin(), hazardList.begin() + 2, hazardList.end());
-            // Assign "nop" to the last two elements of hazardList
-            
-            
+            // Assign "NOP" to the last two elements of hazardList
             hazardList[4] = SimulatedInstruction();
             hazardList[5] = SimulatedInstruction();
             break;

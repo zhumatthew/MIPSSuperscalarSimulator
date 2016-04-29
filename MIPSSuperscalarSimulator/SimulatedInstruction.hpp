@@ -18,7 +18,7 @@ class SimulatedInstruction {
     
 public:
 	SimulatedInstruction(); // used for NOP instruction
-    SimulatedInstruction(Instruction instr); // used for instructions that are not nop instructions
+    SimulatedInstruction(Instruction instr); // used for instructions that are not NOP instructions
     
     string originalString;
     

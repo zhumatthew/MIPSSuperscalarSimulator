@@ -9,9 +9,6 @@
 #include "ExecuteStage.hpp"
 #include "../InstructionType.hpp"
 
-// example instruction
-// $d = $s + $t
-
 void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory, const RegisterFile& regFile, int lastStall, bool& branchMisprediction) {
     
     // In case a RAW hazard is detected in last cycle
