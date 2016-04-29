@@ -45,10 +45,6 @@ vector<string> split(const string& text, char sep) {
     string temp = text.substr(start);
     if (!temp.empty()) tokens.push_back(temp);
     
-//    if (tokens.back()[tokens.back().size()-1] == '\r') {
-//        tokens.back().resize(tokens.back().size()-1);
-//    }
-    
     if (tokens.back().back() == '\r') {
         tokens.back().pop_back();
     }
@@ -63,9 +59,7 @@ vector<string> InstructionParser::splitLine() {
     // Remove commas that occur at the end of substrings
     for (int i = 0; i < separatedLine.size(); i++) {
         if (ends_with(separatedLine[i], ",")) {
-            // pop_back
-            // separatedLine[i] = separatedLine[i].substr(0, separatedLine[i].length()-1);
-            separatedLine[i].resize(separatedLine[i].size() - 1);
+            separatedLine[i].pop_back();
         }
     }
     

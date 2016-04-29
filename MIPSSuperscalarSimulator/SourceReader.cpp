@@ -50,8 +50,6 @@ void SourceReader::findLabel() {
 	while (getline(reader, line)) {
 		if (!line.empty()) {
 			cout << lineNumber << "   " + trim(line) << endl;
-            // MATLAB like formatting? printf?
-            // String constructor to generate dashes?
 			cout << string(OUTPUT_WIDTH, '-') << endl;
 			InstructionParser parser(line);
 			string strOpcode = parser.splitLine().front();

@@ -9,7 +9,7 @@
 // Todo list:
 // reduce the 5 types of instructions to the 3 standard types
 // Figure out the error involving the readAfterWrite flag and the rs-rs, rt-rs control flow issue
-// 
+// In memory stage, determine whether it is necessary to have both lw before sw in case an sw comes before lw
 
 #include <iostream>
 #include "SourceReader.hpp"
