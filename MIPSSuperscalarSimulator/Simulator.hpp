@@ -28,15 +28,15 @@ class Simulator {
 public:
     
 	Simulator(vector<SimulatedInstruction> simulatedInstructionList);
-	FetchStage simuFetch;
-	DecodeStage simuDecode;
-	ExecuteStage simuExecute;
-    MemoryStage simuMemory;
-    WriteBackStage simuWriteBack;
+	FetchStage fetchStage;
+	DecodeStage decodeStage;
+	ExecuteStage executeStage;
+    MemoryStage memoryStage;
+    WriteBackStage writeBackStage;
 
     // Register file and main memory will be initialized implicitly (default constructor is provided)
-    RegisterFile simuRegFile;
-    MainMemory simuMainMemory;
+    RegisterFile registerFile;
+    MainMemory mainMemory;
     
     vector<SimulatedInstruction> simulatedInstructionList;
 

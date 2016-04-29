@@ -11,20 +11,22 @@
 #include <vector>
 #include <algorithm>
 
+#define HAZARD_LIST_SIZE 6
+
 using namespace std;
 
-// if the type of 'simuDecode' is 'DecodeStage' and it has a default constructor, then you don't need to initialize it manually.
+// if the type of 'decodeStage' is 'DecodeStage' and it has a default constructor, then you don't need to initialize it manually.
 // you do not need to define default constructors; they are there implicitly unless you define another constructor
 
-Simulator::Simulator(vector<SimulatedInstruction> simulatedInstructionList) : simulatedInstructionList(simulatedInstructionList), simuFetch(FetchStage(static_cast<int>(simulatedInstructionList.size()))), tempInstr(SimulatedInstruction("nop")), instrCount(0), lastStall(0), hazardList(6, tempInstr), tempHazardList(4, tempInstr), tempInstrList(2, tempInstr) {}
+Simulator::Simulator(vector<SimulatedInstruction> simulatedInstructionList) : simulatedInstructionList(simulatedInstructionList), fetchStage(FetchStage(static_cast<int>(simulatedInstructionList.size()))), tempInstr(SimulatedInstruction("nop")), instrCount(0), lastStall(0), hazardList(HAZARD_LIST_SIZE, tempInstr), tempHazardList(4, tempInstr), tempInstrList(2, tempInstr) {}
 
 //Simulator::Simulator(vector<SimulatedInstruction> simulationInstrList) {
 //    simulationInstrList = simulationInstrList;
-//    simuFetch = FetchStage((int) simulationInstrList.size());
-//    simuDecode = DecodeStage();
-//    simuExecute = ExecuteStage();
-//    simuMemory = MemoryStage();
-//    simuWriteBack = WriteBackStage();
+//    fetchStage = FetchStage((int) simulationInstrList.size());
+//    decodeStage = DecodeStage();
+//    executeStage = ExecuteStage();
+//    memoryStage = MemoryStage();
+//    writeBackStage = WriteBackStage();
 //    instrCount = 0;
 //    lastStall = 0;
 //    simuRegFile = RegisterFile();
@@ -50,7 +52,7 @@ Simulator::Simulator(vector<SimulatedInstruction> simulatedInstructionList) : si
 
 void Simulator::process() {
     cycleCount = 0;
-    while (simuMemory.currentInstructionList[0].originalString != "end") {
+    while (memoryStage.currentInstructionList[0].originalString != "end") {
         stepProcess();
     }
     cout << "Total number of cycles after simulation: " << cycleCount << endl;
@@ -67,83 +69,83 @@ void Simulator::stepProcess() {
     
     // IF -> ID -> EX -> MEM -> WB
     if (lastStall != 2) {
-        simuWriteBack.currentInstructionList[0] = simuMemory.currentInstructionList[0];
-        simuWriteBack.currentInstructionList[1] = simuMemory.currentInstructionList[1];
-        simuMemory.currentInstructionList[0] = simuExecute.currentInstructionList[0];
-        simuMemory.currentInstructionList[1] = simuExecute.currentInstructionList[1];
-        simuExecute.currentInstructionList[0] = simuDecode.currentInstructionList[0];
-        simuExecute.currentInstructionList[1] = simuDecode.currentInstructionList[1];
-        simuDecode.currentInstructionList[0] = simuFetch.currentInstructionList[0];
-        simuDecode.currentInstructionList[1] = simuFetch.currentInstructionList[1];
+        writeBackStage.currentInstructionList[0] = memoryStage.currentInstructionList[0];
+        writeBackStage.currentInstructionList[1] = memoryStage.currentInstructionList[1];
+        memoryStage.currentInstructionList[0] = executeStage.currentInstructionList[0];
+        memoryStage.currentInstructionList[1] = executeStage.currentInstructionList[1];
+        executeStage.currentInstructionList[0] = decodeStage.currentInstructionList[0];
+        executeStage.currentInstructionList[1] = decodeStage.currentInstructionList[1];
+        decodeStage.currentInstructionList[0] = fetchStage.currentInstructionList[0];
+        decodeStage.currentInstructionList[1] = fetchStage.currentInstructionList[1];
     }
     
     // At the second cycle since the RAW hazard was detected (lastStall == 2), a NOP needs to be inserted into the MEM stage, but this can lead to the unsuccessful forwarding with an origin stage of MEM since the information in MEM is discarded before it is forwarded to the execution stage of the same cycle
     
     if (lastStall == 2) {
-        simuWriteBack.currentInstructionList[0] = simuMemory.currentInstructionList[0];
-        simuWriteBack.currentInstructionList[1] = simuMemory.currentInstructionList[1];
+        writeBackStage.currentInstructionList[0] = memoryStage.currentInstructionList[0];
+        writeBackStage.currentInstructionList[1] = memoryStage.currentInstructionList[1];
         
         // Temporary storage of instruction for forwarding to this cycle's execution stage
-        tempInstrList[0] = simuMemory.currentInstructionList[0];
-        tempInstrList[1] = simuMemory.currentInstructionList[1];
+        tempInstrList[0] = memoryStage.currentInstructionList[0];
+        tempInstrList[1] = memoryStage.currentInstructionList[1];
         
-        // Is the simuMemory's instructions wiped? This leads to the process of simuMemory to return immediately without performing any functions. Then, rs and rt of the instructions in the execute stage are forwarded from these "Empty" instructions and tempInstrList is never used.
+        // Is the memoryStage's instructions wiped? This leads to the process of memoryStage to return immediately without performing any functions. Then, rs and rt of the instructions in the execute stage are forwarded from these "Empty" instructions and tempInstrList is never used.
         
-        simuMemory.currentInstructionList[0] = SimulatedInstruction("Empty");
-        simuMemory.currentInstructionList[1] = SimulatedInstruction("Empty");
+        memoryStage.currentInstructionList[0] = SimulatedInstruction("Empty");
+        memoryStage.currentInstructionList[1] = SimulatedInstruction("Empty");
     }
     
     // If branchMisprediction is set in the execute stage of the previous cycle
     if (branchMisprediction) {
         branchMisprediction = false;
-        simuExecute.currentInstructionList[0] = SimulatedInstruction("NOP");
-        simuExecute.currentInstructionList[1] = SimulatedInstruction("NOP");
-        simuDecode.currentInstructionList[0] = SimulatedInstruction("NOP");
-        simuDecode.currentInstructionList[1] = SimulatedInstruction("NOP");
+        executeStage.currentInstructionList[0] = SimulatedInstruction("NOP");
+        executeStage.currentInstructionList[1] = SimulatedInstruction("NOP");
+        decodeStage.currentInstructionList[0] = SimulatedInstruction("NOP");
+        decodeStage.currentInstructionList[1] = SimulatedInstruction("NOP");
         hazardList[2] = tempHazardList[0];
         hazardList[3] = tempHazardList[1];
         hazardList[4] = tempHazardList[2];
         hazardList[5] = tempHazardList[3];
     }
     
-    cout << "Decode:" << simuDecode.currentInstructionList[0].originalString << endl;
-    cout << "Decode:" << simuDecode.currentInstructionList[1].originalString << endl;
-    cout << "Execute:" << simuExecute.currentInstructionList[0].originalString << endl;
-    cout << "Execute:" << simuExecute.currentInstructionList[1].originalString << endl;
-    cout << "Memory:" << simuMemory.currentInstructionList[0].originalString << endl;
-    cout << "Memory:" << simuMemory.currentInstructionList[1].originalString << endl;
-    cout << "WriteBack:" << simuWriteBack.currentInstructionList[0].originalString << endl;
-    cout << "WriteBack:" << simuWriteBack.currentInstructionList[1].originalString << endl;
+    cout << "Decode:" << decodeStage.currentInstructionList[0].originalString << endl;
+    cout << "Decode:" << decodeStage.currentInstructionList[1].originalString << endl;
+    cout << "Execute:" << executeStage.currentInstructionList[0].originalString << endl;
+    cout << "Execute:" << executeStage.currentInstructionList[1].originalString << endl;
+    cout << "Memory:" << memoryStage.currentInstructionList[0].originalString << endl;
+    cout << "Memory:" << memoryStage.currentInstructionList[1].originalString << endl;
+    cout << "WriteBack:" << writeBackStage.currentInstructionList[0].originalString << endl;
+    cout << "WriteBack:" << writeBackStage.currentInstructionList[1].originalString << endl;
     
     int increment;
-    simuWriteBack.process(simuRegFile, simuDecode, increment);
-    simuMemory.process(simuMainMemory, simuRegFile);
-    simuExecute.process(simuDecode, simuMemory, simuRegFile, lastStall, branchMisprediction);
-    simuDecode.process(simuRegFile, hazardList, lastStall);
-    simuFetch.process(simulatedInstructionList, lastStall, branchMisprediction, simuExecute.getSavedProgramCounter());
+    writeBackStage.process(registerFile, decodeStage, increment);
+    memoryStage.process(mainMemory, registerFile);
+    executeStage.process(decodeStage, memoryStage, registerFile, lastStall, branchMisprediction);
+    decodeStage.process(registerFile, hazardList, lastStall);
+    fetchStage.process(simulatedInstructionList, lastStall, branchMisprediction, executeStage.getSavedProgramCounter());
     instrCount += increment;
     
-    cout << "Fetch:" << simuFetch.currentInstructionList[0].originalString << endl;
-    cout << "Fetch:" << simuFetch.currentInstructionList[1].originalString << endl;
-    cout << "Decode:" << simuDecode.currentInstructionList[0].originalString << endl;
-    cout << "Decode:" << simuDecode.currentInstructionList[1].originalString << endl;
-    cout << "Execute:" << simuExecute.currentInstructionList[0].originalString << endl;
-    cout << "Execute:" << simuExecute.currentInstructionList[1].originalString << endl;
-    cout << "Memory:" << simuMemory.currentInstructionList[0].originalString << endl;
-    cout << "Memory:" << simuMemory.currentInstructionList[1].originalString << endl;
-    cout << "WriteBack:" << simuWriteBack.currentInstructionList[0].originalString << endl;
-    cout << "WriteBack:" << simuWriteBack.currentInstructionList[1].originalString << endl;
+    cout << "Fetch:" << fetchStage.currentInstructionList[0].originalString << endl;
+    cout << "Fetch:" << fetchStage.currentInstructionList[1].originalString << endl;
+    cout << "Decode:" << decodeStage.currentInstructionList[0].originalString << endl;
+    cout << "Decode:" << decodeStage.currentInstructionList[1].originalString << endl;
+    cout << "Execute:" << executeStage.currentInstructionList[0].originalString << endl;
+    cout << "Execute:" << executeStage.currentInstructionList[1].originalString << endl;
+    cout << "Memory:" << memoryStage.currentInstructionList[0].originalString << endl;
+    cout << "Memory:" << memoryStage.currentInstructionList[1].originalString << endl;
+    cout << "WriteBack:" << writeBackStage.currentInstructionList[0].originalString << endl;
+    cout << "WriteBack:" << writeBackStage.currentInstructionList[1].originalString << endl;
     cout << "-------------------------------------------------" << endl;
     
     // If the instruction is a branch, then the instructions in the fetch stage and the instruction of the last cycle in the decode stage need to be stored in tempHazardList.
-    if (simuFetch.currentInstructionList[0].opcodeString == "BGEZ"
-        || simuFetch.currentInstructionList[0].opcodeString == "BLEZ"
-        || simuFetch.currentInstructionList[0].opcodeString == "BEQ"
-        || simuFetch.currentInstructionList[0].opcodeString == "J") {
-        tempHazardList[0] = simuDecode.currentInstructionList[0];
-        tempHazardList[1] = simuDecode.currentInstructionList[1];
-        tempHazardList[2] = simuFetch.currentInstructionList[0];
-        tempHazardList[3] = simuFetch.currentInstructionList[1];
+    if (fetchStage.currentInstructionList[0].opcodeString == "BGEZ"
+        || fetchStage.currentInstructionList[0].opcodeString == "BLEZ"
+        || fetchStage.currentInstructionList[0].opcodeString == "BEQ"
+        || fetchStage.currentInstructionList[0].opcodeString == "J") {
+        tempHazardList[0] = decodeStage.currentInstructionList[0];
+        tempHazardList[1] = decodeStage.currentInstructionList[1];
+        tempHazardList[2] = fetchStage.currentInstructionList[0];
+        tempHazardList[3] = fetchStage.currentInstructionList[1];
     }
     
     switch (lastStall) {
@@ -152,8 +154,8 @@ void Simulator::stepProcess() {
             rotate(hazardList.begin(), hazardList.begin() + 2, hazardList.end());
         case 2:
             // Assign the last two elements of hazardList to be the two instructions in the fetch stage
-            hazardList[4] = simuFetch.currentInstructionList[0];
-            hazardList[5] = simuFetch.currentInstructionList[1];
+            hazardList[4] = fetchStage.currentInstructionList[0];
+            hazardList[5] = fetchStage.currentInstructionList[1];
             break;
         case 1:
             // Rotate elements of hazardList left by two
@@ -174,9 +176,9 @@ void Simulator::stepProcess() {
     
     if (lastStall == 1) {
         lastStall = 2;
-        simuDecode.readAfterWriteHazard = false;
+        decodeStage.readAfterWriteHazard = false;
     }
-    if (simuDecode.readAfterWriteHazard) {
+    if (decodeStage.readAfterWriteHazard) {
         lastStall = 1;
     }
     
