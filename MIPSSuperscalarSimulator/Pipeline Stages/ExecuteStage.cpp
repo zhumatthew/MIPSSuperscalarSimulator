@@ -19,7 +19,7 @@ void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory,
     
     for (int i = 0; i <= 1; i++) {
         
-        SimulatedInstruction& instruction = currentInstructionList[i];
+        SimulatedInstruction instruction = currentInstructionList[i];
         
         // No pipeline registers
         // Forwarding is accomplished by simply reading registers because the writeback stage is processed before the decode stage (reverse order from WB to IF)
