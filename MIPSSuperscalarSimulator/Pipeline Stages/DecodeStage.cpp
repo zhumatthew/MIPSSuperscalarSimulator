@@ -35,7 +35,7 @@ void DecodeStage::check(const vector<SimulatedInstruction>& hazardList, int last
     
     // True data dependence (RAW hazard) checking
     
-    for (SimulatedInstruction instruction: currentInstructionList) {
+    for (SimulatedInstruction& instruction: currentInstructionList) {
         
         // lastStall refers to the number of cycles since the last stall
         if (lastStall == 2) {

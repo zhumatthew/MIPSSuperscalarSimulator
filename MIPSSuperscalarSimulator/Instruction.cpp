@@ -24,9 +24,6 @@ Instruction::Instruction(vector<string> separatedLine, InstrType type, vector<La
 	handleInstruction(separatedLine);
 }
 
-
-// opcodeString is assigned the int return value of parseOpcode function??
-// name this function parse instruction??
 void Instruction::handleInstruction(vector<string> separatedLine) {
     
 	InstructionParser parser(separatedLine, labelInstructionList);

@@ -15,10 +15,6 @@ LabelInstruction::LabelInstruction(string label, int lineNumber) : labelAddress(
         label.pop_back();
     }
     
-//    if (!label.empty() && label[label.size() - 1] == ':') {
-//    	label.resize(label.size()-1);
-//    }
-    
     this->label = label;
 }
 
