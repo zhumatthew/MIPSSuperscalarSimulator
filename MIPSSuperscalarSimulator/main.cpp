@@ -42,7 +42,7 @@ int main(int argc, const char * argv[]) {
 	}
 
     // Inserts an end instruction followed by 3 'NOPs' to terminate the instruction list
-    // This infinite loop can be used to simulate the end of the instruction list
+    // An infinite loop can be used to simulate the end of the instruction list
     // end: j end
     // Alternatively, an instruction such as "end: NOP" aka "end: sll r0, r0, 0" may indicate the end
     

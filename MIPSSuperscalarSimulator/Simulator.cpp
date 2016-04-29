@@ -102,16 +102,16 @@ void Simulator::stepProcess() {
     cout << string(OUTPUT_WIDTH, '-') << endl;
     
     // If a fetched instruction is a branch, then the instructions in the fetch stage and the decode stage (which passed through the fetch stage in the last cycle) need to be stored in tempHazardList.
-    if (fetchStage.currentInstructionList.front().opcodeString == "BGEZ"
-        || fetchStage.currentInstructionList.front().opcodeString == "BLEZ"
-        || fetchStage.currentInstructionList.front().opcodeString == "BEQ"
-        || fetchStage.currentInstructionList.front().opcodeString == "J") {
-        tempHazardList[0] = decodeStage.currentInstructionList[0];
-        tempHazardList[1] = decodeStage.currentInstructionList[1];
-        tempHazardList[2] = fetchStage.currentInstructionList[0];
-        tempHazardList[3] = fetchStage.currentInstructionList[1];
-    }
-    
+    if (fetchStage.currentInstructionList.front().opcode == opcode_bgtz
+        || fetchStage.currentInstructionList.front().opcode == opcode_blez
+        || fetchStage.currentInstructionList.front().opcode == opcode_beq
+        || fetchStage.currentInstructionList.front().opcode == opcode_j) {
+            tempHazardList[0] = decodeStage.currentInstructionList[0];
+            tempHazardList[1] = decodeStage.currentInstructionList[1];
+            tempHazardList[2] = fetchStage.currentInstructionList[0];
+            tempHazardList[3] = fetchStage.currentInstructionList[1];
+        }
+        
     switch (lastStall) {
         case 0:
             // Rotate elements of hazardList left by two
