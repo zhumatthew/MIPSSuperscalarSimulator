@@ -53,6 +53,7 @@ void Simulator::process() {
     while (simuMemory.currentInstructionList[0].originalString != "end") {
         stepProcess();
     }
+    cout << "Total original number of instruction count: " << instrCount << endl;
     cout << "Total number of cycles after simulation: " << cycleCount << endl;
     cout << "CPI: " << static_cast<double>(cycleCount) / static_cast<double>(instrCount)  << endl;
 

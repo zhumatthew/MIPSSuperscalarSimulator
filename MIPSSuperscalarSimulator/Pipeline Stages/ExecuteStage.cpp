@@ -109,6 +109,7 @@ void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory,
                 // The immediate value can be the absolute address specified by a label
                 savedProgramCounter = instruction.immediate;
                 branchMisprediction = true; // This flag is set so that a bubble is inserted into EX and ID stages in the next cycle
+                cout << "branch misprediction occurred : " << instruction.originalString << endl;
                 instruction.branchCondition = false; // Every time after this flag is used, it should be reset to false so that the next time it can be set or reset based on the outcome of the condition evaluation.
             }
             // For this instruction set, the target's absolute address (rather than the relative address to the PC) is assigned to the immediate of the branch instruction. The calculation of the effective address is not needed.
