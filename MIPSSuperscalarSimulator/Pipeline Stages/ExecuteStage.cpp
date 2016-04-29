@@ -7,6 +7,7 @@
 //
 
 #include "ExecuteStage.hpp"
+#include "../InstructionType.hpp"
 
 // example instruction
 // $d = $s + $t
@@ -68,51 +69,65 @@ void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory,
         instruction.currentForward.rtDelayedForward = false;
         instruction.currentForward.rtForward = false;
         
-        /* To be implemented
-        // If it is a R-type opcode, then switch on funct
-        // Otherwise, switch on opcode
-        */
-        
-        if (instruction.opcodeString == "ADD") {
-            instruction.rdValue = instruction.rsValue + instruction.rtValue;
-        } else if (instruction.opcodeString == "DIV") {
-            if (instruction.rtValue == 0) // cannot divide by 0
-                return;
-            else
-                instruction.rdValue = instruction.rsValue / instruction.rtValue;
-        } else if (instruction.opcodeString == "SUB") {
-            instruction.rdValue = instruction.rsValue - instruction.rtValue;
-        } else if (instruction.opcodeString == "MUL") {
-            instruction.rdValue = (instruction.rsValue) * (instruction.rtValue);
-        } else if (instruction.opcodeString == "LW" || instruction.opcodeString == "SW") {
-            // immediate corresponds to offset for LW/SW instructions
-            // Branch instructions involving effective address calculations should consider at which stage condition evaluation, effective address calculation, and program counter changing should be completed.
-            instruction.effectiveAddress = instruction.rsValue + instruction.immediate;
-        } else if (instruction.opcodeString == "ADDI") {
-            instruction.rdValue = instruction.rsValue + instruction.immediate;
-        } else if (instruction.opcodeString == "BGEZ" || instruction.opcodeString == "BLEZ" || instruction.opcodeString == "BEQ" || instruction.opcodeString == "J") {
-            // Add actions required by branch instructions in this stage
-            // The label produced by the assembler is the number for the target instruction in the instruction queue
-            // The instruction queue is indexed starting at 0
-            if ((instruction.opcodeString == "BGEZ" && instruction.rsValue >= 0)
-                || (instruction.opcodeString == "BLEZ" && instruction.rsValue <= 0)
-                || (instruction.opcodeString == "BEQ" && (instruction.rsValue == instruction.rtValue))) {
-                instruction.branchCondition = true; // branch condition variable will only be tested or changed in the implement function of execution stage
-            } // condition evaluation of conditional branch
-            if (instruction.opcodeString == "J") // unconditional branch
+        switch (instruction.opcode) {
+            case opcode_rtype:
+                switch (instruction.funct) {
+                    case funct_add:
+                        instruction.rdValue = instruction.rsValue + instruction.rtValue;
+                        break;
+                    case funct_sub:
+                        instruction.rdValue = instruction.rsValue - instruction.rtValue;
+                        break;
+                    case funct_mult:
+                        instruction.rdValue = (instruction.rsValue) * (instruction.rtValue);
+                        break;
+                    case funct_div:
+                        if (instruction.rtValue == 0) // cannot divide by 0
+                            return;
+                        else
+                            instruction.rdValue = instruction.rsValue / instruction.rtValue;
+                        break;
+                }
+                break;
+            case opcode_lw:
+            case opcode_sw:
+                // immediate corresponds to offset for LW/SW instructions
+                // Branch instructions involving effective address calculations should consider at which stage condition evaluation, effective address calculation, and program counter changing should be completed.
+                instruction.effectiveAddress = instruction.rsValue + instruction.immediate;
+                break;
+            case opcode_addi:
+                instruction.rdValue = instruction.rsValue + instruction.immediate;
+                break;
+                
+                // Outcome of the branch is only known after the execute stage
+                // The label read by the assembler determines the address for the target instruction in the instruction queue
+                // the instruction queue is indexed starting at 0
+            case opcode_bgtz:
+                instruction.branchCondition = instruction.rsValue > 0 ? true : false;
+            case opcode_blez:
+                instruction.branchCondition = instruction.rsValue <= 0 ? true : false;
+            case opcode_beq:
+                instruction.branchCondition = instruction.rsValue == instruction.rtValue ? true : false;
+                
+                // Unconditional branch
+            case opcode_j:
                 instruction.branchCondition = true;
-            if (instruction.branchCondition) {
-                // Save the PC. just for convenience, actually the target address will be updated to PC (all the five stages share this
-                // static field) in this cycle, but every instruction indicated by PC won't be fetched until next cycle's IF stage
-                // The immediate value can be the absolute address specified by a label
-                savedProgramCounter = instruction.immediate;
-                branchMisprediction = true; // This flag is set so that a bubble is inserted into EX and ID stages in the next cycle
-//                cout << "branch misprediction: " << instruction.originalString << endl;
-                instruction.branchCondition = false; // Every time after this flag is used, it should be reset to false so that the next time it can be set or reset based on the outcome of the condition evaluation.
-            }
-            // For this instruction set, the target's absolute address (rather than the relative address to the PC) is assigned to the immediate of the branch instruction. The calculation of the effective address is not needed.
+                break;
+                
         }
-        // In MIPS pipeline, the target address is not known earlier than the branch outcome, there is no advantage for the branch taken strategy. For the branch untaken strategy, branch condition evaluation and PC changing is done at the execution stage of the branch instruction. The target instruciton is fetched at the next cycle and the EX and ID stages' instruction are turned into NOP.
+        
+        if (instruction.branchCondition) {
+            // Save the PC. just for convenience, actually the target address will be updated to PC (all the five stages share this
+            // static field) in this cycle, but every instruction indicated by PC won't be fetched until next cycle's IF stage
+            // The immediate value can be the absolute address specified by a label
+            savedProgramCounter = instruction.immediate;
+            branchMisprediction = true; // This flag is set so that a bubble is inserted into EX and ID stages in the next cycle
+            instruction.branchCondition = false; // Every time after this flag is used, it should be reset to false so that the next time it can be set or reset based on the outcome of the condition evaluation.
+        }
+        
+        // For this instruction set, the target's absolute address (rather than the relative address to the PC) is assigned to the immediate of the branch instruction. The calculation of the effective address is not needed.
+        
+        // In a MIPS pipeline, the target address is not known earlier than the branch outcome and there is no advantage for the branch taken strategy. For the branch untaken strategy, branch condition evaluation and PC changing is done at the execution stage of the branch instruction. The target instruciton is fetched at the next cycle and the EX and ID stages' instruction are turned into NOP.
     }
 }
 

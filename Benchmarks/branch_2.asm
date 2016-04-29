@@ -1,6 +1,6 @@
-ADDI r1, r0, 0
-ADDI r5, r0, 7
-BEQ r1, r0, done
-ADDI r4, r0, 5
-ADDI r6, r0, 7
-done: ADDI r5, r0, 6
+addi r1, r0, 0
+addi r5, r0, 7
+beq r1, r0, done
+addi r4, r0, 5
+addi r6, r0, 7
+done: addi r5, r0, 6

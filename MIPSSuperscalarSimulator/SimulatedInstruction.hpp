@@ -30,7 +30,8 @@ public:
     // value in destination register, value in target register, value in source register
     int rdValue, rtValue, rsValue;
     
-    int opcode, immediate;
+    Opcode opcode;
+    int immediate, funct, shamt;
     
     // indicates the instruction location in the simulated instruction list
     int instructionLocation;

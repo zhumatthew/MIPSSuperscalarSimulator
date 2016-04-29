@@ -28,15 +28,15 @@ using namespace std;
 // R-type shift example is SLL $rd, $rt, shamt:  R[$rd] <- R[$rt] << shamt
 
 InstrType InstructionType::instrTypeDefine(string opcode) {
-    if (opcode == "ADD" || opcode == "SUB" || opcode == "MUL"|| opcode == "DIV" || opcode == "AND")
+    if (opcode == "add" || opcode == "sub" || opcode == "mult"|| opcode == "div" || opcode == "and" || opcode == "sll"|| opcode == "srl")
         return RType;
-    else if(opcode == "ADDI" || opcode == "ANDI" || opcode == "ORI" || opcode == "XORI" || opcode == "SUBI" || opcode == "SLLI"|| opcode == "SRLI")
+    else if (opcode == "addi" || opcode == "andi" || opcode == "ori" || opcode == "xori")
         return IType;
-    else if(opcode == "LW" || opcode == "SW"||opcode == "BEQ" || opcode == "BEQL")
+    else if (opcode == "lw" || opcode == "sw"|| opcode == "beq")
         return MBType;
-    else if(opcode == "J" || opcode == "JAL"|| opcode == "B")
+    else if (opcode == "j" || opcode == "jal")
         return JType;
-    else if(opcode == "BGEZ"|| opcode == "BLEZ")
+    else if (opcode == "bgtz"|| opcode == "blez")
         return BRIType;
     else
         return Label;
@@ -56,68 +56,66 @@ bool InstructionType::isLabel(string opcode) {
 
 
 // 6-bit operation code
-int InstructionType::operationCodeDefine(string str, InstrType instrType) {
-    int opcode = 0b000000;
+Opcode InstructionType::operationCodeDefine(string str, InstrType instrType) {
+    Opcode opcode;
     switch (instrType) {
         case RType:
-            if (str == "ADD") {
-                opcode = 0b000000;
-            } else if (str == "MUL") {
-                opcode = 0b011100;
-            } else if (str == "SUB") {
-                opcode = 0b000000;
-            } else if (str == "DIV") {
-                opcode = 0b000000;
+            if (str == "add") {
+                opcode = opcode_add;
+            } else if (str == "mult") {
+                opcode = opcode_mult;
+            } else if (str == "sub") {
+                opcode = opcode_sub;
+            } else if (str == "div") {
+                opcode = opcode_div;
             }
             break;
         case IType:
-            if (str == "ADDI") {
-                opcode = 0b001000;
+            if (str == "addi") {
+                opcode = opcode_addi;
             }
             break;
         case MBType:
-            if (str == "LW") {
-                opcode = 0b100011;
-            } else if (str == "SW") {
-                opcode = 0b101011;
-            } else if (str == "BEQ") {
-                opcode = 0b000100;
-            } else if (str == "BEQL") {
-                opcode = 0b010100;
+            if (str == "lw") {
+                opcode = opcode_lw;
+            } else if (str == "sw") {
+                opcode = opcode_sw;
+            } else if (str == "beq") {
+                opcode = opcode_beq;
             }
             break;
         case JType:
-            if (str == "J") {
-                opcode = 0b000010;
+            if (str == "j") {
+                opcode = opcode_j;
             }
             break;
         case BRIType:
-            if (str == "BGEZ") {
-                opcode = 0b000001;
-            } else if (str == "BLEZ") {
-                opcode = 0b000110;
+            if (str == "bgtz") {
+                opcode = opcode_bgtz;
+            } else if (str == "blez") {
+                opcode = opcode_blez;
             }
             break;
         default:
-            opcode = 0b000000;
+            break;
     }
     return opcode;
 }
 
 // 6-bit function
 int InstructionType::functDefine(string str, InstrType instrType) {
-	int funct = 0b000000;
+	int funct;
 
 	switch (instrType) {
 		case RType:
-			if (str == "ADD") {
-				funct = 0b100000;
-			} else if (str == "MUL") {
-				funct = 0b000010;
-			} else if (str == "SUB") {
-				funct = 0b100010;
-			} else if (str == "DIV") {
-				funct = 0b011010;
+			if (str == "add") {
+				funct = funct_add;
+			} else if (str == "mult") {
+				funct = funct_mult;
+			} else if (str == "sub") {
+				funct = funct_sub;
+			} else if (str == "div") {
+				funct = funct_div;
 			}
 			break;
 		case IType:
@@ -131,31 +129,31 @@ int InstructionType::functDefine(string str, InstrType instrType) {
 
 // 5-bit shift amount
 int InstructionType::shamtDefine(string str, InstrType instrType) {
-	int shamt = 0b00000;
+	int shamt;
 
 	switch (instrType) {
-		case RType:
-			if (str == "ADD") {
-				shamt = 0b00000;
-			} else if(str == "MUL") {
-				shamt = 0b00000;
-			} else if(str == "SUB") {
-				shamt = 0b00000;
-			} else if(str == "DIV") {
-				shamt = 0b00000;
-			}
-			break;
-		case IType:
-		case MBType:
-		case JType:
-			break;
-		case BRIType:
-			if (str == "BGEZ") {
-				shamt = 0b00001;
-			} else if (str == "BLEZ") {
-				shamt = 0b00000;
-			}
-			break;
+//		case RType:
+//			if (str == "ADD") {
+//				shamt = 0b00000;
+//			} else if(str == "MUL") {
+//				shamt = 0b00000;
+//			} else if(str == "SUB") {
+//				shamt = 0b00000;
+//			} else if(str == "DIV") {
+//				shamt = 0b00000;
+//			}
+//			break;
+//		case IType:
+//		case MBType:
+//		case JType:
+//			break;
+//		case BRIType:
+//			if (str == "BGEZ") {
+//				shamt = 0b00001;
+//			} else if (str == "BLEZ") {
+//				shamt = 0b00000;
+//			}
+//			break;
 		default:
             break;
 	}

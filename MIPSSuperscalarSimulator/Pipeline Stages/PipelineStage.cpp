@@ -8,5 +8,7 @@
 
 #include "PipelineStage.hpp"
 
+#define THROUGHPUT 2
+
 // default (initialized) instruction is a NOP
-PipelineStage::PipelineStage() : currentInstructionList(2, SimulatedInstruction("nop")), programCounter(0) {}
+PipelineStage::PipelineStage() : currentInstructionList(THROUGHPUT, SimulatedInstruction("nop")), programCounter(0) {}

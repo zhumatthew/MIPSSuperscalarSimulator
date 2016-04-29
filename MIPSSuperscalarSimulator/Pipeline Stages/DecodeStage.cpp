@@ -19,10 +19,11 @@ void DecodeStage::process(const RegisterFile& regFile, const vector<SimulatedIns
 	check(hazardList, lastStall);
     
     // Retrieve rs and rt values for the two instructions from the register file
-	currentInstructionList[0].rsValue = regFile.getValue(currentInstructionList[0].rs);
-	currentInstructionList[0].rtValue = regFile.getValue(currentInstructionList[0].rt);
-	currentInstructionList[1].rsValue = regFile.getValue(currentInstructionList[1].rs);
-	currentInstructionList[1].rtValue = regFile.getValue(currentInstructionList[1].rt);
+    for (SimulatedInstruction instruction: currentInstructionList) {
+        instruction.rsValue = regFile.getValue(instruction.rs);
+        instruction.rtValue = regFile.getValue(instruction.rt);
+    }
+
 }
 
 // Instructions such as SW and LW only have rt or rs and will assign 0 values to rt or rs that is not needed
@@ -58,7 +59,6 @@ void DecodeStage::check(const vector<SimulatedInstruction>& hazardList, int last
                 }
             }
             
-            // Judge 2 is based on hazard list index of 1
             if (instruction.rs == hazardList[1].rd) {
                 if(instruction.loopCount > hazardList[1].loopCount) {
                     instruction.currentForward.rsForward = true;
@@ -126,8 +126,8 @@ void DecodeStage::check(const vector<SimulatedInstruction>& hazardList, int last
                 // typo??? the innermost if statement may need to be checked against rtForward not rsForward
                 if (instruction.currentForward.rsForward) {
                     int index = instruction.currentForward.rsForwardDepth + 2;
-                    if (hazardList[index].opcodeString == "LW") {
-                        if (instruction.opcodeString == "SW") {
+                    if (hazardList[index].opcodeString == "lw") {
+                        if (instruction.opcodeString == "sw") {
                             if (instruction.currentForward.rsForward) {
                                 readAfterWriteHazard = true;
                             } else {
@@ -141,8 +141,8 @@ void DecodeStage::check(const vector<SimulatedInstruction>& hazardList, int last
                 
                 if (instruction.currentForward.rtForward) {
                     int index = instruction.currentForward.rtForwardDepth + 2;
-                    if (hazardList[index].opcodeString == "LW") {
-                        if (instruction.opcodeString == "SW") {
+                    if (hazardList[index].opcodeString == "lw") {
+                        if (instruction.opcodeString == "sw") {
                             if (instruction.currentForward.rsForward) {
                                 readAfterWriteHazard = true;
                             } else {

@@ -27,8 +27,10 @@ void WriteBackStage::process(RegisterFile& regFile, DecodeStage currentDecode, i
 		else
             increment = 2;
 	}
-	regFile.setValue(currentInstructionList[0].rdValue, currentInstructionList[0].rd);
-	regFile.setValue(currentInstructionList[1].rdValue, currentInstructionList[1].rd);
-    cout << "r" << currentInstructionList[0].rd << "=" << regFile.getValue(currentInstructionList[0].rd) << endl;
-    cout << "r" << currentInstructionList[1].rd << "=" << regFile.getValue(currentInstructionList[1].rd) << endl;
+    
+    for (SimulatedInstruction instruction: currentInstructionList) {
+        regFile.setValue(instruction.rdValue, instruction.rd);
+        cout << "r" << instruction.rd << "=" << regFile.getValue(instruction.rd) << endl;
+    }
+    
 }

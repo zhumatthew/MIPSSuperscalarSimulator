@@ -16,6 +16,9 @@
 
 using namespace std;
 
+// The MIPS ISA does not include an explicit NOP (null operation) instruction
+// Use sll $0, $0, 0 as a nop instruction
+
 // Classes with default constructors do not need to be explicitly initialized
 // Default constructors are implicitly defined unless a constructor is explicitly defined
 // Default constructors are constructors that do not require any parameters.
@@ -125,6 +128,8 @@ void Simulator::stepProcess() {
             // Rotate elements of hazardList left by two
             rotate(hazardList.begin(), hazardList.begin() + 2, hazardList.end());
             // Assign "nop" to the last two elements of hazardList
+            
+            
             hazardList[4] = SimulatedInstruction("nop");
             hazardList[5] = SimulatedInstruction("nop");
             break;

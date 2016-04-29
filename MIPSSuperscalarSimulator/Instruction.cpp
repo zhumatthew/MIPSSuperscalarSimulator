@@ -69,7 +69,7 @@ void Instruction::handleInstruction(vector<string> separatedLine) {
 	}
 }
 
-// Remove the label at the start of the results line
+// Remove the label at the start of the separated line
 vector<string> Instruction::removeLabel(vector<string> separatedLine) {
     separatedLine.erase(separatedLine.begin());
     return separatedLine;

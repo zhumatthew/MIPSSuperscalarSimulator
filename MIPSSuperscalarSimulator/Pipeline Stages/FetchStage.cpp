@@ -71,7 +71,7 @@ bool FetchStage::registerNameMatch(int check)
 
 bool FetchStage::reorder(vector<SimulatedInstruction>& simulatedInstructionList)
 {
-	if (window[0].opcodeString == "BGEZ" || window[0].opcodeString == "BLEZ" || window[0].opcodeString == "BEQ" || window[0].opcodeString == "J" // two branch instructions can only enter pipeline with a depth of two (not a single clock cycle) Only a single branch may enter a pipeline for a single cycle. Another condition is false prediction. (pipeline flash cannot be implemented correctly?) (pipeline flush?)
+	if (window[0].opcodeString == "bgtz" || window[0].opcodeString == "blez" || window[0].opcodeString == "beq" || window[0].opcodeString == "j" // two branch instructions can only enter pipeline with a depth of two (not a single clock cycle) Only a single branch may enter a pipeline for a single cycle. Another condition is false prediction. (pipeline flash cannot be implemented correctly?) (pipeline flush?)
         || window[0].opcodeString == "end" || window[0].opcodeString == "nop" || window[0].opcodeString == "NOP")
 		return false; // window[0] needs to enter the pipeline alone
 	if ((window[1].rs != window[0].rd) && (window[1].rt != window[0].rd) && (window[1].opcodeString != "end") && (window[1].opcodeString != "nop") && (window[1].opcodeString != "NOP")) {
@@ -80,7 +80,7 @@ bool FetchStage::reorder(vector<SimulatedInstruction>& simulatedInstructionList)
 
     // If window[0] can potentially be paired, but the window[1] depends on window[0]
 	for (int i = 2; i < windowTail; i++) {
-		if (window[i].opcodeString == "BGEZ" || window[i].opcodeString == "BLEZ" || window[i].opcodeString == "BEQ" || window[i].opcodeString == "J" || window[i].opcodeString == "end" || window[i].opcodeString == "nop" || window[i].opcodeString == "NOP") // cannot be reordered if it is one of these instructions
+		if (window[i].opcodeString == "bgtz" || window[i].opcodeString == "blez" || window[i].opcodeString == "beq" || window[i].opcodeString == "j" || window[i].opcodeString == "end" || window[i].opcodeString == "nop" || window[i].opcodeString == "NOP") // cannot be reordered if it is one of these instructions
 			return false;
 		if (!registerNameMatch(i)) {
 			window[i].reordered = true; // set reordered true for the instruction in the window to prevent it from being the source for forwarding
@@ -116,10 +116,16 @@ void FetchStage::process(vector<SimulatedInstruction>& simulatedInstructionList,
 			window[1].loopCount = window[1].instructionLocation + upBranch;
 			currentInstructionList[0] = window[0];
 			currentInstructionList[1] = window[1];
-			programCounter += 2;
-			if (window[1].reordered) // The pair of instructions are the result of reordering, so the next sequential address simulatedInstructionList[PC+1] will not enter the pipeline in this cycle
-				programCounter -= 1; // simulatedInstructionList[PC+1] will be window[0] the next cycle
-		} else { // "nop" is inserted at second depth and window[0] enters pipeline alone
+            
+            if (window[1].reordered) {
+                // The pair of instructions are the result of reordering, so the next sequential address simulatedInstructionList[PC+1] will not enter the pipeline in this cycle
+                // simulatedInstructionList[PC+1] will be window[0] the next cycle
+                programCounter += 1;
+            } else {
+                programCounter += 2;
+            }
+            
+		} else { // "nop" is inserted as the second instruction and window[0] enters pipeline alone
 			window[0].loopCount = window[0].instructionLocation + upBranch;
 			currentInstructionList[0] = window[0];
 			currentInstructionList[1] = SimulatedInstruction("NOP");
@@ -127,7 +133,7 @@ void FetchStage::process(vector<SimulatedInstruction>& simulatedInstructionList,
 		}
 		clear_reordered(simulatedInstructionList, programCounter, lastPC); // Clear all the instructions that have entered the pipeline this cycle so that when the program counter branches upper address, the instructions can be executed again. If an instruction's reordered flag is set, it cannot enter the instruction window.
 
-        // predict not taken policy, but branch was taken
+        // Predict not taken policy is implemented, but the branch was taken
         // savedPC is the branch target address
 		if (branchMisprediction) { // The five stages are processed in reverse order, so the changed PC must not be used by this cycle's fetch stage.  To ensure this, the program counter is only updated after actual issuing is finished using the old program counter.
 			int updatedPC = savedPC;

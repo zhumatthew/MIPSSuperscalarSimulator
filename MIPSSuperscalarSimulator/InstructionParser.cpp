@@ -72,7 +72,7 @@ vector<string> InstructionParser::splitLine() {
     return separatedLine;
 }
 
-int InstructionParser::parseOpcode(InstrType instrType) {
+Opcode InstructionParser::parseOpcode(InstrType instrType) {
     string operation = "";
     operation = separatedLine.front();
     
@@ -98,7 +98,7 @@ int InstructionParser::parseRs(InstrType instrType) {
             break;
         case MBType:
             int leftIndex,rightIndex;
-            if (separatedLine[0] == "LW") {
+            if (separatedLine[0] == "lw") {
                 leftIndex = static_cast<int>(separatedLine[2].find("("));
                 rightIndex = static_cast<int>(separatedLine[2].find(")"));
                 string str = separatedLine[2].substr(leftIndex + 1, rightIndex);
@@ -106,7 +106,7 @@ int InstructionParser::parseRs(InstrType instrType) {
                     string strValue = str.substr(1, str.length());
                     rs = atoi(strValue.c_str());
                 }
-            } else if (separatedLine[0] == "SW") {
+            } else if (separatedLine[0] == "sw") {
                 leftIndex = static_cast<int>(separatedLine[2].find("("));
                 rightIndex = static_cast<int>(separatedLine[2].find(")"));
                 string str = separatedLine[2].substr(leftIndex + 1, rightIndex);
@@ -151,10 +151,10 @@ int InstructionParser::parseRt(InstrType instrType) {
             }
             break;
         case MBType:
-            if (separatedLine.front() == "LW") {
+            if (separatedLine.front() == "lw") {
                 if (starts_with(separatedLine[1], "r"))
                     rt = atoi(separatedLine[1].substr(1, separatedLine[1].length()).c_str());
-            } else if (separatedLine.front() == "SW") {
+            } else if (separatedLine.front() == "sw") {
                 if (starts_with(separatedLine[1], "r"))
                     rt = atoi(separatedLine[1].substr(1,separatedLine[1].length()).c_str());
             } else {
@@ -170,7 +170,6 @@ int InstructionParser::parseRt(InstrType instrType) {
     return rt;
 }
 
-// remove extraneous breaks?
 int InstructionParser::parseRd(InstrType instrType) {
     int rd = 0;
     switch (instrType) {
@@ -187,10 +186,10 @@ int InstructionParser::parseRd(InstrType instrType) {
             }
             break;
         case MBType:
-            if (separatedLine[0] == "LW") {
+            if (separatedLine[0] == "lw") {
                 if (starts_with(separatedLine[1], "r"))
                     rd = atoi(separatedLine[1].substr(1, separatedLine[1].length()).c_str());
-            } else if (separatedLine[0] == "SW") {
+            } else if (separatedLine[0] == "sw") {
                 
             } else {
                 
@@ -255,12 +254,12 @@ int InstructionParser::parseImmediate(InstrType instrType) {
             immediate = atoi(separatedLine[3].c_str());
             break;
         case MBType:
-            if (separatedLine.front() == "LW") {
+            if (separatedLine.front() == "lw") {
                 int index;
                 index = static_cast<int>(separatedLine[2].find("("));
                 string str = separatedLine[2].substr(0, index);
                 immediate = atoi(str.c_str());
-            } else if (separatedLine.front() == "SW") {
+            } else if (separatedLine.front() == "sw") {
                 int index;
                 index = static_cast<int>(separatedLine[2].find("("));
                 string str = separatedLine[2].substr(0, index);

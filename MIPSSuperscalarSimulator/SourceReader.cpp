@@ -78,16 +78,14 @@ void SourceReader::constructInstrList() {
 	while (getline(reader, line)) {
         if (!line.empty()) {
         	cout << string(OUTPUT_WIDTH, '-') << endl;
-//            printf("Width trick: %*d \n", 5, 10);
-//            printf("%d %*s \n", lineNumber, 3, trim(line).c_str());
         	cout << lineNumber++ << "   " << trim(line) << endl;
 			InstructionParser parser(line);
 			string strOpcode = parser.splitLine().front();
-			vector<string> results = parser.splitLine();
+			vector<string> separatedLine = parser.splitLine();
 
 			InstructionType type;
 			InstrType instrType = type.instrTypeDefine(strOpcode);
-			Instruction instruction(results, instrType, labelInstructionList);
+			Instruction instruction(separatedLine, instrType, labelInstructionList);
 			instruction.originalString = line;
 
 			cout << "opcode: " << instruction.opcode << endl;
