@@ -16,58 +16,30 @@
 
 using namespace std;
 
-// if the type of 'decodeStage' is 'DecodeStage' and it has a default constructor, then you don't need to initialize it manually.
-// you do not need to define default constructors; they are there implicitly unless you define another constructor
+// Classes with default constructors do not need to be explicitly initialized
+// Default constructors are implicitly defined unless a constructor is explicitly defined
+// Default constructors are constructors that do not require any parameters.
+// Default constructors may define default parameters
 
-Simulator::Simulator(vector<SimulatedInstruction> simulatedInstructionList) : simulatedInstructionList(simulatedInstructionList), fetchStage(FetchStage(static_cast<int>(simulatedInstructionList.size()))), instructionCount(0), lastStall(0), tempInstr(SimulatedInstruction("nop")), hazardList(HAZARD_LIST_SIZE, tempInstr), tempHazardList(4, tempInstr), tempInstrList(2, tempInstr) {}
-
-//Simulator::Simulator(vector<SimulatedInstruction> simulationInstrList) {
-//    simulationInstrList = simulationInstrList;
-//    fetchStage = FetchStage((int) simulationInstrList.size());
-//    decodeStage = DecodeStage();
-//    executeStage = ExecuteStage();
-//    memoryStage = MemoryStage();
-//    writeBackStage = WriteBackStage();
-//    instrCount = 0;
-//    lastStall = 0;
-//    simuRegFile = RegisterFile();
-//    simuMainMemory = MainMemory();
-//    tempInstr = SimulatedInstruction("nop");
-//    hazardList = vector<SimulatedInstruction>();
-//    tempHazardList = vector<SimulatedInstruction>();
-//
-//    for (int i = 0; i < 6; i++)
-//    {
-//        hazardList.push_back(tempInstr);
-//    }
-//    for (int i = 0; i < 4; i++)
-//    {
-//        tempHazardList.push_back(tempInstr);
-//    }
-//    tempInstrList = vector<SimulatedInstruction>();
-//    for (int i = 0; i < 2; i++)
-//    {
-//        tempInstrList.push_back(tempInstr);
-//    }
-//}
+Simulator::Simulator(vector<SimulatedInstruction> simulatedInstructionList) : simulatedInstructionList(simulatedInstructionList), fetchStage(FetchStage(static_cast<int>(simulatedInstructionList.size()))), committedInstructionCount(0), cycleCount(0), lastStall(0), tempInstr(SimulatedInstruction("nop")), hazardList(HAZARD_LIST_SIZE, tempInstr), tempHazardList(4, tempInstr), tempInstrList(2, tempInstr) {}
 
 void Simulator::process() {
-    cycleCount = 0;
+
     while (memoryStage.currentInstructionList.front().originalString != "end") {
         stepProcess();
     }
     
-    cout << "Committed Instruction count: " << instructionCount << endl;
+    cout << "Committed Instruction count: " << committedInstructionCount << endl;
     cout << "Total number of cycles: " << cycleCount << endl;
-    cout << "CPI: " << static_cast<double>(cycleCount) / static_cast<double>(instructionCount)  << endl;
+    cout << "CPI: " << static_cast<double>(cycleCount) / static_cast<double>(committedInstructionCount)  << endl;
 
 }
 
-// Potentially allows the user to press enter to run the entire simulation or press space to run one step at a time
+// Potentially allows the user to 'press enter' to run the entire simulation or 'press space' to run one step at a time
 
 void Simulator::stepProcess() {
     
-    cout << "Clock Cycle #" << cycleCount + 1 << endl;
+    cout << "Clock Cycle #" << ++cycleCount << endl;
     
     // IF -> ID -> EX -> MEM -> WB
     if (lastStall != 2) {
@@ -125,7 +97,7 @@ void Simulator::stepProcess() {
     
     cout << "Fetch:" << fetchStage.currentInstructionList[0].originalString << endl;
     cout << "Fetch:" << fetchStage.currentInstructionList[1].originalString << endl;
-    instructionCount += increment;
+    committedInstructionCount += increment;
 
     cout << string(OUTPUT_WIDTH, '-') << endl;
     
@@ -174,24 +146,5 @@ void Simulator::stepProcess() {
         lastStall = 1;
     }
     
-    cycleCount++;
     cout << string(OUTPUT_WIDTH, '-') << endl;
 }
-
-//  void Simulator::main() {
-//	SourceReader reader = new SourceReader("D:/Code/AssemblerApp0.99/AssemblerApp/InstructionList.dat");
-//	vector<SimulatedInstruction> simuInstrList = vector<SimulatedInstruction>();
-//	// vector<Instruction> originInstrList = reader.readInstrList();
-//	// System.out.println(originInstrList.size());
-//	for(int i =0 ; i < originInstrList.size(); i++){
-//	SimuInstr simInstr = new SimuInstr(originInstrList.get(i));
-//	simuInstrList.add(simInstr);
-//	}
-//	SimuInstr endInstr = new SimuInstr("end");
-//	simuInstrList.add(endInstr);
-//	SimuInstr nopInstr = new SimuInstr("nop");
-//	simuInstrList.add(nopInstr);
-//	simuInstrList.add(nopInstr);
-//	simuInstrList.add(nopInstr);
-//	System.out.println(simuInstrList.size());
-//  }

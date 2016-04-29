@@ -9,7 +9,7 @@
 #include <string>
 #include "LabelInstruction.hpp"
 
-LabelInstruction::LabelInstruction(string label, int lineNumber) {
+LabelInstruction::LabelInstruction(string label, int lineNumber) : labelAddress(lineNumber) {
     
 //    if (!label.empty() && label.back() == ':') {
 //        label.pop_back();
@@ -20,7 +20,6 @@ LabelInstruction::LabelInstruction(string label, int lineNumber) {
     }
     
     this->label = label;
-    labelAddress = lineNumber;
 }
 
 int LabelInstruction::getLabelAddress() {

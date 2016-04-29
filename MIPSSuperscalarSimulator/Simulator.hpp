@@ -36,15 +36,13 @@ public:
     MemoryStage memoryStage;
     WriteBackStage writeBackStage;
     
-    int instructionCount;
+    int committedInstructionCount;
+    int cycleCount;
     int lastStall;
 
     // Register file and main memory will be initialized implicitly (default constructor is provided)
     RegisterFile registerFile;
     MainMemory mainMemory;
-    
-
-    int cycleCount;
     
     SimulatedInstruction tempInstr;
     vector<SimulatedInstruction> tempInstrList;

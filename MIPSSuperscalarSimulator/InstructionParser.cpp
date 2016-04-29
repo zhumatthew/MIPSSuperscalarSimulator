@@ -74,7 +74,7 @@ vector<string> InstructionParser::splitLine() {
 
 int InstructionParser::parseOpcode(InstrType instrType) {
     string operation = "";
-    operation = separatedLine[0];
+    operation = separatedLine.front();
     
     return InstructionType().operationCodeDefine(operation, instrType);
 }
@@ -106,7 +106,7 @@ int InstructionParser::parseRs(InstrType instrType) {
                     string strValue = str.substr(1, str.length());
                     rs = atoi(strValue.c_str());
                 }
-            } else if(separatedLine[0] == "SW") {
+            } else if (separatedLine[0] == "SW") {
                 leftIndex = static_cast<int>(separatedLine[2].find("("));
                 rightIndex = static_cast<int>(separatedLine[2].find(")"));
                 string str = separatedLine[2].substr(leftIndex + 1, rightIndex);

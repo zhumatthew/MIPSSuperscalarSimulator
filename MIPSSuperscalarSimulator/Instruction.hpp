@@ -27,7 +27,7 @@ public:
     
 private:
     vector<LabelInstruction> labelInstructionList;
-    vector<string> removeLabel(vector<string> results);
+    vector<string> removeLabel(vector<string> separatedLine);
 
     
     // Instruction(string str);

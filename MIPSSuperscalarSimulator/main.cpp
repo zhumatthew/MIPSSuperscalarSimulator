@@ -24,31 +24,28 @@ int main(int argc, const char * argv[]) {
 	sourceReader.findLabel();
 	sourceReader.constructInstrList();
 
-	vector<SimulatedInstruction> simulatedInstructionList = vector<SimulatedInstruction>();
 	vector<Instruction> originalInstructionList = sourceReader.getInstructionList();
+    vector<SimulatedInstruction> simulatedInstructionList = vector<SimulatedInstruction>();
 
 	cout << "-------------Start Simulation-------------" << endl;
 	cout << "Original number of instructions : " << originalInstructionList.size() << endl;
     cout << string(OUTPUT_WIDTH, '-') << endl;
 
 
-	for (int i = 0; i < originalInstructionList.size(); i++) {
-		SimulatedInstruction simInstr = SimulatedInstruction(originalInstructionList[i]);
-		simulatedInstructionList.push_back(simInstr);
+    for (Instruction instruction: originalInstructionList) {
+		simulatedInstructionList.push_back(SimulatedInstruction(instruction));
 	}
 
-	SimulatedInstruction endInstr = SimulatedInstruction("end");
-    SimulatedInstruction nopInstr = SimulatedInstruction("nop");
-
-	simulatedInstructionList.push_back(endInstr);
-    fill_n(back_inserter(simulatedInstructionList), 3, nopInstr);
+    // Inserts an end instruction followed by 3 'nops' to terminate the instruction list
+	simulatedInstructionList.push_back(SimulatedInstruction("end"));
+    fill_n(back_inserter(simulatedInstructionList), 3, SimulatedInstruction("nop"));
 
 	for (int i = 0; i < simulatedInstructionList.size(); i++) {
 		simulatedInstructionList[i].instructionLocation = i;
 	}
 
-	Simulator sim = Simulator(simulatedInstructionList);
-	sim.process();
+	Simulator simulator(simulatedInstructionList);
+	simulator.process();
 
 	return 0;
 }

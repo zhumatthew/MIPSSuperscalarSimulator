@@ -23,10 +23,8 @@ void WriteBackStage::process(RegisterFile& regFile, DecodeStage currentDecode, i
 		return;
 	} else {
 		if (currentInstructionList[1].opcodeString == "NOP")
-//			sim.instrCount++;
             increment = 1;
 		else
-//			sim.instrCount = sim.instrCount + 2;
             increment = 2;
 	}
 	regFile.setValue(currentInstructionList[0].rdValue, currentInstructionList[0].rd);

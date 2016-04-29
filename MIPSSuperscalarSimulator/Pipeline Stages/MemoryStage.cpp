@@ -13,7 +13,7 @@ using namespace std;
 // In the memory stage, load word and store word operations are performed
 void MemoryStage::process(MainMemory& mainMemory, RegisterFile& regfile) {
 
-	if (currentInstructionList.front().effectiveAddress != 0) {
+	if (currentInstructionList[0].effectiveAddress != 0) {
         cout << "MemoryAddress [ " << currentInstructionList[0].effectiveAddress << "] = " << endl;
 	}
 
@@ -29,14 +29,14 @@ void MemoryStage::process(MainMemory& mainMemory, RegisterFile& regfile) {
     // rdValue is used to indicate LMD
     // rdValue is a software concept that indicates value should be updated to register file or main memory, it is responding to ALUoutput register
 	if (currentInstructionList[0].opcodeString == "LW")
-		currentInstructionList[0].rdValue = mainMemory.getValue(currentInstructionList.front().effectiveAddress);
+		currentInstructionList[0].rdValue = mainMemory.getValue(currentInstructionList[0].effectiveAddress);
 
 	if (currentInstructionList[1].opcodeString == "LW")
 		currentInstructionList[1].rdValue = mainMemory.getValue(currentInstructionList[1].effectiveAddress);
 
     // GPR[rs] is placed in Mem[effectiveAddress]
 	if (currentInstructionList[0].opcodeString == "SW")
-		mainMemory.setValue(regfile.getValue(currentInstructionList.front().rt), currentInstructionList.front().effectiveAddress);
+		mainMemory.setValue(regfile.getValue(currentInstructionList[0].rt), currentInstructionList[0].effectiveAddress);
 
 	if (currentInstructionList[1].opcodeString == "SW")
 		mainMemory.setValue(regfile.getValue(currentInstructionList[1].rt), currentInstructionList[1].effectiveAddress);

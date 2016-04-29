@@ -45,7 +45,7 @@ void SourceReader::findLabel() {
 	labelInstructionList = vector<LabelInstruction>();
 
     //
-	cout << "----------Read the assembly File----------" << endl;
+	cout << "----------Read the assembly file----------" << endl;
 
 	while (getline(reader, line)) {
 		if (!line.empty()) {
@@ -80,26 +80,25 @@ void SourceReader::constructInstrList() {
         	cout << string(OUTPUT_WIDTH, '-') << endl;
 //            printf("Width trick: %*d \n", 5, 10);
 //            printf("%d %*s \n", lineNumber, 3, trim(line).c_str());
-        	cout << lineNumber << "   " << trim(line) << endl;
+        	cout << lineNumber++ << "   " << trim(line) << endl;
 			InstructionParser parser(line);
 			string strOpcode = parser.splitLine().front();
 			vector<string> results = parser.splitLine();
 
 			InstructionType type;
 			InstrType instrType = type.instrTypeDefine(strOpcode);
-			Instruction instr(results, instrType, labelInstructionList);
-			instr.originalString = line;
+			Instruction instruction(results, instrType, labelInstructionList);
+			instruction.originalString = line;
 
-			cout << "opcode: " << instr.opcode << endl;
-			cout << "rs: " << instr.rs << endl;
-			cout << "rt: " << instr.rt << endl;
-			cout << "rd: " << instr.rd << endl;
-			cout << "immediate: " << instr.immediate << endl;
-			cout << "shamt: " << instr.shamt << endl;
-            cout << "funct: " << instr.funct << endl;
+			cout << "opcode: " << instruction.opcode << endl;
+			cout << "rs: " << instruction.rs << endl;
+			cout << "rt: " << instruction.rt << endl;
+			cout << "rd: " << instruction.rd << endl;
+			cout << "immediate: " << instruction.immediate << endl;
+			cout << "shamt: " << instruction.shamt << endl;
+            cout << "funct: " << instruction.funct << endl;
 
-			instructionList.push_back(instr);
-			lineNumber++;
+			instructionList.push_back(instruction);
 		}
 	}
 }
