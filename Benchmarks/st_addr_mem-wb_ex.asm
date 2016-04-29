@@ -1,4 +1,4 @@
-ADD r1, r2, r3
-ADD r4, r5, r6
-SW r3, 0(r1)
+add r1, r2, r3
+add r4, r5, r6
+sw r3, 0(r1)
 

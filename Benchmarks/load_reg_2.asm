@@ -1,5 +1,5 @@
-LW r1, 0(r2)
-ADD r2, r3, r4
-ADD r5, r6, r7
-ADD r8, r9, r1
-ADD r2, r3, r4
+lw r1, 0(r2)
+add r2, r3, r4
+add r5, r6, r7
+add r8, r9, r1
+add r2, r3, r4

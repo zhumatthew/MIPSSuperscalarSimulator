@@ -85,6 +85,8 @@ void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory,
                         else
                             instruction.rdValue = instruction.rsValue / instruction.rtValue;
                         break;
+                    default:
+                        break;
                 }
                 break;
             case opcode_lw:
@@ -110,6 +112,8 @@ void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory,
                 // Unconditional branch
             case opcode_j:
                 instruction.branchCondition = true;
+                break;
+            default:
                 break;
                 
         }

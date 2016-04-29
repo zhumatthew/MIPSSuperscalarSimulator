@@ -198,18 +198,10 @@ int InstructionParser::parseRd(InstrType instrType) {
 }
 
 Funct InstructionParser::parseFunct(InstrType instrType) {
-    Funct funct;
-    InstructionType instructionType = InstructionType();
-    
-    switch (instrType) {
-        case RType:
-            funct = instructionType.functDefine(separatedLine[0], instrType);
-            break;
-        case IType:
-        case MBType:
-        case JType:
-        default:
-            break;
+    Funct funct = funct_zero;
+    if (instrType == RType) {
+        funct = InstructionType().functDefine(separatedLine[0], instrType);
+
     }
     return funct;
 }
@@ -217,22 +209,10 @@ Funct InstructionParser::parseFunct(InstrType instrType) {
 // Parse shift amount
 int InstructionParser::parseShamt(InstrType instrType) {
     int shamt = 0;
-    InstructionType instructionType = InstructionType();
-    
-    switch(instrType){
-        case RType:
-            shamt =instructionType.shamtDefine(separatedLine[0], instrType);
-            break;
-        case IType:
-        case MBType:
-        case JType:
-            break;
-        case BRIType:
-            shamt =instructionType.shamtDefine(separatedLine[0], instrType);
-            break;
-        default:
-            break;
+    if (instrType == RType) {
+
     }
+    
     return shamt;
 }
 

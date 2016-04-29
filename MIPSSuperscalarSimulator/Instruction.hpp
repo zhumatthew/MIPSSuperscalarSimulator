@@ -22,7 +22,10 @@ public:
     string originalString;
     Opcode opcode;
     Funct funct;
-    int shamt, immediate, rd, rt, rs;
+    
+    // 5-bit shift amount
+    int shamt;
+    int immediate, rd, rt, rs;
     InstrType instrType;
     string opcodeString;
     void handleInstruction(vector<string> separatedLine);

@@ -25,7 +25,6 @@ public:
 	void findLabelAddresses();
 	void constructInstructionList();
 	vector<Instruction> getInstructionList();
-	// vector<Instruction> readInstrList();
 	string trim(string str);
 
 private:

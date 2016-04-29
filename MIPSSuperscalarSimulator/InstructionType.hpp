@@ -34,7 +34,6 @@ public:
 	bool isLabel(string strOpcode);
 	Opcode operationCodeDefine(string str, InstrType instrType);
 	Funct functDefine(string str, InstrType instrType);
-	int shamtDefine(string str, InstrType instrType);
 //    bool isBranch() { return opcode == opcode_j || opcode == opcode_beq }
     
 };

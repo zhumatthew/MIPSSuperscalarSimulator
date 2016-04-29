@@ -23,6 +23,17 @@ using namespace std;
 // SRLI is shift right logical immediate
 // R-type shift example is SLL $rd, $rt, shamt:  R[$rd] <- R[$rt] << shamt
 
+// I-type (opcode $rs, $rt, imm):
+// bgtz $rs, imm
+// blez $rs, imm
+// beq $rs, $rt, imm
+// lw $rt, imm($rs)
+// sw $rt, imm($rs)
+
+// J-type (opcode address):
+// j address
+// jal address
+
 InstrType InstructionType::instrTypeDefine(string opcode) {
     if (opcode == "add" || opcode == "sub" || opcode == "mult"|| opcode == "div" || opcode == "and" || opcode == "sll"|| opcode == "srl")
         return RType;
@@ -100,62 +111,22 @@ Opcode InstructionType::operationCodeDefine(string str, InstrType instrType) {
 
 // 6-bit function
 Funct InstructionType::functDefine(string str, InstrType instrType) {
-	Funct funct;
+	Funct funct = funct_zero;
 
-	switch (instrType) {
-		case RType:
-			if (str == "add") {
-				funct = funct_add;
-			} else if (str == "mult") {
-				funct = funct_mult;
-			} else if (str == "sub") {
-				funct = funct_sub;
-			} else if (str == "div") {
-				funct = funct_div;
-            } if (str == "sll") {
-                funct = funct_sll;
-            } if (str == "srl" ) {
-                funct = funct_srl;
-            }
-			break;
-		case IType:
-		case MBType:
-		case JType:
-		default:
-            break;
-	}
-	return funct;
-}
-
-// 5-bit shift amount
-int InstructionType::shamtDefine(string str, InstrType instrType) {
-	int shamt;
-
-	switch (instrType) {
-//		case RType:
-//			if (str == "ADD") {
-//				shamt = 0b00000;
-//			} else if(str == "MUL") {
-//				shamt = 0b00000;
-//			} else if(str == "SUB") {
-//				shamt = 0b00000;
-//			} else if(str == "DIV") {
-//				shamt = 0b00000;
-//			}
-//			break;
-//		case IType:
-//		case MBType:
-//		case JType:
-//			break;
-//		case BRIType:
-//			if (str == "BGEZ") {
-//				shamt = 0b00001;
-//			} else if (str == "BLEZ") {
-//				shamt = 0b00000;
-//			}
-//			break;
-		default:
-            break;
-	}
-	return shamt;
+    if (instrType == RType) {
+        if (str == "add") {
+            funct = funct_add;
+        } else if (str == "mult") {
+            funct = funct_mult;
+        } else if (str == "sub") {
+            funct = funct_sub;
+        } else if (str == "div") {
+            funct = funct_div;
+        } if (str == "sll") {
+            funct = funct_sll;
+        } if (str == "srl" ) {
+            funct = funct_srl;
+        }
+    }
+    return funct;
 }
