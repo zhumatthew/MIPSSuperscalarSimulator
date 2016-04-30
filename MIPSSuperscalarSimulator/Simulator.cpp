@@ -29,7 +29,7 @@ void Simulator::process() {
         stepProcess();
     }
     
-    cout << "Committed Instruction count: " << committedInstructionCount << endl;
+    cout << "Committed instruction count: " << committedInstructionCount << endl;
     cout << "Total number of cycles: " << cycleCount << endl;
     cout << "CPI: " << static_cast<double>(cycleCount) / static_cast<double>(committedInstructionCount)  << endl;
 

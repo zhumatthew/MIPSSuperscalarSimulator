@@ -18,6 +18,10 @@
 // branch instructions with rs/immediate
 // label instruction
 
+
+// echo 'labelr5: add r5, r2, r3' | perl -pe 's/\br(\d+)/\$$1/g'
+// perl -pe 's/\br(\d+)/\$$1/g
+
 using namespace std;
 
 InstructionParser::InstructionParser(string line) : line(line) {}

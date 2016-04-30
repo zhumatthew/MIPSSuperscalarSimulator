@@ -48,7 +48,7 @@ void SourceReader::findLabelAddresses() {
 	cout << "----------Read the assembly file----------" << endl;
 
 	while (getline(reader, line)) {
-		if (!line.empty()) {
+		if (!line.empty() && line != "\r") {
 			cout << lineNumber << "   " + trim(line) << endl;
 			cout << string(OUTPUT_WIDTH, '-') << endl;
 			InstructionParser parser(line);
@@ -74,7 +74,7 @@ void SourceReader::constructInstructionList() {
 	cout << "-------Printing out each instruction------" << endl;
 
 	while (getline(reader, line)) {
-        if (!line.empty()) {
+        if (!line.empty() && line != "\r") {
         	cout << string(OUTPUT_WIDTH, '-') << endl;
         	cout << lineNumber++ << "   " << trim(line) << endl;
 			InstructionParser parser(line);

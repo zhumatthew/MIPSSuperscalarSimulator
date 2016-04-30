@@ -107,6 +107,10 @@ void FetchStage::process(vector<SimulatedInstruction>& simulatedInstructionList,
 	int lastPC = programCounter;
 	windowMove(simulatedInstructionList);
 	pairwise = reorder(simulatedInstructionList);
+    
+    if (simulatedInstructionList.front().originalString == "endmove: add r0, r0, r0") {
+        
+    }
 
 	if (lastStall == 1) {
 		return; // no instruction is fetched on a stall

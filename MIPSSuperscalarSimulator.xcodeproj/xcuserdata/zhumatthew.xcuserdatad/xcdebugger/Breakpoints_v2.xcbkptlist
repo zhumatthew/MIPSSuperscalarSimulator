@@ -118,7 +118,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MIPSSuperscalarSimulator/Pipeline Stages/WriteBackStage.cpp"
@@ -131,14 +131,14 @@
             landmarkType = "5">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "WriteBackStage::process(RegisterFile&amp;, DecodeStage, int&amp;)"
                   moduleName = "MIPSSuperscalarSimulator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/Pipeline%20Stages/WriteBackStage.cpp"
-                  timestampString = "483633581.216963"
+                  timestampString = "483663682.510152"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "31"
@@ -146,14 +146,14 @@
                   offsetFromSymbolStart = "290">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "WriteBackStage::process(RegisterFile&amp;, DecodeStage, int&amp;)"
                   moduleName = "MIPSSuperscalarSimulator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/Pipeline%20Stages/WriteBackStage.cpp"
-                  timestampString = "483633581.217158"
+                  timestampString = "483663682.510412"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "31"
@@ -234,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MIPSSuperscalarSimulator/InstructionParser.cpp"
-            timestampString = "483659988.161932"
+            timestampString = "483661662.397042"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "244"
-            endingLineNumber = "244"
+            startingLineNumber = "248"
+            endingLineNumber = "248"
             landmarkName = "InstructionParser::parseImmediate(InstrType instrType)"
             landmarkType = "5">
          </BreakpointContent>
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MIPSSuperscalarSimulator/InstructionParser.cpp"
-            timestampString = "483659988.161932"
+            timestampString = "483661662.397042"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "252"
-            endingLineNumber = "252"
+            startingLineNumber = "256"
+            endingLineNumber = "256"
             landmarkName = "InstructionParser::parseImmediate(InstrType instrType)"
             landmarkType = "5">
          </BreakpointContent>
@@ -266,11 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MIPSSuperscalarSimulator/InstructionParser.cpp"
-            timestampString = "483659988.161932"
+            timestampString = "483661662.397042"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "243"
-            endingLineNumber = "243"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
             landmarkName = "InstructionParser::parseImmediate(InstrType instrType)"
             landmarkType = "5">
          </BreakpointContent>
@@ -324,7 +324,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MIPSSuperscalarSimulator/Pipeline Stages/ExecuteStage.cpp"
@@ -360,7 +360,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MIPSSuperscalarSimulator/Pipeline Stages/ExecuteStage.cpp"
-            timestampString = "483659988.161932"
+            timestampString = "483662975.889475"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "110"
@@ -392,11 +392,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MIPSSuperscalarSimulator/InstructionParser.cpp"
-            timestampString = "483659988.161932"
+            timestampString = "483661662.397042"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "223"
-            endingLineNumber = "223"
+            startingLineNumber = "227"
+            endingLineNumber = "227"
             landmarkName = "InstructionParser::parseImmediate(InstrType instrType)"
             landmarkType = "5">
          </BreakpointContent>
@@ -404,7 +404,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MIPSSuperscalarSimulator/Pipeline Stages/MemoryStage.cpp"
@@ -417,36 +417,116 @@
             landmarkType = "5">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "MemoryStage::process(MainMemory&amp;, RegisterFile&amp;)"
                   moduleName = "MIPSSuperscalarSimulator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/Pipeline%20Stages/MemoryStage.cpp"
-                  timestampString = "483633601.885624"
+                  timestampString = "483663682.58289"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "16"
                   endingLineNumber = "16"
-                  offsetFromSymbolStart = "53">
+                  offsetFromSymbolStart = "50">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "MemoryStage::process(MainMemory&amp;, RegisterFile&amp;)"
                   moduleName = "MIPSSuperscalarSimulator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/Pipeline%20Stages/MemoryStage.cpp"
-                  timestampString = "483633601.885842"
+                  timestampString = "483663682.583406"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "16"
                   endingLineNumber = "16"
-                  offsetFromSymbolStart = "473">
+                  offsetFromSymbolStart = "400">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MIPSSuperscalarSimulator/Pipeline Stages/FetchStage.cpp"
+            timestampString = "483663584.81073"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "FetchStage::process(vector&lt;SimulatedInstruction&gt;&amp; simulatedInstructionList, int lastStall, bool branchMisprediction, int savedPC)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MIPSSuperscalarSimulator/Pipeline Stages/FetchStage.cpp"
+            timestampString = "483663677.095879"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "FetchStage::process(vector&lt;SimulatedInstruction&gt;&amp; simulatedInstructionList, int lastStall, bool branchMisprediction, int savedPC)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MIPSSuperscalarSimulator/Pipeline Stages/FetchStage.cpp"
+            timestampString = "483663709.42174"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
+            landmarkName = "FetchStage::process(vector&lt;SimulatedInstruction&gt;&amp; simulatedInstructionList, int lastStall, bool branchMisprediction, int savedPC)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MIPSSuperscalarSimulator/Instruction.cpp"
+            timestampString = "483672361.57389"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "Instruction::handleInstruction(vector&lt;string&gt; separatedLine)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MIPSSuperscalarSimulator/SourceReader.cpp"
+            timestampString = "483672551.815323"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "SourceReader::findLabelAddresses()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
