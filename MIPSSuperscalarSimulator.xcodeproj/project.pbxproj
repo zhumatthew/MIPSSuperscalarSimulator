@@ -14,6 +14,8 @@
 		B35560441CB7421D0043584B /* Instruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B35560421CB7421D0043584B /* Instruction.cpp */; };
 		B35560471CB746A30043584B /* LabelInstruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B35560451CB746A30043584B /* LabelInstruction.cpp */; };
 		B36AB3F41CB88345009C3275 /* Forwarding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B36AB3F21CB88345009C3275 /* Forwarding.cpp */; };
+		B374442A1CD589A5003D0919 /* matrix(superscalar).asm in Sources */ = {isa = PBXBuildFile; fileRef = B37444281CD589A5003D0919 /* matrix(superscalar).asm */; };
+		B374442B1CD589A5003D0919 /* unrolling.asm in Sources */ = {isa = PBXBuildFile; fileRef = B37444291CD589A5003D0919 /* unrolling.asm */; };
 		B3E8DC521CBC5BAF00E99EDD /* InstructionParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3E8DC4E1CBC5BAE00E99EDD /* InstructionParser.cpp */; };
 		B3E8DC531CBC5BAF00E99EDD /* InstructionType.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3E8DC501CBC5BAF00E99EDD /* InstructionType.cpp */; };
 		B3E8DC561CBC965D00E99EDD /* SourceReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3E8DC541CBC965C00E99EDD /* SourceReader.cpp */; };
@@ -53,6 +55,8 @@
 		B35560461CB746A30043584B /* LabelInstruction.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LabelInstruction.hpp; sourceTree = "<group>"; };
 		B36AB3F21CB88345009C3275 /* Forwarding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Forwarding.cpp; sourceTree = "<group>"; };
 		B36AB3F31CB88345009C3275 /* Forwarding.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Forwarding.hpp; sourceTree = "<group>"; };
+		B37444281CD589A5003D0919 /* matrix(superscalar).asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = "matrix(superscalar).asm"; sourceTree = "<group>"; };
+		B37444291CD589A5003D0919 /* unrolling.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = unrolling.asm; sourceTree = "<group>"; };
 		B3E8DC4E1CBC5BAE00E99EDD /* InstructionParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InstructionParser.cpp; sourceTree = "<group>"; };
 		B3E8DC4F1CBC5BAF00E99EDD /* InstructionParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InstructionParser.hpp; sourceTree = "<group>"; };
 		B3E8DC501CBC5BAF00E99EDD /* InstructionType.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InstructionType.cpp; sourceTree = "<group>"; };
@@ -94,7 +98,6 @@
 		B3E8DC871CC2B3DC00E99EDD /* load_reg_1.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = load_reg_1.asm; sourceTree = "<group>"; };
 		B3E8DC881CC2B3DC00E99EDD /* load_reg_2.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = load_reg_2.asm; sourceTree = "<group>"; };
 		B3E8DC891CC2B3DC00E99EDD /* load_reg_3.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = load_reg_3.asm; sourceTree = "<group>"; };
-		B3E8DC8A1CC2B3DC00E99EDD /* matrix(superscalar).asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = "matrix(superscalar).asm"; sourceTree = "<group>"; };
 		B3E8DC8B1CC2B3DC00E99EDD /* mem-wb_to_ex1.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = "mem-wb_to_ex1.asm"; sourceTree = "<group>"; };
 		B3E8DC8C1CC2B3DC00E99EDD /* mem-wb_to_ex2.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = "mem-wb_to_ex2.asm"; sourceTree = "<group>"; };
 		B3E8DC8D1CC2B3DC00E99EDD /* mem-wb_to_ex3.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = "mem-wb_to_ex3.asm"; sourceTree = "<group>"; };
@@ -106,7 +109,6 @@
 		B3E8DC931CC2B3DC00E99EDD /* st_addr_ex-mem_ex.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = "st_addr_ex-mem_ex.asm"; sourceTree = "<group>"; };
 		B3E8DC941CC2B3DC00E99EDD /* st_addr_mem-wb_ex.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = "st_addr_mem-wb_ex.asm"; sourceTree = "<group>"; };
 		B3E8DC951CC2B3DC00E99EDD /* st_mem-wb_mem.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = "st_mem-wb_mem.asm"; sourceTree = "<group>"; };
-		B3E8DC961CC2B3DC00E99EDD /* unrolling.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = unrolling.asm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +199,8 @@
 		B3E8DC751CC2B3DC00E99EDD /* Benchmarks */ = {
 			isa = PBXGroup;
 			children = (
+				B37444281CD589A5003D0919 /* matrix(superscalar).asm */,
+				B37444291CD589A5003D0919 /* unrolling.asm */,
 				B3E8DC761CC2B3DC00E99EDD /* add_reg_1.asm */,
 				B3E8DC771CC2B3DC00E99EDD /* alu_reg_1.asm */,
 				B3E8DC781CC2B3DC00E99EDD /* alu_reg_2.asm */,
@@ -217,7 +221,6 @@
 				B3E8DC871CC2B3DC00E99EDD /* load_reg_1.asm */,
 				B3E8DC881CC2B3DC00E99EDD /* load_reg_2.asm */,
 				B3E8DC891CC2B3DC00E99EDD /* load_reg_3.asm */,
-				B3E8DC8A1CC2B3DC00E99EDD /* matrix(superscalar).asm */,
 				B3E8DC8B1CC2B3DC00E99EDD /* mem-wb_to_ex1.asm */,
 				B3E8DC8C1CC2B3DC00E99EDD /* mem-wb_to_ex2.asm */,
 				B3E8DC8D1CC2B3DC00E99EDD /* mem-wb_to_ex3.asm */,
@@ -229,7 +232,6 @@
 				B3E8DC931CC2B3DC00E99EDD /* st_addr_ex-mem_ex.asm */,
 				B3E8DC941CC2B3DC00E99EDD /* st_addr_mem-wb_ex.asm */,
 				B3E8DC951CC2B3DC00E99EDD /* st_mem-wb_mem.asm */,
-				B3E8DC961CC2B3DC00E99EDD /* unrolling.asm */,
 			);
 			path = Benchmarks;
 			sourceTree = "<group>";
@@ -300,11 +302,13 @@
 				B3E8DC531CBC5BAF00E99EDD /* InstructionType.cpp in Sources */,
 				B3E8DC621CC1E71B00E99EDD /* MainMemory.cpp in Sources */,
 				B3E8DC721CC1E73000E99EDD /* MemoryStage.cpp in Sources */,
+				B374442B1CD589A5003D0919 /* unrolling.asm in Sources */,
 				B3E8DC521CBC5BAF00E99EDD /* InstructionParser.cpp in Sources */,
 				B3E8DC6F1CC1E73000E99EDD /* DecodeStage.cpp in Sources */,
 				B3E8DC741CC1E73000E99EDD /* WriteBackStage.cpp in Sources */,
 				B3E8DC731CC1E73000E99EDD /* PipelineStage.cpp in Sources */,
 				B355603B1CB737AE0043584B /* RegisterFile.cpp in Sources */,
+				B374442A1CD589A5003D0919 /* matrix(superscalar).asm in Sources */,
 				B35560471CB746A30043584B /* LabelInstruction.cpp in Sources */,
 				B32A0D0A1CB7581A00216F67 /* Simulator.cpp in Sources */,
 			);
