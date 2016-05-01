@@ -63,7 +63,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "../../Benchmarks/mult.asm"
+            argument = "../../Benchmarks/unrolling.asm"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
