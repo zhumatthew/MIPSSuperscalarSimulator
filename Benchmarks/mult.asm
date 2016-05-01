@@ -4,12 +4,12 @@ addi r8, r0, 100
 addi r9, r0, 120
 begina: sub r31, r3, r2
 add r0, r0, r0
-bgez r31, endloopa
+bgtz r31, endloopa
 addi r4, r0, 0
 beginb: sub r31, r4, r2
 add r0, r0, r0
-bgez r31, endloopb
-mul r29, r3, r2
+bgtz r31, endloopb
+mult r29, r3, r2
 add r10, r29, r4
 add r0, r0, r0
 add r11, r7, r10
@@ -25,30 +25,30 @@ add r4, r4, r0
 addi r3, r0, 0
 add r0, r0, r0
 loop1: sub r31, r3, r2
-bgez r31, endloop1
+bgtz r31, endloop1
 addi r4, r0, 0
 addi r1, r1, 0
 loop2: sub r31, r4, r2
 add r0, r0, r0
-bgez r31, endloop2
+bgtz r31, endloop2
 addi r6, r0, 0
 addi r5, r0, 0
 loop3: sub r31, r5, r2
 add r0, r0, r0
-bgez r31, endloop3
-mul r22, r3, r2
-mul r23, r5, r2
+bgtz r31, endloop3
+mult r22, r3, r2
+mult r23, r5, r2
 add r13, r22, r5
 add r16, r23, r4
 add r13, r13, r7
 add r16, r16, r8
 lw r15, 0(r13)
 lw r18, 0(r16)
-mul r30, r15, r18
+mult r30, r15, r18
 addi r5, r5, 1
 add r6, r6, r30
 j loop3
-endloop3: mul r25, r3, r2
+endloop3: mult r25, r3, r2
 add r0, r0, r0
 add r20, r25, r4
 add r0, r0, r0

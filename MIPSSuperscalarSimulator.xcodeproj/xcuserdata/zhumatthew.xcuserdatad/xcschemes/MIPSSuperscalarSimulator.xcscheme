@@ -63,7 +63,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "../../Benchmarks/mem_move.asm"
+            argument = "../../Benchmarks/array.asm"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

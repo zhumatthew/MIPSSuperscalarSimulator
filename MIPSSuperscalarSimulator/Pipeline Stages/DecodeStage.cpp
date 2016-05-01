@@ -19,7 +19,7 @@ void DecodeStage::process(RegisterFile const& regFile, vector<SimulatedInstructi
 	check(hazardList, lastStall);
     
     // Retrieve rs and rt values for the two instructions from the register file
-    for (SimulatedInstruction instruction: currentInstructionList) {
+    for (SimulatedInstruction& instruction: currentInstructionList) {
         instruction.rsValue = regFile.getValue(instruction.rs);
         instruction.rtValue = regFile.getValue(instruction.rt);
     }

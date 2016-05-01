@@ -104,10 +104,13 @@ void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory,
                 // the instruction queue is indexed starting at 0
             case opcode_bgtz:
                 instruction.branchCondition = instruction.rsValue > 0 ? true : false;
+                break;
             case opcode_blez:
                 instruction.branchCondition = instruction.rsValue <= 0 ? true : false;
+                break;
             case opcode_beq:
                 instruction.branchCondition = instruction.rsValue == instruction.rtValue ? true : false;
+                break;
                 
                 // Unconditional branch
             case opcode_j:

@@ -53,11 +53,16 @@ void Instruction::handleInstruction(vector<string> separatedLine) {
 			break;
 		case JType:
 			opcode = parser.parseOpcode(instrType);
+            rs = 0;
+            rt = 0;
+            rd = 0;
 			immediate = parser.parseImmediate(instrType);
 			break;
 		case BRIType:
 			opcode = parser.parseOpcode(instrType);
 			rs = parser.parseRs(instrType);
+            rt = 0;
+            rd = 0;
 			shamt = parser.parseShamt(instrType);
 			immediate = parser.parseImmediate(instrType);
 			break;

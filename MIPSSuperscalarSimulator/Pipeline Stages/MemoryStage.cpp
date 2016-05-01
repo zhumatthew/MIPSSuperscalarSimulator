@@ -15,7 +15,7 @@ void MemoryStage::process(MainMemory& mainMemory, RegisterFile& regfile) {
 
     for (SimulatedInstruction const& instruction: currentInstructionList) {
         if (instruction.effectiveAddress != 0) {
-            cout << "Mem[" << instruction.effectiveAddress << "] = " << endl;
+            cout << "Mem[" << instruction.effectiveAddress << "] = " << regfile.getValue(instruction.rt) << endl;
         }
     }
 
