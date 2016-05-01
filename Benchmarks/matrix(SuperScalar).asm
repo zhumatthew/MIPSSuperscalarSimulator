@@ -3,10 +3,10 @@ addi r1, r0, 10
 addi r2, r0, 100
 addi r3, r0, 300
 begina: sub r31, r4, r1
-bgez r31, endloopa
+bgtz r31, endloopa
 addi r5, r0, 0
 beginb: sub r30, r5, r1
-bgez r30, endloopb
+bgtz r30, endloopb
 mul r30, r1, r4
 add r10, r30, r5
 add r11, r2, r10
@@ -22,13 +22,13 @@ add r0, r0, r0
 addi r4, r0, 1
 beginc: sub r31, r4, r1
 addi r31, r31, 1
-bgez r31, endloopc
+bgtz r31, endloopc
 addi r5, r0, 1
 begind: sub r30, r5, r1
 addi r30, r30, 1
-bgez r30, endloopd
-addi r10, r4, -1
-addi r11, r4, 1
+bgtz r30, endloopd
+addi r10, r4, -1 
+addi r11, r4, 1 
 mul r30, r1, r10
 mul r31, r1, r11
 add r17, r5, r30
