@@ -1,6 +1,6 @@
-addi r1, r0, 0
-addi r5, r0, 7
-beq r1, r0, done
-addi r4, r0, 5
-addi r6, r0, 7
-done: addi r5, r0, 6
+addi $1, $0, 0
+addi $5, $0, 7
+beq $1, $0, done
+addi $4, $0, 5
+addi $6, $0, 7
+done: addi $5, $0, 6

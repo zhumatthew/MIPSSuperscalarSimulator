@@ -1,6 +1,6 @@
-add r1, r2, r3
-add r6, r7, r8
-add r9, r10, r11
-add r4, r2, r1
-add r6, r7, r8
+add $1, $2, $3
+add $6, $7, $8
+add $9, $10, $11
+add $4, $2, $1
+add $6, $7, $8
 

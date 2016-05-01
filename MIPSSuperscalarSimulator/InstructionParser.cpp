@@ -20,7 +20,7 @@
 
 
 // echo 'labelr5: add r5, r2, r3' | perl -pe 's/\br(\d+)/\$$1/g'
-// perl -pe 's/\br(\d+)/\$$1/g
+// perl -pe 's/\br(\d+)/\$$1/g'
 
 using namespace std;
 
@@ -83,13 +83,13 @@ int InstructionParser::parseRs(InstrType instrType) {
     
     switch (instrType) {
         case RType:
-            if (starts_with(separatedLine[2], "r")) {
+            if (starts_with(separatedLine[2], "$")) {
                 string strValue = separatedLine[2].substr(1, separatedLine[2].length());
                 rs = atoi(strValue.c_str());
             }
             break;
         case IType:
-            if (starts_with(separatedLine[2], "r")) {
+            if (starts_with(separatedLine[2], "$")) {
                 string strValue = separatedLine[2].substr(1, separatedLine[2].length());
                 rs = atoi(strValue.c_str());
             }
@@ -100,7 +100,7 @@ int InstructionParser::parseRs(InstrType instrType) {
                 leftIndex = static_cast<int>(separatedLine[2].find("("));
                 rightIndex = static_cast<int>(separatedLine[2].find(")"));
                 string str = separatedLine[2].substr(leftIndex + 1, rightIndex);
-                if (starts_with(str, "r")) {
+                if (starts_with(str, "$")) {
                     string strValue = str.substr(1, str.length());
                     rs = atoi(strValue.c_str());
                 }
@@ -108,19 +108,19 @@ int InstructionParser::parseRs(InstrType instrType) {
                 leftIndex = static_cast<int>(separatedLine[2].find("("));
                 rightIndex = static_cast<int>(separatedLine[2].find(")"));
                 string str = separatedLine[2].substr(leftIndex + 1, rightIndex);
-                if (starts_with(str, "r")){
+                if (starts_with(str, "$")){
                     string strValue = str.substr(1,str.length());
                     rs = atoi(strValue.c_str());
                 }
             } else {
-                if (starts_with(separatedLine[1], "r"))
+                if (starts_with(separatedLine[1], "$"))
                     rs = atoi(separatedLine[1].substr(1, separatedLine[1].length()).c_str());
             }
             break;
         case JType:
             break;
         case BRIType:
-            if(starts_with(separatedLine[1], "r")){
+            if(starts_with(separatedLine[1], "$")){
                 string strValue = separatedLine[1].substr(1, separatedLine[1].length());
                 rs = atoi(strValue.c_str());
             }
@@ -137,26 +137,26 @@ int InstructionParser::parseRt(InstrType instrType) {
     
     switch (instrType) {
         case RType:
-            if (starts_with(separatedLine[3], "r")) {
+            if (starts_with(separatedLine[3], "$")) {
                 string strValue = separatedLine[3].substr(1, separatedLine[3].length());
                 rt = atoi(strValue.c_str());
             }
             break;
         case IType:
-            if (starts_with(separatedLine[1], "r")) {
+            if (starts_with(separatedLine[1], "$")) {
                 string strValue = separatedLine[1].substr(1, separatedLine[1].length());
                 rt = atoi(strValue.c_str());
             }
             break;
         case MBType:
             if (separatedLine.front() == "lw") {
-                if (starts_with(separatedLine[1], "r"))
+                if (starts_with(separatedLine[1], "$"))
                     rt = atoi(separatedLine[1].substr(1, separatedLine[1].length()).c_str());
             } else if (separatedLine.front() == "sw") {
-                if (starts_with(separatedLine[1], "r"))
+                if (starts_with(separatedLine[1], "$"))
                     rt = atoi(separatedLine[1].substr(1,separatedLine[1].length()).c_str());
             } else {
-                if (starts_with(separatedLine[2], "r"))
+                if (starts_with(separatedLine[2], "$"))
                     rt = atoi(separatedLine[2].substr(1,separatedLine[2].length()).c_str());
             }
             break;
@@ -172,20 +172,20 @@ int InstructionParser::parseRd(InstrType instrType) {
     int rd = 0;
     switch (instrType) {
         case RType:
-            if (starts_with(separatedLine[1], "r")) {
+            if (starts_with(separatedLine[1], "$")) {
                 string strValue = separatedLine[1].substr(1, separatedLine[1].length());
                 rd = atoi(strValue.c_str());
             }
             break;
         case IType:
-            if(starts_with(separatedLine[1], "r")) {
+            if(starts_with(separatedLine[1], "$")) {
                 string strValue = separatedLine[1].substr(1, separatedLine[1].length());
                 rd = atoi(strValue.c_str());
             }
             break;
         case MBType:
             if (separatedLine[0] == "lw") {
-                if (starts_with(separatedLine[1], "r"))
+                if (starts_with(separatedLine[1], "$"))
                     rd = atoi(separatedLine[1].substr(1, separatedLine[1].length()).c_str());
             } else if (separatedLine[0] == "sw") {
                 

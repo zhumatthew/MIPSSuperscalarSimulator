@@ -1,21 +1,21 @@
-addi r2, r0, 1000
-addi r3, r0, 20
-addi r4, r0, 0
-init: sub r7, r4, r2
-bgtz r7, endinit
-add r5, r3, r4
-sw r4, 0(r5)
-addi r4, r4, 1 
+addi $2, $0, 1000
+addi $3, $0, 20
+addi $4, $0, 0
+init: sub $7, $4, $2
+bgtz $7, endinit
+add $5, $3, $4
+sw $4, 0($5)
+addi $4, $4, 1 
 j init
-endinit: addi r4, r0, 0
-add r0, r0, r0
-move: sub r8, r4, r2
-bgtz r8, endmove
-add r5, r3, r4 
-lw r6, 0(r5) 
-addi r6, r6, 1 
-sw r6, 0(r5)
-addi r4, r4, 1
+endinit: addi $4, $0, 0
+add $0, $0, $0
+move: sub $8, $4, $2
+bgtz $8, endmove
+add $5, $3, $4 
+lw $6, 0($5) 
+addi $6, $6, 1 
+sw $6, 0($5)
+addi $4, $4, 1
 j move
-endmove: add r0, r0, r0
+endmove: add $0, $0, $0
 

@@ -1,60 +1,60 @@
-addi r2, r0, 10
-addi r3, r0, 50
-addi r4, r0, 100
-addi r5, r0, 150
-addi r6, r0, 200
-addi r7, r0, 250
-addi r8, r0, 0
-init: sub r20, r8, r2
-bgtz r20, doneinit
-add r9, r3, r8
-sw r8, 0(r9)
-add r9, r4, r8
-sw r8, 0(r9)
-add r9, r5, r8
-sw r8, 0(r9)
-add r9, r6, r8
-sw r8, 0(r9)
-add r9, r7, r8
-sw r8, 0(r9)
-addi r8, r8, 1
+addi $2, $0, 10
+addi $3, $0, 50
+addi $4, $0, 100
+addi $5, $0, 150
+addi $6, $0, 200
+addi $7, $0, 250
+addi $8, $0, 0
+init: sub $20, $8, $2
+bgtz $20, doneinit
+add $9, $3, $8
+sw $8, 0($9)
+add $9, $4, $8
+sw $8, 0($9)
+add $9, $5, $8
+sw $8, 0($9)
+add $9, $6, $8
+sw $8, 0($9)
+add $9, $7, $8
+sw $8, 0($9)
+addi $8, $8, 1
 j init
-doneinit: add r0, r0, r0
-addi r8, r0, 0
-loop1: sub r20, r8, r2
-bgtz r20, endloop1
-add r10, r5, r8
-add r11, r3, r8
-lw r14, 0(r11)
-add r12, r4, r8
-lw r15, 0(r12)
-add r13, r14, r15
-sw r13, 0(r10)
-addi r8, r8, 1
+doneinit: add $0, $0, $0
+addi $8, $0, 0
+loop1: sub $20, $8, $2
+bgtz $20, endloop1
+add $10, $5, $8
+add $11, $3, $8
+lw $14, 0($11)
+add $12, $4, $8
+lw $15, 0($12)
+add $13, $14, $15
+sw $13, 0($10)
+addi $8, $8, 1
 j loop1
-endloop1: add r0, r0, r0
-addi r8, r0, 0
-loop2: sub r20, r8, r2
-bgtz r20, endloop2
-add r10, r6, r8
-add r11, r5, r8
-lw r14, 0(r11)
-add r12, r7, r8
-lw r15, 0(r12)
-add r13, r14, r15
-sw r13, 0(r10)
-addi r8, r8, 1
+endloop1: add $0, $0, $0
+addi $8, $0, 0
+loop2: sub $20, $8, $2
+bgtz $20, endloop2
+add $10, $6, $8
+add $11, $5, $8
+lw $14, 0($11)
+add $12, $7, $8
+lw $15, 0($12)
+add $13, $14, $15
+sw $13, 0($10)
+addi $8, $8, 1
 j loop2
-endloop2: add r0, r0, r0
-addi r8, r0, 0
-loop3: sub r20, r8, r2
-bgtz r20, endloop3
-add r11, r3, r8
-lw r14, 0(r11)
-add r12, r4, r8
-lw r15, 0(r12)
-add r13, r14, r15
-sw r13, 0(r11)
-addi r8, r8, 1
+endloop2: add $0, $0, $0
+addi $8, $0, 0
+loop3: sub $20, $8, $2
+bgtz $20, endloop3
+add $11, $3, $8
+lw $14, 0($11)
+add $12, $4, $8
+lw $15, 0($12)
+add $13, $14, $15
+sw $13, 0($11)
+addi $8, $8, 1
 j loop3
-endloop3: add r0, r0, r0
+endloop3: add $0, $0, $0

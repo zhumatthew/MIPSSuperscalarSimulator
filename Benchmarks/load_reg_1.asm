@@ -1,5 +1,5 @@
-lw r1, 0(r2)
-add r2, r3, r4
-add r5, r6, r7
-add r8, r1, r9
-add r2, r3, r4
+lw $1, 0($2)
+add $2, $3, $4
+add $5, $6, $7
+add $8, $1, $9
+add $2, $3, $4

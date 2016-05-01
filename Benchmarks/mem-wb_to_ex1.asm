@@ -1,3 +1,3 @@
-add r1, r2, r3
-add r6, r7, r8
-add r4, r1, r2
+add $1, $2, $3
+add $6, $7, $8
+add $4, $1, $2

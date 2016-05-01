@@ -1,63 +1,63 @@
-addi r4, r0, 0
-addi r1, r0, 10
-addi r2, r0, 100
-addi r3, r0, 300
-begina: sub r31, r4, r1
-bgtz r31, endloopa
-addi r5, r0, 0
-beginb: sub r30, r5, r1
-bgtz r30, endloopb
-mul r30, r1, r4
-add r10, r30, r5
-add r11, r2, r10
-sw r4, 0(r11)
-add r12, r3, r10
-sw r5, 0(r12)
-addi r5, r5, 1
+addi $4, $0, 0
+addi $1, $0, 10
+addi $2, $0, 100
+addi $3, $0, 300
+begina: sub $31, $4, $1
+bgtz $31, endloopa
+addi $5, $0, 0
+beginb: sub $30, $5, $1
+bgtz $30, endloopb
+mul $30, $1, $4
+add $10, $30, $5
+add $11, $2, $10
+sw $4, 0($11)
+add $12, $3, $10
+sw $5, 0($12)
+addi $5, $5, 1
 j beginb
-endloopb: addi r4, r4, 1
+endloopb: addi $4, $4, 1
 j begina
-endloopa: add r0, r0, r0
-add r0, r0, r0
-addi r4, r0, 1
-beginc: sub r31, r4, r1
-addi r31, r31, 1
-bgtz r31, endloopc
-addi r5, r0, 1
-begind: sub r30, r5, r1
-addi r30, r30, 1
-bgtz r30, endloopd
-addi r10, r4, -1 
-addi r11, r4, 1 
-mul r30, r1, r10
-mul r31, r1, r11
-add r17, r5, r30
-add r18, r5, r31
-add r30, r17, r2
-add r31, r18, r2
-lw r21, 0(r30)
-lw r22, 0(r31)
-mul r30, r1, r4
-addi r6, r5, 1
-add r6, r30, r6
-add r0, r0, r0
-add r6, r6, r2
-add r0, r0, r0
-lw r23, 0(r6)
-lw r24, -2(r6)
-add r21, r21, r22
-add r23, r23, r24
-add r0, r0, r0
-add r21, r21, r23
-addi r23, r0, 4
-div r21, r21, r23
-add r30, r30, r5
-add r0, r0, r0
-add r8, r30, r3
-add r0, r0, r0
-sw r21, 0(r8)
-addi r5, r5, 1
+endloopa: add $0, $0, $0
+add $0, $0, $0
+addi $4, $0, 1
+beginc: sub $31, $4, $1
+addi $31, $31, 1
+bgtz $31, endloopc
+addi $5, $0, 1
+begind: sub $30, $5, $1
+addi $30, $30, 1
+bgtz $30, endloopd
+addi $10, $4, -1 
+addi $11, $4, 1 
+mul $30, $1, $10
+mul $31, $1, $11
+add $17, $5, $30
+add $18, $5, $31
+add $30, $17, $2
+add $31, $18, $2
+lw $21, 0($30)
+lw $22, 0($31)
+mul $30, $1, $4
+addi $6, $5, 1
+add $6, $30, $6
+add $0, $0, $0
+add $6, $6, $2
+add $0, $0, $0
+lw $23, 0($6)
+lw $24, -2($6)
+add $21, $21, $22
+add $23, $23, $24
+add $0, $0, $0
+add $21, $21, $23
+addi $23, $0, 4
+div $21, $21, $23
+add $30, $30, $5
+add $0, $0, $0
+add $8, $30, $3
+add $0, $0, $0
+sw $21, 0($8)
+addi $5, $5, 1
 j begind
-endloopd: addi r4, r4, 1
+endloopd: addi $4, $4, 1
 j beginc
-endloopc: add r0, r0, r0
+endloopc: add $0, $0, $0
