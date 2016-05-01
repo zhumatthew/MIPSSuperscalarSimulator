@@ -20,12 +20,17 @@ class Instruction {
 public:
     Instruction(vector<string> separatedLine, InstrType instructionType, vector<LabelInstruction> labelInstructionList);
     string originalString;
+    
     Opcode opcode;
     Funct funct;
     
+    int rs, rt, rd;
+    int immediate;
+    
     // 5-bit shift amount
     int shamt;
-    int immediate, rd, rt, rs;
+    
+    
     InstrType instrType;
     string opcodeString;
     void handleInstruction(vector<string> separatedLine);

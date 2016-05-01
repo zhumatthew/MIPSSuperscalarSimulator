@@ -13,7 +13,7 @@
 		B355603B1CB737AE0043584B /* RegisterFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B35560391CB737AE0043584B /* RegisterFile.cpp */; };
 		B35560441CB7421D0043584B /* Instruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B35560421CB7421D0043584B /* Instruction.cpp */; };
 		B35560471CB746A30043584B /* LabelInstruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B35560451CB746A30043584B /* LabelInstruction.cpp */; };
-		B36AB3F41CB88345009C3275 /* Forwarding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B36AB3F21CB88345009C3275 /* Forwarding.cpp */; };
+		B36AB3F41CB88345009C3275 /* Forward.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B36AB3F21CB88345009C3275 /* Forward.cpp */; };
 		B3E8DC521CBC5BAF00E99EDD /* InstructionParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3E8DC4E1CBC5BAE00E99EDD /* InstructionParser.cpp */; };
 		B3E8DC531CBC5BAF00E99EDD /* InstructionType.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3E8DC501CBC5BAF00E99EDD /* InstructionType.cpp */; };
 		B3E8DC561CBC965D00E99EDD /* SourceReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3E8DC541CBC965C00E99EDD /* SourceReader.cpp */; };
@@ -51,8 +51,8 @@
 		B35560431CB7421D0043584B /* Instruction.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Instruction.hpp; path = Assembler/Instruction.hpp; sourceTree = "<group>"; };
 		B35560451CB746A30043584B /* LabelInstruction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LabelInstruction.cpp; path = Assembler/LabelInstruction.cpp; sourceTree = "<group>"; };
 		B35560461CB746A30043584B /* LabelInstruction.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = LabelInstruction.hpp; path = Assembler/LabelInstruction.hpp; sourceTree = "<group>"; };
-		B36AB3F21CB88345009C3275 /* Forwarding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Forwarding.cpp; path = Processor/Forwarding.cpp; sourceTree = "<group>"; };
-		B36AB3F31CB88345009C3275 /* Forwarding.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Forwarding.hpp; path = Processor/Forwarding.hpp; sourceTree = "<group>"; };
+		B36AB3F21CB88345009C3275 /* Forward.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Forward.cpp; path = Processor/Forward.cpp; sourceTree = "<group>"; };
+		B36AB3F31CB88345009C3275 /* Forward.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Forward.hpp; path = Processor/Forward.hpp; sourceTree = "<group>"; };
 		B37444281CD589A5003D0919 /* matrix(superscalar).asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = "matrix(superscalar).asm"; sourceTree = "<group>"; };
 		B37444291CD589A5003D0919 /* unrolling.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = unrolling.asm; sourceTree = "<group>"; };
 		B374442E1CD5A296003D0919 /* mem-to-ex.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = "mem-to-ex.asm"; sourceTree = "<group>"; };
@@ -176,8 +176,8 @@
 		B3E8DC5E1CC1E52700E99EDD /* Processor */ = {
 			isa = PBXGroup;
 			children = (
-				B36AB3F31CB88345009C3275 /* Forwarding.hpp */,
-				B36AB3F21CB88345009C3275 /* Forwarding.cpp */,
+				B36AB3F31CB88345009C3275 /* Forward.hpp */,
+				B36AB3F21CB88345009C3275 /* Forward.cpp */,
 				B32A0D061CB7581900216F67 /* SimulatedInstruction.hpp */,
 				B32A0D051CB7581900216F67 /* SimulatedInstruction.cpp */,
 				B3E8DC6C1CC1E73000E99EDD /* PipelineStage.hpp */,
@@ -306,7 +306,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B36AB3F41CB88345009C3275 /* Forwarding.cpp in Sources */,
+				B36AB3F41CB88345009C3275 /* Forward.cpp in Sources */,
 				B3E8DC711CC1E73000E99EDD /* FetchStage.cpp in Sources */,
 				B355600C1CB4D02F0043584B /* main.cpp in Sources */,
 				B3E8DC561CBC965D00E99EDD /* SourceReader.cpp in Sources */,

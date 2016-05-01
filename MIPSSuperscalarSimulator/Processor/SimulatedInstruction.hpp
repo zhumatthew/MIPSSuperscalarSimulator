@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 #include <string>
-#include "Forwarding.hpp"
+#include "Forward.hpp"
 #include "Instruction.hpp"
 
 class SimulatedInstruction {
@@ -48,7 +48,7 @@ public:
     // Indicates whether this instruction has been reordered. If true, the instruction cannot be the source for data forwarding.
     bool reordered;
     
-    Forwarding currentForward;
+    Forward currentForward;
 
 };
 

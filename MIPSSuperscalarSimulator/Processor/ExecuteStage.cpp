@@ -132,7 +132,7 @@ void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory,
         
         // For this instruction set, the target's absolute address (rather than the relative address to the PC) is assigned to the immediate of the branch instruction. The calculation of the effective address is not needed.
         
-        // In a MIPS pipeline, the target address is not known earlier than the branch outcome and there is no advantage for the branch taken strategy. For the branch untaken strategy, branch condition evaluation and PC changing is done at the execution stage of the branch instruction. The target instruciton is fetched at the next cycle and the EX and ID stages' instruction are turned into NOP.
+        // In a MIPS pipeline, the target address is not known earlier than the branch outcome and there is no advantage for the branch taken strategy. For the branch untaken strategy, branch condition evaluation and PC changing is done at the execution stage of the branch instruction. The target instruciton is fetched at the next cycle and the EX and ID stages' instructions are turned into NOP.
     }
 }
 

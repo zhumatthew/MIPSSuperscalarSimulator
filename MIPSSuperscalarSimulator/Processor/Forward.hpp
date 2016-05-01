@@ -1,20 +1,20 @@
 //
-//  Forwarding.hpp
+//  Forward.hpp
 //  MIPSSuperscalarSimulator
 //
 //  Created by Matt Zhu on 4/6/16.
 //  Copyright © 2016 ZhuKim. All rights reserved.
 //
 
-#ifndef Forwarding_hpp
-#define Forwarding_hpp
+#ifndef Forward_hpp
+#define Forward_hpp
 
 #include <stdio.h>
 
-class Forwarding {
+class Forward {
     
 public:
-	Forwarding();
+	Forward();
 
     bool rsForward; // Indicates whether or not rs needs to be forwarded
     bool rtForward; // Indicates whether or not rt needs to be forwarded
@@ -30,4 +30,4 @@ public:
 
 };
 
-#endif /* Forwarding_hpp */
+#endif /* Forward_hpp */
