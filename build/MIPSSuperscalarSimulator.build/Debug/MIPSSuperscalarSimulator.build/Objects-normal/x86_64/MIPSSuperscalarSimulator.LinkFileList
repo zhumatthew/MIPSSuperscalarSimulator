@@ -8,12 +8,10 @@
 /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/build/MIPSSuperscalarSimulator.build/Debug/MIPSSuperscalarSimulator.build/Objects-normal/x86_64/InstructionType.o
 /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/build/MIPSSuperscalarSimulator.build/Debug/MIPSSuperscalarSimulator.build/Objects-normal/x86_64/MainMemory.o
 /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/build/MIPSSuperscalarSimulator.build/Debug/MIPSSuperscalarSimulator.build/Objects-normal/x86_64/MemoryStage.o
-/Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/build/MIPSSuperscalarSimulator.build/Debug/MIPSSuperscalarSimulator.build/Objects-normal/x86_64/unrolling.o
 /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/build/MIPSSuperscalarSimulator.build/Debug/MIPSSuperscalarSimulator.build/Objects-normal/x86_64/InstructionParser.o
 /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/build/MIPSSuperscalarSimulator.build/Debug/MIPSSuperscalarSimulator.build/Objects-normal/x86_64/DecodeStage.o
 /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/build/MIPSSuperscalarSimulator.build/Debug/MIPSSuperscalarSimulator.build/Objects-normal/x86_64/WriteBackStage.o
 /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/build/MIPSSuperscalarSimulator.build/Debug/MIPSSuperscalarSimulator.build/Objects-normal/x86_64/PipelineStage.o
 /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/build/MIPSSuperscalarSimulator.build/Debug/MIPSSuperscalarSimulator.build/Objects-normal/x86_64/RegisterFile.o
-/Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/build/MIPSSuperscalarSimulator.build/Debug/MIPSSuperscalarSimulator.build/Objects-normal/x86_64/matrix(superscalar).o
 /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/build/MIPSSuperscalarSimulator.build/Debug/MIPSSuperscalarSimulator.build/Objects-normal/x86_64/LabelInstruction.o
 /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/build/MIPSSuperscalarSimulator.build/Debug/MIPSSuperscalarSimulator.build/Objects-normal/x86_64/Simulator.o
