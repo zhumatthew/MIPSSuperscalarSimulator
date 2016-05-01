@@ -14,4 +14,5 @@ dependencies: \
   /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/Pipeline\ Stages/DecodeStage.hpp \
   /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/Pipeline\ Stages/ExecuteStage.hpp \
   /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/Pipeline\ Stages/MemoryStage.hpp \
-  /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/Pipeline\ Stages/WriteBackStage.hpp
+  /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/Pipeline\ Stages/WriteBackStage.hpp \
+  /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/BufferToggle.hpp

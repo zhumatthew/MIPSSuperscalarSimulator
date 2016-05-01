@@ -23,22 +23,25 @@ using namespace std;
 
 Simulator::Simulator(vector<SimulatedInstruction> simulatedInstructionList) : simulatedInstructionList(simulatedInstructionList), fetchStage(FetchStage(static_cast<int>(simulatedInstructionList.size()))), committedInstructionCount(0), cycleCount(0), lastStall(0), hazardList(HAZARD_LIST_SIZE, SimulatedInstruction()), tempHazardList(4, SimulatedInstruction()), tempInstrList(2, SimulatedInstruction()) {}
 
+void Simulator::printFinalOutput() {
+    cout << string(OUTPUT_WIDTH, '-') << endl;
+    cout << "Committed instruction count: " << committedInstructionCount << endl;
+    cout << "Total number of cycles: " << cycleCount << endl;
+    cout << "CPI: " << static_cast<double>(cycleCount) / static_cast<double>(committedInstructionCount)  << endl;
+}
+
 void Simulator::process() {
 
     while (memoryStage.currentInstructionList.front().originalString != "end") {
         stepProcess();
     }
-    
-    cout << "Committed instruction count: " << committedInstructionCount << endl;
-    cout << "Total number of cycles: " << cycleCount << endl;
-    cout << "CPI: " << static_cast<double>(cycleCount) / static_cast<double>(committedInstructionCount)  << endl;
-
 }
 
 // Potentially allows the user to 'press enter' to run the entire simulation or 'press space' to run one step at a time
 
 void Simulator::stepProcess() {
     
+    cout << string(OUTPUT_WIDTH, '-') << endl;
     cout << "Clock Cycle #" << ++cycleCount << endl;
     
     // IF -> ID -> EX -> MEM -> WB
@@ -65,6 +68,9 @@ void Simulator::stepProcess() {
     // If branchMisprediction is set in the execute stage of the previous cycle
     if (branchMisprediction) {
         branchMisprediction = false;
+        cout << endl << "Branch misprediction occurred in the previous cycle" << endl;
+        cout << "NOP instructions in decode and execute stage" << endl << endl;
+
         executeStage.currentInstructionList[0] = SimulatedInstruction();
         executeStage.currentInstructionList[1] = SimulatedInstruction();
         decodeStage.currentInstructionList[0] = SimulatedInstruction();
@@ -146,5 +152,4 @@ void Simulator::stepProcess() {
         lastStall = 1;
     }
     
-    cout << string(OUTPUT_WIDTH, '-') << endl;
 }

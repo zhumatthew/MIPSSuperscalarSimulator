@@ -205,7 +205,6 @@ Funct InstructionParser::parseFunct(InstrType instrType) {
     Funct funct = funct_zero;
     if (instrType == RType) {
         funct = InstructionType().functDefine(separatedLine[0], instrType);
-
     }
     return funct;
 }
@@ -220,7 +219,7 @@ int InstructionParser::parseShamt(InstrType instrType) {
     return shamt;
 }
 
-// parseImmediateValue?
+// 
 int InstructionParser::parseImmediate(InstrType instrType) {
     
     int immediate = 0;

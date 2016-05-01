@@ -55,6 +55,10 @@
 		B36AB3F31CB88345009C3275 /* Forwarding.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Forwarding.hpp; sourceTree = "<group>"; };
 		B37444281CD589A5003D0919 /* matrix(superscalar).asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = "matrix(superscalar).asm"; sourceTree = "<group>"; };
 		B37444291CD589A5003D0919 /* unrolling.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = unrolling.asm; sourceTree = "<group>"; };
+		B374442E1CD5A296003D0919 /* mem-to-ex.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = "mem-to-ex.asm"; sourceTree = "<group>"; };
+		B37444301CD5A38A003D0919 /* wb-to-ex.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = "wb-to-ex.asm"; sourceTree = "<group>"; };
+		B37444321CD5D312003D0919 /* BufferToggle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BufferToggle.hpp; sourceTree = "<group>"; };
+		B37444331CD5E385003D0919 /* benchmark1.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = benchmark1.asm; sourceTree = "<group>"; };
 		B3E8DC4E1CBC5BAE00E99EDD /* InstructionParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InstructionParser.cpp; sourceTree = "<group>"; };
 		B3E8DC4F1CBC5BAF00E99EDD /* InstructionParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InstructionParser.hpp; sourceTree = "<group>"; };
 		B3E8DC501CBC5BAF00E99EDD /* InstructionType.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InstructionType.cpp; sourceTree = "<group>"; };
@@ -142,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				B355600B1CB4D02F0043584B /* main.cpp */,
+				B37444321CD5D312003D0919 /* BufferToggle.hpp */,
 				B3E8DC551CBC965C00E99EDD /* SourceReader.hpp */,
 				B3E8DC541CBC965C00E99EDD /* SourceReader.cpp */,
 				B3E8DC4F1CBC5BAF00E99EDD /* InstructionParser.hpp */,
@@ -197,11 +202,13 @@
 		B3E8DC751CC2B3DC00E99EDD /* Benchmarks */ = {
 			isa = PBXGroup;
 			children = (
+				B37444301CD5A38A003D0919 /* wb-to-ex.asm */,
 				B3E8DC761CC2B3DC00E99EDD /* add_reg_1.asm */,
 				B3E8DC771CC2B3DC00E99EDD /* alu_reg_1.asm */,
 				B3E8DC781CC2B3DC00E99EDD /* alu_reg_2.asm */,
 				B3E8DC791CC2B3DC00E99EDD /* alu_reg_3.asm */,
 				B3E8DC7A1CC2B3DC00E99EDD /* array.asm */,
+				B37444331CD5E385003D0919 /* benchmark1.asm */,
 				B3E8DC7B1CC2B3DC00E99EDD /* big_test.asm */,
 				B3E8DC7C1CC2B3DC00E99EDD /* branch_1.asm */,
 				B3E8DC7D1CC2B3DC00E99EDD /* branch_2.asm */,
@@ -220,6 +227,7 @@
 				B37444281CD589A5003D0919 /* matrix(superscalar).asm */,
 				B3E8DC8B1CC2B3DC00E99EDD /* mem-wb_to_ex1.asm */,
 				B3E8DC8C1CC2B3DC00E99EDD /* mem-wb_to_ex2.asm */,
+				B374442E1CD5A296003D0919 /* mem-to-ex.asm */,
 				B3E8DC8D1CC2B3DC00E99EDD /* mem-wb_to_ex3.asm */,
 				B3E8DC8E1CC2B3DC00E99EDD /* mem-wb_to_ex4.asm */,
 				B3E8DC8F1CC2B3DC00E99EDD /* mem-wb_to_ex5.asm */,

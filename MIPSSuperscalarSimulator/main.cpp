@@ -11,10 +11,27 @@
 // Figure out the error involving the readAfterWrite flag and the rs-rs, rt-rs control flow issue
 // In memory stage, determine whether it is necessary to have both lw before sw in case an sw comes before lw
 
+// mem-wb_to_ex means the write output of the memory stage of an instruction that is currently in the writeback stage is forwarded to the instruction in the execution stage (2 cycles apart)
+// ex-mem_to_ex means the write output of the execute stage of an instruction that is currently in the writeback stage is forwarded to the instruction in the execution stage (1 cycle apart)
+
+// ld is for load word
+// ld_add_ex-mem_ex is for a load word that uses an address dependent on a forward between instructions 1 cycle apart (execution stage instruction depends on the memory stage instruction)
+// ld_add_ex-wb_ex is for a load word that uses an address dependent on a forward between instructions 2 cycles apart (execute stage instruction depends on the write back instruction)
+// ld_addr_ex-wb_mem is the memory stage instruction (sw) writing a value into memory that is dependent on the instruction in the writeback stage (lw)
+
+// st is for store word
+// st_addr_ex-mem_ex effective address for sw instruction in ex is dependent on the instruction in mem
+// st_addr_mem-wb_ex the effective address for sw instruction in ex is dependent on the instruction in wb
+// st_mem-wb_mem, the value written to memory is when sw is in memory is dependent on the value written back by the instruction in the wb stage (add)
+
+// load_delay is to ensure that when load word loads to a register, the next instruction does not enter into the pipeline simultaneously because it must read after the load writes.
+
 #include <iostream>
+#include <limits>
 #include "SourceReader.hpp"
 #include "Simulator.hpp"
 #include "SimulatedInstruction.hpp"
+#include "BufferToggle.hpp"
 
 #define OUTPUT_WIDTH 42
 
@@ -57,7 +74,27 @@ int main(int argc, const char * argv[]) {
 	}
 
 	Simulator simulator(simulatedInstructionList);
-	simulator.process();
+    
+    cout << "Press enter to run the entire simulation without pauses" << endl;
+    cout << "Or press space to step through the simulation" << endl;
+    BufferToggle bt;
+    while (simulator.memoryStage.currentInstructionList.front().originalString != "end") {
+        bt.off();
+        char input = getchar();
+        bt.on();
 
+//        cin >> noskipws >> input;
+//        cin.get(input);
+        if (input == ' ') {
+            cout << endl;
+            simulator.stepProcess();
+        } else if (input == '\n' || input == '\r') {
+            simulator.process();
+        }
+    }
+    
+    
+    simulator.printFinalOutput();
+    
 	return 0;
 }

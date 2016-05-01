@@ -50,7 +50,7 @@ public:
     // This flag is set at the execution stage of a conditional branch instruction for a mispredicted branch. At the next cycle, the decision of whether or not bubbles will be inserted will be based on this flag.
     bool branchMisprediction;
     
-
+    void printFinalOutput();
     void process();
     void stepProcess();
 };

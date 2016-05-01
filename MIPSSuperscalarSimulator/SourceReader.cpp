@@ -71,7 +71,7 @@ void SourceReader::constructInstructionList() {
 	int lineNumber = 0;
 	instructionList = vector<Instruction>();
 
-	cout << "-------Printing out each instruction------" << endl;
+	cout << "-------------Instruction List-------------" << endl;
 
 	while (getline(reader, line)) {
         if (!line.empty() && line != "\r") {

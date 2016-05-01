@@ -63,7 +63,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "../../Benchmarks/mem-wb_to_ex1.asm"
+            argument = "../../Benchmarks/benchmark1.asm"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

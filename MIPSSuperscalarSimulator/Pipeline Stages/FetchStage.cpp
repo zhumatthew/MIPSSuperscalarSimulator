@@ -41,28 +41,29 @@ void FetchStage::windowMove(vector<SimulatedInstruction>& simulatedInstructionLi
 bool FetchStage::registerNameMatch(int check)
 {
     // function returns true if a hazard is found
-	bool flag = false;
-
-	if ((window[0].opcodeString == "end") || (window[0].opcodeString == "NOP"))
-		return true;
+    bool flag = false;
     
-//    if (window[check].rd == window[0].rd) flag = true; // WAW hazard (If the loop goes until i <= check), then this instruction is redundant
+    if ((window[0].opcodeString == "end") || (window[0].opcodeString == "NOP"))
+        return true;
+    
+    //    if (window[check].rd == window[0].rd) flag = true; // WAW hazard (If the loop goes until i <= check), then this instruction is redundant
     
     // should be comparing only down to window[1]?
     // Compare window[check] to previous instructions window[0] to window [check-1]
     for (int i = 1; i <= check; i++) {
         
-		if ((window[check].rd == window[check-i].rd) // WAW hazard
-			|| (window[check].rs == window[check-i].rd) // RAW hazard
-			|| (window[check].rt == window[check-i].rd) // RAW hazard (isn't rt the destination for certain instructions?)
-			|| (((window[check].rd == window[check-i].rt) || (window[check].rd == window[check-i].rs)) // WAR hazard
-                && ((check-i) > 2) // No WAR hazard if earlier instruction (at check-i) reads before the later instruction (at check) updates
+        if ((window[check].rd == window[check-i].rd) // WAW hazard
+            || (window[check].rs == window[check-i].rd) // RAW hazard
+            || (window[check].rt == window[check-i].rd) // RAW hazard (isn't rt the destination for certain instructions?)
+            || (((window[check].rd == window[check-i].rt) || (window[check].rd == window[check-i].rs)) // WAR hazard
+                && ((check-i) > 2) // No WAR hazard after reordering if earlier instruction (at check-i) reads before the later instruction (at check) updates
                 )) {
-			flag = true;
-			break;
-		}
-	}
-	return flag;
+                
+                flag = true;
+                break;
+            }
+    }
+    return flag;
 }
 
 // For the pipeline to stop, an "end" is inserted at the end of the benchmark (when an "end" is detected in the MEM stage) To stay within array borders, three "NOP" are inserted after "end".  "end"/"NOP" is not included in reordering, but enters the window/pipeline to stop the pipeline.
@@ -75,7 +76,7 @@ bool FetchStage::reorder(vector<SimulatedInstruction>& simulatedInstructionList)
         || window[0].opcodeString == "end" || window[0].opcodeString == "NOP")
 		return false; // window[0] needs to enter the pipeline alone
 	if ((window[1].rs != window[0].rd) && (window[1].rt != window[0].rd) && (window[1].opcodeString != "end") && (window[1].opcodeString != "NOP")) {
-		return true; // no data dependence between [0] and [1]; (end cannot enter second depth?)
+		return true; // no data dependence between [0] and [1]; (end must traverse pipeline as [0])
 	}
 
     // If window[0] can potentially be paired, but the window[1] depends on window[0]
@@ -107,10 +108,6 @@ void FetchStage::process(vector<SimulatedInstruction>& simulatedInstructionList,
 	int lastPC = programCounter;
 	windowMove(simulatedInstructionList);
 	pairwise = reorder(simulatedInstructionList);
-    
-    if (simulatedInstructionList.front().originalString == "endmove: add r0, r0, r0") {
-        
-    }
 
 	if (lastStall == 1) {
 		return; // no instruction is fetched on a stall
