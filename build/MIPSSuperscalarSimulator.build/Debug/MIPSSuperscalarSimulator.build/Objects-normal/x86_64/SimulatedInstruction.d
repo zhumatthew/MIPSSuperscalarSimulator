@@ -1,7 +1,7 @@
 dependencies: \
-  /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/SimulatedInstruction.cpp \
-  /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/SimulatedInstruction.hpp \
-  /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/Forwarding.hpp \
-  /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/Instruction.hpp \
-  /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/LabelInstruction.hpp \
-  /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/InstructionType.hpp
+  /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/Processor/SimulatedInstruction.cpp \
+  /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/Processor/SimulatedInstruction.hpp \
+  /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/Processor/Forwarding.hpp \
+  /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/Assembler/Instruction.hpp \
+  /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/Assembler/LabelInstruction.hpp \
+  /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/Assembler/InstructionType.hpp

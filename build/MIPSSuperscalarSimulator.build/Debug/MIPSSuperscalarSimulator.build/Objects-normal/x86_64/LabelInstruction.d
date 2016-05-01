@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/LabelInstruction.cpp \
-  /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/LabelInstruction.hpp
+  /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/Assembler/LabelInstruction.cpp \
+  /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/Assembler/LabelInstruction.hpp

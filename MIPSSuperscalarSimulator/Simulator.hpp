@@ -14,11 +14,11 @@
 
 #include "Memory/MainMemory.hpp"
 #include "Memory/RegisterFile.hpp"
-#include "Pipeline Stages/FetchStage.hpp"
-#include "Pipeline Stages/DecodeStage.hpp"
-#include "Pipeline Stages/ExecuteStage.hpp"
-#include "Pipeline Stages/MemoryStage.hpp"
-#include "Pipeline Stages/WriteBackStage.hpp"
+#include "Processor/FetchStage.hpp"
+#include "Processor/DecodeStage.hpp"
+#include "Processor/ExecuteStage.hpp"
+#include "Processor/MemoryStage.hpp"
+#include "Processor/WriteBackStage.hpp"
 #include "SimulatedInstruction.hpp"
 
 // Order of declaration for member variables is the order of initialization

@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/InstructionType.cpp \
-  /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/InstructionType.hpp
+  /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/Assembler/InstructionType.cpp \
+  /Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/Assembler/InstructionType.hpp

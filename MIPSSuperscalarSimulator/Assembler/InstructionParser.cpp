@@ -18,10 +18,6 @@
 // branch instructions with rs/immediate
 // label instruction
 
-
-// echo 'labelr5: add r5, r2, r3' | perl -pe 's/\br(\d+)/\$$1/g'
-// perl -pe 's/\br(\d+)/\$$1/g'
-
 using namespace std;
 
 InstructionParser::InstructionParser(string line) : line(line) {}
@@ -89,13 +85,8 @@ int InstructionParser::parseRs(InstrType instrType) {
             }
             break;
         case IType:
-            if (starts_with(separatedLine[2], "$")) {
-                string strValue = separatedLine[2].substr(1, separatedLine[2].length());
-                rs = atoi(strValue.c_str());
-            }
-            break;
-        case MBType:
             int leftIndex,rightIndex;
+            
             if (separatedLine[0] == "lw") {
                 leftIndex = static_cast<int>(separatedLine[2].find("("));
                 rightIndex = static_cast<int>(separatedLine[2].find(")"));
@@ -104,6 +95,7 @@ int InstructionParser::parseRs(InstrType instrType) {
                     string strValue = str.substr(1, str.length());
                     rs = atoi(strValue.c_str());
                 }
+                break;
             } else if (separatedLine[0] == "sw") {
                 leftIndex = static_cast<int>(separatedLine[2].find("("));
                 rightIndex = static_cast<int>(separatedLine[2].find(")"));
@@ -112,19 +104,19 @@ int InstructionParser::parseRs(InstrType instrType) {
                     string strValue = str.substr(1,str.length());
                     rs = atoi(strValue.c_str());
                 }
-            } else {
+                break;
+            } else if (separatedLine[0] == "beq" || separatedLine[0] == "blez" || separatedLine[0] == "bgtz") {
                 if (starts_with(separatedLine[1], "$"))
                     rs = atoi(separatedLine[1].substr(1, separatedLine[1].length()).c_str());
+                break;
             }
-            break;
-        case JType:
-            break;
-        case BRIType:
-            if(starts_with(separatedLine[1], "$")){
-                string strValue = separatedLine[1].substr(1, separatedLine[1].length());
+            
+            if (starts_with(separatedLine[2], "$")) {
+                string strValue = separatedLine[2].substr(1, separatedLine[2].length());
                 rs = atoi(strValue.c_str());
             }
             break;
+        case JType:
         default:
             break;
     }
@@ -143,25 +135,31 @@ int InstructionParser::parseRt(InstrType instrType) {
             }
             break;
         case IType:
+            
+            if (separatedLine.front() == "lw") {
+                if (starts_with(separatedLine[1], "$"))
+                    rt = atoi(separatedLine[1].substr(1, separatedLine[1].length()).c_str());
+                break;
+            } else if (separatedLine.front() == "sw") {
+                if (starts_with(separatedLine[1], "$"))
+                    rt = atoi(separatedLine[1].substr(1,separatedLine[1].length()).c_str());
+                break;
+            } else if (separatedLine.front() == "beq") {
+                if (starts_with(separatedLine[2], "$"))
+                    rt = atoi(separatedLine[2].substr(1,separatedLine[2].length()).c_str());
+                break;
+            } else if (separatedLine.front() == "bgtz" || separatedLine.front() == "blez") {
+                break;
+            }
+            
             if (starts_with(separatedLine[1], "$")) {
                 string strValue = separatedLine[1].substr(1, separatedLine[1].length());
                 rt = atoi(strValue.c_str());
             }
-            break;
-        case MBType:
-            if (separatedLine.front() == "lw") {
-                if (starts_with(separatedLine[1], "$"))
-                    rt = atoi(separatedLine[1].substr(1, separatedLine[1].length()).c_str());
-            } else if (separatedLine.front() == "sw") {
-                if (starts_with(separatedLine[1], "$"))
-                    rt = atoi(separatedLine[1].substr(1,separatedLine[1].length()).c_str());
-            } else {
-                if (starts_with(separatedLine[2], "$"))
-                    rt = atoi(separatedLine[2].substr(1,separatedLine[2].length()).c_str());
-            }
+            
+            
             break;
         case JType:
-        case BRIType:
         default:
             break;
     }
@@ -178,23 +176,22 @@ int InstructionParser::parseRd(InstrType instrType) {
             }
             break;
         case IType:
-            if(starts_with(separatedLine[1], "$")) {
-                string strValue = separatedLine[1].substr(1, separatedLine[1].length());
-                rd = atoi(strValue.c_str());
-            }
-            break;
-        case MBType:
+            
             if (separatedLine[0] == "lw") {
                 if (starts_with(separatedLine[1], "$"))
                     rd = atoi(separatedLine[1].substr(1, separatedLine[1].length()).c_str());
-            } else if (separatedLine[0] == "sw") {
-                
-            } else {
-                
+                break;
+            } else if (separatedLine[0] == "sw" || separatedLine[0] == "beq" || separatedLine[0] == "bgtz" || separatedLine[0] == "blez") {
+                break;
             }
+            
+            if (starts_with(separatedLine[1], "$")) {
+                string strValue = separatedLine[1].substr(1, separatedLine[1].length());
+                rd = atoi(strValue.c_str());
+            }
+            
             break;
         case JType:
-        case BRIType:
         default:
             break;
     }
@@ -213,13 +210,13 @@ Funct InstructionParser::parseFunct(InstrType instrType) {
 int InstructionParser::parseShamt(InstrType instrType) {
     int shamt = 0;
     if (instrType == RType) {
-
+        
     }
     
     return shamt;
 }
 
-// 
+//
 int InstructionParser::parseImmediate(InstrType instrType) {
     
     int immediate = 0;
@@ -228,37 +225,38 @@ int InstructionParser::parseImmediate(InstrType instrType) {
         case RType:
             break;
         case IType:
-            immediate = atoi(separatedLine[3].c_str());
-            break;
-        case MBType:
             if (separatedLine.front() == "lw") {
                 int index;
                 index = static_cast<int>(separatedLine[2].find("("));
                 string str = separatedLine[2].substr(0, index);
                 immediate = atoi(str.c_str());
+                break;
             } else if (separatedLine.front() == "sw") {
                 int index;
                 index = static_cast<int>(separatedLine[2].find("("));
                 string str = separatedLine[2].substr(0, index);
                 immediate = atoi(str.c_str());
-            } else {
+                break;
+            } else if (separatedLine.front() == "beq") {
                 for (LabelInstruction instruction: labelInstructionList) {
                     if (instruction.getLabelString() == separatedLine[3]) {
                         immediate = instruction.getLabelAddress();
                     }
                 }
+                break;
+            } else if (separatedLine.front() == "bgtz" || separatedLine.front() == "blez") {
+                for (LabelInstruction instruction: labelInstructionList) {
+                    if (instruction.getLabelString() == separatedLine[2]) {
+                        immediate = instruction.getLabelAddress();
+                    }
+                }
+                break;
             }
+            immediate = atoi(separatedLine[3].c_str());
             break;
         case JType:
             for (LabelInstruction instruction: labelInstructionList) {
                 if (instruction.getLabelString() == separatedLine[1]) {
-                    immediate = instruction.getLabelAddress();
-                }
-            }
-            break;
-        case BRIType:
-            for (LabelInstruction instruction: labelInstructionList) {
-                if (instruction.getLabelString() == separatedLine[2]) {
                     immediate = instruction.getLabelAddress();
                 }
             }

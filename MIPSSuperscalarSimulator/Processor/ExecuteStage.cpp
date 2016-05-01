@@ -7,7 +7,7 @@
 //
 
 #include "ExecuteStage.hpp"
-#include "../InstructionType.hpp"
+#include "../Assembler/InstructionType.hpp"
 
 void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory, RegisterFile const& regFile, int lastStall, bool& branchMisprediction) {
     

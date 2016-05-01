@@ -37,14 +37,10 @@ using namespace std;
 InstrType InstructionType::instrTypeDefine(string opcode) {
     if (opcode == "add" || opcode == "sub" || opcode == "mult"|| opcode == "div" || opcode == "and" || opcode == "sll"|| opcode == "srl")
         return RType;
-    else if (opcode == "addi" || opcode == "andi" || opcode == "ori" || opcode == "xori")
+    else if (opcode == "addi" || opcode == "andi" || opcode == "ori" || opcode == "xori" || opcode == "lw" || opcode == "sw"|| opcode == "beq" || opcode == "bgtz"|| opcode == "blez")
         return IType;
-    else if (opcode == "lw" || opcode == "sw"|| opcode == "beq")
-        return MBType;
     else if (opcode == "j" || opcode == "jal")
         return JType;
-    else if (opcode == "bgtz"|| opcode == "blez")
-        return BRIType;
     else
         return Label;
 }
@@ -80,15 +76,16 @@ Opcode InstructionType::operationCodeDefine(string str, InstrType instrType) {
         case IType:
             if (str == "addi") {
                 opcode = opcode_addi;
-            }
-            break;
-        case MBType:
-            if (str == "lw") {
+            } else if (str == "lw") {
                 opcode = opcode_lw;
             } else if (str == "sw") {
                 opcode = opcode_sw;
             } else if (str == "beq") {
                 opcode = opcode_beq;
+            } else if (str == "bgtz") {
+                opcode = opcode_bgtz;
+            } else if (str == "blez") {
+                opcode = opcode_blez;
             }
             break;
         case JType:
@@ -96,13 +93,7 @@ Opcode InstructionType::operationCodeDefine(string str, InstrType instrType) {
                 opcode = opcode_j;
             }
             break;
-        case BRIType:
-            if (str == "bgtz") {
-                opcode = opcode_bgtz;
-            } else if (str == "blez") {
-                opcode = opcode_blez;
-            }
-            break;
+
         default:
             break;
     }

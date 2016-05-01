@@ -40,14 +40,7 @@ void Instruction::handleInstruction(vector<string> separatedLine) {
 		case IType:
 			opcode = parser.parseOpcode(instrType);
 			rs = parser.parseRs(instrType);
-			rd = parser.parseRd(instrType);
-			rt = rd;
-			immediate = parser.parseImmediate(instrType);
-			break;
-		case MBType:
-			opcode = parser.parseOpcode(instrType);
-            rs = parser.parseRs(instrType);
-			rt = parser.parseRt(instrType);
+            rt = parser.parseRt(instrType);
 			rd = parser.parseRd(instrType);
 			immediate = parser.parseImmediate(instrType);
 			break;
@@ -56,14 +49,6 @@ void Instruction::handleInstruction(vector<string> separatedLine) {
             rs = 0;
             rt = 0;
             rd = 0;
-			immediate = parser.parseImmediate(instrType);
-			break;
-		case BRIType:
-			opcode = parser.parseOpcode(instrType);
-			rs = parser.parseRs(instrType);
-            rt = 0;
-            rd = 0;
-			shamt = parser.parseShamt(instrType);
 			immediate = parser.parseImmediate(instrType);
 			break;
 		default:

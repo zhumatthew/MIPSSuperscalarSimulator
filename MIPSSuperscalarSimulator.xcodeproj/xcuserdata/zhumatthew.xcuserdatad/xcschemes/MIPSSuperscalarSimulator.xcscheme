@@ -63,7 +63,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "../../Benchmarks/benchmark1.asm"
+            argument = "../../Benchmarks/branch_2.asm"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
