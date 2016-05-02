@@ -31,7 +31,7 @@ void Simulator::printFinalOutput() {
 }
 
 void Simulator::process() {
-
+    // For the pipeline to stop, an "end" is inserted at the end of the benchmark (the pipeline stops when an "end" is detected in the MEM stage). To stay within array borders, three "NOP" are inserted after "end".
     while (memoryStage.currentInstructionList.front().originalString != "end") {
         stepProcess();
     }
