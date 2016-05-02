@@ -30,7 +30,7 @@ void MemoryStage::process(MainMemory& mainMemory, RegisterFile& regfile) {
         if (instruction.opcode == opcode_lw) {
             // Mem[effectiveAddress] is placed in LMD (load memory data)
             // rdValue is used to indicate LMD
-            // rdValue is a software concept that indicates value should be updated to register file or main memory, it corresponds to the ALUoutput register
+            // rdValue is a software concept that indicates the value should be updated to register file or main memory, it corresponds to the ALUoutput register
             instruction.rdValue = mainMemory.getValue(instruction.effectiveAddress);
         }
     }

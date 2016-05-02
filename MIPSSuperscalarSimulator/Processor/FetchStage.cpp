@@ -37,8 +37,8 @@ void FetchStage::windowMove(vector<SimulatedInstruction>& simulatedInstructionLi
 	}
 }
 
-// determines if window[check] can be reordered into window[1] to make a pair with window [0] for simultaneous pipeline entering
-bool FetchStage::registerNameMatch(int check)
+// determines if window[i] can be reordered into window[1] to make a pair with window [0] to enter the pipeline simultaneously
+bool FetchStage::registerNameMatch(int i)
 {
     // function returns true if a hazard is found
     bool flag = false;
@@ -46,17 +46,17 @@ bool FetchStage::registerNameMatch(int check)
     if ((window[0].opcodeString == "end") || (window[0].opcodeString == "NOP"))
         return true;
     
-    //    if (window[check].rd == window[0].rd) flag = true; // WAW hazard (If the loop goes until i <= check), then this instruction is redundant
+    //    if (window[i].rd == window[0].rd) flag = true; // WAW hazard (If the loop goes until j <= i), then this instruction is redundant
     
     // should be comparing only down to window[1]?
-    // Compare window[check] to previous instructions window[0] to window [check-1]
-    for (int i = 1; i <= check; i++) {
+    // Compare window[i] to previous instructions window[0] to window [i-1]
+    for (int j = i - 1; j >= 1; j--) {
         
-        if ((window[check].rd == window[check-i].rd) // WAW hazard
-            || (window[check].rs == window[check-i].rd) // RAW hazard
-            || (window[check].rt == window[check-i].rd) // RAW hazard (isn't rt the destination for certain instructions?)
-            || (((window[check].rd == window[check-i].rt) || (window[check].rd == window[check-i].rs)) // WAR hazard
-                && ((check-i) > 2) // No WAR hazard after reordering if earlier instruction (at check-i) reads before the later instruction (at check) updates
+        if ((window[i].rd == window[j].rd) // WAW hazard
+            || (window[i].rs == window[j].rd) // RAW hazard
+            || (window[i].rt == window[j].rd) // RAW hazard (isn't rt the destination for certain instructions?)
+            || (((window[i].rd == window[j].rt) || (window[i].rd == window[j].rs)) // WAR hazard
+                && ((j) > 2) // No WAR hazard after reordering if earlier instruction (at j) reads before the later instruction (at i) updates
                 )) {
                 
                 flag = true;
