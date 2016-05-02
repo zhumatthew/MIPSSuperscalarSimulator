@@ -37,8 +37,6 @@ void Simulator::process() {
     }
 }
 
-// Potentially allows the user to 'press enter' to run the entire simulation or 'press space' to run one step at a time
-
 void Simulator::stepProcess() {
     
     cout << string(OUTPUT_WIDTH, '-') << endl;
@@ -59,7 +57,7 @@ void Simulator::stepProcess() {
         // Temporary storage of instruction for forwarding to this cycle's execution stage
         tempInstrList = memoryStage.currentInstructionList;
         
-        // Is the memoryStage's instructions wiped? This leads to the process of memoryStage to return immediately without performing any functions. Then, rs and rt of the instructions in the execute stage are forwarded from these "NOP" instructions and tempInstrList is never used.
+        // Is the memoryStage's instructions wiped? This leads to the process of memoryStage to return immediately without performing any functions. Then, rs and rt of the instructions in the execute stage are forwarded from these "NOP" instructions and tempInstrList is not used.
         
         memoryStage.currentInstructionList[0] = SimulatedInstruction();
         memoryStage.currentInstructionList[1] = SimulatedInstruction();
@@ -107,11 +105,9 @@ void Simulator::stepProcess() {
 
     cout << string(OUTPUT_WIDTH, '-') << endl;
     
-    // If a fetched instruction is a branch, then the instructions in the fetch stage and the decode stage (which passed through the fetch stage in the last cycle) need to be stored in tempHazardList.
-    if (fetchStage.currentInstructionList.front().opcode == opcode_bgtz
-        || fetchStage.currentInstructionList.front().opcode == opcode_blez
-        || fetchStage.currentInstructionList.front().opcode == opcode_beq
-        || fetchStage.currentInstructionList.front().opcode == opcode_j) {
+    // If a fetched instruction is a branch, then the instructions in the fetch stage and the decode stage need to be stored in tempHazardList.
+    
+    if (InstructionType::isBranch(fetchStage.currentInstructionList.front().opcode)) {
             tempHazardList[0] = decodeStage.currentInstructionList[0];
             tempHazardList[1] = decodeStage.currentInstructionList[1];
             tempHazardList[2] = fetchStage.currentInstructionList[0];

@@ -72,7 +72,7 @@ bool FetchStage::registerNameMatch(int check)
 
 bool FetchStage::reorder(vector<SimulatedInstruction>& simulatedInstructionList)
 {
-	if (window[0].opcodeString == "bgtz" || window[0].opcodeString == "blez" || window[0].opcodeString == "beq" || window[0].opcodeString == "j" // two branch instructions can only enter pipeline with a depth of two (not a single clock cycle) Only a single branch may enter a pipeline for a single cycle. Another condition is false prediction. (pipeline flash cannot be implemented correctly?) (pipeline flush?)
+    if (InstructionType::isBranch(window[0].opcode) // Only a single branch may enter a pipeline each cycle.  (Pipeline flush cannot be implemented correctly for a false prediction).
         || window[0].opcodeString == "end" || window[0].opcodeString == "NOP")
 		return false; // window[0] needs to enter the pipeline alone
 	if ((window[1].rs != window[0].rd) && (window[1].rt != window[0].rd) && (window[1].opcodeString != "end") && (window[1].opcodeString != "NOP")) {
@@ -81,7 +81,7 @@ bool FetchStage::reorder(vector<SimulatedInstruction>& simulatedInstructionList)
 
     // If window[0] can potentially be paired, but the window[1] depends on window[0]
 	for (int i = 2; i < windowTail; i++) {
-		if (window[i].opcodeString == "bgtz" || window[i].opcodeString == "blez" || window[i].opcodeString == "beq" || window[i].opcodeString == "j" || window[i].opcodeString == "end" || window[i].opcodeString == "NOP") // cannot be reordered if it is one of these instructions
+        if (InstructionType::isBranch(window[i].opcode) || window[i].opcodeString == "end" || window[i].opcodeString == "NOP") // cannot be reordered if instruction is a branch or NOP
 			return false;
 		if (!registerNameMatch(i)) {
 			window[i].reordered = true; // set reordered true for the instruction in the window to prevent it from being the source for forwarding

@@ -47,7 +47,7 @@ public:
     vector<SimulatedInstruction> tempInstrList;
     vector<SimulatedInstruction> hazardList, tempHazardList;
     
-    // This flag is set at the execution stage of a conditional branch instruction for a mispredicted branch. At the next cycle, the decision of whether or not bubbles will be inserted will be based on this flag.
+    // This flag is set at the execution stage for a conditional branch instruction if a branch is mispredicted. In the next cycle, the decision of whether or not instructions in DE or EX are NOPed is based on this flag
     bool branchMisprediction;
     
     void printFinalOutput();

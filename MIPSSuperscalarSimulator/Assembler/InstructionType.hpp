@@ -26,10 +26,11 @@ class InstructionType {
 // static members??
     
 public:
-	InstrType instrTypeDefine(string strOpcode);
-	bool isLabel(string strOpcode);
-	Opcode operationCodeDefine(string str, InstrType instrType);
-	Funct functDefine(string str, InstrType instrType);
+	static InstrType instrTypeDefine(string strOpcode);
+    static bool isBranch(Opcode opcode);
+	static bool isLabel(string strOpcode);
+	static Opcode operationCodeDefine(string str, InstrType instrType);
+	static Funct functDefine(string str, InstrType instrType);
 //    bool isBranch() { return opcode == opcode_j || opcode == opcode_beq }
     
 };

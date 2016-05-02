@@ -59,9 +59,7 @@ int main(int argc, const char * argv[]) {
 	}
 
     // Inserts an end instruction followed by 3 'NOPs' to terminate the instruction list
-    // An infinite loop can be used to simulate the end of the instruction list
-    // end: j end
-    // Alternatively, an instruction such as "end: NOP" aka "end: sll r0, r0, 0" may indicate the end
+    // An end NOP instruction is used to indicate the end of the instruction list
     
     SimulatedInstruction end = SimulatedInstruction();
     end.originalString = "end";
@@ -77,14 +75,15 @@ int main(int argc, const char * argv[]) {
     
     cout << "Press enter to run the entire simulation without pauses" << endl;
     cout << "Or press space to step through the simulation" << endl;
+    
     BufferToggle bt;
+    
     while (simulator.memoryStage.currentInstructionList.front().originalString != "end") {
+        
         bt.off();
         char input = getchar();
         bt.on();
 
-//        cin >> noskipws >> input;
-//        cin.get(input);
         if (input == ' ') {
             cout << endl;
             simulator.stepProcess();

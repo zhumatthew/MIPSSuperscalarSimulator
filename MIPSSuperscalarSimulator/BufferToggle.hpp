@@ -27,8 +27,7 @@ public:
      * Disable buffered input
      */
     
-    void off(void)
-    {
+    void off() {
         tcgetattr(STDIN_FILENO, &t); // retrieve the current terminal I/O structure
         t.c_lflag &= ~ICANON; // Manipulate the flag bits
         tcsetattr(STDIN_FILENO, TCSANOW, &t); // Set the new structure
@@ -38,8 +37,7 @@ public:
      * Enable buffered input
      */
     
-    void on(void)
-    {
+    void on() {
         tcgetattr(STDIN_FILENO, &t);
         t.c_lflag |= ICANON;
         tcsetattr(STDIN_FILENO, TCSANOW, &t);

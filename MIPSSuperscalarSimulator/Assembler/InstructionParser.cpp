@@ -63,7 +63,7 @@ Opcode InstructionParser::parseOpcode(InstrType instrType) {
     string operation = "";
     operation = separatedLine.front();
     
-    return InstructionType().operationCodeDefine(operation, instrType);
+    return InstructionType::operationCodeDefine(operation, instrType);
 }
 
 int InstructionParser::parseRs(InstrType instrType) {
@@ -194,7 +194,7 @@ int InstructionParser::parseRd(InstrType instrType) {
 Funct InstructionParser::parseFunct(InstrType instrType) {
     Funct funct = funct_zero;
     if (instrType == RType) {
-        funct = InstructionType().functDefine(separatedLine[0], instrType);
+        funct = InstructionType::functDefine(separatedLine[0], instrType);
     }
     return funct;
 }

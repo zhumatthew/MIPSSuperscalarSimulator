@@ -16,7 +16,7 @@ using namespace std;
 Instruction::Instruction(vector<string> separatedLine, InstrType type, vector<LabelInstruction> labelInstructionList) : instrType(type), labelInstructionList(labelInstructionList), funct(funct_zero), shamt(0) {
 
 	if (instrType == Label) {
-		instrType = InstructionType().instrTypeDefine(separatedLine[1]);
+        instrType = InstructionType::instrTypeDefine(separatedLine[1]);
 		separatedLine = removeLabel(separatedLine);
 	}
     

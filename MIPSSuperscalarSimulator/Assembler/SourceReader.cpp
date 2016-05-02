@@ -54,9 +54,7 @@ void SourceReader::findLabelAddresses() {
 			InstructionParser parser(line);
 			string strOpcode = parser.splitLine().front();
 
-			InstructionType type;
-
-			if (type.isLabel(strOpcode)) {
+            if (InstructionType::isLabel(strOpcode)) {
 				LabelInstruction label(strOpcode, lineNumber);
 				labelInstructionList.push_back(label);
 			}
@@ -81,8 +79,7 @@ void SourceReader::constructInstructionList() {
 			string strOpcode = parser.splitLine().front();
 			vector<string> separatedLine = parser.splitLine();
 
-			InstructionType type;
-			InstrType instrType = type.instrTypeDefine(strOpcode);
+            InstrType instrType = InstructionType::instrTypeDefine(strOpcode);
 			Instruction instruction(separatedLine, instrType, labelInstructionList);
 			instruction.originalString = line;
 
