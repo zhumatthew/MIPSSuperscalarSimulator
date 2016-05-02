@@ -101,8 +101,7 @@ void FetchStage::clear_reordered(vector<SimulatedInstruction>& simulatedInstruct
 }
 
 
-// rename savedPC to branch target?
-void FetchStage::process(vector<SimulatedInstruction>& simulatedInstructionList, int lastStall, bool branchMisprediction, int savedPC)
+void FetchStage::process(vector<SimulatedInstruction>& simulatedInstructionList, int lastStall, bool branchMisprediction, int branchTarget)
 {
 	bool pairwise;
 	int lastPC = programCounter;
@@ -135,9 +134,8 @@ void FetchStage::process(vector<SimulatedInstruction>& simulatedInstructionList,
 		clear_reordered(simulatedInstructionList, programCounter, lastPC); // Clear all the instructions that have entered the pipeline this cycle so that when the program counter branches upper address, the instructions can be executed again. If an instruction's reordered flag is set, it cannot enter the instruction window.
 
         // Predict not taken policy is implemented, but the branch was taken
-        // savedPC is the branch target address
 		if (branchMisprediction) { // The five stages are processed in reverse order, so the changed PC must not be used by this cycle's fetch stage.  To ensure this, the program counter is only updated after actual issuing is finished using the old program counter.
-			int updatedPC = savedPC;
+			int updatedPC = branchTarget;
 			upBranch = upBranch + (programCounter - updatedPC);
 			simulatedInstructionList[programCounter].reordered = false;
 			programCounter = updatedPC;

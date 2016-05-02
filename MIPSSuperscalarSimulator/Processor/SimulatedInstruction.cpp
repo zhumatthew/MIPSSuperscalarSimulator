@@ -11,7 +11,6 @@
 
 using namespace std;
 
-
 // The MIPS ISA does not include an explicit NOP (null operation) instruction
 // The default constructor constructs a NOP, which is interpreted by the CPU as sll $0, $0, 0
 SimulatedInstruction::SimulatedInstruction() : originalString("NOP"), opcode(opcode_nop), rd(0), rs(0), rt(0), rdValue(0), rtValue(0), rsValue(0), immediate(0), funct(funct_sll), shamt(0), opcodeString("NOP"), currentForward(Forward()), effectiveAddress(0), branchCondition(false), reordered(false), instructionLocation(0), loopCount(0) {}

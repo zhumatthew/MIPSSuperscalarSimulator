@@ -123,7 +123,7 @@ void DecodeStage::check(vector<SimulatedInstruction> const& hazardList, int last
                 // If the rd of the potential hazard (previous) instruction is this instruction's source register rs or rt and this instruction is SW and the hazard instruction is LW
                 // in case these conditions are true, once this instruction (which is a SW) passes the execute stage, it is NOP'ed before it reaches the memory stage, because what it would have wrote into memory is wrong, since it did not get its updated rt or rs value from the previous LW instruction.
                 
-                // typo??? the innermost if statement may need to be checked against rtForward not rsForward
+                // the innermost if statement may need to be checked against rtForward not rsForward
                 if (instruction.currentForward.rsForward) {
                     int index = instruction.currentForward.rsForwardDepth + 2;
                     if (hazardList[index].opcodeString == "lw") {
@@ -196,5 +196,3 @@ void DecodeStage::check(vector<SimulatedInstruction> const& hazardList, int last
 }
 
 // In consideration of forwarding, only the EX stage needs to implement forwarding by first checking the rsForward and rtForward boolean values. The RAW hazard boolean must be false for forwarding to occur, otherwise forwarding must be performed on a cycle when the boolean is false. When performing forwarding, rs, rt, or both rs and rt must be forwarded from the first instruction of the MEM stage (currentInstructionList[0]).
-
-// Rollover appears to refer to moving instructions from one stage to the next.

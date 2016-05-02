@@ -63,7 +63,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "../../Benchmarks/matrix(superscalar).asm"
+            argument = "../../Benchmarks/benchmark_6.asm"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

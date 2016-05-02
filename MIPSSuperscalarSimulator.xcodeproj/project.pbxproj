@@ -53,12 +53,10 @@
 		B35560461CB746A30043584B /* LabelInstruction.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = LabelInstruction.hpp; path = Assembler/LabelInstruction.hpp; sourceTree = "<group>"; };
 		B36AB3F21CB88345009C3275 /* Forward.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Forward.cpp; path = Processor/Forward.cpp; sourceTree = "<group>"; };
 		B36AB3F31CB88345009C3275 /* Forward.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Forward.hpp; path = Processor/Forward.hpp; sourceTree = "<group>"; };
-		B37444281CD589A5003D0919 /* matrix(superscalar).asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = "matrix(superscalar).asm"; sourceTree = "<group>"; };
-		B37444291CD589A5003D0919 /* unrolling.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = unrolling.asm; sourceTree = "<group>"; };
-		B374442E1CD5A296003D0919 /* mem-to-ex.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = "mem-to-ex.asm"; sourceTree = "<group>"; };
-		B37444301CD5A38A003D0919 /* wb-to-ex.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = "wb-to-ex.asm"; sourceTree = "<group>"; };
+		B37444281CD589A5003D0919 /* benchmark_2.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = benchmark_2.asm; sourceTree = "<group>"; };
+		B37444291CD589A5003D0919 /* benchmark_6.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = benchmark_6.asm; sourceTree = "<group>"; };
 		B37444321CD5D312003D0919 /* BufferToggle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BufferToggle.hpp; sourceTree = "<group>"; };
-		B37444331CD5E385003D0919 /* benchmark1.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = benchmark1.asm; sourceTree = "<group>"; };
+		B37444331CD5E385003D0919 /* benchmark_1.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = benchmark_1.asm; sourceTree = "<group>"; };
 		B3E8DC4E1CBC5BAE00E99EDD /* InstructionParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InstructionParser.cpp; path = Assembler/InstructionParser.cpp; sourceTree = "<group>"; };
 		B3E8DC4F1CBC5BAF00E99EDD /* InstructionParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = InstructionParser.hpp; path = Assembler/InstructionParser.hpp; sourceTree = "<group>"; };
 		B3E8DC501CBC5BAF00E99EDD /* InstructionType.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InstructionType.cpp; path = Assembler/InstructionType.cpp; sourceTree = "<group>"; };
@@ -80,37 +78,9 @@
 		B3E8DC6C1CC1E73000E99EDD /* PipelineStage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = PipelineStage.hpp; path = Processor/PipelineStage.hpp; sourceTree = "<group>"; };
 		B3E8DC6D1CC1E73000E99EDD /* WriteBackStage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WriteBackStage.cpp; path = Processor/WriteBackStage.cpp; sourceTree = "<group>"; };
 		B3E8DC6E1CC1E73000E99EDD /* WriteBackStage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = WriteBackStage.hpp; path = Processor/WriteBackStage.hpp; sourceTree = "<group>"; };
-		B3E8DC761CC2B3DC00E99EDD /* add_reg_1.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = add_reg_1.asm; sourceTree = "<group>"; };
-		B3E8DC771CC2B3DC00E99EDD /* alu_reg_1.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = alu_reg_1.asm; sourceTree = "<group>"; };
-		B3E8DC781CC2B3DC00E99EDD /* alu_reg_2.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = alu_reg_2.asm; sourceTree = "<group>"; };
-		B3E8DC791CC2B3DC00E99EDD /* alu_reg_3.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = alu_reg_3.asm; sourceTree = "<group>"; };
-		B3E8DC7A1CC2B3DC00E99EDD /* array.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = array.asm; sourceTree = "<group>"; };
-		B3E8DC7B1CC2B3DC00E99EDD /* big_test.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = big_test.asm; sourceTree = "<group>"; };
-		B3E8DC7C1CC2B3DC00E99EDD /* branch_1.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = branch_1.asm; sourceTree = "<group>"; };
-		B3E8DC7D1CC2B3DC00E99EDD /* branch_2.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = branch_2.asm; sourceTree = "<group>"; };
-		B3E8DC7E1CC2B3DC00E99EDD /* ex-mem_to_ex_1.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = "ex-mem_to_ex_1.asm"; sourceTree = "<group>"; };
-		B3E8DC7F1CC2B3DC00E99EDD /* ex-mem_to_ex_2.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = "ex-mem_to_ex_2.asm"; sourceTree = "<group>"; };
-		B3E8DC801CC2B3DC00E99EDD /* ex-mem_to_ex_3.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = "ex-mem_to_ex_3.asm"; sourceTree = "<group>"; };
-		B3E8DC811CC2B3DC00E99EDD /* ld_addr_ex-mem_ex.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = "ld_addr_ex-mem_ex.asm"; sourceTree = "<group>"; };
-		B3E8DC821CC2B3DC00E99EDD /* ld_addr_ex-wb_ex.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = "ld_addr_ex-wb_ex.asm"; sourceTree = "<group>"; };
-		B3E8DC831CC2B3DC00E99EDD /* ld_addr_ex-wb_mem.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = "ld_addr_ex-wb_mem.asm"; sourceTree = "<group>"; };
-		B3E8DC841CC2B3DC00E99EDD /* load_delay_1.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = load_delay_1.asm; sourceTree = "<group>"; };
-		B3E8DC851CC2B3DC00E99EDD /* load_delay_2.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = load_delay_2.asm; sourceTree = "<group>"; };
-		B3E8DC861CC2B3DC00E99EDD /* load_delay_3.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = load_delay_3.asm; sourceTree = "<group>"; };
-		B3E8DC871CC2B3DC00E99EDD /* load_reg_1.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = load_reg_1.asm; sourceTree = "<group>"; };
-		B3E8DC881CC2B3DC00E99EDD /* load_reg_2.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = load_reg_2.asm; sourceTree = "<group>"; };
-		B3E8DC891CC2B3DC00E99EDD /* load_reg_3.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = load_reg_3.asm; sourceTree = "<group>"; };
-		B3E8DC8B1CC2B3DC00E99EDD /* mem-wb_to_ex1.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = "mem-wb_to_ex1.asm"; sourceTree = "<group>"; };
-		B3E8DC8C1CC2B3DC00E99EDD /* mem-wb_to_ex2.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = "mem-wb_to_ex2.asm"; sourceTree = "<group>"; };
-		B3E8DC8D1CC2B3DC00E99EDD /* mem-wb_to_ex3.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = "mem-wb_to_ex3.asm"; sourceTree = "<group>"; };
-		B3E8DC8E1CC2B3DC00E99EDD /* mem-wb_to_ex4.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = "mem-wb_to_ex4.asm"; sourceTree = "<group>"; };
-		B3E8DC8F1CC2B3DC00E99EDD /* mem-wb_to_ex5.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = "mem-wb_to_ex5.asm"; sourceTree = "<group>"; };
-		B3E8DC901CC2B3DC00E99EDD /* mem-wb_to_ex6.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = "mem-wb_to_ex6.asm"; sourceTree = "<group>"; };
-		B3E8DC911CC2B3DC00E99EDD /* mem_move.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = mem_move.asm; sourceTree = "<group>"; };
-		B3E8DC921CC2B3DC00E99EDD /* mult.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = mult.asm; sourceTree = "<group>"; };
-		B3E8DC931CC2B3DC00E99EDD /* st_addr_ex-mem_ex.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = "st_addr_ex-mem_ex.asm"; sourceTree = "<group>"; };
-		B3E8DC941CC2B3DC00E99EDD /* st_addr_mem-wb_ex.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = "st_addr_mem-wb_ex.asm"; sourceTree = "<group>"; };
-		B3E8DC951CC2B3DC00E99EDD /* st_mem-wb_mem.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = "st_mem-wb_mem.asm"; sourceTree = "<group>"; };
+		B3E8DC7A1CC2B3DC00E99EDD /* benchmark_3.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = benchmark_3.asm; sourceTree = "<group>"; };
+		B3E8DC911CC2B3DC00E99EDD /* benchmark_4.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = benchmark_4.asm; sourceTree = "<group>"; };
+		B3E8DC921CC2B3DC00E99EDD /* benchmark_5.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = benchmark_5.asm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,42 +180,12 @@
 		B3E8DC751CC2B3DC00E99EDD /* Benchmarks */ = {
 			isa = PBXGroup;
 			children = (
-				B37444301CD5A38A003D0919 /* wb-to-ex.asm */,
-				B3E8DC761CC2B3DC00E99EDD /* add_reg_1.asm */,
-				B3E8DC771CC2B3DC00E99EDD /* alu_reg_1.asm */,
-				B3E8DC781CC2B3DC00E99EDD /* alu_reg_2.asm */,
-				B3E8DC791CC2B3DC00E99EDD /* alu_reg_3.asm */,
-				B3E8DC7A1CC2B3DC00E99EDD /* array.asm */,
-				B37444331CD5E385003D0919 /* benchmark1.asm */,
-				B3E8DC7B1CC2B3DC00E99EDD /* big_test.asm */,
-				B3E8DC7C1CC2B3DC00E99EDD /* branch_1.asm */,
-				B3E8DC7D1CC2B3DC00E99EDD /* branch_2.asm */,
-				B3E8DC7E1CC2B3DC00E99EDD /* ex-mem_to_ex_1.asm */,
-				B3E8DC7F1CC2B3DC00E99EDD /* ex-mem_to_ex_2.asm */,
-				B3E8DC801CC2B3DC00E99EDD /* ex-mem_to_ex_3.asm */,
-				B3E8DC811CC2B3DC00E99EDD /* ld_addr_ex-mem_ex.asm */,
-				B3E8DC821CC2B3DC00E99EDD /* ld_addr_ex-wb_ex.asm */,
-				B3E8DC831CC2B3DC00E99EDD /* ld_addr_ex-wb_mem.asm */,
-				B3E8DC841CC2B3DC00E99EDD /* load_delay_1.asm */,
-				B3E8DC851CC2B3DC00E99EDD /* load_delay_2.asm */,
-				B3E8DC861CC2B3DC00E99EDD /* load_delay_3.asm */,
-				B3E8DC871CC2B3DC00E99EDD /* load_reg_1.asm */,
-				B3E8DC881CC2B3DC00E99EDD /* load_reg_2.asm */,
-				B3E8DC891CC2B3DC00E99EDD /* load_reg_3.asm */,
-				B37444281CD589A5003D0919 /* matrix(superscalar).asm */,
-				B3E8DC8B1CC2B3DC00E99EDD /* mem-wb_to_ex1.asm */,
-				B3E8DC8C1CC2B3DC00E99EDD /* mem-wb_to_ex2.asm */,
-				B374442E1CD5A296003D0919 /* mem-to-ex.asm */,
-				B3E8DC8D1CC2B3DC00E99EDD /* mem-wb_to_ex3.asm */,
-				B3E8DC8E1CC2B3DC00E99EDD /* mem-wb_to_ex4.asm */,
-				B3E8DC8F1CC2B3DC00E99EDD /* mem-wb_to_ex5.asm */,
-				B3E8DC901CC2B3DC00E99EDD /* mem-wb_to_ex6.asm */,
-				B3E8DC911CC2B3DC00E99EDD /* mem_move.asm */,
-				B3E8DC921CC2B3DC00E99EDD /* mult.asm */,
-				B3E8DC931CC2B3DC00E99EDD /* st_addr_ex-mem_ex.asm */,
-				B3E8DC941CC2B3DC00E99EDD /* st_addr_mem-wb_ex.asm */,
-				B3E8DC951CC2B3DC00E99EDD /* st_mem-wb_mem.asm */,
-				B37444291CD589A5003D0919 /* unrolling.asm */,
+				B37444331CD5E385003D0919 /* benchmark_1.asm */,
+				B37444281CD589A5003D0919 /* benchmark_2.asm */,
+				B3E8DC7A1CC2B3DC00E99EDD /* benchmark_3.asm */,
+				B3E8DC911CC2B3DC00E99EDD /* benchmark_4.asm */,
+				B3E8DC921CC2B3DC00E99EDD /* benchmark_5.asm */,
+				B37444291CD589A5003D0919 /* benchmark_6.asm */,
 			);
 			path = Benchmarks;
 			sourceTree = "<group>";

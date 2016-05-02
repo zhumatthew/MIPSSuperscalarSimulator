@@ -18,12 +18,10 @@ class ExecuteStage : public PipelineStage {
 
 public:
 	void process(DecodeStage currentDecode, MemoryStage currentMemory, RegisterFile const& regFile, int lastStall, bool& branchMisprediction);
-	int getSavedProgramCounter();
+	int getBranchTarget();
 
 private:
-    // other stages have public fields with direct access, but this stage providers a getter
-    // rename branch target?
-	int savedProgramCounter;
+	int branchTarget;
 };
 
 #endif /* ExecuteStage_hpp */

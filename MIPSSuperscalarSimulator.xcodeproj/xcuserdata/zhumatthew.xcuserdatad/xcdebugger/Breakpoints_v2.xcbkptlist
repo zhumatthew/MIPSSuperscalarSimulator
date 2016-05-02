@@ -872,5 +872,245 @@
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MIPSSuperscalarSimulator/Processor/WriteBackStage.cpp"
+            timestampString = "483840731.414772"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "WriteBackStage::process(RegisterFile&amp; regFile, int&amp; increment)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MIPSSuperscalarSimulator/Processor/MemoryStage.cpp"
+            timestampString = "483841259.588411"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "MemoryStage::process(MainMemory&amp; mainMemory, RegisterFile&amp; regfile)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MIPSSuperscalarSimulator/Processor/ExecuteStage.cpp"
+            timestampString = "483840937.369064"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory, RegisterFile const&amp; regFile, int lastStall, bool&amp; branchMisprediction)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MIPSSuperscalarSimulator/Processor/WriteBackStage.cpp"
+            timestampString = "483853297.954584"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "WriteBackStage::process(RegisterFile&amp; regFile, int&amp; increment)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MIPSSuperscalarSimulator/Processor/MemoryStage.cpp"
+            timestampString = "483853988.105291"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "MemoryStage::process(MainMemory&amp; mainMemory, RegisterFile&amp; regfile)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MIPSSuperscalarSimulator/Processor/ExecuteStage.cpp"
+            timestampString = "483853978.158834"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory, RegisterFile const&amp; regFile, int lastStall, bool&amp; branchMisprediction)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MIPSSuperscalarSimulator/Processor/DecodeStage.cpp"
+            timestampString = "483853982.178104"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "DecodeStage::process(RegisterFile const&amp; regFile, vector&lt;SimulatedInstruction&gt; const&amp; hazardList, int lastStall)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MIPSSuperscalarSimulator/Processor/MemoryStage.cpp"
+            timestampString = "483854097.096885"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "MemoryStage::process(MainMemory&amp; mainMemory, RegisterFile&amp; regfile)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MemoryStage::process(MainMemory&amp;, RegisterFile&amp;)"
+                  moduleName = "MIPSSuperscalarSimulator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/Processor/MemoryStage.cpp"
+                  timestampString = "483856412.777616"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "50">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MemoryStage::process(MainMemory&amp;, RegisterFile&amp;)"
+                  moduleName = "MIPSSuperscalarSimulator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zhumatthew/Documents/Xcode/MIPSSuperscalarSimulator/MIPSSuperscalarSimulator/Processor/MemoryStage.cpp"
+                  timestampString = "483856412.777846"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "400">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MIPSSuperscalarSimulator/Processor/ExecuteStage.cpp"
+            timestampString = "483854693.406393"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory, RegisterFile const&amp; regFile, int lastStall, bool&amp; branchMisprediction)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MIPSSuperscalarSimulator/Processor/DecodeStage.cpp"
+            timestampString = "483854875.687167"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "DecodeStage::process(RegisterFile const&amp; regFile, vector&lt;SimulatedInstruction&gt; const&amp; hazardList, int lastStall)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MIPSSuperscalarSimulator/Processor/ExecuteStage.cpp"
+            timestampString = "483854883.826653"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory, RegisterFile const&amp; regFile, int lastStall, bool&amp; branchMisprediction)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MIPSSuperscalarSimulator/Processor/ExecuteStage.cpp"
+            timestampString = "483854886.909213"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory, RegisterFile const&amp; regFile, int lastStall, bool&amp; branchMisprediction)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MIPSSuperscalarSimulator/Processor/WriteBackStage.cpp"
+            timestampString = "483856326.099176"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "WriteBackStage::process(RegisterFile&amp; regFile, int&amp; increment)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

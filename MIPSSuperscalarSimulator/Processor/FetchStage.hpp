@@ -16,14 +16,14 @@ class FetchStage : public PipelineStage {
 
 public:
 	FetchStage(int instructionListSize);
-    void process(vector<SimulatedInstruction>& simulatedInstructionList, int lastStall, bool branchMisprediction, int savedPC);
+    void process(vector<SimulatedInstruction>& simulatedInstructionList, int lastStall, bool branchMisprediction, int branchTarget);
     
 private:
     int upBranch;
-    int windowTail; // number of instructions in the window
-    int instructionListSize; // number of instructions in the benchmark
+    int windowTail; // dynamic number of instructions in the window
+    int instructionListSize; // number of instructions in the entire benchmark
     
-    // Before IF is implemented, the window contains all instructions that can potentially be reordered. After the IF is implemented, the window contains all reordered instructions. Instructions enter ID stage according to the order of instructions in the window
+    // Before IF is implemented, the window contains all instructions that can potentially be reordered. After the IF is implemented, the window contains reordered instructions. Instructions enter ID stage according to the order of instructions in the window
     vector<SimulatedInstruction> window;
 
     // window/check/count?

@@ -18,10 +18,11 @@ void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory,
     // instruction must be a reference since rdValue is written to
     for (SimulatedInstruction& instruction: currentInstructionList) {
         
-        // No pipeline registers
-        // Forwarding is accomplished by simply reading registers because the writeback stage is processed before the decode stage (reverse order from WB to IF)
-        // Delayed forward means that the instruction's read of the register is delayed until
-        // the instruction that passed through the pipeline two cycles ago has written back to the registers
+        // Simulator does not include pipeline registers
+        // Forwarding from MEM to EX is accomplished by simply reading registers because the writeback stage is processed before the decode stage (reverse order from WB to IF)
+        // Delayed forward indicates that the instruction's read of the register is delayed until
+        // the execute stage (after the instruction two cycles ahead has already written to registers)
+        
         // MEM to EX (delayed)
         if (instruction.currentForward.rsDelayedForward) {
             instruction.rsValue = regFile.getValue(instruction.rs);
@@ -34,11 +35,11 @@ void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory,
         
         // At the second cycle since the RAW hazard was detected (lastStall == 2), a NOP needs to be inserted into the MEM stage, but this can lead to the unsuccessful forwarding with an origin stage of MEM since the information in MEM is discarded before it is forwarded to the execution stage of the same cycle
         
-        // Implement forwarding with MEM as source for forwarding
-        // Since MEM is processed before EX, the rdValue of the instruction in the memory stage may be the result of a "lw" instruction (is this accounted for by hazards?)
+        // Implement forwarding with instructions in MEM as source for forwarding
+        // Since MEM is processed before EX, the rdValue of the instruction in the memory stage may be the result of a "lw" instruction (accounted for by hazards?)
         // Otherwise, the rdValue of the instructions in MEM will be the result of the preceding calculations of the EX stage
         
-        // Instructions that passed through the pipeline one cycle ago need to be forwarded
+        // Instructions that are one cycle ahead need to be forwarded
         // EX to EX
         if (instruction.currentForward.rsForward) {
             int depthIndex = instruction.currentForward.rsForwardDepth;
@@ -52,7 +53,7 @@ void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory,
         }
         
         // Newly loaded, updated register value is required for the operation, so the register file needs to be accessed again. Instruction that has passed through the pipeline two cycles ago has already written back to the registers after the writeback stage for this cycle has been processed.
-        // Implement stage sequence is from WB to IF
+        // Stages are processed from WB to IF
         
         if (lastStall == 2) {
             if (instruction.currentForward.rsForward)
@@ -91,7 +92,7 @@ void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory,
                 break;
             case opcode_lw:
             case opcode_sw:
-                // immediate corresponds to offset for LW/SW instructions
+                // immediate is the address offset for LW/SW instructions
                 // Branch instructions involving effective address calculations should consider at which stage condition evaluation, effective address calculation, and program counter changing should be completed.
                 instruction.effectiveAddress = instruction.rsValue + instruction.immediate;
                 break;
@@ -125,7 +126,7 @@ void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory,
             // Save the PC. just for convenience, actually the target address will be updated to PC (all the five stages share this
             // static field) in this cycle, but every instruction indicated by PC won't be fetched until next cycle's IF stage
             // The immediate value can be the absolute address specified by a label
-            savedProgramCounter = instruction.immediate;
+            branchTarget = instruction.immediate;
             branchMisprediction = true; // This flag is set so that a bubble is inserted into EX and ID stages in the next cycle
             instruction.branchCondition = false; // Every time after this flag is used, it should be reset to false so that the next time it can be set or reset based on the outcome of the condition evaluation.
         }
@@ -136,6 +137,6 @@ void ExecuteStage::process(DecodeStage currentDecode, MemoryStage currentMemory,
     }
 }
 
-int ExecuteStage::getSavedProgramCounter() {
-    return savedProgramCounter;
+int ExecuteStage::getBranchTarget() {
+    return branchTarget;
 }

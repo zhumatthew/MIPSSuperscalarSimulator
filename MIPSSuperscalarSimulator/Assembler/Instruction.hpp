@@ -30,7 +30,6 @@ public:
     // 5-bit shift amount
     int shamt;
     
-    
     InstrType instrType;
     string opcodeString;
     void handleInstruction(vector<string> separatedLine);
@@ -38,9 +37,7 @@ public:
 private:
     vector<LabelInstruction> labelInstructionList;
     vector<string> removeLabel(vector<string> separatedLine);
-
     
-    // Instruction(string str);
 };
 
 #endif /* Instruction_hpp */

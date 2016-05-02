@@ -11,13 +11,6 @@
 
 #include "InstructionParser.hpp"
 
-// R-type instructions (register?)
-// I-type instructions (immediate?)
-// Load/store word instructions/branch comparison
-// Branch instructions with only immediate
-// branch instructions with rs/immediate
-// label instruction
-
 using namespace std;
 
 InstructionParser::InstructionParser(string line) : line(line) {}
@@ -216,7 +209,7 @@ int InstructionParser::parseShamt(InstrType instrType) {
     return shamt;
 }
 
-//
+// Parse immediate
 int InstructionParser::parseImmediate(InstrType instrType) {
     
     int immediate = 0;

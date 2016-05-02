@@ -18,7 +18,6 @@ class DecodeStage : public PipelineStage {
 
 public:
 	DecodeStage();
-    // SimulationInstruction instructionSaved;
     bool readAfterWriteHazard;
 
     void process(RegisterFile const& regFile, vector<SimulatedInstruction> const& hazardList, int lastStall);

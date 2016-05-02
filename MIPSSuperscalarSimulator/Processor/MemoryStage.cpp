@@ -15,7 +15,9 @@ void MemoryStage::process(MainMemory& mainMemory, RegisterFile& regfile) {
 
     for (SimulatedInstruction const& instruction: currentInstructionList) {
         if (instruction.effectiveAddress != 0) {
-            cout << "Mem[" << instruction.effectiveAddress << "] = " << regfile.getValue(instruction.rt) << endl;
+            if (instruction.opcode == opcode_sw) {
+                cout << "Mem[" << instruction.effectiveAddress << "] = " << instruction.rtValue << endl;
+            }
         }
     }
 
@@ -37,7 +39,10 @@ void MemoryStage::process(MainMemory& mainMemory, RegisterFile& regfile) {
     for (SimulatedInstruction const& instruction: currentInstructionList) {
         if (instruction.opcode == opcode_sw) {
             // GPR[rt] is placed in Mem[effectiveAddress]
-            mainMemory.setValue(regfile.getValue(instruction.rt), instruction.effectiveAddress);
+            mainMemory.setValue(instruction.rtValue, instruction.effectiveAddress);
+            
+            // This line allows for the register value to be updated underneath, but the original rtValue is correct
+//            mainMemory.setValue(regfile.getValue(instruction.rt), instruction.effectiveAddress);
         }
     }
     

@@ -11,28 +11,10 @@
 
 using namespace std;
 
-// R-type instructions (register)
-// I-type instructions (immediate)
-// Load/store word instructions/branch comparison     LW r21, 0(r30)       BEQ r1, r0, done
-// J-type Instruction   Branch instructions with only immediate     J begina
-// branch instructions with rs/immediate      BGEZ r30, endloopb      BGEZ r18, r0, Loop
-// label instruction        done ADDI r5, r0, 6
-
-// JAL is jump and link
-// SLLI is shift left logical immediate
-// SRLI is shift right logical immediate
-// R-type shift example is SLL $rd, $rt, shamt:  R[$rd] <- R[$rt] << shamt
-
-// I-type (opcode $rs, $rt, imm):
-// bgtz $rs, imm
-// blez $rs, imm
-// beq $rs, $rt, imm
-// lw $rt, imm($rs)
-// sw $rt, imm($rs)
-
-// J-type (opcode address):
-// j address
-// jal address
+// R-type instructions (Register) add $rd, $rs, $rt; sub $rd, $rs, $rt
+// I-type instructions (Immediate) bgtz $rs, imm; blez $rs, imm; beq $rs, $rt, imm; lw $rt, imm($rs)
+// J-type Instructions (Jump) j address; jal address
+// Label instructions
 
 InstrType InstructionType::instrTypeDefine(string opcode) {
     if (opcode == "add" || opcode == "sub" || opcode == "mult"|| opcode == "div" || opcode == "and" || opcode == "sll"|| opcode == "srl")
@@ -52,11 +34,6 @@ bool InstructionType::isLabel(string opcode) {
 	else
 		return false;
 }
-
-// case 0 is register-register basic arithmetic
-// all but case 0 involve immediates
-// case 5 involves labels
-
 
 // 6-bit operation code
 Opcode InstructionType::operationCodeDefine(string str, InstrType instrType) {

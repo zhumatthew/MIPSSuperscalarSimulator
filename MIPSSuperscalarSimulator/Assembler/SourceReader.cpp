@@ -38,7 +38,7 @@ string SourceReader::trim(string str) {
     return str.substr(beg, end - beg + 1);
 }
 
-// Finds addresses of labels for branch instruction targets
+// Finds addresses of labels for targets of branch instructions
 void SourceReader::findLabelAddresses() {
 	ifstream reader(getFilePath().c_str());
 	string line;

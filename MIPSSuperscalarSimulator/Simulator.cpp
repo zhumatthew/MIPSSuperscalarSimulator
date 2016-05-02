@@ -85,7 +85,7 @@ void Simulator::stepProcess() {
     
     cout << "WriteBack:" << writeBackStage.currentInstructionList[0].originalString << endl;
     cout << "WriteBack:" << writeBackStage.currentInstructionList[1].originalString << endl;
-    writeBackStage.process(registerFile, decodeStage, increment);
+    writeBackStage.process(registerFile, increment);
     
     cout << "Memory:" << memoryStage.currentInstructionList[0].originalString << endl;
     cout << "Memory:" << memoryStage.currentInstructionList[1].originalString << endl;
@@ -99,7 +99,7 @@ void Simulator::stepProcess() {
     cout << "Decode:" << decodeStage.currentInstructionList[1].originalString << endl;
     decodeStage.process(registerFile, hazardList, lastStall);
     
-    fetchStage.process(simulatedInstructionList, lastStall, branchMisprediction, executeStage.getSavedProgramCounter());
+    fetchStage.process(simulatedInstructionList, lastStall, branchMisprediction, executeStage.getBranchTarget());
     
     cout << "Fetch:" << fetchStage.currentInstructionList[0].originalString << endl;
     cout << "Fetch:" << fetchStage.currentInstructionList[1].originalString << endl;
