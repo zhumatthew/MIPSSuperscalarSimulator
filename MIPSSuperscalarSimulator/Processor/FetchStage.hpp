@@ -19,7 +19,7 @@ public:
     void process(vector<SimulatedInstruction>& simulatedInstructionList, int lastStall, bool branchMisprediction, int branchTarget);
     
 private:
-    int upBranch;
+    int addressOffset;
     int windowTail; // dynamic number of instructions in the window
     int instructionListSize; // number of instructions in the entire benchmark
     

@@ -19,9 +19,7 @@ public:
     bool rsForward; // Indicates whether or not rs needs to be forwarded
     bool rtForward; // Indicates whether or not rt needs to be forwarded
     bool rsDelayedForward;
-    bool rtDelayedForward; // Indicates this instruction has a data dependence with the ~second to last, or penultimate instruction~
-    
-    // Because there are no pipeline registers in this simulator, when the source register for forwarding is EX|MEM, this field is assigned a value of 4. This indicates that when forwarding, the data will be found in the current instruction of the write-back stage. The "SW" instruction is unique in that all other instructions only need to be forwarded at the EX stage and only have one register (rs or rt) to be forwarded. Since every cycle is processed in reverse order from WB to IF, the only possibility to be considered is forwarding from EX|MEM to EX.
+    bool rtDelayedForward; // Indicates this instruction has a data dependence on the ~second to last, or penultimate instruction~
 
     int rsForwardDepth;
     int rtForwardDepth;

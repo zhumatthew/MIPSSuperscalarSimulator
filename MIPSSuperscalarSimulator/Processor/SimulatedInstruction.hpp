@@ -17,8 +17,8 @@
 class SimulatedInstruction {
     
 public:
-	SimulatedInstruction(); // used for NOP instruction
-    SimulatedInstruction(Instruction instr); // used for instructions that are not NOP instructions
+	SimulatedInstruction(); // NOP instruction constructor
+    SimulatedInstruction(Instruction instr);
     
     string originalString;
     
@@ -32,20 +32,21 @@ public:
     
     Opcode opcode;
     Funct funct;
-    int immediate, shamt;
+    int immediate;
+    int shamt;
     
     // indicates the instruction location in the simulated instruction list
     int instructionLocation;
     
-    // this variable is equal to the instruction's index in the instruction list plus the total length of upper branch each instruction entered the pipeline and hazard list will have its own loopCount according to its original index in the instruction queue and its sequence in execution, which will be used to implement correct data forwarding involving reordered instructions
+    // this variable is to the sum of the instruction's index in the list and the cumulative address offset incurred from branching.
     int loopCount;
     
-    int effectiveAddress; // Temporarily store the effective address as it is generated in the EX stage and is used in the WB or MEM stage
+    int effectiveAddress;
     
     // The evaluated outcome of a conditional branch.
     bool branchCondition;
     
-    // Indicates whether this instruction has been reordered. If true, the instruction cannot be the source for data forwarding.
+    // Indicates whether or not this instruction has been reordered.
     bool reordered;
     
     Forward currentForward;

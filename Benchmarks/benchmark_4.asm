@@ -18,4 +18,3 @@ sw $6, 0($5)
 addi $4, $4, 1
 j move
 endmove: add $0, $0, $0
-

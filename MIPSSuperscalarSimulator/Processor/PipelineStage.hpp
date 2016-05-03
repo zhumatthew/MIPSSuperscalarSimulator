@@ -17,10 +17,7 @@ class PipelineStage {
 public:
 	PipelineStage();
 	vector<SimulatedInstruction> currentInstructionList;
-    
-    // static?
-    // index of instruction queue / instruction list
-    // index of instruction that is being fetched at this cycle
+    // index in the instruction queue for the instruction that is being fetched at this cycle
     int programCounter;
 
 private:

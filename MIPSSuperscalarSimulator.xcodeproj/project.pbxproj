@@ -57,6 +57,7 @@
 		B37444291CD589A5003D0919 /* benchmark_6.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = benchmark_6.asm; sourceTree = "<group>"; };
 		B37444321CD5D312003D0919 /* BufferToggle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BufferToggle.hpp; sourceTree = "<group>"; };
 		B37444331CD5E385003D0919 /* benchmark_1.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = benchmark_1.asm; sourceTree = "<group>"; };
+		B386E9831CD8504D00411A33 /* benchmark_7.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = benchmark_7.asm; sourceTree = "<group>"; };
 		B3E8DC4E1CBC5BAE00E99EDD /* InstructionParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InstructionParser.cpp; path = Assembler/InstructionParser.cpp; sourceTree = "<group>"; };
 		B3E8DC4F1CBC5BAF00E99EDD /* InstructionParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = InstructionParser.hpp; path = Assembler/InstructionParser.hpp; sourceTree = "<group>"; };
 		B3E8DC501CBC5BAF00E99EDD /* InstructionType.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InstructionType.cpp; path = Assembler/InstructionType.cpp; sourceTree = "<group>"; };
@@ -186,6 +187,7 @@
 				B3E8DC911CC2B3DC00E99EDD /* benchmark_4.asm */,
 				B3E8DC921CC2B3DC00E99EDD /* benchmark_5.asm */,
 				B37444291CD589A5003D0919 /* benchmark_6.asm */,
+				B386E9831CD8504D00411A33 /* benchmark_7.asm */,
 			);
 			path = Benchmarks;
 			sourceTree = "<group>";

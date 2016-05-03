@@ -35,13 +35,13 @@ void MemoryStage::process(MainMemory& mainMemory, RegisterFile& regfile) {
         }
     }
     
-    // Although instruction is not being modified here, it is still useful to use a reference since instruction does not need to be copied from currentInstructionList
+    // Although instruction is not being modified here, it is still useful to use a reference so that instruction does not need to be copied from currentInstructionList
     for (SimulatedInstruction const& instruction: currentInstructionList) {
         if (instruction.opcode == opcode_sw) {
             // GPR[rt] is placed in Mem[effectiveAddress]
             mainMemory.setValue(instruction.rtValue, instruction.effectiveAddress);
             
-            // This line allows for the register value to be updated underneath, but the original rtValue is correct
+            // This line allows for the register value to be updated underneath, but the original decoded rtValue is correct
 //            mainMemory.setValue(regfile.getValue(instruction.rt), instruction.effectiveAddress);
         }
     }

@@ -27,18 +27,6 @@ InstrType InstructionType::instrTypeDefine(string opcode) {
         return Label;
 }
 
-bool InstructionType::isLabel(string opcode) {
-	if (instrTypeDefine(opcode) == Label)
-		return true;
-	else
-		return false;
-}
-
-// Jump instructions are considered to be unconditional branches
-bool InstructionType::isBranch(Opcode opcode) {
-    return (opcode == opcode_j || opcode == opcode_blez || opcode == opcode_bgtz || opcode == opcode_beq);
-}
-
 // 6-bit operation code
 Opcode InstructionType::operationCodeDefine(string str, InstrType instrType) {
     Opcode opcode;

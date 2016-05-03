@@ -13,9 +13,9 @@
 
 // No "this" keyword is required unless there is parameter/local variable name overloading
 
-FetchStage::FetchStage(int instructionListSize) : instructionListSize(instructionListSize), windowTail(0), upBranch(0), window(WINDOW_SIZE, SimulatedInstruction()) {}
+FetchStage::FetchStage(int instructionListSize) : instructionListSize(instructionListSize), windowTail(0), addressOffset(0), window(WINDOW_SIZE, SimulatedInstruction()) {}
 
-// Program counter may add one or two
+// Program counter may be incremented by one or two
 void FetchStage::windowMove(vector<SimulatedInstruction>& simulatedInstructionList)
 {
 	windowTail = 0;
@@ -111,8 +111,8 @@ void FetchStage::process(vector<SimulatedInstruction>& simulatedInstructionList,
 	} else {
 		if (paired) {
             // The actual program counter plus upBranch is where the programCounter would be if there was no branch
-			window[0].loopCount = window[0].instructionLocation + upBranch;
-			window[1].loopCount = window[1].instructionLocation + upBranch;
+			window[0].loopCount = window[0].instructionLocation + addressOffset;
+			window[1].loopCount = window[1].instructionLocation + addressOffset;
 			currentInstructionList[0] = window[0];
 			currentInstructionList[1] = window[1];
             
@@ -125,19 +125,19 @@ void FetchStage::process(vector<SimulatedInstruction>& simulatedInstructionList,
             }
             
 		} else { // "NOP" is inserted as the second instruction and window[0] enters pipeline alone
-			window[0].loopCount = window[0].instructionLocation + upBranch;
+			window[0].loopCount = window[0].instructionLocation + addressOffset;
 			currentInstructionList[0] = window[0];
 			currentInstructionList[1] = SimulatedInstruction();
 			programCounter++;
 		}
         
-        // Clear all the instructions that have entered the pipeline this cycle so that when the program counter branches upper address, the instructions can be executed again. If an instruction's reordered flag is set, it cannot enter the instruction window.
+        // Clear the reordered flag for all the instructions that have entered the pipeline this cycle so that when the program counter branches, the instructions can be executed again. If an instruction's reordered flag is set, it cannot enter the instruction window.
 		clear_reordered(simulatedInstructionList, programCounter, lastPC);
 
         // Predict not taken policy is implemented, but the branch was taken
 		if (branchMisprediction) {
             // The five stages are processed from WB to IF, so the branch target must not be used by the fetch stage for this cycle.  The program counter is updated to the branch target after instructions have already been fetched.
-			upBranch = upBranch + (programCounter - branchTarget);
+			addressOffset += (programCounter - branchTarget);
 			simulatedInstructionList[programCounter].reordered = false;
 			programCounter = branchTarget;            
 		}

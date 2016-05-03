@@ -47,7 +47,7 @@ public:
     vector<SimulatedInstruction> tempInstrList;
     vector<SimulatedInstruction> hazardList, tempHazardList;
     
-    // This flag is set at the execution stage for a conditional branch instruction if a branch is mispredicted. In the next cycle, the decision of whether or not instructions in DE or EX are NOPed is based on this flag
+    // This flag is set at the execution stage for a conditional branch instruction if a branch is mispredicted. In the cycle following a branch misprediction, instructions in DE/EX are NOP'ed
     bool branchMisprediction;
     
     void printFinalOutput();

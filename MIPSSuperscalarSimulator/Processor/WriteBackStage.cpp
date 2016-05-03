@@ -11,14 +11,14 @@
 
 using namespace std;
 
-// Places the destination register value into the destination register of the register file
-// Returns an increment for the simulator's instruction count
+// Write to the destination register in the register file
+// Return an increment for the simulator's instruction count
 
 void WriteBackStage::process(RegisterFile& regFile, int& increment) {
 
     increment = 0;
 	if (currentInstructionList.front().opcodeString == "NOP") {
-        // If the first instruction is NOP or is empty, then the instruction count is not incremented at all.
+        // If the first instruction is NOP or is empty, then the instruction count is not incremented.
 		return;
 	} else {
         // If the second instruction in the list is a NOP, the instruction count is incremented by one. Otherwise, it is incremented by two.

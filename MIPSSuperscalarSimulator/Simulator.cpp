@@ -54,7 +54,7 @@ void Simulator::stepProcess() {
         
         writeBackStage.currentInstructionList = memoryStage.currentInstructionList;
         
-        // Temporary storage of instruction for forwarding to this cycle's execution stage
+        // Temporary storage of instructions for forwarding to this cycle's execution stage
         tempInstrList = memoryStage.currentInstructionList;
         
         // Is the memoryStage's instructions wiped? This leads to the process of memoryStage to return immediately without performing any functions. Then, rs and rt of the instructions in the execute stage are forwarded from these "NOP" instructions and tempInstrList is not used.
@@ -136,15 +136,15 @@ void Simulator::stepProcess() {
         cout << "hazardList[" << i << "]: " << hazardList[i].originalString << endl;
     }
     
-    // lastStall indicates the number of cycles that have passed since a RAW hazard was detected
+    // lastStall indicates the number of cycles that have passed since a load data dependence was detected
     if (lastStall == 2)
         lastStall = 0;
     
     if (lastStall == 1) {
         lastStall = 2;
-        decodeStage.readAfterWriteHazard = false;
+        decodeStage.loadDataDependence = false;
     }
-    if (decodeStage.readAfterWriteHazard) {
+    if (decodeStage.loadDataDependence) {
         lastStall = 1;
     }
     
