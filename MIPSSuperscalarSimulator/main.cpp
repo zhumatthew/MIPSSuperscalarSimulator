@@ -28,9 +28,9 @@
 
 #include <iostream>
 #include <limits>
-#include "SourceReader.hpp"
+#include "Assembler/SourceReader.hpp"
+#include "Processor/SimulatedInstruction.hpp"
 #include "Simulator.hpp"
-#include "SimulatedInstruction.hpp"
 #include "BufferToggle.hpp"
 
 #define OUTPUT_WIDTH 42

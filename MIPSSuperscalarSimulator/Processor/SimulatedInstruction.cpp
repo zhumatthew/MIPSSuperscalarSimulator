@@ -7,7 +7,6 @@
 //
 
 #include "SimulatedInstruction.hpp"
-#include "Instruction.hpp"
 
 using namespace std;
 

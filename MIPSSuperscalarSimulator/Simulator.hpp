@@ -19,7 +19,7 @@
 #include "Processor/ExecuteStage.hpp"
 #include "Processor/MemoryStage.hpp"
 #include "Processor/WriteBackStage.hpp"
-#include "SimulatedInstruction.hpp"
+#include "Processor/SimulatedInstruction.hpp"
 
 // Order of declaration for member variables is the order of initialization
 

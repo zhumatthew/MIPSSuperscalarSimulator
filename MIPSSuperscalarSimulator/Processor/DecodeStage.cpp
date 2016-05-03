@@ -37,6 +37,8 @@ void DecodeStage::check(vector<SimulatedInstruction> const& hazardList, int last
     
     for (SimulatedInstruction& instruction: currentInstructionList) {
         
+        if (instruction.opcodeString == "NOP") return;
+        
         // lastStall refers to the number of cycles since the last stall
         if (lastStall == 2) {
             

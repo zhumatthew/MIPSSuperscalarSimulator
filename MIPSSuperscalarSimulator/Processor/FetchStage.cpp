@@ -110,6 +110,7 @@ void FetchStage::process(vector<SimulatedInstruction>& simulatedInstructionList,
 		return; // no instruction is fetched on a stall cycle
 	} else {
 		if (paired) {
+            // The actual program counter plus upBranch is where the programCounter would be if there was no branch
 			window[0].loopCount = window[0].instructionLocation + upBranch;
 			window[1].loopCount = window[1].instructionLocation + upBranch;
 			currentInstructionList[0] = window[0];
@@ -138,7 +139,7 @@ void FetchStage::process(vector<SimulatedInstruction>& simulatedInstructionList,
             // The five stages are processed from WB to IF, so the branch target must not be used by the fetch stage for this cycle.  The program counter is updated to the branch target after instructions have already been fetched.
 			upBranch = upBranch + (programCounter - branchTarget);
 			simulatedInstructionList[programCounter].reordered = false;
-			programCounter = branchTarget;
+			programCounter = branchTarget;            
 		}
 	}
 }

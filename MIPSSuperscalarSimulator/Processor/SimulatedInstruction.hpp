@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <string>
 #include "Forward.hpp"
-#include "Instruction.hpp"
+#include "../Assembler/Instruction.hpp"
 
 class SimulatedInstruction {
     
