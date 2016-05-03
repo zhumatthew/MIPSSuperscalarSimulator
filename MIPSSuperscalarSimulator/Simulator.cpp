@@ -57,7 +57,7 @@ void Simulator::stepProcess() {
         // Temporary storage of instructions for forwarding to this cycle's execution stage
         tempInstrList = memoryStage.currentInstructionList;
         
-        // Is the memoryStage's instructions wiped? This leads to the process of memoryStage to return immediately without performing any functions. Then, rs and rt of the instructions in the execute stage are forwarded from these "NOP" instructions and tempInstrList is not used.
+        // Are the memoryStage's instructions wiped? This leads to the process of memoryStage to return immediately without performing any functions. Then, rs and rt of the instructions in the execute stage are forwarded from these "NOP" instructions and tempInstrList is not used.
         
         memoryStage.currentInstructionList[0] = SimulatedInstruction();
         memoryStage.currentInstructionList[1] = SimulatedInstruction();
@@ -132,7 +132,7 @@ void Simulator::stepProcess() {
             break;
     }
     
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < HAZARD_LIST_SIZE; i++) {
         cout << "hazardList[" << i << "]: " << hazardList[i].originalString << endl;
     }
     

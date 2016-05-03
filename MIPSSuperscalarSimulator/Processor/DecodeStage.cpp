@@ -87,7 +87,7 @@ void DecodeStage::check(vector<SimulatedInstruction> const& hazardList, int last
             if (instruction.currentForward.rsForward || instruction.currentForward.rtForward) {
                 // LW has "rd" and it is equal to its "rt"
                 
-                // If previous hazard instruction is lw, and there is RAW hazard, it is impossible to forward, because the hazard instruction cannot forward from EX to EX. lw only obtains the final rd value in the memory stage
+                // If previous hazard instruction is lw, and there is a RAW hazard, it is impossible to forward, because the hazard instruction cannot forward from EX to EX. lw only obtains the final rd value in the memory stage
                 
                 if (instruction.currentForward.rsForward) {
                     int index = instruction.currentForward.rsForwardDepth + 2;
